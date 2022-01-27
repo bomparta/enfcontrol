@@ -6,7 +6,7 @@
         <h1>Bienvenido, {{Auth::user()->name}}</h1>
     </div>
     <div class="card-columns">
-        <a href="{{route('home')}}" style="color: black;">
+        <a href="{{route('listadoestudiante')}}" style="color: black;">
             <div class="card text-center">
                 <img src="{{url('/img/estudiante.jpeg')}}" class="card-img-top">
                 <div class="card-body">

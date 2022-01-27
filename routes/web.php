@@ -23,5 +23,9 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/actividad', 'ActividadController@index')->name('actividad');
-Route::get('/actividad', 'ActividadController@index')->name('listadoactividad');
+Route::get('/listado', 'ActividadController@indexactividad')->name('listadoactividad');
+
+Route::get('/reporte', 'ReporteController@index')->name('reporte');
+
+Route::get('/estudiante', 'EstudianteController@index')->name('listadoestudiante');
 

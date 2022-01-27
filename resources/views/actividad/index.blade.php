@@ -54,7 +54,8 @@
                             <?php //} ?>
                         </tbody>   
                     </table>
-                    <button class='btn-info'>Regresar</button>
+                    <br>
+                    <a class='btn btn-info' href="{{URL::route('actividad')}}">Regresar</a>
                 </div>
             </div> <!-- card -->
         </div>

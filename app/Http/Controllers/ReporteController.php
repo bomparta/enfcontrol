@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class ActividadController extends Controller
+class ReporteController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,8 +13,7 @@ class ActividadController extends Controller
      */
     public function index()
     {
-       // return view('actividad/actividad');
-       return view('actividad/actividad');
+        return view('reportes/lista_reporte');
     }
 
     /**
@@ -81,11 +80,5 @@ class ActividadController extends Controller
     public function destroy($id)
     {
         //
-    }
-
-    public function indexactividad()
-    {
-       // return view('actividad/actividad');
-       return view('actividad/index');
     }
 }
