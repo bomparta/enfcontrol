@@ -20,7 +20,6 @@
                 <img src="{{url('/img/control_estudio.jpeg')}}" class="card-img-top">
                 <div class="card-body">
                     <h1 class="card-title">Actuacion</h1>
-<<<<<<< HEAD
                 </div>
             </div>
         </a>
@@ -30,8 +29,6 @@
                 <img src="{{url('/img/postgrado.jpeg')}}" class="card-img-top">
                 <div class="card-body">
                     <h1 class="card-title">Reportes Eventos</h1>
-=======
->>>>>>> 187071f05a6938e39f766249f5ff13376b9f1412
                 </div>
             </div>
         </a>
