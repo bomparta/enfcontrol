@@ -17,7 +17,7 @@
                                 <th>Alcance</th>
                                 <th>Tipo de Actividad</th>
                             
-                                <th>Actuaciones</th>
+                                <th>Actuacion</th>
                                 <th>Acciones</th>
                             </tr>
                         </thead>
