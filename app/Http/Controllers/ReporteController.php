@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\App;
 
 class ReporteController extends Controller
 {
@@ -81,4 +83,22 @@ class ReporteController extends Controller
     {
         //
     }
+
+    public function constancia()
+    {
+
+        /*se instalo composer require barryvdh/laravel-dompdf 
+        * se coloco en 'providers' este codigo  Barryvdh\DomPDF\ServiceProvider::class,
+        * y en 'aliases' se coloco esto 'PDF' => Barryvdh\DomPDF\Facade::class,
+        */
+        $datos_estudiante = DB::table('users')->get();
+      // dd($datos_estudiante);
+     // $view = View::make('reportes/constancia',compact('datos_estudiante'))->render();
+       $view = \view('reportes/constancia', compact('datos_estudiante'));
+       $pdf = App::make('dompdf.wrapper');
+       $pdf->loadHTML($view);
+       return $pdf->stream('informe'.'.pdf');
+        
+    }
+
 }

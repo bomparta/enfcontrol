@@ -55,6 +55,14 @@
                 </div>
             </div>
         </a>
+        <a style="color: black;" href="{{route('home')}}">
+            <div class="card text-center">
+                <img src="{{url('/img/administracion.jpeg')}}" class="card-img-top">
+                <div class="card-body">
+                    <h1 class="card-title">Administracion</h1>
+                </div>
+            </div>
+        </a>
     </div>
 </div>
 @endsection

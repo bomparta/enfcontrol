@@ -33,7 +33,7 @@
             </div>
         </a>
 
-        <a style="color: black;" href="{{route('reporte')}}">
+        <a style="color: black;" href="{{route('constanciapdf')}}">
             <div class="card text-center">
                 <img src="{{url('/img/control_estudioenf.jpeg')}}" class="card-img-top">
                 <div class="card-body">
