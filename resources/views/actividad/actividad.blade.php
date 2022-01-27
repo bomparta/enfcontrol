@@ -19,7 +19,7 @@
             <div class="card text-center">
                 <img src="{{url('/img/control_estudio.jpeg')}}" class="card-img-top">
                 <div class="card-body">
-                    <h1 class="card-title">Actuaciones</h1>
+                    <h1 class="card-title">Actuacion</h1>
                 </div>
             </div>
         </a>
