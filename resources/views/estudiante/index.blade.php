@@ -6,7 +6,7 @@
         <h1>Bienvenido, {{Auth::user()->name}}</h1>
     </div>
     <div class="card-columns">
-        <a href="{{route('listadoactividad')}}" style="color: black;" href="index">
+        <a href="{{route('datosestudiante')}}" style="color: black;" href="index">
             <div class="card text-center">
                 <img src="{{url('/img/informacion_personalenf.jpeg')}}" class="card-img-top">
                 <div class="card-body">
@@ -33,7 +33,7 @@
             </div>
         </a>
 
-        <a style="color: black;" href="{{route('constanciapdf')}}">
+        <a style="color: black;" target="_blank" href="{{route('constanciapdf')}}">
             <div class="card text-center">
                 <img src="{{url('/img/control_estudioenf.jpeg')}}" class="card-img-top">
                 <div class="card-body">
