@@ -31,5 +31,7 @@ Route::get('/pdfconstancia', 'ReporteController@constancia')->name('constanciapd
 Route::get('/estudiante', 'EstudianteController@index')->name('listadoestudiante');
 Route::get('/estudiantedatos', 'EstudianteController@create')->name('datosestudiante');
 
+Route::get('/usuario', 'DashboardController@index')->name('usuario');
+
 
 

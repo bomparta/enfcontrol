@@ -63,7 +63,7 @@
                 </div>
             </div>
         </a>
-        <a style="color: black;" href="{{route('home')}}">
+        <a style="color: black;" href="{{route('usuario')}}">
             <div class="card text-center">
                 <img src="{{url('/img/super.jpeg')}}" class="card-img-top">
                 <div class="card-body">

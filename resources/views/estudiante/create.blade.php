@@ -84,13 +84,20 @@
 
                                 </div>
                                 <div role="tabpanel" class="tab-pane" id="tab3">
-                                    {!! Form::label('capital3', 'Educacion') !!}
-                                    {!! Form::text('capital3', null, ['class' => 'form-control' , 'required']) !!}
-                                    <br>
-                                    {!! Form::selectRange('number', 10, 20)!!}
-                                    <br>
-                                    <br>
-                                    {!! Form::submit('Agregar!') !!}
+                                    <h1>Agregar canción</h1>
+                                    <form method="POST" action="">
+                                        @csrf
+                                        <input autocomplete="off" required type="text" name="nombre" placeholder="Nombre de la canción">
+                                        <br><br>
+                                        <input autocomplete="off" required type="text" name="artista" placeholder="Artista que la canta">
+                                        <br><br>
+                                        <input autocomplete="off" required type="text" name="album" placeholder="Álbum">
+                                        <br><br>
+                                        <input autocomplete="off" required type="number" name="anio" placeholder="Año">
+                                        <br><br>
+                                        <input type="submit" value="Guardar">
+                                    </form>
+                                    
                                 </div>
                                 <div role="tabpanel" class="tab-pane" id="tab4">
                                     {!! Form::token() !!}
