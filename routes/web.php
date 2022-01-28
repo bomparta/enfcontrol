@@ -23,6 +23,7 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/actividad', 'ActividadController@index')->name('actividad');
+Route::get('/creactividad', 'ActividadController@create')->name('crearactividad');
 Route::get('/listado', 'ActividadController@indexactividad')->name('listadoactividad');
 
 Route::get('/reporte', 'ReporteController@index')->name('reporte');

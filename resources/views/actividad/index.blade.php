@@ -1,85 +1,111 @@
 @extends('layouts.app')
+@section('styles')
+
+@endsection
 
 @section('content')
+    <div class="d-flex" id="wrapper">
+        @include('layouts.appevento')
 
-<div class="container pb-4">
-    <div class="row">
-        <div class="col-12">
-            <div class="card">
-                <div class="card-body">
-                    <table cellpadding="0" cellspacing="0" border="0" class="display table table-bordered table-strided" id="example" width="100%">
-                        <thead>
-                            <tr>
-                                <th>C&oacute;digo</th>
-                                <th>Nombre</th>
-                                <th>Clasificaci&oacute;n</th>
-                                <th>Tem&aacute;tica</th>
-                                <th>Alcance</th>
-                                <th>Tipo de Actividad</th>
-                            
-                                <th>Actuacion</th>
-                                <th>Acciones</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?Php //foreach ($actividad as $activ) { ?>
-                            <tr>
-                                <?php echo "<td>"; ?>
-                                    <a target='_blank' title='Editar Actividad' href=''>
-                                        <span class='btn-info badge'><? //= $activ->codigo."-".$activ->anio; ?></span>
-                                    </a>
-                                <?php echo "</td>"; ?>  
-                                <?php echo "<td>"; ?><?php echo "</td>"; ?>  
-                                <?php echo "<td align='center'>"; ?><?php echo "</td>"; ?> 
-                                <?php echo "<td align='center'>"; ?><?php echo "</td>"; ?>
-                                <?php echo "<td align='center'>"; ?><?php echo "</td>"; ?>
-                                <?php echo "<td align='center'>"; ?><?php echo "</td>"; ?>
+        <div id="page-content-wrapper">
+            <div class="container pb-4">
+                <div class="row align-items-stretch">
+                    <div class="col-12">
+                        <div class="card mb-4">
                                 
-                                <?php echo "<td align='center'>"; ?>
-                                <?php 
-                                //$variable = $this->actuacion_model->contador($activ->codigo);
-                                    // echo $variable;				
-                                ?>
-                                    <a target='_blank' title='Actuaciones' href=''>
-                                        <span class='btn-info badge'>< //?= $variable ?></span>
-                                    </a>
-                                <?php echo "</td>"; ?>
-                                <?Php ?>
-                                <td align='center'>
-                                    <?Php //$var_3 = "actividad/borrar/".$activ->id;?>
-                                    <?Php //$var_4 = "reportes/capacitados_actividad_global/".$activ->id;?>
-                                    <?php //echo anchor($var_4, $text_5);//borrar ?>
-                                </td>
-                            </tr>
-                            <?php //} ?>
-                        </tbody>   
-                    </table>
-                    <br>
-                    <a class='btn btn-info' href="{{URL::route('actividad')}}">Regresar</a>
+                            <div class="table-responsive">
+                                
+                                    <div class="card-header">
+                                        <h3 class="card-title">Actividades Academica</h3>
+                                        <p align="right"><a class='btn btn-info' href="{{URL::route('crearactividad')}}">Crear Actividad</a></p>
+                                    </div>
+                                    <!-- /.card-header -->
+                                    <div class="card-body">
+                                        <table id="example1" class="table table-bordered table-striped">
+                                                <thead>
+                                                <tr>
+                                                  <th>Codigo</th>
+                                                  <th>Nombre</th>
+                                                  <th>Clasificacion</th>
+                                                  <th>Tematica</th>
+                                                  <th>Alcance</th>
+                                                  <th>Tipo de Actividad</th>
+                                                  <th>Actuacion</th>
+                                                  <th>Accion</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                <tr>
+                                                  <td>Trident</td>
+                                                  <td>Internet
+                                                    Explorer 4.0
+                                                  </td>
+                                                  <td>Win 95+</td>
+                                                  <td> 4</td>
+                                                  <td>X</td>
+                                                  <td> 4</td>
+                                                  <td>X</td>
+                                                  <td>X</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Trident</td>
+                                                    <td>Internet
+                                                      Explorer 4.0
+                                                    </td>
+                                                    <td>Win 95+</td>
+                                                    <td> 4</td>
+                                                    <td>X</td>
+                                                    <td> 4</td>
+                                                    <td>X</td>
+                                                    <td>X</td>
+                                                  </tr>
+                                                </tbody>
+                                                <tfoot>
+                                                <tr>
+                                                    <th>Codigo</th>
+                                                    <th>Nombre</th>
+                                                    <th>Clasificacion</th>
+                                                    <th>Tematica</th>
+                                                    <th>Alcance</th>
+                                                    <th>Tipo de Actividad</th>
+                                                    <th>Actuacion</th>
+                                                    <th>Accion</th>
+                                                </tr>
+                                                </tfoot>
+                                        </table>
+                                    </div>
+                                    <!-- /.card-body -->
+                                
+                                          <!-- /.card -->
+                                <br>
+                                <a class='btn btn-info' href="{{URL::route('actividad')}}">Regresar</a>
+                            </div>
+            
+                            </div> <!-- /.card -->
+                        </div>
+                    </div>
+
                 </div>
-            </div> <!-- card -->
-        </div>
-    </div> <!-- row -->
-</div>
-</div> <!-- page-content-wrapper -->
-</div> <!-- wrapper -->
+            </div>
+        </div> <!-- page-content-wrapper -->
+    </div> <!-- wrapper -->
 <!-- jQuery -->
-<script src="../../plugins/jquery/jquery.min.js"></script>
+<script src="/plugins/jquery/jquery.min.js"></script>
 <!-- Bootstrap 4 -->
-<script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- DataTables  & Plugins -->
-<script src="../../plugins/datatables/jquery.dataTables.min.js"></script>
-<script src="../../plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
-<script src="../../plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
-<script src="../../plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
-<script src="../../plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
-<script src="../../plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
-<script src="../../plugins/jszip/jszip.min.js"></script>
-<script src="../../plugins/pdfmake/pdfmake.min.js"></script>
-<script src="../../plugins/pdfmake/vfs_fonts.js"></script>
-<script src="../../plugins/datatables-buttons/js/buttons.html5.min.js"></script>
-<script src="../../plugins/datatables-buttons/js/buttons.print.min.js"></script>
-<script src="../../plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
+<script src="/plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+<script src="/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+<script src="/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+<script src="/plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
+<script src="/plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
+<script src="/plugins/jszip/jszip.min.js"></script>
+<script src="/plugins/pdfmake/pdfmake.min.js"></script>
+<script src="/plugins/pdfmake/vfs_fonts.js"></script>
+<script src="/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
+<script src="/plugins/datatables-buttons/js/buttons.print.min.js"></script>
+<script src="/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
 <script>
     $(function () {
       $("#example1").DataTable({
