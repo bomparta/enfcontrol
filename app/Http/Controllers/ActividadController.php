@@ -2,8 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use DataTables;
+use App\Alcance;
+use App\Tematica;
+use App\Actividad;
+use App\TipoEstudio;
+use App\Clasificacion;
+use Illuminate\Http\Request;
 
 class ActividadController extends Controller
 {
@@ -14,7 +19,7 @@ class ActividadController extends Controller
      */
     public function index()
     {
-       // return view('actividad/actividad');
+        
        return view('actividad/actividad');
     }
 
@@ -25,7 +30,16 @@ class ActividadController extends Controller
      */
     public function create()
     {
-        return view('actividad/crear');
+                
+        $query= Actividad::count();
+        $num= $query+1;
+        $cod_actividad= str_pad($num, 3, '0', STR_PAD_LEFT);
+        $fecha = 22;
+        $clasificacion = Clasificacion::where('status', 1)->get();
+        $tematica = Tematica::where('status', 1)->get();
+        $alcance = Alcance::where('status', 1)->get();
+        $tipo_estudio = TipoEstudio::where('status', 1)->get();
+        return view('actividad/crear', compact('clasificacion','tematica','alcance','tipo_estudio','cod_actividad','fecha'));
     }
 
     /**
@@ -86,7 +100,7 @@ class ActividadController extends Controller
 
     public function indexactividad()
     {
-       // return view('actividad/actividad');
-       return view('actividad/index');
+       $actividades = Actividad::all();
+       return view('actividad/index', compact('actividades'));
     }
 }

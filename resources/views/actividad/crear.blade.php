@@ -16,13 +16,13 @@
                             <div class="card-body">
                                 @include('layouts.items.card-header', ['titulo' => 'Nueva Actividad'])
 
-                                <form method="POST" action="/parametros/banco">
+                                <form method="POST" action="#">
                                     @csrf
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label for="nombre">Codigo  </label>
-                                                <input id="nombre" type="text" class="form-control rounded-pill border-primary @error('nombre') is-invalid @enderror" name="nombre" value="{{ old('nombre') }}" required>
+                                                <input disabled='true' id="nombre" type="text" class="form-control rounded-pill border-primary @error('nombre') is-invalid @enderror" name="nombre" value="{{ $cod_actividad }}-{{ $fecha}}" required>
                                                 @error('nombre')
                                                     <div class="invalid-feedback">
                                                         <strong>{{ $message }}</strong>
@@ -31,11 +31,11 @@
                                             </div>
                                             <div class="form-group">
                                                 <label for="nombre">Tipo de Estudio  </label>
-                                                <select id="retencion" class="form-control custom-select border-primary @error('retencion') is-invalid @enderror" name="retencion">
-                                                    <option selected disabled>Seleccionar...</option>
-                                                    <option value="0" >0%</option>
-                                                    <option value="75" >75%</option>
-                                                    <option value="100" >100%</option>
+                                                <select class="form-control"  type="text" name="cuentas" >
+                                                    <option value="">Seleccione...</option>
+                                                    @foreach ($tipo_estudio as $datas3)
+                                                        <option value="{{ $datas3->id }}">{{ $datas3->descripcion }}</option>
+                                                    @endforeach
                                                 </select>
                                                 @error('nombre')
                                                     <div class="invalid-feedback">
@@ -54,11 +54,11 @@
                                             </div>
                                             <div class="form-group">
                                                 <label for="nombre">Clasificacion  </label>
-                                                <select id="retencion" class="form-control custom-select border-primary @error('retencion') is-invalid @enderror" name="retencion">
-                                                    <option selected disabled>Seleccionar...</option>
-                                                    <option value="0" >0%</option>
-                                                    <option value="75" >75%</option>
-                                                    <option value="100" >100%</option>
+                                                <select class="form-control"  type="text" name="cuentas" >
+                                                    <option value="">Selecciones...</option>
+                                                    @foreach ($clasificacion as $datas)
+                                                        <option value="{{ $datas->id }}">{{ $datas->descripcion }}</option>
+                                                    @endforeach
                                                 </select>
                                                 @error('nombre')
                                                     <div class="invalid-feedback">
@@ -68,11 +68,11 @@
                                             </div>
                                             <div class="form-group">
                                                 <label for="nombre">Tematica  </label>
-                                                <select id="retencion" class="form-control custom-select border-primary @error('retencion') is-invalid @enderror" name="retencion">
-                                                    <option selected disabled>Seleccionar...</option>
-                                                    <option value="0" >0%</option>
-                                                    <option value="75" >75%</option>
-                                                    <option value="100" >100%</option>
+                                                <select class="form-control"  type="text" name="cuentas" >
+                                                    <option value="">Seleccione...</option>
+                                                    @foreach ($tematica as $datas1)
+                                                        <option value="{{ $datas1->id }}">{{ $datas1->descripcion }}</option>
+                                                    @endforeach
                                                 </select>
                                                 @error('nombre')
                                                     <div class="invalid-feedback">
@@ -82,11 +82,11 @@
                                             </div>
                                             <div class="form-group">
                                                 <label for="nombre">Alcance  </label>
-                                                <select id="retencion" class="form-control custom-select border-primary @error('retencion') is-invalid @enderror" name="retencion">
-                                                    <option selected disabled>Seleccionar...</option>
-                                                    <option value="0" >0%</option>
-                                                    <option value="75" >75%</option>
-                                                    <option value="100" >100%</option>
+                                                <select class="form-control"  type="text" name="cuentas" >
+                                                    <option value="">Seleccione...</option>
+                                                    @foreach ($alcance as $datas2)
+                                                        <option value="{{ $datas2->id }}">{{ $datas2->descripcion }}</option>
+                                                    @endforeach
                                                 </select>
                                                 @error('nombre')
                                                     <div class="invalid-feedback">
