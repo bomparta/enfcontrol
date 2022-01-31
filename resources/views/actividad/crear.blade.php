@@ -4,108 +4,124 @@
 @endsection
 
 @section('content')
-    <div class="d-flex flex-row bd-highlight mb-2" id="wrapper">
+    <div class="d-flex" id="wrapper">
         @include('layouts.appevento')
 
         <div id="page-content-wrapper">
-            <div class="container">
+
+            <div class="container pb-4">
                 <div class="row">
-                    <div class="col">
+                    <div class="col-12">
                         <div class="card">
-                                
-                            <div class="table-responsive">
-                                
-                                    <div class="card-header">
-                                        <h3 class="card-title">Nueva Actividades</h3>
-                                      </div>
-                                    <!-- /.card-header -->
-                                    <div class="card-body">
-                                        <div class="form-group row">
-                                            <label for="inputcodigo" class="p-2 bd-highlight">Codigo</label>
-                                            <div class="p-2 bd-highlight">
-                                              <input type="codigo" class="form-control" id="codigo" placeholder="Email">
+                            <div class="card-body">
+                                @include('layouts.items.card-header', ['titulo' => 'Nueva Actividad'])
+
+                                <form method="POST" action="/parametros/banco">
+                                    @csrf
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label for="nombre">Codigo  </label>
+                                                <input id="nombre" type="text" class="form-control rounded-pill border-primary @error('nombre') is-invalid @enderror" name="nombre" value="{{ old('nombre') }}" required>
+                                                @error('nombre')
+                                                    <div class="invalid-feedback">
+                                                        <strong>{{ $message }}</strong>
+                                                    </div>
+                                                @enderror
                                             </div>
-                                          </div>
-                                          <div class="form-group row">
-                                            <label for="inputtipoestudio" class="p-2 bd-highlight">Tipo de Estudio</label>
-                                            <div class="p-2 bd-highlight">
-                                                <div class="p-2 bd-highlight">
-                                                    <SELECT name='hora'id='hora' SIZE=1 onChange="sacarHora()"> 
-                                                        <OPTION VALUE="8:00">Seleccione...</OPTION>
-                                                        <OPTION VALUE="9:00">9:00</OPTION>
-                                                        
-                                                    </SELECT> 
-                                                </div>
+                                            <div class="form-group">
+                                                <label for="nombre">Tipo de Estudio  </label>
+                                                <select id="retencion" class="form-control custom-select border-primary @error('retencion') is-invalid @enderror" name="retencion">
+                                                    <option selected disabled>Seleccionar...</option>
+                                                    <option value="0" >0%</option>
+                                                    <option value="75" >75%</option>
+                                                    <option value="100" >100%</option>
+                                                </select>
+                                                @error('nombre')
+                                                    <div class="invalid-feedback">
+                                                        <strong>{{ $message }}</strong>
+                                                    </div>
+                                                @enderror
                                             </div>
-                                          </div>
-                                          <div class="form-group row">
-                                            <label for="inputtipoestudio" class="p-2 bd-highlight">Nombre de la Actividad</label>
-                                            <div class="p-2 bd-highlight">
-                                              <input type="inputtipoestudio" class="form-control" id="inputtipoestudio" placeholder="Password">
+                                            <div class="form-group">
+                                                <label for="nombre">Nombre de la Actividad  </label>
+                                                <input id="nombre" type="text" class="form-control rounded-pill border-primary @error('nombre') is-invalid @enderror" name="nombre" value="{{ old('nombre') }}" required>
+                                                @error('nombre')
+                                                    <div class="invalid-feedback">
+                                                        <strong>{{ $message }}</strong>
+                                                    </div>
+                                                @enderror
                                             </div>
-                                          </div>
-                                          <div class="form-group row">
-                                            <label for="inputtipoestudio" class="p-2 bd-highlight">Clasificacion</label>
-                                            <div class="p-2 bd-highlight">
-                                                <div class="p-2 bd-highlight">
-                                                    <SELECT name='hora'id='hora' SIZE=1 onChange="sacarHora()"> 
-                                                        <OPTION VALUE="8:00">Seleccione...</OPTION>
-                                                        <OPTION VALUE="9:00">9:00</OPTION>
-                                                        
-                                                    </SELECT> 
-                                                </div>
+                                            <div class="form-group">
+                                                <label for="nombre">Clasificacion  </label>
+                                                <select id="retencion" class="form-control custom-select border-primary @error('retencion') is-invalid @enderror" name="retencion">
+                                                    <option selected disabled>Seleccionar...</option>
+                                                    <option value="0" >0%</option>
+                                                    <option value="75" >75%</option>
+                                                    <option value="100" >100%</option>
+                                                </select>
+                                                @error('nombre')
+                                                    <div class="invalid-feedback">
+                                                        <strong>{{ $message }}</strong>
+                                                    </div>
+                                                @enderror
                                             </div>
-                                          </div>
-                                          <div class="form-group row">
-                                            <label for="inputtipoestudio" class="p-2 bd-highlight">Tematica</label>
-                                            <div class="p-2 bd-highlight">
-                                                <SELECT name='hora'id='hora' SIZE=1 onChange="sacarHora()"> 
-                                                    <OPTION VALUE="8:00">Seleccione...</OPTION>
-                                                    <OPTION VALUE="9:00">9:00</OPTION>
-                                                    
-                                                </SELECT> 
+                                            <div class="form-group">
+                                                <label for="nombre">Tematica  </label>
+                                                <select id="retencion" class="form-control custom-select border-primary @error('retencion') is-invalid @enderror" name="retencion">
+                                                    <option selected disabled>Seleccionar...</option>
+                                                    <option value="0" >0%</option>
+                                                    <option value="75" >75%</option>
+                                                    <option value="100" >100%</option>
+                                                </select>
+                                                @error('nombre')
+                                                    <div class="invalid-feedback">
+                                                        <strong>{{ $message }}</strong>
+                                                    </div>
+                                                @enderror
                                             </div>
-                                          </div>
-                                          <div class="form-group row">
-                                            <label for="inputtipoestudio" class="p-2 bd-highlight">Alcance</label>
-                                            <div class="p-2 bd-highlight">
-                                                <SELECT name='hora'id='hora' SIZE=1 onChange="sacarHora()"> 
-                                                    <OPTION VALUE="8:00">Seleccione...</OPTION>
-                                                    <OPTION VALUE="9:00">9:00</OPTION>
-                                                    
-                                                </SELECT> 
+                                            <div class="form-group">
+                                                <label for="nombre">Alcance  </label>
+                                                <select id="retencion" class="form-control custom-select border-primary @error('retencion') is-invalid @enderror" name="retencion">
+                                                    <option selected disabled>Seleccionar...</option>
+                                                    <option value="0" >0%</option>
+                                                    <option value="75" >75%</option>
+                                                    <option value="100" >100%</option>
+                                                </select>
+                                                @error('nombre')
+                                                    <div class="invalid-feedback">
+                                                        <strong>{{ $message }}</strong>
+                                                    </div>
+                                                @enderror
                                             </div>
-                                          </div>
-                                          <div class="form-group row">
-                                            <label for="inputtipoestudio" class="p-2 bd-highlight">Tipo de Actividad</label>
-                                            <div class="p-2 bd-highlight">
-                                                <SELECT name='hora'id='hora' SIZE=1 onChange="sacarHora()"> 
-                                                    <OPTION VALUE="8:00">Seleccione...</OPTION>
-                                                    <OPTION VALUE="9:00">9:00</OPTION>
-                                                    
-                                                </SELECT> 
-                                            </div>
-                                          </div>
-                                          
+
+                                            
                                         </div>
-                                        <!-- /.card-body -->
-                                        <div class="card-footer">
-                                          <a type="submit" class="btn btn-info">Crear</a>
-                                          <a type="submit" href="{{URL::route('actividad')}}" class="btn btn-default float-right">Cancel</a>
-                                        
 
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label for="observacion">Observación</label>
+                                                <textarea id="observacion" class="form-control border-primary @error('observacion') is-invalid @enderror" name="observacion" value="{{ old('observacion') }}"></textarea>
+                                                    @error('observacion')
+                                                    <div class="invalid-feedback">
+                                                        <strong>{{ $message }}</strong>
+                                                    </div>
+                                                @enderror
+                                            </div>
+                                        </div>
                                     </div>
-                        
-                            </div>
-            
-                            </div> <!-- /.card -->
-                        </div>
-                    </div>
+                                    <div align="center">
+                                        <input type="submit" value=" Crear " class="btn btn-primary" />
+                                        <input name="" type="button" value=" Cerrar " onclick="cerrar()" class="btn btn-default" />
+                                    </div>
 
+                                   
+                                </form>
+                            </div>
+                        </div> <!-- card -->
+                    </div>
                 </div>
             </div>
         </div> <!-- page-content-wrapper -->
     </div> <!-- wrapper -->
-
-
 @endsection

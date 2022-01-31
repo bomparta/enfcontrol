@@ -44,8 +44,8 @@
                                                   <td> 4</td>
                                                   <td>X</td>
                                                   <td> 4</td>
-                                                  <td>X</td>
-                                                  <td>X</td>
+                                                  <td><a href=""><font color=#FC0A0A>7</a></td>
+                                                  <td><a href=""><img src="/img/icon/clipboard.ico" class="icon-lg" alt="Acciones"></a></td>
                                                 </tr>
                                                 <tr>
                                                     <td>Trident</td>
@@ -56,8 +56,8 @@
                                                     <td> 4</td>
                                                     <td>X</td>
                                                     <td> 4</td>
-                                                    <td>X</td>
-                                                    <td>X</td>
+                                                    <td><a href=""><font color=#FC0A0A>2</a></td>
+                                                    <td><a href=""><img src="/img/icon/clipboard.ico" class="icon-lg" alt="Acciones"></a></td>
                                                   </tr>
                                                 </tbody>
                                                 <tfoot>
@@ -89,6 +89,10 @@
             </div>
         </div> <!-- page-content-wrapper -->
     </div> <!-- wrapper -->
+
+@endsection
+
+@section('scripts')
 <!-- jQuery -->
 <script src="/plugins/jquery/jquery.min.js"></script>
 <!-- Bootstrap 4 -->
@@ -106,6 +110,7 @@
 <script src="/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
 <script src="/plugins/datatables-buttons/js/buttons.print.min.js"></script>
 <script src="/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
+
 <script>
     $(function () {
       $("#example1").DataTable({
@@ -123,5 +128,4 @@
       });
     });
   </script>
-
-@endsection
+@endsection  

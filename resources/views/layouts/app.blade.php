@@ -97,6 +97,7 @@
 
         <main class="py-4">
             @yield('content')
+            @yield('scripts')
         </main>
         <footer class="px-2 py-2 fixed-bottom bg-dark">
      <span class="text-muted">Sistema de control de estudio de la Escuela Nacional de Fiscales
