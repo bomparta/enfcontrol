@@ -9,6 +9,8 @@ use App\Actividad;
 use App\TipoEstudio;
 use App\Clasificacion;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\DB;
 
 class ActividadController extends Controller
 {
@@ -35,11 +37,11 @@ class ActividadController extends Controller
         $num= $query+1;
         $cod_actividad= str_pad($num, 3, '0', STR_PAD_LEFT);
         $fecha = 22;
-        $clasificacion = Clasificacion::where('status', 1)->get();
-        $tematica = Tematica::where('status', 1)->get();
-        $alcance = Alcance::where('status', 1)->get();
-        $tipo_estudio = TipoEstudio::where('status', 1)->get();
-        return view('actividad/crear', compact('clasificacion','tematica','alcance','tipo_estudio','cod_actividad','fecha'));
+        $clasificacions = Clasificacion::where('status', 1)->get();
+        $tematicas = Tematica::where('status', 1)->get();
+        $alcances = Alcance::where('status', 1)->get();
+        $tipo_estudios = TipoEstudio::where('status', 1)->get();
+        return view('actividad/crear', compact('clasificacions','tematicas','alcances','tipo_estudios','cod_actividad','fecha'));
     }
 
     /**
@@ -50,7 +52,39 @@ class ActividadController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'nombre' => ['required', 'string', 'max:160'],
+            'clasificacion' => ['required'],
+            'tematica' => ['required'],
+            'alcance' => ['required'],
+            'tipo_estudio' => ['required'],
+    
+           
+        ]);
+
+        
+
+        $actividad = new Actividad();
+        $actividad->codigo = $request->codigo_original;
+        $actividad->anio = $request->fecha;
+        $actividad->nombre = $request->nombre;
+        $actividad->id_clasificacion = $request->clasificacion;
+        $actividad->id_tematica = $request->tematica;
+        $actividad->id_alcance = $request->alcance;
+        $actividad->id_tipo_actividad = $request->tipo_estudio;
+        $actividad->convenio = 1;
+        $actividad->institucion = 1;
+        $actividad->certificacion = True;
+        $actividad->id_planificador1 = 1;
+        $actividad->id_planificador2 = 1;
+        $actividad->id_planificador3 = 1;
+        $actividad->status = 1;
+        $actividad->id_programa = 1;
+        $actividad->pasantias = 1;
+        $actividad->investigacion = 1;
+        $actividad->save();
+
+        return redirect('/parametros/actividad')->with('success', 'Actividad creada con éxito.');
     }
 
     /**
@@ -100,7 +134,28 @@ class ActividadController extends Controller
 
     public function indexactividad()
     {
-       $actividades = Actividad::all();
+
+
+      // $actividades = Actividad::all();
+      /*
+      $actividades = Actividad::select('actividad.codigo','actividad.anio','actividad.nombre','clasificacion.descripcion as clasificacion','tematica.descripcion as tematica','alcance.descripcion as alcance','tipo_actividad.descripcion as tipo_actividad','convenio')
+      ->join("tematica", "tematica.id", "=", "actividad.id")
+      ->join("clasificacion", "clasificacion.id", "=", "actividad.id_clasificacion")
+      ->join("alcance", "alcance.id", "=", "actividad.id_alcance")
+      ->join("tipo_actividad", "tipo_actividad.id", "=", "actividad.id_tipo_actividad")
+      ->get();
+       return view('actividad/index', compact('actividades'));
+        */
+
+       $actividades = DB::table('actividad')
+       ->select('actividad.codigo','actividad.anio','actividad.nombre','clasificacion.descripcion as clasificacion','tematica.descripcion as tematica','alcance.descripcion as alcance','tipo_actividad.descripcion as tipo_actividad','convenio')
+       ->join("tematica", "tematica.id", "=", "actividad.id")
+       ->join("clasificacion", "clasificacion.id", "=", "actividad.id_clasificacion")
+       ->join("alcance", "alcance.id", "=", "actividad.id_alcance")
+       ->join("tipo_actividad", "tipo_actividad.id", "=", "actividad.id_tipo_actividad")
+       ->get();
+
+
        return view('actividad/index', compact('actividades'));
     }
 }

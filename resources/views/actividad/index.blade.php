@@ -37,13 +37,13 @@
                                                 <tbody>
                                                   @foreach ($actividades as $item)
                                                 <tr>
-                                                  <td><a href=""><font color=#0A0EFC>{{ $item->codigo }}-{{ $item->anio }}</a></td>
+                                                  <td><a href=""><span class='btn-info badge'><font color=#F2F3F8>{{ $item->codigo }}-{{ $item->anio }}</span></a></td>
                                                   <td>{{ $item->nombre }}</td>
-                                                  <td>{{ $item->id_clasificacion }}</td>
-                                                  <td>{{ $item->id_tematica }}</td>
-                                                  <td>{{ $item->id_alcance }}</td>
-                                                  <td>{{ $item->id_tipo_actividad }}</td>
-                                                  <td><a href=""><font color=#FC0A0A>{{ $item->convenio }}</a></td>
+                                                  <td>{{ $item->clasificacion }}</td>
+                                                  <td>{{ $item->tematica }}</td>
+                                                  <td>{{ $item->alcance }}</td>
+                                                  <td>{{ $item->tipo_actividad }}</td>
+                                                  <td><a href=""><span class='btn-info badge'><font color=#F8F5F5>{{ $item->convenio }}</span></a></td>
                                                   <td><a href=""><img src="/img/icon/clipboard.ico" class="icon-lg" alt="Acciones"></a></td>
                                                 </tr>
                                                 @endforeach

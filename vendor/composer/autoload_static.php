@@ -529,6 +529,10 @@ class ComposerStaticInit15eaf9be5fd173a585c5b2a2cdcd4216
 
     public static $classMap = array (
         'AlcanceSeeder' => __DIR__ . '/../..' . '/database/seeds/AlcanceSeeder.php',
+        'App\\Actividad' => __DIR__ . '/../..' . '/app/Actividad.php',
+        'App\\Actuacion' => __DIR__ . '/../..' . '/app/Actuacion.php',
+        'App\\Alcance' => __DIR__ . '/../..' . '/app/Alcance.php',
+        'App\\Clasificacion' => __DIR__ . '/../..' . '/app/Clasificacion.php',
         'App\\Console\\Kernel' => __DIR__ . '/../..' . '/app/Console/Kernel.php',
         'App\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',
         'App\\Http\\Controllers\\ActividadController' => __DIR__ . '/../..' . '/app/Http/Controllers/ActividadController.php',
@@ -557,6 +561,8 @@ class ComposerStaticInit15eaf9be5fd173a585c5b2a2cdcd4216
         'App\\Providers\\BroadcastServiceProvider' => __DIR__ . '/../..' . '/app/Providers/BroadcastServiceProvider.php',
         'App\\Providers\\EventServiceProvider' => __DIR__ . '/../..' . '/app/Providers/EventServiceProvider.php',
         'App\\Providers\\RouteServiceProvider' => __DIR__ . '/../..' . '/app/Providers/RouteServiceProvider.php',
+        'App\\Tematica' => __DIR__ . '/../..' . '/app/Tematica.php',
+        'App\\TipoEstudio' => __DIR__ . '/../..' . '/app/TipoEstudio.php',
         'App\\User' => __DIR__ . '/../..' . '/app/User.php',
         'Asm89\\Stack\\Cors' => __DIR__ . '/..' . '/asm89/stack-cors/src/Cors.php',
         'Asm89\\Stack\\CorsService' => __DIR__ . '/..' . '/asm89/stack-cors/src/CorsService.php',

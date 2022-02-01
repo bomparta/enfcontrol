@@ -7,6 +7,10 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'AlcanceSeeder' => $baseDir . '/database/seeds/AlcanceSeeder.php',
+    'App\\Actividad' => $baseDir . '/app/Actividad.php',
+    'App\\Actuacion' => $baseDir . '/app/Actuacion.php',
+    'App\\Alcance' => $baseDir . '/app/Alcance.php',
+    'App\\Clasificacion' => $baseDir . '/app/Clasificacion.php',
     'App\\Console\\Kernel' => $baseDir . '/app/Console/Kernel.php',
     'App\\Exceptions\\Handler' => $baseDir . '/app/Exceptions/Handler.php',
     'App\\Http\\Controllers\\ActividadController' => $baseDir . '/app/Http/Controllers/ActividadController.php',
@@ -35,6 +39,8 @@ return array(
     'App\\Providers\\BroadcastServiceProvider' => $baseDir . '/app/Providers/BroadcastServiceProvider.php',
     'App\\Providers\\EventServiceProvider' => $baseDir . '/app/Providers/EventServiceProvider.php',
     'App\\Providers\\RouteServiceProvider' => $baseDir . '/app/Providers/RouteServiceProvider.php',
+    'App\\Tematica' => $baseDir . '/app/Tematica.php',
+    'App\\TipoEstudio' => $baseDir . '/app/TipoEstudio.php',
     'App\\User' => $baseDir . '/app/User.php',
     'Asm89\\Stack\\Cors' => $vendorDir . '/asm89/stack-cors/src/Cors.php',
     'Asm89\\Stack\\CorsService' => $vendorDir . '/asm89/stack-cors/src/CorsService.php',

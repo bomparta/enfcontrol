@@ -16,28 +16,30 @@
                             <div class="card-body">
                                 @include('layouts.items.card-header', ['titulo' => 'Nueva Actividad'])
 
-                                <form method="POST" action="#">
+                                <form method="POST" action="/parametros/actividad">
                                     @csrf
                                     <div class="row">
                                         <div class="col-md-12">
+                                            <input id="codigo_original" type="hidden" class="form-control rounded-pill border-primary" name="codigo_original" value="{{ $cod_actividad }}" >
+                                            <input id="fecha" type="hidden" class="form-control rounded-pill border-primary" name="fecha" value="{{ $fecha }}" >
                                             <div class="form-group">
-                                                <label for="nombre">Codigo  </label>
-                                                <input disabled='true' id="nombre" type="text" class="form-control rounded-pill border-primary @error('nombre') is-invalid @enderror" name="nombre" value="{{ $cod_actividad }}-{{ $fecha}}" required>
-                                                @error('nombre')
+                                                <label for="codigo">Codigo  </label>
+                                                <input disabled='false' id="codigo" type="text" class="form-control rounded-pill border-primary @error('codigo') is-invalid @enderror" name="codigo" value="{{ $cod_actividad }}-{{ $fecha}}" required>
+                                                @error('codigo')
                                                     <div class="invalid-feedback">
                                                         <strong>{{ $message }}</strong>
                                                     </div>
                                                 @enderror
                                             </div>
                                             <div class="form-group">
-                                                <label for="nombre">Tipo de Estudio  </label>
-                                                <select class="form-control"  type="text" name="cuentas" >
+                                                <label for="tipo_estudio">Tipo de Estudio  </label>
+                                                <select class="form-control"  type="text" name="tipo_estudio" >
                                                     <option value="">Seleccione...</option>
-                                                    @foreach ($tipo_estudio as $datas3)
-                                                        <option value="{{ $datas3->id }}">{{ $datas3->descripcion }}</option>
+                                                    @foreach ($tipo_estudios as $tipo_estudio)
+                                                        <option value="{{ $tipo_estudio->id }}">{{ $tipo_estudio->descripcion }}</option>
                                                     @endforeach
                                                 </select>
-                                                @error('nombre')
+                                                @error('tipo_estudio')
                                                     <div class="invalid-feedback">
                                                         <strong>{{ $message }}</strong>
                                                     </div>
@@ -53,42 +55,42 @@
                                                 @enderror
                                             </div>
                                             <div class="form-group">
-                                                <label for="nombre">Clasificacion  </label>
-                                                <select class="form-control"  type="text" name="cuentas" >
+                                                <label for="clasificacion">Clasificacion  </label>
+                                                <select class="form-control"  type="text" name="clasificacion" >
                                                     <option value="">Selecciones...</option>
-                                                    @foreach ($clasificacion as $datas)
-                                                        <option value="{{ $datas->id }}">{{ $datas->descripcion }}</option>
+                                                    @foreach ($clasificacions as $clasificacion)
+                                                        <option value="{{ $clasificacion->id }}">{{ $clasificacion->descripcion }}</option>
                                                     @endforeach
                                                 </select>
-                                                @error('nombre')
+                                                @error('clasificacion')
                                                     <div class="invalid-feedback">
                                                         <strong>{{ $message }}</strong>
                                                     </div>
                                                 @enderror
                                             </div>
                                             <div class="form-group">
-                                                <label for="nombre">Tematica  </label>
-                                                <select class="form-control"  type="text" name="cuentas" >
+                                                <label for="tematica">Tematica  </label>
+                                                <select class="form-control"  type="text" name="tematica" >
                                                     <option value="">Seleccione...</option>
-                                                    @foreach ($tematica as $datas1)
-                                                        <option value="{{ $datas1->id }}">{{ $datas1->descripcion }}</option>
+                                                    @foreach ($tematicas as $tematica)
+                                                        <option value="{{ $tematica->id }}">{{ $tematica->descripcion }}</option>
                                                     @endforeach
                                                 </select>
-                                                @error('nombre')
+                                                @error('tematica')
                                                     <div class="invalid-feedback">
                                                         <strong>{{ $message }}</strong>
                                                     </div>
                                                 @enderror
                                             </div>
                                             <div class="form-group">
-                                                <label for="nombre">Alcance  </label>
-                                                <select class="form-control"  type="text" name="cuentas" >
+                                                <label for="alcance">Alcance  </label>
+                                                <select class="form-control"  type="text" name="alcance" >
                                                     <option value="">Seleccione...</option>
-                                                    @foreach ($alcance as $datas2)
-                                                        <option value="{{ $datas2->id }}">{{ $datas2->descripcion }}</option>
+                                                    @foreach ($alcances as $alcance)
+                                                        <option value="{{ $alcance->id }}">{{ $alcance->descripcion }}</option>
                                                     @endforeach
                                                 </select>
-                                                @error('nombre')
+                                                @error('alcance')
                                                     <div class="invalid-feedback">
                                                         <strong>{{ $message }}</strong>
                                                     </div>
@@ -96,18 +98,6 @@
                                             </div>
 
                                             
-                                        </div>
-
-                                        <div class="col-md-12">
-                                            <div class="form-group">
-                                                <label for="observacion">Observación</label>
-                                                <textarea id="observacion" class="form-control border-primary @error('observacion') is-invalid @enderror" name="observacion" value="{{ old('observacion') }}"></textarea>
-                                                    @error('observacion')
-                                                    <div class="invalid-feedback">
-                                                        <strong>{{ $message }}</strong>
-                                                    </div>
-                                                @enderror
-                                            </div>
                                         </div>
                                     </div>
                                     <div align="center">

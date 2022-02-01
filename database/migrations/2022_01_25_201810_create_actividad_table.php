@@ -28,8 +28,7 @@ class CreateActividadTable extends Migration
             $table->bigInteger('id_planificador1');
             $table->bigInteger('id_planificador2');
             $table->bigInteger('id_planificador3');
-            $table->timestamp('fecha_registro', 0);
-            $table->timestamp('fecha_actualizacion', 0);
+            $table->timestamps();
             $table->smallInteger('status');
             $table->bigInteger('id_programa');
             $table->smallInteger('pasantias');
