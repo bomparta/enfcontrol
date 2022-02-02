@@ -12,13 +12,7 @@
                 <div class="row align-items-stretch">
                     <div class="col-12">
                         <div class="card mb-4">
-                          <div>
-                            <label>Area:</label>
-                            <select id="area_id">
-                                <option value="">Elije una planta--</option>
-                            </select>
-                        </div>
-                                
+                                                        
                             <div class="table-responsive">
                                 
                                     <div class="card-header">
