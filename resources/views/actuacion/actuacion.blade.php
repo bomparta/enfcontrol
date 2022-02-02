@@ -15,7 +15,7 @@
             </div>
         </a>
 
-        <a style="color: black;" target="_blank" href="{{route('actuacion')}}">
+        <a style="color: black;" target="_blank" href="https://parzibyte.me/blog/contrataciones-ayuda/">
             <div class="card text-center">
                 <img src="{{url('/img/control_estudio.jpeg')}}" class="card-img-top">
                 <div class="card-body">
