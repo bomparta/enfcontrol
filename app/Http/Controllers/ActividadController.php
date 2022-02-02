@@ -155,7 +155,25 @@ class ActividadController extends Controller
        ->join("tipo_actividad", "tipo_actividad.id", "=", "actividad.id_tipo_actividad")
        ->get();
 
+      
+
 
        return view('actividad/index', compact('actividades'));
     }
+    
+    public function getconteo(Request $request)
+    {
+        try {    
+            $codigo = $request->input('codigo');
+            $conteo= DB::table('actuacion')
+            ->where('cod_actividad',$codigo)
+            ->select(DB::raw('count(*) as nro_conteo'))
+            ->first();
+            $response = ['data' => $conteo];
+        } catch (\Exception $exception) {
+            return response()->json([ 'message' => 'There was an error retrieving the records' ], 500);
+        }
+        return response()->json($response);
+    }
+
 }

@@ -28,6 +28,7 @@ Route::get('/listado', 'ActividadController@indexactividad')->name('listadoactiv
 Route::get('/listado', 'ActividadController@indexactividad')->name('listadoactividad');
 
 Route::resource('/parametros/actividad', ActividadController::class);
+Route::get('actuacion/contador', 'ActividadController@contador')->name('contador');
 
 Route::get('/reporte', 'ReporteController@index')->name('reporte');
 Route::get('/pdfconstancia', 'ReporteController@constancia')->name('constanciapdf');
