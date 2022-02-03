@@ -101,4 +101,12 @@ class ReporteController extends Controller
         
     }
 
+    public function capacitados_actividad_global($codigo)
+    {
+
+       
+        return view('reportes/capacidad_actividad');
+        
+    }
+
 }

@@ -124,7 +124,27 @@ class ActividadController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'nombre' => ['required', 'string', 'max:160'],
+            'clasificacion' => ['required'],
+            'tematica' => ['required'],
+            'alcance' => ['required'],
+            'tipo_estudio' => ['required'],
+    
+           
+        ]);
+
+        Actividad::where('codigo', $id)
+        ->update([
+            'nombre' => $request->nombre,
+            'id_clasificacion' => $request->clasificacion,
+            'id_tematica' => $request->tematica,
+            'id_alcance' => $request->alcance,
+            'id_tipo_actividad' => $request->tipo_estudio,
+        ]);
+       
+
+        return redirect('/listado')->with('success', 'Actividad actualizada con éxito.');
     }
 
     /**
@@ -141,7 +161,7 @@ class ActividadController extends Controller
     public function indexactividad()
     {
 
-        $actividades = DB::select('SELECT actividad.codigo,actividad.anio,actividad.nombre,clasificacion.descripcion as clasificacion,tematica.descripcion as tematica,alcance.descripcion as alcance,tipo_actividad.descripcion as tipo_actividad,(SELECT COUNT(*) AS convenio FROM actuacion WHERE cod_actividad = actividad.codigo) FROM actividad 
+        $actividades = DB::select('SELECT actividad.id,actividad.codigo,actividad.anio,actividad.nombre,clasificacion.descripcion as clasificacion,tematica.descripcion as tematica,alcance.descripcion as alcance,tipo_actividad.descripcion as tipo_actividad,(SELECT COUNT(*) AS convenio FROM actuacion WHERE cod_actividad = actividad.codigo) FROM actividad 
         INNER JOIN tematica ON tematica.id = actividad.id_tematica
         INNER JOIN clasificacion ON clasificacion.id = actividad.id_clasificacion
         INNER JOIN alcance ON alcance.id = actividad.id_alcance

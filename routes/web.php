@@ -26,9 +26,11 @@ Route::get('/actividad', 'ActividadController@index')->name('actividad');
 Route::get('/creactividad', 'ActividadController@create')->name('crearactividad');
 Route::get('/listado', 'ActividadController@indexactividad')->name('listadoactividad');
 Route::get('/actividad/edit/{id}', 'ActividadController@edit')->name('editactividad');
+Route::post('/actividad/update/{id}', 'ActividadController@update');
 
 Route::resource('/parametros/actividad', ActividadController::class);
 Route::get('actuacion/contador', 'ActividadController@contador')->name('contador');
+Route::get('actuacion/listactuacion/{codigo}', 'ActuacionController@get_actuaciones')->name('listadoactuacion');
 
 Route::get('/reporte', 'ReporteController@index')->name('reporte');
 Route::get('/pdfconstancia', 'ReporteController@constancia')->name('constanciapdf');
@@ -41,5 +43,6 @@ Route::get('/usuario', 'DashboardController@index')->name('usuario');
 Route::get('/actuacion', 'ActuacionController@index')->name('actuacion');
 Route::get('/creactuacion', 'ActuacionController@create')->name('crearactuacion');
 Route::get('/actuacion/edit/{codigo}', 'ActuacionController@edit')->name('editactuacion');
+Route::get('/reporte/capacidad_actividad_global/{codigo}', 'ReporteController@capacitados_actividad_global')->name('reporteactividaglobal');
 
 

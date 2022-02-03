@@ -4,6 +4,7 @@
 @endsection
 
 @section('content')
+
     <div class="d-flex" id="wrapper">
         @include('layouts.appevento')
 
@@ -16,7 +17,7 @@
                             <div class="card-body">
                                 @include('layouts.items.card-header', ['titulo' => 'Edit Actividad'])
 
-                                <form method="POST" action="#">
+                                <form method="POST" action="/actividad/update/{{$actividad->codigo }}">
                                     @csrf
                                     <div class="row">
                                         <div class="col-md-12">
@@ -114,7 +115,7 @@
                                         </div>
                                     </div>
                                     <div align="center">
-                                        <input type="submit" value=" Crear " class="btn btn-primary" />
+                                        <input type="submit" value=" Actualizar " class="btn btn-primary" />
                                         <input name="" type="button" value=" Cerrar " onclick="cerrar()" class="btn btn-default" />
                                     </div>
 

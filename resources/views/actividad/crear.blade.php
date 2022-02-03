@@ -102,7 +102,7 @@
                                     </div>
                                     <div align="center">
                                         <input type="submit" value=" Crear " class="btn btn-primary" />
-                                        <input name="" type="button" value=" Cerrar " onclick="cerrar()" class="btn btn-default" />
+                                        <a class='btn btn-default' type="button"  href="{{URL::route('listadoactividad')}}">Cerrar</a>
                                     </div>
 
                                    
@@ -114,4 +114,12 @@
             </div>
         </div> <!-- page-content-wrapper -->
     </div> <!-- wrapper -->
+@endsection
+
+@section('scripts')
+<script type="text/javascript">
+	function cerrar(){
+		window.close()
+	}
+</script>
 @endsection

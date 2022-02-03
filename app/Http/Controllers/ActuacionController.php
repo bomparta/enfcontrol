@@ -144,4 +144,19 @@ class ActuacionController extends Controller
     {
         //
     }
+
+    public function get_actuaciones($cod)
+    {
+        $actuaciones = DB::table('actividad')
+       ->select('actividad.codigo','actividad.anio','actividad.nombre','clasificacion.descripcion as clasificacion','tematica.descripcion as tematica','alcance.descripcion as alcance','tipo_actividad.descripcion as tipo_actividad','convenio')
+       ->join("tematica", "tematica.id", "=", "actividad.id")
+       ->join("clasificacion", "clasificacion.id", "=", "actividad.id_clasificacion")
+       ->join("alcance", "alcance.id", "=", "actividad.id_alcance")
+       ->join("tipo_actividad", "tipo_actividad.id", "=", "actividad.id_tipo_actividad")
+       ->where('actividad.codigo',$cod)
+       ->orderby('actividad.codigo')
+       ->get();
+            
+        return view('actuacion/listadoactuacion', compact('actuaciones'));
+    }
 }

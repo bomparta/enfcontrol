@@ -16,8 +16,8 @@
                             <div class="table-responsive">
                                 
                                     <div class="card-header">
-                                        <h3 class="card-title">Actividades Academica</h3>
-                                        <p align="right"><a class='btn btn-info' href="{{URL::route('crearactividad')}}">Crear Actividad</a></p>
+                                        <h3 class="card-title">Capacitados en Actividad Global</h3>
+                                        
                                     </div>
                                     <!-- /.card-header -->
                                     <div class="card-body">
@@ -35,18 +35,18 @@
                                                 </tr>
                                                 </thead>
                                                 <tbody>
-                                                  @foreach ($actividades as $item)
+                                                  
                                                 <tr>
-                                                  <td><a href="/actividad/edit/{{ $item->codigo }}"><span class='btn-info badge'><font color=#F2F3F8>{{ $item->codigo }}-{{ $item->anio }}</span></a></td>
-                                                  <td>{{ $item->nombre }}</td>
-                                                  <td>{{ $item->clasificacion }}</td>
-                                                  <td>{{ $item->tematica }}</td>
-                                                  <td>{{ $item->alcance }}</td>
-                                                  <td>{{ $item->tipo_actividad }}</td>
-                                                  <td><a href="/actuacion/listactuacion/{{ $item->codigo }}"><span class='btn-info badge'><font color=#F8F5F5>{{ $item->convenio }} </span></a></td>
-                                                  <td><a href="/reporte/capacidad_actividad_global/{{ $item->id }}"><img src="/img/icon/clipboard.ico" class="icon-lg" alt="Acciones"></a></td>
+                                                  <td></td>
+                                                  <td></td>
+                                                  <td></td>
+                                                  <td></td>
+                                                  <td></td>
+                                                  <td></td>
+                                                  <td></td>
+                                                  <td></td>
                                                 </tr>
-                                                @endforeach
+                                                
                                                 </tbody>
                                                 <tfoot>
                                                 <tr>
@@ -126,4 +126,5 @@
 
 
 
-@endsection  
+@endsection 
+
