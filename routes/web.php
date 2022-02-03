@@ -40,5 +40,6 @@ Route::get('/estudiantedatos', 'EstudianteController@create')->name('datosestudi
 Route::get('/usuario', 'DashboardController@index')->name('usuario');
 Route::get('/actuacion', 'ActuacionController@index')->name('actuacion');
 Route::get('/creactuacion', 'ActuacionController@create')->name('crearactuacion');
+Route::get('/actuacion/edit/{codigo}', 'ActuacionController@edit')->name('editactuacion');
 
 

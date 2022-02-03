@@ -115,9 +115,11 @@ class ActuacionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Request $request,$id)
     {
-        //
+        $codigo = $id;
+
+        return view('actuacion/edit', compact('codigo'));
     }
 
     /**

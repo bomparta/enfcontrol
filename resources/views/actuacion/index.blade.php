@@ -49,7 +49,7 @@
                                                   <td>{{ $item->alcance }}</td>
                                                   <td>{{ $item->tipo_actividad }}</td>
                                                   <td><a href=""><font color=#FC0A0A>{{ $item->convenio }}</a></td>
-                                                  <td><a href=""><img src="/img/icon/clipboard.ico" class="icon-lg" alt="Acciones"></a></td>
+                                                  <td><a href="/actuacion/edit/{{ $item->codigo }}"><img src="/img/icon/clipboard.ico" class="icon-lg" alt="Acciones"></a></td>
                                                   <td><a href=""><img src="/img/icon/clipboard.ico" class="icon-lg" alt="Acciones"></a></td>
                                                   <td><a href=""><img src="/img/icon/clipboard.ico" class="icon-lg" alt="Acciones"></a></td> 
                                                   <td><a href=""><img src="/img/icon/clipboard.ico" class="icon-lg" alt="Acciones"></a></td>                                                </tr>
