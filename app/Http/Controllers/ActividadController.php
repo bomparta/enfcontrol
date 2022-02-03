@@ -104,9 +104,15 @@ class ActividadController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Request $request,$id)
     {
-        //
+
+        $actividad = Actividad::where('codigo',$id)->first();
+        $clasificacions = Clasificacion::where('status', 1)->get();
+        $tematicas = Tematica::where('status', 1)->get();
+        $alcances = Alcance::where('status', 1)->get();
+        $tipo_estudios = TipoEstudio::where('status', 1)->get();
+        return view('actividad/edit', compact('actividad','clasificacions','tematicas','alcances','tipo_estudios'));
     }
 
     /**
@@ -135,45 +141,16 @@ class ActividadController extends Controller
     public function indexactividad()
     {
 
-
-      // $actividades = Actividad::all();
-      /*
-      $actividades = Actividad::select('actividad.codigo','actividad.anio','actividad.nombre','clasificacion.descripcion as clasificacion','tematica.descripcion as tematica','alcance.descripcion as alcance','tipo_actividad.descripcion as tipo_actividad','convenio')
-      ->join("tematica", "tematica.id", "=", "actividad.id")
-      ->join("clasificacion", "clasificacion.id", "=", "actividad.id_clasificacion")
-      ->join("alcance", "alcance.id", "=", "actividad.id_alcance")
-      ->join("tipo_actividad", "tipo_actividad.id", "=", "actividad.id_tipo_actividad")
-      ->get();
-       return view('actividad/index', compact('actividades'));
-        */
-
-       $actividades = DB::table('actividad')
-       ->select('actividad.codigo','actividad.anio','actividad.nombre','clasificacion.descripcion as clasificacion','tematica.descripcion as tematica','alcance.descripcion as alcance','tipo_actividad.descripcion as tipo_actividad','convenio')
-       ->join("tematica", "tematica.id", "=", "actividad.id")
-       ->join("clasificacion", "clasificacion.id", "=", "actividad.id_clasificacion")
-       ->join("alcance", "alcance.id", "=", "actividad.id_alcance")
-       ->join("tipo_actividad", "tipo_actividad.id", "=", "actividad.id_tipo_actividad")
-       ->get();
-
-      
-
-
-       return view('actividad/index', compact('actividades'));
+        $actividades = DB::select('SELECT actividad.codigo,actividad.anio,actividad.nombre,clasificacion.descripcion as clasificacion,tematica.descripcion as tematica,alcance.descripcion as alcance,tipo_actividad.descripcion as tipo_actividad,(SELECT COUNT(*) AS convenio FROM actuacion WHERE cod_actividad = actividad.codigo) FROM actividad 
+        INNER JOIN tematica ON tematica.id = actividad.id_tematica
+        INNER JOIN clasificacion ON clasificacion.id = actividad.id_clasificacion
+        INNER JOIN alcance ON alcance.id = actividad.id_alcance
+        INNER JOIN tipo_actividad ON tipo_actividad.id = actividad.id_tipo_actividad
+        ');
+            
+        return view('actividad/index', compact('actividades'));
     }
     
-    public function getconteo(Request $request)
-    {
-        try {    
-            $codigo = $request->input('codigo');
-            $conteo= DB::table('actuacion')
-            ->where('cod_actividad',$codigo)
-            ->select(DB::raw('count(*) as nro_conteo'))
-            ->first();
-            $response = ['data' => $conteo];
-        } catch (\Exception $exception) {
-            return response()->json([ 'message' => 'There was an error retrieving the records' ], 500);
-        }
-        return response()->json($response);
-    }
+
 
 }
