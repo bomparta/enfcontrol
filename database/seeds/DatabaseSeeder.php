@@ -17,6 +17,10 @@ class DatabaseSeeder extends Seeder
             AlcanceSeeder::class,
             TipoActividadSeeder::class,
             ProgramaSeeder::class,
+            StatusactividadSeeder::class,
+            PersonaSeeder::class,
+            EntidadSeeder::class,
+
             ]);
     }
 }
