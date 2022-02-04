@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
             StatusactividadSeeder::class,
             PersonaSeeder::class,
             EntidadSeeder::class,
+            UsuarioGrupoSeeder::class,
 
             ]);
     }
