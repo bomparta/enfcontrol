@@ -6,6 +6,7 @@
         <h1>Bienvenido, {{Auth::user()->name}}</h1>
     </div>
     <div class="card-columns">
+        @if(in_array( Auth::user()->id_usuariogrupo, array(1, 3, 6) ))
         <a href="{{route('listadoestudiante')}}" style="color: black;">
             <div class="card text-center">
                 <img src="{{url('/img/estudiante.jpeg')}}" class="card-img-top">
@@ -14,7 +15,7 @@
                 </div>
             </div>
         </a>
-
+        @endif
         <a style="color: black;" href="{{route('actividad')}}">
             <div class="card text-center">
                 <img src="{{url('/img/control_estudio.jpeg')}}" class="card-img-top">

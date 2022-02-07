@@ -7,12 +7,12 @@
 
     <div class="list-group list-group-flush">
         <!-- Menu Secretaria-->
-
+        @if(in_array( Auth::user()->id_usuariogrupo, array(1, 3, 6) ))
         <a href="{{route('listadoactividad')}}" class="list-group-item list-group-item-action border-0">
             <img src="/img/icons-lineal/analiticas.png" class="icon-lg">
             Actividad
         </a>
-        
+        @endif
         <a href="{{route('actuacion')}}" class="list-group-item list-group-item-action border-0">
             <img src="/img/icons-lineal/analiticas.png" class="icon-lg">
             Actuacion
