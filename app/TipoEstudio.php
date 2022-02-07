@@ -16,6 +16,6 @@ class TipoEstudio extends Model
      * @var array
      */
     protected $fillable = [
-        'descripcion','sttus',
+        'descripcion','status',
     ];
 }
