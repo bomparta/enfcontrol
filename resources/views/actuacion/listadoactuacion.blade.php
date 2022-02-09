@@ -16,7 +16,9 @@
                             <div class="table-responsive">
                                 
                                     <div class="card-header">
-                                        <h3 class="card-title">Actividades Academica | Nombre de el talle, diplomado</h3>
+                                    @foreach ($actividad as $itema)
+                                     <h3 class="card-title">Actividades Academica | {{ $itema->codigo }}-{{ $itema->anio }} {{ $itema->nombre }}</h3>
+                                    @endforeach
                                         <p align="right"><a class='btn btn-info' href="{{URL::route('crearactividad')}}">Crear Actuacion</a></p>
                                     </div>
                                     <!-- /.card-header -->
@@ -26,7 +28,6 @@
                                         <tr>
                                           <th>N°</th>
                                           <th>Codigo</th>
-                                          <th>Actividad</th>
                                           <th>Período</th>
                                           <th>Entidad</th>
                                           <th>Horas Académicas</th>
@@ -35,21 +36,20 @@
                                           <th>Asistencias</th>
                                           <th>Facilitadores</th>
                                           <th>Estatus</th>
-                                          <th>opciones</th>
+                                          <th>Opciones</th>
                                         </tr>
                                         </thead>
                                         <tbody>
                                           @foreach ($actuaciones as $item)
                                         <tr>
                                         <td>1</td>  
-                                        <td><a href="{{URL::route('crearactuacion')}}"><font color=#0A0EFC>{{ $item->codigo }}-{{ $item->anio }}</a></td>
-                                          <td>{{ $item->nombre }}</td>
-                                          <td>{{ $item->clasificacion }}</td>
-                                          <td>{{ $item->tematica }}</td>
-                                          <td>{{ $item->alcance }}</td>
-                                          <td>{{ $item->tipo_actividad }}</td>
-                                          <td><a href=""><font color=#FC0A0A>{{ $item->convenio }}</a></td>
-                                          <td><a href="/actuacion/edit/{{ $item->codigo }}"><img src="/img/icon/clipboard.ico" class="icon-lg" alt="Acciones"></a></td>
+                                        <!--<td><a href="{{URL::route('crearactuacion')}}"><font color=#0A0EFC>{{ $item->cod_actividad }}-{{ $item->anio }}-{{ $item->cod_actuacion }}</a></td>-->
+                                        <td><a href="/actuacion/edit/{{ $item->cod_actuacion}}"><font color=#0A0EFC>{{ $item->cod_actividad }}-{{ $item->anio }}-{{ $item->cod_actuacion }}</a>
+                                          <td>{{ $item->fecha_inicio }} a {{ $item->fecha_fin }}</td>
+                                          <td>{{ $item->entidad }}</td>
+                                          <td>{{ $item->horas }}</td>
+                                          <td>{{ $item->nomb_planificador }} {{ $item->ape_planificador }}</td>                                                                               
+                                          <td><a href="/actuacion/edit/{{ $item->cod_actuacion}}"><img src="/img/icon/clipboard.ico" class="icon-lg" alt="Acciones"></a></td>
                                           <td><a href=""><img src="/img/icon/clipboard.ico" class="icon-lg" alt="Acciones"></a></td>
                                           <td><a href=""><img src="/img/icon/clipboard.ico" class="icon-lg" alt="Acciones"></a></td> 
                                           <td><a href=""><img src="/img/icon/clipboard.ico" class="icon-lg" alt="Acciones"></a></td>                                                </tr>
@@ -57,9 +57,8 @@
                                         </tbody>
                                         <tfoot>
                                         <tr>
-                                        <th>N°</th>
+                                        <th>N°</th>                                     
                                           <th>Codigo</th>
-                                          <th>Actividad</th>
                                           <th>Período</th>
                                           <th>Entidad</th>
                                           <th>Horas Académicas</th>
@@ -68,7 +67,7 @@
                                           <th>Asistencias</th>
                                           <th>Facilitadores</th>
                                           <th>Estatus</th>
-                                          <th>opciones</th>
+                                          <th>Opciones</th>
                                         </tr>
                                         </tfoot>
                                 </table>

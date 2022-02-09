@@ -115,7 +115,7 @@ class ActuacionController extends Controller
     public function get_actuaciones($cod)
     {
         
-        $actuaciones = DB::table('actividad')
+        $actividad = DB::table('actividad')
        ->select('actividad.codigo','actividad.anio','actividad.nombre','clasificacion.descripcion as clasificacion','tematica.descripcion as tematica','alcance.descripcion as alcance','tipo_actividad.descripcion as tipo_actividad','convenio')
        ->join("tematica", "tematica.id", "=", "actividad.id")
        ->join("clasificacion", "clasificacion.id", "=", "actividad.id_clasificacion")
@@ -125,6 +125,17 @@ class ActuacionController extends Controller
        ->orderby('actividad.codigo')
        ->get();
 
-           return view('actuacion/listadoactuacion', compact('actuaciones'));
+       $actuaciones = DB::table('actuacion')
+       ->select('actuacion.cod_actividad','actuacion.anio','actuacion.cod_actuacion',
+       'actuacion.fecha_inicio','actuacion.fecha_fin','entidad.descripcion as entidad',
+       'actuacion.horas','actuacion.id_planificador','persona.nombre as nomb_planificador',
+       'persona.apellido as ape_planificador')
+       ->join("entidad", "entidad.id", "=", "actuacion.id_entidad")
+       ->join("persona", "persona.id", "=", "actuacion.id_planificador")       
+       ->where('actuacion.cod_actividad',$cod)
+       ->orderby('actuacion.id')
+       ->get();
+
+        return view('actuacion/listadoactuacion', compact('actuaciones','actividad'));
     }
 }
