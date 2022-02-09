@@ -86,7 +86,7 @@
                                         <button type="submit" value='Guardar y Continuar' class="btn_default" id="btnGuardar">
                                             Guardar y Continuar&nbsp;&nbsp;<i class="fa fa-arrow-right fa-lg" style="color:white"></i>
                                         </button>
-                                        <a class='btn btn-info' href="{{URL::route('experienciaestudiante')}}" >Guardar y Continuar</a>
+                                        <a class='btn btn-info' href="{{URL::route('listadoestudiante')}}" >Guardar y Continuar</a>
                                     </div>
                                 </td>
                             </tr>

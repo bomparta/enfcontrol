@@ -78,13 +78,7 @@
                             <tr>
                                 <td class="frameContenedor" align="center">
                                     <div align="right">
-                                        <button type="button" name="btnAtras" value="Atr&aacute;s" class="btn_default" onClick="atras();">
-                                            <i class="fa fa-arrow-left fa-lg" style="color:white"></i>&nbsp;Regresar
-                                        </button>
-                                        <button type="button" name="btnSeguiente" value="Siguiente" class="btn_default" onClick="siguiente();">
-                                            Continuar&nbsp;<i class="fa fa-arrow-right fa-lg" style="color:white"></i>
-                                        </button>
-                                        <a class='btn btn-info' href="{{URL::route('programa')}}" >Continuar</a>
+                                        <a class='btn btn-info' href="{{URL::route('programa')}}" >Guardar y Continuar</a>
                                     </div>
                                 </td>
                             </tr>

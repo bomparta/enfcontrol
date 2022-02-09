@@ -196,12 +196,6 @@
                             </div>
                         </div>
                          <div class="frameContenedor" style="margin:5px;" align="right">
-                            <button type="button" name="btnGrabar" value="Guardar" class="btn_default" onClick="validar();">
-                                <i class="fa fa-save fa-lg" style="color:white"></i>&nbsp;Guardar
-                            </button>
-                            <button type="button" name="btnSeguiente" value="Siguiente" class="btn_default" onClick="siguiente();" href="{{URL::route('experienciaestudiante')}}">
-                                Guardar y Continuar&nbsp;<i class="fa fa-arrow-right fa-lg" style="color:white"></i>
-                            </button>
                             <a class='btn btn-info' href="{{URL::route('experienciaestudiante')}}" >Guardar y Continuar</a>
                         </div>
                     </form>
