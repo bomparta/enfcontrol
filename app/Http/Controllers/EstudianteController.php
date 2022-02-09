@@ -23,7 +23,32 @@ class EstudianteController extends Controller
      */
     public function create()
     {
-        return view('estudiante/create');
+       // return view('estudiante/create');
+       return view('estudiante/datos');
+    }
+
+    public function createxperiencia()
+    {
+       // return view('estudiante/create');
+       return view('estudiante/experiencia');
+    }
+
+    public function createxperienciadoc()
+    {
+       // return view('estudiante/create');
+       return view('estudiante/experienciadocente');
+    }
+
+    public function createorganizacion()
+    {
+       // return view('estudiante/create');
+       return view('estudiante/organizacion');
+    }
+
+    public function createprograma()
+    {
+       // return view('estudiante/create');
+       return view('estudiante/programa');
     }
 
     /**
