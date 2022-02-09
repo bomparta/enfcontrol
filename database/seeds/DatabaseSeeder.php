@@ -2,6 +2,8 @@
 
 use Illuminate\Database\Seeder;
 
+use function Ramsey\Uuid\v1;
+
 class DatabaseSeeder extends Seeder
 {
     /**
@@ -21,6 +23,16 @@ class DatabaseSeeder extends Seeder
             PersonaSeeder::class,
             EntidadSeeder::class,
             UsuarioGrupoSeeder::class,
+            Ind_financieroSeeder::class,
+            Tipo_ind_financieroSeeder::class,
+            RefrigeriosSeeder::class,
+            ViaticosSeeder::class,
+            OrganismoSeeder::class,
+            NacionalidadSeeder::class,
+            GeneroSeeder::class,
+            Estado_civilSeeder::class,
+            Tipo_identificacionSeeder::class,
+            Tipo_funcionarioSeeder::class,
 
             ]);
     }
