@@ -21,7 +21,7 @@
                             <tr>
                                 <td colspan="4">
                                     <div align="center" id="divTituloIndex2">
-                                            DATOS BÁSICOS
+                                           <b> DATOS BÁSICOS</b>
                                     </div>
                                     <div id="divSubTituloIndex2">
                                         Suministre sus datos básicos, haga clic en "Guardar" y posteriormente suba su foto.
@@ -30,17 +30,12 @@
                             </tr>
                             <tr>
                                 <td>
-                                    &nbsp;Cedula&nbsp;<span style="color:red;">*</span>&nbsp;
-                                    <input disabled type="text" name="cedulaT" id="cedulaT" value="" style="width:190px;" maxlength="8" onKeyPress="return valText(this.value, event, 'int');" class="campoTexto"/>
-                                    <input type="hidden" name="cedula" id="cedula" value="" />
+                                    &nbsp;Primer Nombre&nbsp;<span style="color:red;">*</span>&nbsp;<br>
+                                    <input type="text" name="primernombre" id="primernombre" value="" style="width:190px;" maxlength="25"/>
                                 </td>
                                 <td>
-                                    &nbsp;Nombres&nbsp;<span style="color:red;">*</span>&nbsp;
-                                    <input type="text" name="nombres" id="nombres" value="" style="width:190px;" maxlength="100" class="campoTexto" onKeyUp="this.value = this.value.toUpperCase();"/>
-                                </td>
-                                <td>
-                                    &nbsp;Apellidos&nbsp;<span style="color:red;">*</span>&nbsp;
-                                    <input type="text" name="apellidos" id="apellidos" value="" style="width:190px;"  maxlength="100" class="campoTexto" onKeyUp="this.value = this.value.toUpperCase();"/>
+                                    &nbsp;Segundo Nombre&nbsp;<span style="color:red;">*</span>&nbsp;<br>
+                                    <input type="text" name="segundonombre" id="segundonombre" value="" style="width:190px;" maxlength="25" />
                                 </td>
                                 <td width="30%" rowspan="7" >
                                     <div align="center">
@@ -69,78 +64,70 @@
                             <!-- FILA 2 -->
                             <tr>
                                 <td>
-                                    &nbsp;G&eacute;nero&nbsp;<span style="color:red;">*</span>&nbsp;
-                                    <select id="genero" name="genero" class="combo select2_single" style="width:190px;">
-                                        <option value="">Seleccione G&eacute;nero</option>
+                                    &nbsp;Primer Apellido&nbsp;<span style="color:red;">*</span>&nbsp;<br>
+                                    <input type="text" name="primerapellido" id="primerapellido" value="" style="width:190px;" maxlength="25"/>
+                                </td>
+                                <td>
+                                    &nbsp;Segundo Apellido&nbsp;<span style="color:red;">*</span>&nbsp;<br>
+                                    <input type="text" name="segundoapellido" id="segundoapellido" value="" style="width:190px;" maxlength="25"/>
+                                </td>
+                            </tr>
+                            <!-- FILA 2 -->
+                            <tr>
+                                <td>
+                                    &nbsp;Cedula&nbsp;<span style="color:red;">*</span>&nbsp;<br>
+                                    <select id="genero" name="genero" style="width:70px;">
+                                        <option value=""></option></select>
+                                        <input type="text" name="segundoapellido" id="segundoapellido" value="" style="width:190px;" maxlength="25"/>  
+                                </td>
+                                <td>
+                                    &nbsp;Sexo&nbsp;<span style="color:red;">*</span>&nbsp;<br>
+                                    <select id="sexo" name="sexo"  style="width:190px;" >
+                                        <option value="">Seleccione Sexo</option>
                                         
                                     </select>
                                 </td>
-                                <td>
-                                    &nbsp;Estado Civil&nbsp;<span style="color:red;">*</span>&nbsp;
-                                    <select id="edocivil" name="edoCivil" class="combo select2_single" style="width:190px;" >
-                                        <option value="">Seleccione Estado Civil</option>
-                                        
-                                    </select>
-                                </td>
-                                <td>
-                                    &nbsp;Fecha de Nacimiento&nbsp;<span style="color:red;">*</span>&nbsp;
-                                    <input type="text" name="fechaNacimiento" id="fechaNacimiento" value="" style="width:170px;" readonly="readonly" class="campoTexto"/>
-                                    <i class="fa fa-calendar fa-lg" id='cal1' alt='calendario' onmouseover="Tip('Haga click aqu\u00ed para abrir un selector de fechas.')" onmouseout="UnTip();"></i>
-                                    
-                                </td>			
+                                			
                             </tr>
                             <!-- FILA 3 -->
                             <tr>
                                 <td>
-                                    &nbsp;Estado de Residencia&nbsp;<span style="color:red;">*</span>&nbsp;
-                                    <select name="estado" onChange="cargarComboMunicipios(this.value);cargarComboParroquias(0);" class="combo select2_single" style="width:190px;">
-                                        <option value="">Seleccione Estado</option>
+                                    &nbsp;Estado Civil&nbsp;<span style="color:red;">*</span>&nbsp;<br>
+                                    <select name="estadocivil"  style="width:190px;">
+                                        <option value="">Seleccione Estado civil</option>
                                         
                                     </select>
                                 </td>
                                 <td>
-                                    &nbsp;Municipio de Residencia&nbsp;<span style="color:red;">*</span>&nbsp;
-                                    <select name="municipio" id="municipio" class="combo select2_single" style="width:190px;"  onchange="cargarComboParroquias(this.value)">
-                                        <option value="">Seleccione un Municipio</option>
-                                        
-                                    </select>
-                                </td>
-                                <td>
-                                    &nbsp;Parroquia de Residencia&nbsp;<span style="color:red;">*</span>&nbsp;
-                                    <select name="parroquia" id="parroquia" class="combo select2_single" style="width:190px;">
-                                        <option value="">Seleccione una Parroquia</option>
-                                        
-                                    </select>
+                                    &nbsp;Correo&nbsp;<span style="color:red;">*</span>&nbsp;<br>
+                                    <input type="email" name="correo" id="correo" value="" style="width:190px;" maxlength="200"/>
                                 </td>
                             </tr>
                             <!-- FILA 4 -->
                             <tr>
                                 <td>
-                                    &nbsp;Ciudad / Urbanizaci&oacute;n&nbsp;&nbsp;&nbsp;&nbsp;
-                                    <input type="text" name="urbanizacion" id="urbanizacion" value="" style="width:190px;" maxlength="100" class="campoTexto" onKeyUp="this.value = this.value.toUpperCase();"/>
+                                    &nbsp;Telefono de Habitacion&nbsp;&nbsp;&nbsp;&nbsp;<br>
+                                    <select id="codtele" name="codtele" style="width:70px;">
+                                        <option value=""></option></select>
+                                    <input type="text" name="telfhabitacion" id="telfhabitacion" value="" style="width:190px;" maxlength="100"/>
                                 </td>
                                 <td>
-                                    &nbsp;Calle/Avenida&nbsp;&nbsp;&nbsp;&nbsp;
-                                    <input type="text" name="calleAv" id="calleAv" value="" style="width:190px;" maxlength="100" class="campoTexto" onKeyUp="this.value = this.value.toUpperCase();"/>
-                                </td>
-                                <td>
-                                    &nbsp;Nombre Casa o Edificio&nbsp;&nbsp;&nbsp;
-                                    <input type="text" name="nombreCasaApto" id="nombreCasaApto" value=""  style="width:190px;" maxlength="100" class="campoTexto" onKeyUp="this.value = this.value.toUpperCase();"/>
+                                    &nbsp;Fecha Nacimiento&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:red;">*</span><br>
+                                    <input type="text" name="fechanac" id="fechanac" value="" style="width:190px;" maxlength="25"/>
                                 </td>
                             </tr>
                             <!-- FILA 5 -->
                             <tr>
                                 <td>
-                                    &nbsp;Correo Electr&oacute;nico <span style="color:red;">*</span>&nbsp;
-                                    <input disabled type="text" name="emailT" id="emailT" value="" style="width:190px;" maxlength="100" class="campoTexto"/>
-                                    <input disabled type="hidden" name="email" id="email" value=""/>
-                                </td>
-                                <td>
-                                    &nbsp;Telefono Local&nbsp;<span style="color:red;">*</span>&nbsp;
+                                    &nbsp;Telefono Local&nbsp;<span style="color:red;">*</span>&nbsp;<br>
+                                    <select id="codtele" name="codtele" style="width:70px;">
+                                        <option value=""></option></select>
                                     <input type="text" name="telefonoHab" id="telefonoHab" value="" style="width:190px;" maxlength="11" onKeyPress="return valText(this.value, event, 'int');"  class="campoTexto"/>
                                 </td>
                                 <td>
-                                    &nbsp;Telefono Celular&nbsp;<span style="color:red;">*</span>&nbsp;
+                                    &nbsp;Telefono Celular&nbsp;<span style="color:red;">*</span>&nbsp;<br>
+                                    <select id="codtele" name="codtele" style="width:70px;">
+                                        <option value=""></option></select>
                                     <input type="text" name="telefonoCel" id="telefonoCel" value="" style="width:190px;" maxlength="11" onKeyPress="return valText(this.value, event, 'int');"  class="campoTexto"/>
                                 </td>
                             </tr>
@@ -196,7 +183,7 @@
                             </div>
                         </div>
                          <div class="frameContenedor" style="margin:5px;" align="right">
-                            <a class='btn btn-info' href="{{URL::route('experienciaestudiante')}}" >Guardar y Continuar</a>
+                            <a class='btn btn-info' href="{{URL::route('direccionestudiante')}}" >Guardar y Continuar</a>
                         </div>
                     </form>
 

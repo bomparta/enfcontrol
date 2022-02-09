@@ -33,6 +33,14 @@ class DatabaseSeeder extends Seeder
             Estado_civilSeeder::class,
             Tipo_identificacionSeeder::class,
             Tipo_funcionarioSeeder::class,
+            AulaSeeder::class,
+            AdscripcionSeeder::class,
+            TratamientoSeeder::class,
+            ModalidadSeeder::class,
+            MatriculaSeeder::class,
+            TurnoSeeder::class,
+            Centro_ejecucionSeeder::class,
+            PaisSeeder::class,
 
             ]);
     }
