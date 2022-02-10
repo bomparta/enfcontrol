@@ -49,4 +49,10 @@ Route::get('/creactuacion', 'ActuacionController@create')->name('crearactuacion'
 Route::get('/actuacion/edit/{codigo}', 'ActuacionController@edit')->name('editactuacion');
 Route::get('/reporte/capacidad_actividad_global/{codigo}', 'ReporteController@capacitados_actividad_global')->name('reporteactividaglobal');
 
+Route::get('/control', 'AdminController@index')->name('admincontrol');
 
+Route::get('/listadoadmin', 'AdministracionController@index')->name('listaconciliacion');
+Route::get('/listconce', 'AdministracionController@get_list_conciliacion')->name('listconciliacion');
+Route::get('/listconcerror', 'AdministracionController@get_list_conciliacion_error')->name('listaconciliacionerror');
+
+Route::get('/listadomatdoc', 'DocenteController@index')->name('listamateriadoc');

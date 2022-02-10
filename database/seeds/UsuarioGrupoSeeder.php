@@ -32,5 +32,21 @@ class UsuarioGrupoSeeder extends Seeder
             'nombre' => 'Informatica',
             'activos' => '0',
         ]);
+        DB::table('usuario_grupo')->insert([
+            'nombre' => 'Supervisor',
+            'activos' => '0',
+        ]);
+        DB::table('usuario_grupo')->insert([
+            'nombre' => 'Planificador',
+            'activos' => '0',
+        ]);
+        DB::table('usuario_grupo')->insert([
+            'nombre' => 'Operador',
+            'activos' => '0',
+        ]);
+        DB::table('usuario_grupo')->insert([
+            'nombre' => 'Administrador',
+            'activos' => '0',
+        ]);
     }
 }

@@ -16,7 +16,7 @@
             </div>
         </a>
         @endif
-        <a style="color: black;" href="{{route('actividad')}}">
+        <a style="color: black;" href="{{route('admincontrol')}}">
             <div class="card text-center">
                 <img src="{{url('/img/control_estudio.jpeg')}}" class="card-img-top">
                 <div class="card-body">
@@ -69,6 +69,14 @@
                 <img src="{{url('/img/super.jpeg')}}" class="card-img-top">
                 <div class="card-body">
                     <h1 class="card-title">Informatica</h1>
+                </div>
+            </div>
+        </a>
+        <a style="color: black;" href="{{route('actividad')}}">
+            <div class="card text-center">
+                <img src="{{url('/img/eventos.jpeg')}}" class="card-img-top">
+                <div class="card-body">
+                    <h1 class="card-title">Eventos</h1>
                 </div>
             </div>
         </a>
