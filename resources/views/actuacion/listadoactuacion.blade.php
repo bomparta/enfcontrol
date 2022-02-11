@@ -18,8 +18,9 @@
                                     <div class="card-header">
                                     @foreach ($actividad as $itema)
                                      <h3 class="card-title">Actividades Academica | {{ $itema->codigo }}-{{ $itema->anio }} {{ $itema->nombre }}</h3>
+                                     <p align="right"><a class='btn btn-info' href="{{URL::route('crearactividad')}}">Crear Actuacion</a></p>
                                     @endforeach
-                                        <p align="right"><a class='btn btn-info' href="{{URL::route('crearactividad')}}">Crear Actuacion</a></p>
+                                      
                                     </div>
                                     <!-- /.card-header -->
                                     <div class="card-body">
@@ -43,13 +44,13 @@
                                           @foreach ($actuaciones as $item)
                                         <tr>
                                         <td>1</td>  
-                                        <!--<td><a href="{{URL::route('crearactuacion')}}"><font color=#0A0EFC>{{ $item->cod_actividad }}-{{ $item->anio }}-{{ $item->cod_actuacion }}</a></td>-->
-                                        <td><a href="/actuacion/edit/{{ $item->cod_actuacion}}"><font color=#0A0EFC>{{ $item->cod_actividad }}-{{ $item->anio }}-{{ $item->cod_actuacion }}</a>
+                                        <!--<td><a href="{{URL::route('crearactuacion')}}"><font color=#0A0EFC>{{ $item->id_actividad }}-{{ $item->anio }}-{{ $item->cod_actuacion }}</a></td>-->
+                                        <td><a href="/actuacion/edit/{{ $item->id}}"><font color=#0A0EFC>{{ $item->cod_actividad }}-{{ $item->anio }}-{{ $item->cod_actuacion }}</a>
                                           <td>{{ $item->fecha_inicio }} a {{ $item->fecha_fin }}</td>
                                           <td>{{ $item->entidad }}</td>
                                           <td>{{ $item->horas }}</td>
                                           <td>{{ $item->nomb_planificador }} {{ $item->ape_planificador }}</td>                                                                               
-                                          <td><a href="/actuacion/edit/{{ $item->cod_actuacion}}"><img src="/img/icon/clipboard.ico" class="icon-lg" alt="Acciones"></a></td>
+                                          <td><a href="/actuacion/edit/{{ $item->cod_actuacion}}-{{ $item->anio}}-{{ $item->id_actividad}}"><img src="/img/icon/clipboard.ico" class="icon-lg" alt="Acciones"></a></td>
                                           <td><a href=""><img src="/img/icon/clipboard.ico" class="icon-lg" alt="Acciones"></a></td>
                                           <td><a href=""><img src="/img/icon/clipboard.ico" class="icon-lg" alt="Acciones"></a></td> 
                                           <td><a href=""><img src="/img/icon/clipboard.ico" class="icon-lg" alt="Acciones"></a></td>                                                </tr>

@@ -21,7 +21,7 @@ class DatabaseSeeder extends Seeder
             ProgramaSeeder::class,
             StatusactividadSeeder::class,
             PersonaSeeder::class,
-            EntidadSeeder::class,
+            EntidadSeeder::class,           
             UsuarioGrupoSeeder::class,
             Ind_financieroSeeder::class,
             Tipo_ind_financieroSeeder::class,

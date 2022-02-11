@@ -15,6 +15,7 @@ class CreateActuacionTable extends Migration
     {
         Schema::create('actuacion', function (Blueprint $table) {
             $table->id();
+            $table->integer("id_actividad");
             $table->string("cod_actividad");
             $table->smallInteger('anio');
             $table->string("cod_actuacion");
