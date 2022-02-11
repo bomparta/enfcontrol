@@ -92,5 +92,10 @@ class AdministracionController extends Controller
     {
        return view('control/administrador/list_conciliacion_error');
     }
+    
+    public function get_list_docente()
+    {
+       return view('control/docente/list_docente');
+    }
 
 }

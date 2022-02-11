@@ -41,6 +41,11 @@ class DatabaseSeeder extends Seeder
             TurnoSeeder::class,
             Centro_ejecucionSeeder::class,
             PaisSeeder::class,
+            NivelAcademicoSeeder::class,
+            SeccionSeeder::class,
+            BancoSeeder::class,
+            CodigoCelSeeder::class,
+            CodigoHabSeeder::class,
 
             ]);
     }

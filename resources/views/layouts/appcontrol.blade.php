@@ -113,19 +113,19 @@
             <img src="/img/icons-lineal/analiticas.png" class="icon-lg">
             Precio UC
         </a>
-        <a href="{{route('listadoactividad')}}" class="list-group-item list-group-item-action border-0">
+        <a href="{{route('listadocente')}}" class="list-group-item list-group-item-action border-0">
             <img src="/img/icons-lineal/analiticas.png" class="icon-lg">
             Listado Docente
         </a>
-        <a href="{{route('listadoactividad')}}" class="list-group-item list-group-item-action border-0">
+        <a href="{{route('listaconciliacion')}}" class="list-group-item list-group-item-action border-0">
             <img src="/img/icons-lineal/analiticas.png" class="icon-lg">
             Conciliacion
         </a>
-        <a href="{{route('listadoactividad')}}" class="list-group-item list-group-item-action border-0">
+        <a href="{{route('listconciliacion')}}" class="list-group-item list-group-item-action border-0">
             <img src="/img/icons-lineal/analiticas.png" class="icon-lg">
             Conciliado Lista
         </a>
-        <a href="{{route('listadoactividad')}}" class="list-group-item list-group-item-action border-0">
+        <a href="{{route('listaconciliacionerror')}}" class="list-group-item list-group-item-action border-0">
             <img src="/img/icons-lineal/analiticas.png" class="icon-lg">
             Conciliado Error
         </a>

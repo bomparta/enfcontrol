@@ -54,5 +54,7 @@ Route::get('/control', 'AdminController@index')->name('admincontrol');
 Route::get('/listadoadmin', 'AdministracionController@index')->name('listaconciliacion');
 Route::get('/listconce', 'AdministracionController@get_list_conciliacion')->name('listconciliacion');
 Route::get('/listconcerror', 'AdministracionController@get_list_conciliacion_error')->name('listaconciliacionerror');
+Route::get('/listdocent', 'AdministracionController@get_list_docente')->name('listadocente');
+Route::get('/adddocent', 'DocenteController@create')->name('adddocente');
 
 Route::get('/listadomatdoc', 'DocenteController@index')->name('listamateriadoc');
