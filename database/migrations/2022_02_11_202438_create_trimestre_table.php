@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTiempoPreinscripcionTable extends Migration
+class CreateTrimestreTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,10 @@ class CreateTiempoPreinscripcionTable extends Migration
      */
     public function up()
     {
-        Schema::create('tiempo_preinscripcion', function (Blueprint $table) {
+        Schema::create('trimestre', function (Blueprint $table) {
             $table->id();
-            $table->date("fecha_inicio");
-            $table->time("hora_inicio");
-            $table->date("fecha_fin");
-            $table->time("hora_fin");
-            $table->smallInteger('status')->comment('1 activo / 0 no activo');
+            $table->string("nombre");
+            $table->string("sigla_t");
             $table->timestamps();
         });
     }
@@ -31,6 +28,6 @@ class CreateTiempoPreinscripcionTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tiempo_preinscripcion');
+        Schema::dropIfExists('trimestre');
     }
 }

@@ -15,6 +15,8 @@ class CreateLugarTrabajoTable extends Migration
     {
         Schema::create('lugar_trabajo', function (Blueprint $table) {
             $table->id();
+            $table->string("lugar_trabajo");
+            $table->smallInteger('descuento')->comment('1 Descuento / 0 no tiene Descuento');
             $table->timestamps();
         });
     }

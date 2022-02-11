@@ -20,6 +20,7 @@ class CreatePensumTable extends Migration
             $table->bigInteger('id_programa');
             $table->bigInteger('id_trimestre');
             $table->string("horas");
+            $table->string("unidad_curricular");
             $table->string("codigo");
             $table->bigInteger('id_eje');
             $table->smallInteger('status')->default(1)->comment('1 activo / 0 inactivo');
