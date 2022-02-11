@@ -31,7 +31,7 @@ class DocenteController extends Controller
      */
     public function create()
     {
-        //
+        return view('control/docente/add');
     }
 
     /**
