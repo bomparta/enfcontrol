@@ -12,7 +12,7 @@ class PaisSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('organismo')->insert(['organismo' => 'Organismo Publico','status' => '1',]);
+       
         DB::table('pais')->insert(['nombre_pais' =>'Albania','codigo_pais' => 'AL'  ,]);
         DB::table('pais')->insert(['nombre_pais' =>'Alemania','codigo_pais' => 'DE'   ,]);
         DB::table('pais')->insert(['nombre_pais' =>'Andorra','codigo_pais' => 'AD'  ,]);
