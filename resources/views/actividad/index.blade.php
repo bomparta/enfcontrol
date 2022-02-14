@@ -43,7 +43,7 @@
                                                   <td>{{ $item->tematica }}</td>
                                                   <td>{{ $item->alcance }}</td>
                                                   <td>{{ $item->tipo_actividad }}</td>
-                                                  <td><a href="/actuacion/listactuacion/{{ $item->id }}"><span class='btn-info badge'><font color=#F8F5F5>{{ $item->convenio }} </span></a></td>
+                                                  <td><a href="/listadoactuacion/{{ $item->id}}"><span class='btn-info badge'><font color=#F8F5F5>{{ $item->convenio }} </span></a></td>
                                                   <td><a href="/reporte/capacidad_actividad_global/{{ $item->id }}"><img src="/img/icon/clipboard.ico" class="icon-lg" alt="Acciones"></a></td>
                                                 </tr>
                                                 @endforeach

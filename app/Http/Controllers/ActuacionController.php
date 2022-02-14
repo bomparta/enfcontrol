@@ -113,7 +113,7 @@ class ActuacionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+ /*   public function update(Request $request, $id)
     {
         //
        
@@ -134,8 +134,8 @@ class ActuacionController extends Controller
 
         Actuacion::where('id', $id)
         ->update([
-            'id_ind_finaciero' => $request->ind_financiero,
-            'id_tipo_ind_financiero' => $request->tipo_ind_finaciero,
+            'id_ind_financiero' => $request->ind_financiero,
+            'id_tipo_ind_financiero' => $request->tipo_ind_financiero,
             'id_refrigerios' => $request->refrigerios,
             'id_viaticos' => $request->viaticos,
             'fecha_inicio' => $request->fecha_inicio,
@@ -156,7 +156,7 @@ class ActuacionController extends Controller
        
 
         return redirect('/listadoactuaciones')->with('success', 'Actuación actualizada con éxito!!.');
-    }
+     } */ 
 
     /**
      * Remove the specified resource from storage.
@@ -169,7 +169,7 @@ class ActuacionController extends Controller
         //
     }
 
-    public function get_actuaciones($id)
+    public function get_actuaciones( $id)
     {
         
         $actividad = DB::table('actividad')

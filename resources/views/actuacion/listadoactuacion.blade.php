@@ -18,7 +18,7 @@
                                     <div class="card-header">
                                     @foreach ($actividad as $itema)
                                      <h3 class="card-title">Actividades Academica | {{ $itema->codigo }}-{{ $itema->anio }} {{ $itema->nombre }}</h3>
-                                     <p align="right"><a class='btn btn-info' href="{{URL::route('crearactividad')}}">Crear Actuacion</a></p>
+                                     <p align="right"><a class='btn btn-info' href="{{URL::route('crearactuacion')}}">Crear Actuacion</a></p>
                                     @endforeach
                                       
                                     </div>
