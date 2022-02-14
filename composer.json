@@ -10,6 +10,7 @@
     "require": {
         "php": "^7.2.5|^8.0",
         "almasaeed2010/adminlte": "~2.4",
+        "artesaos/seotools": "^0.22.0",
         "barryvdh/laravel-dompdf": "^0.9.0",
         "fideloper/proxy": "^4.4",
         "fruitcake/laravel-cors": "^2.0",
@@ -19,7 +20,6 @@
         "laravel/ui": "^2.5",
         "laravelcollective/html": "^6.2",
         "yajra/laravel-datatables-oracle": "^9.19"
-        
     },
     "require-dev": {
         "facade/ignition": "^2.0",

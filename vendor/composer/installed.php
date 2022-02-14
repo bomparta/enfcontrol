@@ -5,7 +5,7 @@
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => '3b66bf6545c6ffc51d024ba16c5df46f3f0cea32',
+        'reference' => '50b606eab147702878962ba843b26dc79320512e',
         'name' => 'laravel/laravel',
         'dev' => true,
     ),
@@ -17,6 +17,15 @@
             'install_path' => __DIR__ . '/../almasaeed2010/adminlte',
             'aliases' => array(),
             'reference' => 'b3acb63ac56b13eb45b36e628b384a9a2507b50e',
+            'dev_requirement' => false,
+        ),
+        'artesaos/seotools' => array(
+            'pretty_version' => 'v0.22.0',
+            'version' => '0.22.0.0',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../artesaos/seotools',
+            'aliases' => array(),
+            'reference' => '55746e0870d3bb6507479bd846d5528c46a7312e',
             'dev_requirement' => false,
         ),
         'asm89/stack-cors' => array(
@@ -415,7 +424,7 @@
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => '3b66bf6545c6ffc51d024ba16c5df46f3f0cea32',
+            'reference' => '50b606eab147702878962ba843b26dc79320512e',
             'dev_requirement' => false,
         ),
         'laravel/tinker' => array(

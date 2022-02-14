@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Artesaos\SEOTools\Facades\SEOTools;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -23,6 +23,9 @@ class HomeController extends Controller
      */
     public function index()
     {
+        
+        SEOTools::setTitle('Escuela de Fiscales');
+        SEOTools::setDescription('Somos la primera escuela de fiscales a nivel nacional');
         return view('home');
     }
 }
