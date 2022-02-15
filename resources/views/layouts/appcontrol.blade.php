@@ -12,6 +12,10 @@
             <img src="/img/icons-lineal/analiticas.png" class="icon-lg">
             Lista de Usuario
         </a>
+        <a href="{{route('listaPeriodo')}}" class="list-group-item list-group-item-action border-0">
+            <img src="/img/icons-lineal/analiticas.png" class="icon-lg">
+            Lista de Periodo
+        </a>
         @endif
 
         <!-- Menu Supervisor Control Estudio -->

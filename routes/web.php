@@ -59,6 +59,12 @@ Route::get('/listadoadmin', 'AdministracionController@index')->name('listaconcil
 Route::get('/listconce', 'AdministracionController@get_list_conciliacion')->name('listconciliacion');
 Route::get('/listconcerror', 'AdministracionController@get_list_conciliacion_error')->name('listaconciliacionerror');
 Route::get('/listdocent', 'AdministracionController@get_list_docente')->name('listadocente');
-Route::get('/adddocent', 'DocenteController@create')->name('adddocente');
+Route::post('/adddocent', 'DocenteController@create')->name('adddocente');
 
 Route::get('/listadomatdoc', 'DocenteController@index')->name('listamateriadoc');
+
+Route::get('/listperiodo', 'PeriodoController@index')->name('listaPeriodo');
+Route::get('/addperiod', 'PeriodoController@create')->name('addperiodo');
+Route::post('/periodo', 'PeriodoController@store')->name('periodo.store');
+Route::get('/edit/period/{id}', 'PeriodoController@edit')->name('editperiodo');
+Route::post('/update/period/{id}', 'PeriodoController@update')->name('update.periodo');

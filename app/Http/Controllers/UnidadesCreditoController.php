@@ -13,7 +13,7 @@ class UnidadesCreditoController extends Controller
      */
     public function index()
     {
-        //
+        return view('control.unidades_creditos.list');
     }
 
     /**

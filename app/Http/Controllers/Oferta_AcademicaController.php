@@ -13,7 +13,7 @@ class Oferta_AcademicaController extends Controller
      */
     public function index()
     {
-        //
+        return view('control.oferta_academica.list');
     }
 
     /**

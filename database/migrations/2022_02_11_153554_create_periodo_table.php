@@ -17,6 +17,7 @@ class CreatePeriodoTable extends Migration
             $table->id();
             $table->string("nombre");
             $table->smallInteger('status')->default(1)->comment('1 activo / 0 inactivo');
+            $table->smallInteger('condicion')->default(1)->comment('1 abierto / 0 cerrado');
             $table->timestamps();
         });
     }

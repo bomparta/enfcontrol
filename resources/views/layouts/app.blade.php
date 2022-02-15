@@ -23,6 +23,18 @@
     
 </head>
 <body>
+   
+        @foreach (['danger', 'warning', 'success'] as $alert)
+            @if(session()->has($alert))
+                <div id="alert-main" class="alert alert-{{ $alert }} alert-dismissible fixed-top" role="alert">
+                    {{ session()->get($alert) }}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            @endif
+        @endforeach
+      
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">

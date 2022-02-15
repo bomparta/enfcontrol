@@ -13,7 +13,7 @@ class PensumController extends Controller
      */
     public function index()
     {
-        //
+        return view('control.pensum.index');
     }
 
     /**
