@@ -80,6 +80,11 @@
                 </div>
             </div>
         </a>
+        <div class="title m-b-md">
+            {!!QrCode::size(100)->generate("www.nigmacode.com") !!}
+            
+         </div>
+         
     </div>
 </div>
 @endsection
