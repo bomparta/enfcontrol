@@ -44,7 +44,7 @@ class PeriodoController extends Controller
         ]);
 
         if ($periodoactivo = Periodo::where('status', 1)->first()){
-            return redirect('/listperiodo')->with('danger', 'Periodo no fue creado.');
+            return redirect('/listperiodo')->with('danger', 'Periodo no fue creado porque hay uno activo.');
         }
                 
         $periodo = new Periodo();
