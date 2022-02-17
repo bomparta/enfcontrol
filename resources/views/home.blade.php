@@ -16,6 +16,7 @@
             </div>
         </a>
         @endif
+        @if(in_array( Auth::user()->id_usuariogrupo, array(6) ))
         <a style="color: black;" href="{{route('admincontrol')}}">
             <div class="card text-center">
                 <img src="{{url('/img/control_estudio.jpeg')}}" class="card-img-top">
@@ -24,6 +25,8 @@
                 </div>
             </div>
         </a>
+        @endif
+        @if(in_array( Auth::user()->id_usuariogrupo, array(1, 3, 6) ))
         <a style="color: black;" href="{{route('home')}}">
             <div class="card text-center">
                 <img src="{{url('/img/postgrado.jpeg')}}" class="card-img-top">
@@ -32,6 +35,8 @@
                 </div>
             </div>
         </a>
+        @endif
+        @if(in_array( Auth::user()->id_usuariogrupo, array(1, 3, 6) ))
         <a style="color: black;" href="{{route('home')}}">
             <div class="card text-center">
                 <img src="{{url('/img/curso_cpp.jpeg')}}" class="card-img-top">
@@ -40,6 +45,8 @@
                 </div>
             </div>
         </a>
+        @endif
+        @if(in_array( Auth::user()->id_usuariogrupo, array(1, 3, 6) ))
         <a style="color: black;" href="{{route('home')}}">
             <div class="card text-center">
                 <img src="{{url('/img/cursos.jpeg')}}" class="card-img-top">
@@ -48,6 +55,8 @@
                 </div>
             </div>
         </a>
+        @endif
+        @if(in_array( Auth::user()->id_usuariogrupo, array(1, 3, 6) ))
         <a style="color: black;" href="{{route('home')}}">
             <div class="card text-center">
                 <img src="{{url('/img/maestrias.jpeg')}}" class="card-img-top">
@@ -56,6 +65,8 @@
                 </div>
             </div>
         </a>
+        @endif
+        @if(in_array( Auth::user()->id_usuariogrupo, array(4) ))
         <a style="color: black;" href="{{route('home')}}">
             <div class="card text-center">
                 <img src="{{url('/img/administracion.jpeg')}}" class="card-img-top">
@@ -64,6 +75,8 @@
                 </div>
             </div>
         </a>
+        @endif
+        @if(in_array( Auth::user()->id_usuariogrupo, array(9) ))
         <a style="color: black;" href="{{route('usuario')}}">
             <div class="card text-center">
                 <img src="{{url('/img/super.jpeg')}}" class="card-img-top">
@@ -72,6 +85,8 @@
                 </div>
             </div>
         </a>
+        @endif
+        @if(in_array( Auth::user()->id_usuariogrupo, array(3, 6) ))
         <a style="color: black;" href="{{route('actividad')}}">
             <div class="card text-center">
                 <img src="{{url('/img/eventos.jpeg')}}" class="card-img-top">
@@ -80,6 +95,7 @@
                 </div>
             </div>
         </a>
+        @endif
         <div class="title m-b-md">
             {!!QrCode::size(100)->generate("www.nigmacode.com") !!}
             

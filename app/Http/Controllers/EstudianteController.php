@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\DatosEstudiante;
 use Illuminate\Http\Request;
 
 class EstudianteController extends Controller
@@ -111,5 +112,11 @@ class EstudianteController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function datoslistestudiante($id)
+    {
+        $datosestudiantes = DatosEstudiante::find($id);
+        return view('estudiante.listdatos',compact('datosestudiantes'));
     }
 }

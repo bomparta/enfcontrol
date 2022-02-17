@@ -44,6 +44,7 @@ Route::get('/pdfconstancia', 'ReporteController@constancia')->name('constanciapd
 
 Route::get('/estudiante', 'EstudianteController@index')->name('listadoestudiante');
 Route::get('/estudiantedatos', 'EstudianteController@create')->name('datosestudiante');
+Route::get('/estudiantelist', 'EstudianteController@datoslistestudiante')->name('estudiantelist');
 Route::get('/estudiantedireccion', 'EstudianteController@createdireccion')->name('direccionestudiante');
 Route::get('/estudianteexperiencia', 'EstudianteController@createxperiencia')->name('experienciaestudiante');
 Route::get('/estudianteexperienciadoc', 'EstudianteController@createxperienciadoc')->name('experienciadocente');
@@ -68,3 +69,8 @@ Route::get('/addperiod', 'PeriodoController@create')->name('addperiodo');
 Route::post('/periodo', 'PeriodoController@store')->name('periodo.store');
 Route::get('/edit/period/{id}', 'PeriodoController@edit')->name('editperiodo');
 Route::post('/update/period/{id}', 'PeriodoController@update')->name('update.periodo');
+
+Route::get('/gestor/usuario', 'UsuariosController@index')->name('gestor.usuario');
+Route::get('/gestor/usuarios/{id}', 'UsuariosController@show')->name('usuarios.show');
+Route::get('/gestore/usuarios/{id}', 'UsuariosController@edit')->name('usuarios.edit');
+Route::put('/gestores/usuarios/{id}', 'UsuariosController@update')->name('usuarios.update');

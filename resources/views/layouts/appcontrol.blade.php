@@ -12,6 +12,10 @@
             <img src="/img/icons-lineal/analiticas.png" class="icon-lg">
             Lista de Usuario
         </a>
+        <a href="{{route('gestor.usuario')}}" class="list-group-item list-group-item-action border-0">
+            <img src="/img/icons-lineal/analiticas.png" class="icon-lg">
+            Gestor Usuario
+        </a>
         <a href="{{route('listaPeriodo')}}" class="list-group-item list-group-item-action border-0">
             <img src="/img/icons-lineal/analiticas.png" class="icon-lg">
             Lista de Periodo
@@ -101,7 +105,7 @@
             <img src="/img/icons-lineal/analiticas.png" class="icon-lg">
             Registro de Pago
         </a>
-        <a href="{{route('listadoactividad')}}" class="list-group-item list-group-item-action border-0">
+        <a href="/estudiantelist/{{ Auth::user()->id }}" class="list-group-item list-group-item-action border-0">
             <img src="/img/icons-lineal/analiticas.png" class="icon-lg">
             Informacio Alumno
         </a>
