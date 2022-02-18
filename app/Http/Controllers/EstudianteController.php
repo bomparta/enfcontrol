@@ -88,7 +88,8 @@ class EstudianteController extends Controller
      */
     public function edit($id)
     {
-        //
+        $datos= DatosEstudiante::find($id);
+        return view('estudiante.datos_edit',compact('datos'));
     }
 
     /**
@@ -119,4 +120,24 @@ class EstudianteController extends Controller
         $datosestudiantes = DatosEstudiante::find($id);
         return view('estudiante.listdatos',compact('datosestudiantes'));
     }
+
+    public function direccionlistestudiante($id)
+    {
+        $direccionestudiantes = DatosEstudiante::find($id);
+        return view('estudiante.listdireccion',compact('direccionestudiantes'));
+    }
+
+    public function experiencialistestudiante($id)
+    {
+        $experienciaestudiantes = DatosEstudiante::find($id);
+        return view('estudiante.listexperiencia',compact('experienciaestudiantes'));
+    }
+
+    public function indexestatus()
+    {
+       // $estatusproceso = DatosEstudiante::find($id);
+        return view('estudiante.estatus');
+    }
+
+
 }

@@ -2,7 +2,7 @@
 @section('title', 'Cantidades')
 @section ('content')
 <div class="d-flex" id="wrapper">
-    @include('layouts.appevento')
+    @include('layouts.appcontrol')
 
     <div id="page-content-wrapper">
 <div class="container pb-4">

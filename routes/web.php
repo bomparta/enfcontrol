@@ -44,13 +44,16 @@ Route::get('/pdfconstancia', 'ReporteController@constancia')->name('constanciapd
 
 Route::get('/estudiante', 'EstudianteController@index')->name('listadoestudiante');
 Route::get('/estudiantedatos', 'EstudianteController@create')->name('datosestudiante');
-Route::get('/estudiantelist', 'EstudianteController@datoslistestudiante')->name('estudiantelist');
+Route::get('/editestudiantedatos/{id}', 'EstudianteController@edit')->name('editdatosestudiante');
+Route::get('/estudiantelist/{id}', 'EstudianteController@datoslistestudiante')->name('estudiantelist');
 Route::get('/estudiantedireccion', 'EstudianteController@createdireccion')->name('direccionestudiante');
+Route::get('/direccionlist/{id}', 'EstudianteController@direccionlistestudiante')->name('direccionlist');
 Route::get('/estudianteexperiencia', 'EstudianteController@createxperiencia')->name('experienciaestudiante');
+Route::get('/experiencialist/{id}', 'EstudianteController@experiencialistestudiante')->name('experiencialist');
 Route::get('/estudianteexperienciadoc', 'EstudianteController@createxperienciadoc')->name('experienciadocente');
 Route::get('/estudianteorganizacion', 'EstudianteController@createorganizacion')->name('organizacion');
 Route::get('/estudianteprograma', 'EstudianteController@createprograma')->name('programa');
-
+Route::get('/estatus', 'EstudianteController@indexestatus')->name('estatus');
 
 Route::get('/reporte/capacidad_actividad_global/{codigo}', 'ReporteController@capacitados_actividad_global')->name('reporteactividaglobal');
 

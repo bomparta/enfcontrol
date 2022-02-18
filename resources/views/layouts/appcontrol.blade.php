@@ -109,7 +109,19 @@
             <img src="/img/icons-lineal/analiticas.png" class="icon-lg">
             Informacio Alumno
         </a>
-        <a href="{{route('listadoactividad')}}" class="list-group-item list-group-item-action border-0">
+        <a href="/direccionlist/{{ Auth::user()->id }}" class="list-group-item list-group-item-action border-0">
+            <img src="/img/icons-lineal/analiticas.png" class="icon-lg">
+            Direccion Alumno
+        </a>
+        <a href="/experiencialist/{{ Auth::user()->id }}" class="list-group-item list-group-item-action border-0">
+            <img src="/img/icons-lineal/analiticas.png" class="icon-lg">
+            Experiencia Alumno
+        </a>
+        <a href="/estudiantelist/{{ Auth::user()->id }}" class="list-group-item list-group-item-action border-0">
+            <img src="/img/icons-lineal/analiticas.png" class="icon-lg">
+            Datos Adjuntados
+        </a>
+        <a href="{{route('estatus')}}" class="list-group-item list-group-item-action border-0">
             <img src="/img/icons-lineal/analiticas.png" class="icon-lg">
             Status Proceso
         </a>

@@ -16,21 +16,21 @@
                         <div class="col-12">
                             <div class="card mb-4">
                                 <div class="card-body">
-                                    @include('layouts.items.card-header', ['titulo' => 'Lista de usuarios ENFMP'])
-                                    @if(!$datosestudiantes->id)
-                                    <p align="right"><a class='btn btn-info' href="{{URL::route('datosestudiante')}}">Crear Estudiante</a></p>
-                                    @endif
-                                    <p>Desde aqui puedes listar la informacion personal del estudiante. Como por ejemplo nombre,apellidos,correo,telefono habitacion,telefono celular.</p>
+                                    @include('layouts.items.card-header', ['titulo' => 'Experiencia laboral del estudiante ENFMP'])
+                                    {{-- @if(!$experienciaestudiantes->id) --}}
+                                    <p align="right"><a class='btn btn-info' href="{{URL::route('experienciaestudiante')}}">Crear Experiencia Laboral</a></p>
+                                    {{-- @endif --}}
+                                    <p>Desde aqui puedes listar las experiencias laborales del estudiante.</p>
                                     
                                     <div class="table-responsive mt-3">
                                         <table class="table datatable">
                                             <thead>
                                                 <tr>
-                                                    <th>id_tipo_identificacion</th>
-                                                    <th>id_nacionalidad</th>
-                                                    <th>nro identificacion</th>
-                                                    <th>nombre</th>
-                                                    <th>apellido</th>
+                                                    <th>Lugar de Trabajo</th>
+                                                    <th>Cargo que Desempeña</th>
+                                                    <th>Telefono</th>
+                                                    <th>Jubilado/o ad</th>
+                                                    <th>Estado donde inscribio</th>
                                                     @if(in_array( Auth::user()->id_usuariogrupo, array(9,1) ))
                                                         <th>Opcion</th>
                                                     @endif
@@ -39,14 +39,14 @@
                                             <tbody>
                                               
                                                 <tr>
-                                                    <td>{{ $datosestudiantes->id_tipo_identificacion }}</td>
-                                                    <td>{{ $datosestudiantes->id_nacionalidad }}</td>
-                                                    <td>{{ $datosestudiantes->numero_identificacion}}</td>
-                                                    <td>{{ $datosestudiantes->nombre}}</td>
-                                                    <td>{{ $datosestudiantes->apellido }}</td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
                                                     @if(in_array( Auth::user()->id_usuariogrupo, array(9,1) ))
                                                     <td class="text-center">
-                                                            <a href= "/editestudiantedatos/{{$datosestudiantes->id}}" class="btn btn-info" data-tip="Detalle" data-toggle="tooltip" data-original-title="Editar">
+                                                            <a href= "/editestudiantedatos/{{$experienciaestudiantes->id}}" class="btn btn-info" data-tip="Detalle" data-toggle="tooltip" data-original-title="Editar">
                                                                 <img src="/img/icon/modify.ico" class="icon-sm" alt="Listado">
                                                             </a>
                                                         </td>
