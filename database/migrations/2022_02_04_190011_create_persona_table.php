@@ -19,8 +19,10 @@ class CreatePersonaTable extends Migration
             $table->smallInteger('id_nacionalidad'); 
             $table->integer('numero_identificacion');
             $table->string('nombre');
+            $table->string('nombreseg');
             $table->string('apellido');
-            $table->smallInteger('edad')->default(0);
+            $table->string('apellidoseg');
+            $table->date('edad');
             $table->smallInteger('id_genero');
             $table->string('email')->default(NULL);;            
             $table->smallInteger('id_estado_civil');

@@ -14,7 +14,7 @@
                         <h1>Informacion</h1>
                     </div>
                     <form id="formulario" name="formulario" method="post" action="#">
-                        <input name="continuar" id="continuar" type="hidden" value=""/>
+                        
                     <!--	<div class="frame3">-->
                         <table align="center" border="0" cellpadding="2" cellspacing="5" width="100%" >
                             <!-- FILA 1 + FOTO -->
@@ -43,8 +43,8 @@
                                     </div>
                                     <div class="frameContenedor" style="width: 250px;" align="center">
                                         <!-- MUESTRA LA FOTO DEL USUARIO SI EXISTE, SINO SE MUESTRA LA IMAGEN POR DEFECTO -->
-                                       
-                                         <!-- <form id="formFoto" method="post" enctype="multipart/form-data" action=""> -->
+                                        <img src="{{ asset('img/icon/usuario.png') }}" height="120" width="100"><br><br>
+                                        <!-- <form id="formFoto" method="post" enctype="multipart/form-data" action=""> -->
                                             <div class="custom-input-file"><input id="userfile" name="userfile" type="file" size="1" class="input-file" />
                                                 Seleccione su foto
                                                 <div class="archivo" style="color: black;font-size: 10px;background: #f7b261;">...</div>
@@ -76,16 +76,25 @@
                             <tr>
                                 <td>
                                     &nbsp;Cedula&nbsp;<span style="color:red;">*</span>&nbsp;<br>
-                                    <select id="genero" name="genero" style="width:70px;">
-                                        <option value=""></option></select>
-                                        <input type="text" name="segundoapellido" id="segundoapellido" value="" style="width:190px;" maxlength="25"/>  
+                                    <select id="id_nacionalidad" name="id_nacionalidad" style="width:70px;">
+                                        @foreach ($nacionalidades as $nacionalidad)
+                                            <option value="{{ $nacionalidad->id }}">{{ $nacionalidad->cod }}</option>
+                                        @endforeach
+                                        <input type="text" name="cedula" id="cedula" value="" style="width:190px;" maxlength="25"/>  
                                 </td>
                                 <td>
                                     &nbsp;Sexo&nbsp;<span style="color:red;">*</span>&nbsp;<br>
-                                    <select id="sexo" name="sexo"  style="width:190px;" >
-                                        <option value="">Seleccione Sexo</option>
-                                        
+                                    <select class="form-control"  type="text" name="sexo" >
+                                        <option value="">Seleccione...</option>
+                                        @foreach ($generos as $genero)
+                                            <option value="{{ $genero->id }}">{{ $genero->cod }}</option>
+                                        @endforeach
                                     </select>
+                                    @error('sexo')
+                                        <div class="invalid-feedback">
+                                            <strong>{{ $message }}</strong>
+                                        </div>
+                                    @enderror
                                 </td>
                                 			
                             </tr>
@@ -93,9 +102,10 @@
                             <tr>
                                 <td>
                                     &nbsp;Estado Civil&nbsp;<span style="color:red;">*</span>&nbsp;<br>
-                                    <select name="estadocivil"  style="width:190px;">
-                                        <option value="">Seleccione Estado civil</option>
-                                        
+                                    <select name="estadocivil"  style="width:190px;" class="form-control" >
+                                        @foreach ($estado_civils as $estado_civil)
+                                            <option value="{{ $estado_civil->id }}">{{ $estado_civil->descripcion }}</option>
+                                        @endforeach
                                     </select>
                                 </td>
                                 <td>
@@ -106,30 +116,31 @@
                             <!-- FILA 4 -->
                             <tr>
                                 <td>
-                                    &nbsp;Telefono de Habitacion&nbsp;&nbsp;&nbsp;&nbsp;<br>
+                                    &nbsp;Telefono de Habitacion&nbsp;<span style="color:red;">*</span>&nbsp;<br>
                                     <select id="codtele" name="codtele" style="width:70px;">
-                                        <option value=""></option></select>
+                                        @foreach ($cod_habs as $cod_hab)
+                                            <option value="{{ $cod_hab->descripcion }}">{{ $cod_hab->descripcion }}</option>
+                                        @endforeach
+                                    </select>
                                     <input type="text" name="telfhabitacion" id="telfhabitacion" value="" style="width:190px;" maxlength="100"/>
                                 </td>
                                 <td>
                                     &nbsp;Fecha Nacimiento&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:red;">*</span><br>
-                                    <input type="text" name="fechanac" id="fechanac" value="" style="width:190px;" maxlength="25"/>
+                                    <input type="date" name="fechanac" id="fechanac" value="" style="width:190px;" maxlength="25"/>
                                 </td>
                             </tr>
                             <!-- FILA 5 -->
                             <tr>
                                 <td>
-                                    &nbsp;Telefono Local&nbsp;<span style="color:red;">*</span>&nbsp;<br>
-                                    <select id="codtele" name="codtele" style="width:70px;">
-                                        <option value=""></option></select>
-                                    <input type="text" name="telefonoHab" id="telefonoHab" value="" style="width:190px;" maxlength="11" onKeyPress="return valText(this.value, event, 'int');"  class="campoTexto"/>
-                                </td>
-                                <td>
-                                    &nbsp;Telefono Celular&nbsp;<span style="color:red;">*</span>&nbsp;<br>
-                                    <select id="codtele" name="codtele" style="width:70px;">
-                                        <option value=""></option></select>
+                                    &nbsp;Telefono Ceular&nbsp;<span style="color:red;">*</span>&nbsp;<br>
+                                    <select id="codtelecel" name="codtelecel" style="width:70px;">
+                                        @foreach ($cod_cels as $cod_cel)
+                                            <option value="{{ $cod_cel->descripcion }}">{{ $cod_cel->descripcion }}</option>
+                                        @endforeach
+                                    </select>
                                     <input type="text" name="telefonoCel" id="telefonoCel" value="" style="width:190px;" maxlength="11" onKeyPress="return valText(this.value, event, 'int');"  class="campoTexto"/>
                                 </td>
+                                <td></td>
                             </tr>
                             <tr>
                                 <td colspan="3"></td>

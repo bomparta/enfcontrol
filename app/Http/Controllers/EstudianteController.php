@@ -2,7 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Cod_Celular;
+use App\Cod_Habitacion;
+use App\Genero;
 use App\DatosEstudiante;
+use App\Estado_civil;
+use App\Nacionalidad;
 use Illuminate\Http\Request;
 
 class EstudianteController extends Controller
@@ -24,8 +29,12 @@ class EstudianteController extends Controller
      */
     public function create()
     {
-       // return view('estudiante/create');
-       return view('estudiante/datos');
+        $nacionalidades= Nacionalidad::All();
+        $generos= Genero::All();
+        $estado_civils= Estado_civil::All();
+        $cod_habs= Cod_Habitacion::All();
+        $cod_cels= Cod_Celular::All();
+       return view('estudiante/datos',compact('generos','nacionalidades','estado_civils','cod_habs','cod_cels'));
     }
 
     public function createdireccion()
@@ -66,7 +75,43 @@ class EstudianteController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'primernombre' => ['required', 'string', 'max:160'],
+            'segundonombre' => ['required', 'string', 'max:160'],
+            'primerapellido' => ['required', 'string', 'max:160'],
+            'segundoapellido' => ['required', 'string', 'max:160'],
+            'genero' => ['required'],
+            'id_nacionalidad' => ['required'],
+            'cedula' => ['required'],
+            'estadocivil' => ['required'],
+            'correo' => ['required'],
+            'codtele' => ['required'],
+            'telfhabitacion' => ['required'],
+            'fechanac' => ['required'],
+            'codtelecel' => ['required'],
+            'telefonoCel' => ['required'],
+    
+           
+        ]);
+
+        
+
+        $estudiantes = new DatosEstudiante();
+        $estudiantes->nombre = $request->primernombre;
+        $estudiantes->nombreseg = $request->segundonombre;
+        $estudiantes->apellido = $request->primerapellido;
+        $estudiantes->apellidoseg = $request->segundoapellido;
+        $estudiantes->id_genero = $request->genero;
+        $estudiantes->id_nacionalidad = $request->id_nacionalidad;
+        $estudiantes->numero_identificacion = $request->cedula;
+        $estudiantes->id_estado_civil = $request->estadocivil;
+        $estudiantes->email = $request->estadocorreocivil;
+        $estudiantes->telefono_hab = $request->codtele.$request->telfhabitacion;
+        $estudiantes->telefono_cel = $request->codtele.$request->telfhabitacion;
+        $estudiantes->edad = $request->fechanac;
+        $estudiantes->save();
+
+        return redirect('/parametros/actividad')->with('success', 'Actividad creada con éxito.');
     }
 
     /**

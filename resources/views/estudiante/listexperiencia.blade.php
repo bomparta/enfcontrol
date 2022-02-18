@@ -39,6 +39,7 @@
                                             <tbody>
                                               
                                                 <tr>
+                                                    @if(!$experienciaestudiantes==NULL)
                                                     <td></td>
                                                     <td></td>
                                                     <td></td>
@@ -50,6 +51,7 @@
                                                                 <img src="/img/icon/modify.ico" class="icon-sm" alt="Listado">
                                                             </a>
                                                         </td>
+                                                    @endif
                                                     @endif
                                                 </tr>
                                                 

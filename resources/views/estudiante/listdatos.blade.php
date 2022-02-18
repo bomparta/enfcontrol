@@ -17,7 +17,7 @@
                             <div class="card mb-4">
                                 <div class="card-body">
                                     @include('layouts.items.card-header', ['titulo' => 'Lista de usuarios ENFMP'])
-                                    @if(!$datosestudiantes->id)
+                                    @if($datosestudiantes==NULL)
                                     <p align="right"><a class='btn btn-info' href="{{URL::route('datosestudiante')}}">Crear Estudiante</a></p>
                                     @endif
                                     <p>Desde aqui puedes listar la informacion personal del estudiante. Como por ejemplo nombre,apellidos,correo,telefono habitacion,telefono celular.</p>
@@ -39,6 +39,7 @@
                                             <tbody>
                                               
                                                 <tr>
+                                                    @if(!$datosestudiantes==NULL)
                                                     <td>{{ $datosestudiantes->id_tipo_identificacion }}</td>
                                                     <td>{{ $datosestudiantes->id_nacionalidad }}</td>
                                                     <td>{{ $datosestudiantes->numero_identificacion}}</td>
@@ -50,6 +51,7 @@
                                                                 <img src="/img/icon/modify.ico" class="icon-sm" alt="Listado">
                                                             </a>
                                                         </td>
+                                                    @endif
                                                     @endif
                                                 </tr>
                                                 

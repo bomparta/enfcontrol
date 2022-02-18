@@ -17,7 +17,7 @@
                             <div class="card mb-4">
                                 <div class="card-body">
                                     @include('layouts.items.card-header', ['titulo' => 'Direccion estudiante ENFMP'])
-                                    @if(!$direccionestudiantes->id)
+                                    @if($direccionestudiantes==NULL)
                                     <p align="right"><a class='btn btn-info' href="{{URL::route('direccionestudiante')}}">Crear Direccion</a></p>
                                     @endif
                                     <p>Desde aqui puedes listar la direccion del estudiante. Como por ejemplo av principal con av central.</p>
@@ -41,6 +41,7 @@
                                             <tbody>
                                               
                                                 <tr>
+                                                    @if(!$direccionestudiantes==NULL)
                                                     <td></td>
                                                     <td></td>
                                                     <td></td>
@@ -54,6 +55,7 @@
                                                                 <img src="/img/icon/modify.ico" class="icon-sm" alt="Listado">
                                                             </a>
                                                         </td>
+                                                    @endif
                                                     @endif
                                                 </tr>
                                                 

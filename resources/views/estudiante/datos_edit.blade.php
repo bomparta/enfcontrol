@@ -43,12 +43,13 @@
                                     </div>
                                     <div class="frameContenedor" style="width: 250px;" align="center">
                                         <!-- MUESTRA LA FOTO DEL USUARIO SI EXISTE, SINO SE MUESTRA LA IMAGEN POR DEFECTO -->
-                                       
+                                        <img src="{{ asset('img/'.$datos->foto) }}" height="120" width="100"><br><br>
                                          <!-- <form id="formFoto" method="post" enctype="multipart/form-data" action=""> -->
                                             <div class="custom-input-file"><input id="userfile" name="userfile" type="file" size="1" class="input-file" />
                                                 Seleccione su foto
                                                 <div class="archivo" style="color: black;font-size: 10px;background: #f7b261;">...</div>
                                             </div>
+                                            
                                             <!--
                                             <button type="button" value='Subir foto' name="upload" class="btn_default" id="btnVolver" onclick="procesaForm(2)">
                                                 <i class="fa fa-upload fa-lg" style="color:white"></i>&nbsp;&nbsp;Subir Foto
@@ -106,30 +107,25 @@
                             <!-- FILA 4 -->
                             <tr>
                                 <td>
-                                    &nbsp;Telefono de Habitacion&nbsp;&nbsp;&nbsp;&nbsp;<br>
+                                    &nbsp;Telefono de Habitacion&nbsp;<span style="color:red;">*</span>&nbsp;<br>
                                     <select id="codtele" name="codtele" style="width:70px;">
                                         <option value=""></option></select>
                                     <input type="text" name="telfhabitacion" id="telfhabitacion" value="" style="width:190px;" maxlength="100"/>
                                 </td>
                                 <td>
                                     &nbsp;Fecha Nacimiento&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:red;">*</span><br>
-                                    <input type="text" name="fechanac" id="fechanac" value="" style="width:190px;" maxlength="25"/>
+                                    <input type="date" name="fechanac" id="fechanac" value="" style="width:190px;" maxlength="25"/>
                                 </td>
                             </tr>
                             <!-- FILA 5 -->
                             <tr>
                                 <td>
-                                    &nbsp;Telefono Local&nbsp;<span style="color:red;">*</span>&nbsp;<br>
+                                    &nbsp;Telefono Ceular&nbsp;<span style="color:red;">*</span>&nbsp;<br>
                                     <select id="codtele" name="codtele" style="width:70px;">
                                         <option value=""></option></select>
                                     <input type="text" name="telefonoHab" id="telefonoHab" value="" style="width:190px;" maxlength="11" onKeyPress="return valText(this.value, event, 'int');"  class="campoTexto"/>
                                 </td>
-                                <td>
-                                    &nbsp;Telefono Celular&nbsp;<span style="color:red;">*</span>&nbsp;<br>
-                                    <select id="codtele" name="codtele" style="width:70px;">
-                                        <option value=""></option></select>
-                                    <input type="text" name="telefonoCel" id="telefonoCel" value="" style="width:190px;" maxlength="11" onKeyPress="return valText(this.value, event, 'int');"  class="campoTexto"/>
-                                </td>
+                                <td></td>
                             </tr>
                             <tr>
                                 <td colspan="3"></td>
