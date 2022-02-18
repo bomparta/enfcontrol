@@ -54,6 +54,7 @@ Route::get('/estudianteexperienciadoc', 'EstudianteController@createxperienciado
 Route::get('/estudianteorganizacion', 'EstudianteController@createorganizacion')->name('organizacion');
 Route::get('/estudianteprograma', 'EstudianteController@createprograma')->name('programa');
 Route::get('/estatus', 'EstudianteController@indexestatus')->name('estatus');
+Route::get('/datos_adjunto/{id}', 'EstudianteController@datosadjunto')->name('datos_adjunto');
 
 Route::get('/reporte/capacidad_actividad_global/{codigo}', 'ReporteController@capacitados_actividad_global')->name('reporteactividaglobal');
 

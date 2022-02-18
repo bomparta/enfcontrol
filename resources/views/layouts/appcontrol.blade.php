@@ -117,7 +117,7 @@
             <img src="/img/icons-lineal/analiticas.png" class="icon-lg">
             Experiencia Alumno
         </a>
-        <a href="/estudiantelist/{{ Auth::user()->id }}" class="list-group-item list-group-item-action border-0">
+        <a href="/datos_adjunto/{{ Auth::user()->id }}" class="list-group-item list-group-item-action border-0">
             <img src="/img/icons-lineal/analiticas.png" class="icon-lg">
             Datos Adjuntados
         </a>

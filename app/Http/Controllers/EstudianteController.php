@@ -183,6 +183,12 @@ class EstudianteController extends Controller
        // $estatusproceso = DatosEstudiante::find($id);
         return view('estudiante.estatus');
     }
+    
 
+    public function datosadjunto($id)
+    {
+        $adjuntosestudiantes = DatosEstudiante::find($id);
+        return view('estudiante.datosadjuntados',compact('adjuntosestudiantes'));
+    }
 
 }
