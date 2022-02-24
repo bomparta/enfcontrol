@@ -182,7 +182,7 @@ class ActuacionController extends Controller
        ->orderby('actividad.codigo')
        ->get();
 
-     /* $actuaciones = DB::table('actuacion')
+     /*$actuaciones = DB::table('actuacion')
        ->select('actuacion.id_actividad','actuacion.anio','actuacion.cod_actuacion','actuacion.cod_actividad','actuacion.id',
        'actuacion.fecha_inicio','actuacion.fecha_fin','entidad.descripcion as entidad',
        'actuacion.horas','actuacion.id_planificador','persona.nombre as nomb_planificador',
@@ -194,12 +194,9 @@ class ActuacionController extends Controller
        ->where('actuacion.id_actividad',$id)
        ->orderby('actuacion.id')
        ->get();*/
-       
-       $participantes = DB::select("SELECT COUNT(actuacion_participantes.id) AS cant_participantes
-       FROM actuacion_participantes
-       WHERE actuacion_participantes.id_actuacion = 1 AND actuacion_participantes.status = 1 
-       GROUP BY actuacion_participantes.id_actuacion ");
-
+      
+      
+      
        /*$asistencia = DB::select("SELECT COUNT(id) as cant_asistencias 
        FROM asistencia WHERE asistencia.id_actuacion = 1 
        AND asistencia.certificado_asistencia = 1 AND asistencia.status = 1 
@@ -210,23 +207,26 @@ class ActuacionController extends Controller
        AND actuacion_ponente.status = 1 
        GROUP BY actuacion_ponente.id_actuacion "); */
       
-       $actuaciones = DB::select ("SELECT 
-       actuacion.id_actividad,actuacion.anio,actuacion.cod_actuacion,actuacion.cod_actividad,actuacion.id,   
-       actuacion.fecha_inicio,actuacion.fecha_fin, 
-       entidad.descripcion as entidad, actuacion.horas, actuacion.id_planificador,persona.nombre as nomb_planificador,
+      $actuaciones = DB::select ("SELECT 
+      actuacion.id_actividad,actuacion.anio,actuacion.cod_actuacion,actuacion.cod_actividad,actuacion.id,
+       actuacion.fecha_inicio,actuacion.fecha_fin,entidad.descripcion as entidad,
+       actuacion.horas,actuacion.id_planificador,persona.nombre as nomb_planificador,
        persona.apellido as ape_planificador,
        status_actividad.descripcion as estatus,
-       (SELECT COUNT(actuacion_participantes.id) AS conteo FROM actuacion_participantes WHERE actuacion_participantes.id_actuacion = actuacion.id AND actuacion_participantes.status = 1
-        GROUP BY actuacion_participantes.id_actuacion) as cant_participantes
-        FROM actuacion, actividad, entidad, status_actividad, persona
-				WHERE 	
-                  actuacion.id_actividad = $id AND 
-					actuacion.id_entidad = entidad.id AND 
-					actuacion.id_planificador = persona.id AND 
-					actuacion.id_status_actividad = status_actividad.id AND 
-					actuacion.status = 1");
+      (SELECT COUNT(actuacion_participantes.id) AS conteo FROM actuacion_participantes WHERE actuacion_participantes.id_actuacion = actuacion.id AND actuacion_participantes.status = 1 GROUP BY actuacion_participantes.id_actuacion) as cant_participantes,
+      (SELECT COUNT(id) AS conteo FROM asistencia WHERE asistencia.id_actuacion = actuacion.id AND asistencia.certificado_asistencia = 1 AND asistencia.status = 1 GROUP BY asistencia.id_actuacion) as cant_asistencias,
+    (SELECT COUNT(id) AS conteo FROM actuacion_ponente WHERE actuacion_ponente.id_actuacion = actuacion.id AND actuacion_ponente.status = 1 GROUP BY actuacion_ponente.id_actuacion) as cant_facilitadores
+      
+  FROM 
+      actuacion, actividad, entidad, status_actividad, persona 
+  WHERE 	
+      actuacion.cod_actividad = actividad.codigo AND 
+      actuacion.id_entidad = entidad.id AND 
+      actuacion.id_planificador = persona.id AND 
+      actuacion.id_status_actividad = status_actividad.id AND 
+      actuacion.status = 1 and actuacion.id_actividad=$id");
 
         //return view('actuacion/listadoactuacion', compact('actuaciones','actividad','participantes','asistencia','facilitador'));
-        return view('actuacion/listadoactuacion', compact('actuaciones','actividad','participantes'));
+        return view('actuacion/listadoactuacion', compact('actuaciones','actividad'));
     }
 }

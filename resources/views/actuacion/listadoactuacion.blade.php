@@ -50,9 +50,19 @@
                                           <td>{{ $item->entidad }}</td>
                                           <td>{{ $item->horas }}</td>
                                           <td>{{ $item->nomb_planificador }} {{ $item->ape_planificador }}</td>                                                                               
-                                          @foreach ($participantes as $itemp) <td>{{ $itemp->cant_participantes }} </td>   @endforeach
-                                          <td><a href=""></a></td>
-                                          <td><a href=""></a></td>
+                                          <td>{{ $item->cant_participantes }}
+                                          @if($item->cant_participantes=='')
+                                          <a href=""><img src="/img/icon/add.ico" class="icon-lg" alt="Participantes" title="Agregar Pariticpante(s)"></a></td> 
+                                          @endif
+                                          <td>{{ $item->cant_asistencias }}
+                                          @if($item->cant_asistencias=='')
+                                          <a href=""><img src="/img/icon/add.ico" class="icon-lg" alt="Asistencias" title="Agregar Asistencia"></a></td> 
+                                          @endif
+                                          <td>{{ $item->cant_facilitadores }}
+                                          @if($item->cant_facilitadores=='')
+                                          <a href=""><img src="/img/icon/add.ico" class="icon-lg" alt="Participantes" title="Agregar Facilitador(es)"></a></td> 
+                                          @endif
+                                         
                                           <td>{{ $item->estatus }}</td>  
                                           <td><a href=""><img src="/img/icon/correo.png" class="icon-lg" alt="Correo" title="Enviar Constancia por Correo">
                                           </a>  <a href=""><img src="/img/icon/imprimir.png" class="icon-lg" alt="Imprimir" title="Imprimir"></a></td>                                                  </tr>
