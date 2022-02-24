@@ -44,19 +44,26 @@ class ActuacionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Request $id)
+    public function create( )
     {
-        $tot_actuacion= Actuacion::where ('id_actividad',$id)->count();          
-        $num= $tot_actuacion+1; // aqui debo traerme por post el codigo de la actuacion
-        $cod_actuacion= str_pad($num, 3, '0', STR_PAD_LEFT);
+        //$tot_actuacion=  DB::table('actuacion')->where('actuacion.id_actividad', $id)
+       // ->select(DB::raw('count(*) as filas'))
+       // ->first();        
+      // $codigo=$id;
+       $actividad = Actividad::where('id', 1)->get();
+
+        $cod_actuacion='002';
+        //$num= $tot_actuacion+1; // aqui debo traerme por post el codigo de la actuacion
+        //$cod_actuacion= str_pad($num, 3, '0', STR_PAD_LEFT);
         $fecha = 22;
-        $cod_actividad= Actividad::where ('id',$id)-get();
-       //$clasificacions = Clasificacion::where('status', 1)->get();
-       // $tematicas = Tematica::where('status', 1)->get();
-     //   $alcances = Alcance::where('status', 1)->get();
-      //  $tipo_estudios = TipoEstudio::where('status', 1)->get();
-       // return view('actuacion/crear', compact('clasificacions','tematicas','alcances','tipo_estudios','cod_actividad','fecha'));
-       return view('actuacion/crear', compact('cod_actuacion','cod_actividad','fecha'));
+        $ind_financiero = Ind_financiero::where('status', 1)->get();
+        $tip_ind_financiero = Tip_ind_financiero::where('status', 1)->get();
+        $refrigerio= Refrigerios::where ('status',1)->get();
+        $viatico= Viaticos::where ('status',1)->get();
+        $entidad= Entidad::where ('status',1)->get();
+        $estatus= Status_actividad::where ('status',1)->get();
+        $planificador = Persona::where ('status',1)->get(); 
+       return view('actuacion/crear', compact('cod_actuacion','actividad','fecha','ind_financiero','tip_ind_financiero','refrigerio','viatico','entidad','estatus','planificador'));
     }
 
     /**

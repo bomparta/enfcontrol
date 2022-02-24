@@ -16,20 +16,20 @@
                             <div class="card-body">
                               
                                 <div class="card-header">
-                                 @include('layouts.items.card-header', ['titulo' => 'Editar Actuación'])
-                                     <h4 class="card-title"> {{ $actuacion->cod_actividad }}-{{ $actuacion->anio }} | {{ $actividad->nombre }}</h4>
+                                 @include('layouts.items.card-header', ['titulo' => 'Nueva Actuación'])
+                                
                                 </div>
                                     <!-- /.card-header -->
-                                <form method="POST" action="/actuacion/create/{{$codigo}}">
+                                <form method="POST" action="/actuacion/create/">
                                     @csrf
-                                    <input type="hidden" name="id_actuacion" value="{{$codigo}}" />
+                                    <input type="hidden" name="id_actividad" value="{{$actividad}}" />
                                     <div class="row">
                                         <div class="col-md-3">
                                             <div class="form-group">
                                                 
                                                 <label for="nombre">Código de la Actuación </label>
                                                 
-                                                <input disabled='true' id="cod_actuacion" type="text" class="form-control rounded-pill border-primary @error('cod_actuacion') is-invalid @enderror" name="cod_actuacion" value="{{$actuacion->cod_actividad}}-{{$actuacion->anio}}-{{$actuacion->cod_actuacion}}" required>
+                                                <input disabled='true' id="cod_actuacion" type="text" class="form-control rounded-pill border-primary @error('cod_actuacion') is-invalid @enderror" name="cod_actuacion" value="" required>
                                                 @error('cod_actuacion')
                                                     <div class="invalid-feedback">
                                                         <strong>{{ $message }}</strong>
@@ -56,8 +56,8 @@
                         <select name="ind_financiero" id="ind_financiero" class="form-control input-sm" required>
                             <option selected disabled>Seleccione...</option>
                             @foreach ($ind_financiero as $ind_financiero)
-                                <option value="{{ $ind_financiero->id }}"
-                                    @if($ind_financiero->id == $actuacion->id_ind_financiero) selected @endif>
+                                <option value="{{ $ind_financiero->id }}">
+                                 
                                     {{ $ind_financiero->descripcion }}
                                 </option>>
                             @endforeach
@@ -73,8 +73,8 @@
                         <select name="tipo_ind_financiero" id="tipo_ind_financiero" class="form-control input-sm" required>
                         <option selected disabled>Seleccione...</option>
                             @foreach ($tip_ind_financiero as $tip_ind_financiero)
-                                <option value="{{ $tip_ind_financiero->id }}"
-                                    @if($tip_ind_financiero->id == $actuacion->id_tipo_ind_financiero) selected @endif>
+                                <option value="{{ $tip_ind_financiero->id }}">
+                                 
                                     {{ $tip_ind_financiero->descripcion }}
                                 </option>>
                             @endforeach
@@ -90,8 +90,8 @@
                         <select name="refrigerios" id="refrigerios" class="form-control input-sm">
                         <option selected disabled>Seleccione...</option>
                         @foreach ($refrigerio as $refrigerio)
-                                <option value="{{ $refrigerio->id }}"
-                                    @if($refrigerio->id == $actuacion->id_refrigerios) selected @endif>
+                                <option value="{{ $refrigerio->id }}">
+                               
                                     {{ $refrigerio->descripcion }}
                                 </option>>
                             @endforeach
@@ -107,8 +107,8 @@
                         <select name="viaticos" id="viaticos" class="form-control">
                         <option selected disabled>Seleccione...</option>
                         @foreach ($viatico as $viatico)
-                                <option value="{{ $viatico->id }}"
-                                    @if($viatico->id == $actuacion->id_viaticos) selected @endif>
+                                <option value="{{ $viatico->id }}">
+                                
                                     {{ $viatico->descripcion }}
                                 </option>>
                             @endforeach
@@ -135,31 +135,30 @@
                     <div class="form-group-sm col-lg-2 col-md-2 col-sm-4 col-xs-12">
                         <label for="fecha_inicio" class="control-label">Fecha de Inicio</label>
                         <input data-role="date" type="date"  name="fecha_inicio" id="dtpicker1" class="form-control "
-                            value="{{$actuacion->fecha_inicio}}" />
+                            value="" />
                     </div>
                     <div class="form-group-sm col-lg-2 col-md-2 col-sm-4 col-xs-12">
                         <label for="fecha_fin" class="control-label">Fecha de Cierre</label>
                         <input data-role="date" type="date"  name="fecha_fin" id="dtpicker2" class="form-control " 
-                            value="{{$actuacion->fecha_fin}}" />
+                            value="" />
                     </div>
                     <div class="form-group-sm col-lg-2 col-md-2 col-sm-4 col-xs-12">
                         <label for="dias_duracion" class="control-label">Días de Duración</label>
                         <input name="duracion" type="number" id="duracion" size="5" min="0" class="form-control required"
-                            value="{{$actuacion->duracion}}" />
+                            value="" />
                     </div>
                     <div class="form-group-sm col-lg-2 col-md-2 col-sm-4 col-xs-12">
                         <label for="horas_academicas" class="control-label">Horas Académicas</label>
                         <input name="horas" type="number" id="horas" size="5" min="0" class="form-control required"
-                            value="{{$actuacion->horas}}" />
+                            value="" />
                     </div>
                     <div class="form-group-sm col-lg-2 col-md-2 col-sm-4 col-xs-12">
                         <label for="entidad" class="control-label">Entidad Federal</label>
                         <select name="entidad" id="entidad" class="form-control" required>
-                            <option value="">Seleccione...</option>
-                            <option selected disabled>Seleccione...</option>
+                              <option selected disabled>Seleccione...</option>
                         @foreach ($entidad as $entidad)
-                                <option value="{{ $viatico->id }}"
-                                    @if($entidad->id == $actuacion->id_entidad) selected @endif>
+                                <option value="{{ $viatico->id }}">
+                                 
                                     {{ $entidad->descripcion }}
                                 </option>>
                             @endforeach
@@ -176,8 +175,8 @@
                         <select name="status_actividad" id="status_actividad" class="form-control" required>
                         <option selected disabled>Seleccione...</option>
                         @foreach ($estatus as $estatus)
-                                <option value="{{ $estatus->id }}"
-                                    @if($estatus->id == $actuacion->id_status_actividad) selected @endif>
+                                <option value="{{ $estatus->id }}">
+                                 
                                     {{ $estatus->descripcion }}
                                 </option>>
                             @endforeach
@@ -192,18 +191,18 @@
                     </div>
                     <div class="form-group-sm col-lg-5 col-md-5 col-sm-12 col-xs-12">
                         <label for="lugar" class="control-label">Lugar de Realización</label>
-                        <textarea name="lugar" id="lugar" rows="2" maxlength="255" class="form-control">  {{ $actuacion->lugar }}</textarea>
+                        <textarea name="lugar" id="lugar" rows="2" maxlength="255" class="form-control">  </textarea>
                         
                     </div>
                     <div class="form-group-sm col-lg-5 col-md-5 col-sm-12 col-xs-12">
                         <label for="observacion" class="control-label">Observaciones</label>
-                        <textarea name="observacion" id="observacion" cols="25" rows="2" maxlength="1000" class="form-control"> {{ $actuacion->observaciones }}</textarea>
+                        <textarea name="observacion" id="observacion" cols="25" rows="2" maxlength="1000" class="form-control"> </textarea>
                     </div>
                     <div class="form-group-sm col-lg-2 col-md-2 col-sm-4 col-xs-12">
                         <label for="fecha_reporte" class="control-label">Fecha de Reporte</label>
                         <input data-role="date" type="date" name="fecha_reporte" id="dtpicker3" class="form-control"
-                            value=" {{ $actuacion->mes_reporte}}" />
-                         <input type="checkbox" name="aprobatorio" id="aprobatorio" value="{{ $actuacion->aprobatorio }}">&nbsp;&nbsp;Aprobatorio
+                            value=" " />
+                         <input type="checkbox" name="aprobatorio" id="aprobatorio" value="">&nbsp;&nbsp;Aprobatorio
                     </div>
                 </div> 
            
@@ -223,8 +222,8 @@
                         <select name="id_planificador" id="id_planificador" required class="form-control">
                         <option selected disabled>Seleccione...</option>
                         @foreach ($planificador as $planificador)
-                                <option value="{{ $planificador->id }}"
-                                    @if($planificador->id == $actuacion->id_planificador) selected @endif>
+                                <option value="{{ $planificador->id }}">
+                                 
                                     {{ $planificador->nombre }} {{ $planificador->apellido }}
                                 </option>>
                             @endforeach
@@ -239,17 +238,17 @@
                     <div class="form-group-sm col-lg-3 col-md-3 col-sm-6 col-xs-12">
                         <label for="fecha_limite" class="control-label">Fecha Límite</label>
                         <input data-role="date" type="date" name="fecha_limite" id="dtpicker4" class="form-control"
-                            value="{{$actuacion->fecha_aprobacion}}" />
+                            value="" />
                     </div>
                     <div class="form-group-sm col-lg-3 col-md-3 col-sm-6 col-xs-12">
                         <label for="hoja_ruta" class="control-label">Hoja de Ruta</label>
                         <input type="number" id="hoja_ruta" name="hoja_ruta" size="18" min="0"  class="form-control"
-                            value="{{$actuacion->hoja_ruta}}" />
+                            value="" />
                     </div>
                     <div class="form-group-sm col-lg-3 col-md-3 col-sm-6 col-xs-12">
                         <label for="num_participantes" class="control-label">Número de Participantes</label>
                         <input type="number" id="num_participantes" name="num_participantes" size="18" min="0"  class="form-control"
-                            value="{{$actuacion->num_participantes}}" />
+                            value="" />
                     </div>
                 </div>
             </div>
