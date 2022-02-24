@@ -33,9 +33,9 @@
                                           <th>Entidad</th>
                                           <th>Horas Académicas</th>
                                           <th>Planificador</th>
-                                          <th>Participantes</th>
-                                          <th>Asistencias</th>
-                                          <th>Facilitadores</th>
+                                          <th><img src="/img/icon/grupo.png" class="icon-lg" alt="Participantes" title="Ver Participantes"></th>
+                                          <th><img src="/img/icon/asistencia.png" class="icon-lg" alt="Asistencias" title="Ver Asistencia"></th>
+                                          <th><img src="/img/icon/facilitadores.png" class="icon-lg" alt="Facilitadores" title="Ver Facilitador(es)"></th>
                                           <th>Estatus</th>
                                           <th>Opciones</th>
                                         </tr>
@@ -45,15 +45,17 @@
                                         <tr>
                                         <td>1</td>  
                                         <!--<td><a href="{{URL::route('crearactuacion')}}"><font color=#0A0EFC>{{ $item->id_actividad }}-{{ $item->anio }}-{{ $item->cod_actuacion }}</a></td>-->
-                                        <td><a href="/actuacion/edit/{{ $item->id}}"><font color=#0A0EFC>{{ $item->cod_actividad }}-{{ $item->anio }}-{{ $item->cod_actuacion }}</a>
-                                          <td>{{ $item->fecha_inicio }} a {{ $item->fecha_fin }}</td>
+                                        <td><a href="/actuacion/edit/{{ $item->id}}"><span class='btn-info badge'><font color=#F2F3F8>{{ $item->cod_actividad }}-{{ $item->anio }}-{{ $item->cod_actuacion }}</span></a>
+                                          <td ><div aling="center">{{ $item->fecha_inicio }} a {{ $item->fecha_fin }}</div></td>
                                           <td>{{ $item->entidad }}</td>
                                           <td>{{ $item->horas }}</td>
                                           <td>{{ $item->nomb_planificador }} {{ $item->ape_planificador }}</td>                                                                               
-                                          <td><a href="/actuacion/edit/{{ $item->cod_actuacion}}-{{ $item->anio}}-{{ $item->id_actividad}}"><img src="/img/icon/clipboard.ico" class="icon-lg" alt="Acciones"></a></td>
-                                          <td><a href=""><img src="/img/icon/clipboard.ico" class="icon-lg" alt="Acciones"></a></td>
-                                          <td><a href=""><img src="/img/icon/clipboard.ico" class="icon-lg" alt="Acciones"></a></td> 
-                                          <td><a href=""><img src="/img/icon/clipboard.ico" class="icon-lg" alt="Acciones"></a></td>                                                </tr>
+                                          @foreach ($participantes as $itemp) <td>{{ $itemp->cant_participantes }} </td>   @endforeach
+                                          <td><a href=""></a></td>
+                                          <td><a href=""></a></td>
+                                          <td>{{ $item->estatus }}</td>  
+                                          <td><a href=""><img src="/img/icon/correo.png" class="icon-lg" alt="Correo" title="Enviar Constancia por Correo">
+                                          </a>  <a href=""><img src="/img/icon/imprimir.png" class="icon-lg" alt="Imprimir" title="Imprimir"></a></td>                                                  </tr>
                                         @endforeach
                                         </tbody>
                                         <tfoot>

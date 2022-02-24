@@ -182,17 +182,51 @@ class ActuacionController extends Controller
        ->orderby('actividad.codigo')
        ->get();
 
-       $actuaciones = DB::table('actuacion')
+     /* $actuaciones = DB::table('actuacion')
        ->select('actuacion.id_actividad','actuacion.anio','actuacion.cod_actuacion','actuacion.cod_actividad','actuacion.id',
        'actuacion.fecha_inicio','actuacion.fecha_fin','entidad.descripcion as entidad',
        'actuacion.horas','actuacion.id_planificador','persona.nombre as nomb_planificador',
-       'persona.apellido as ape_planificador')
+       'persona.apellido as ape_planificador',
+       'status_actividad.descripcion as estatus')
        ->join("entidad", "entidad.id", "=", "actuacion.id_entidad")
-       ->join("persona", "persona.id", "=", "actuacion.id_planificador")       
+       ->join("persona", "persona.id", "=", "actuacion.id_planificador")   
+       ->join ('status_actividad',"status_actividad.id", "=", "actuacion.id_status_actividad")    
        ->where('actuacion.id_actividad',$id)
        ->orderby('actuacion.id')
-       ->get();
+       ->get();*/
+       
+       $participantes = DB::select("SELECT COUNT(actuacion_participantes.id) AS cant_participantes
+       FROM actuacion_participantes
+       WHERE actuacion_participantes.id_actuacion = 1 AND actuacion_participantes.status = 1 
+       GROUP BY actuacion_participantes.id_actuacion ");
 
-        return view('actuacion/listadoactuacion', compact('actuaciones','actividad'));
+       /*$asistencia = DB::select("SELECT COUNT(id) as cant_asistencias 
+       FROM asistencia WHERE asistencia.id_actuacion = 1 
+       AND asistencia.certificado_asistencia = 1 AND asistencia.status = 1 
+       GROUP BY asistencia.id_actuacion");
+
+       $facilitador = DB::select("SELECT COUNT(id) AS cant_facilitadores 
+       FROM actuacion_ponente WHERE actuacion_ponente.id_actuacion = actuacion.id 
+       AND actuacion_ponente.status = 1 
+       GROUP BY actuacion_ponente.id_actuacion "); */
+      
+       $actuaciones = DB::select ("SELECT 
+       actuacion.id_actividad,actuacion.anio,actuacion.cod_actuacion,actuacion.cod_actividad,actuacion.id,   
+       actuacion.fecha_inicio,actuacion.fecha_fin, 
+       entidad.descripcion as entidad, actuacion.horas, actuacion.id_planificador,persona.nombre as nomb_planificador,
+       persona.apellido as ape_planificador,
+       status_actividad.descripcion as estatus,
+       (SELECT COUNT(actuacion_participantes.id) AS conteo FROM actuacion_participantes WHERE actuacion_participantes.id_actuacion = actuacion.id AND actuacion_participantes.status = 1
+        GROUP BY actuacion_participantes.id_actuacion) as cant_participantes
+        FROM actuacion, actividad, entidad, status_actividad, persona
+				WHERE 	
+                  actuacion.id_actividad = $id AND 
+					actuacion.id_entidad = entidad.id AND 
+					actuacion.id_planificador = persona.id AND 
+					actuacion.id_status_actividad = status_actividad.id AND 
+					actuacion.status = 1");
+
+        //return view('actuacion/listadoactuacion', compact('actuaciones','actividad','participantes','asistencia','facilitador'));
+        return view('actuacion/listadoactuacion', compact('actuaciones','actividad','participantes'));
     }
 }
