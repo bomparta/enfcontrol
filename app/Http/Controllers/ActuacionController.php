@@ -92,7 +92,7 @@ class ActuacionController extends Controller
        
         $codigo=$id;
        
-        $actuacion = Actuacion::where('id_actividad',$codigo)->first();
+        $actuacion = Actuacion::where('id',$codigo)->first();
         $actividad= Actividad::where ('id',$actuacion->id_actividad)->first();
         $ind_financiero = Ind_financiero::where('status', 1)->get();
         $tip_ind_financiero = Tip_ind_financiero::where('status', 1)->get();
@@ -113,7 +113,7 @@ class ActuacionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
- /*   public function update(Request $request, $id)
+   public function update(Request $request, $id)
     {
         //
        
@@ -154,9 +154,9 @@ class ActuacionController extends Controller
             'num_participantes'=>$request->num_participantes,
         ]);
        
-
-        return redirect('/listadoactuaciones')->with('success', 'Actuación actualizada con éxito!!.');
-     } */ 
+     
+        return redirect('/listado')->with('success', 'Actuación actualizada con éxito!!.');
+     } 
 
     /**
      * Remove the specified resource from storage.
@@ -181,31 +181,6 @@ class ActuacionController extends Controller
        ->where('actividad.id',$id)
        ->orderby('actividad.codigo')
        ->get();
-
-     /*$actuaciones = DB::table('actuacion')
-       ->select('actuacion.id_actividad','actuacion.anio','actuacion.cod_actuacion','actuacion.cod_actividad','actuacion.id',
-       'actuacion.fecha_inicio','actuacion.fecha_fin','entidad.descripcion as entidad',
-       'actuacion.horas','actuacion.id_planificador','persona.nombre as nomb_planificador',
-       'persona.apellido as ape_planificador',
-       'status_actividad.descripcion as estatus')
-       ->join("entidad", "entidad.id", "=", "actuacion.id_entidad")
-       ->join("persona", "persona.id", "=", "actuacion.id_planificador")   
-       ->join ('status_actividad',"status_actividad.id", "=", "actuacion.id_status_actividad")    
-       ->where('actuacion.id_actividad',$id)
-       ->orderby('actuacion.id')
-       ->get();*/
-      
-      
-      
-       /*$asistencia = DB::select("SELECT COUNT(id) as cant_asistencias 
-       FROM asistencia WHERE asistencia.id_actuacion = 1 
-       AND asistencia.certificado_asistencia = 1 AND asistencia.status = 1 
-       GROUP BY asistencia.id_actuacion");
-
-       $facilitador = DB::select("SELECT COUNT(id) AS cant_facilitadores 
-       FROM actuacion_ponente WHERE actuacion_ponente.id_actuacion = actuacion.id 
-       AND actuacion_ponente.status = 1 
-       GROUP BY actuacion_ponente.id_actuacion "); */
       
       $actuaciones = DB::select ("SELECT 
       actuacion.id_actividad,actuacion.anio,actuacion.cod_actuacion,actuacion.cod_actividad,actuacion.id,
@@ -224,7 +199,9 @@ class ActuacionController extends Controller
       actuacion.id_entidad = entidad.id AND 
       actuacion.id_planificador = persona.id AND 
       actuacion.id_status_actividad = status_actividad.id AND 
-      actuacion.status = 1 and actuacion.id_actividad=$id");
+      actuacion.status = 1 and actuacion.id_actividad=$id
+  Order by  actuacion.id 
+    ");
 
         //return view('actuacion/listadoactuacion', compact('actuaciones','actividad','participantes','asistencia','facilitador'));
         return view('actuacion/listadoactuacion', compact('actuaciones','actividad'));
