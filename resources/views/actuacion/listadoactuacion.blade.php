@@ -28,7 +28,7 @@
                                         <thead>
                                         <tr>
                                           <th>N°</th>
-                                          <th>Codigo</th>
+                                          <th>Código</th>
                                           <th>Período</th>
                                           <th>Entidad</th>
                                           <th>Horas Académicas</th>
@@ -41,11 +41,10 @@
                                         </tr>
                                         </thead>
                                         <tbody>
-                                          @foreach ($actuaciones as $item)
+                                          @foreach ($actuaciones as  $key=>$item)
                                         <tr>
-                                        <td>1</td>  
-                                        <!--<td><a href="{{URL::route('crearactuacion')}}"><font color=#0A0EFC>{{ $item->id_actividad }}-{{ $item->anio }}-{{ $item->cod_actuacion }}</a></td>-->
-                                        <td><a href="/actuacion/edit/{{ $item->id}}"><span class='btn-info badge'><font color=#F2F3F8>{{ $item->cod_actividad }}-{{ $item->anio }}-{{ $item->cod_actuacion }}</span></a>
+                                        <td>{{$key+1}}</td>  
+                                       <td><a href="/actuacion/edit/{{ $item->id}}"><span class='btn-info badge'><font color=#F2F3F8>{{ $item->cod_actividad }}-{{ $item->anio }}-{{ $item->cod_actuacion }}</span></a></td>
                                           <td ><div aling="center">{{ $item->fecha_inicio }} a {{ $item->fecha_fin }}</div></td>
                                           <td>{{ $item->entidad }}</td>
                                           <td>{{ $item->horas }}</td>
@@ -71,7 +70,7 @@
                                         <tfoot>
                                         <tr>
                                         <th>N°</th>                                     
-                                          <th>Codigo</th>
+                                          <th>Código</th>
                                           <th>Período</th>
                                           <th>Entidad</th>
                                           <th>Horas Académicas</th>
@@ -101,7 +100,7 @@
         </div> <!-- page-content-wrapper -->
     </div> <!-- wrapper -->
 
-@endsection
+    @endsection
 
 @section('scripts')
 <!-- jQuery -->

@@ -24,9 +24,10 @@
                                         <table id="example1" class="table table-bordered table-striped">
                                                 <thead>
                                                 <tr>
-                                                  <th>Codigo</th>
+                                                <th>N°</th>
+                                                  <th>Código</th>
                                                   <th>Nombre</th>
-                                                  <th>Clasificacion</th>
+                                                  <th>Clasificación</th>
                                                   <th>Tematica</th>
                                                   <th>Alcance</th>
                                                   <th>Tipo de Actividad</th>
@@ -35,8 +36,9 @@
                                                 </tr>
                                                 </thead>
                                                 <tbody>
-                                                  @foreach ($actividades as $item)
+                                                  @foreach ($actividades as $key=>$item)
                                                 <tr>
+                                                <td>{{$key+1}}</td>  
                                                   <td><a href="/actividad/edit/{{ $item->codigo }}"><span class='btn-info badge'><font color=#F2F3F8>{{ $item->codigo }}-{{ $item->anio }}</span></a></td>
                                                   <td>{{ $item->nombre }}</td>
                                                   <td>{{ $item->clasificacion }}</td>
@@ -50,14 +52,17 @@
                                                 </tbody>
                                                 <tfoot>
                                                 <tr>
-                                                    <th>Codigo</th>
-                                                    <th>Nombre</th>
-                                                    <th>Clasificacion</th>
-                                                    <th>Tematica</th>
-                                                    <th>Alcance</th>
-                                                    <th>Tipo de Actividad</th>
-                                                    <th>Actuacion</th>
-                                                    <th>Accion</th>
+                                                <tr>
+                                                <th>N°</th>
+                                                  <th>Código</th>
+                                                  <th>Nombre</th>
+                                                  <th>Clasificación</th>
+                                                  <th>Tematica</th>
+                                                  <th>Alcance</th>
+                                                  <th>Tipo de Actividad</th>
+                                                  <th>Actuacion</th>
+                                                  <th>Accion</th>
+                                                </tr>
                                                 </tr>
                                                 </tfoot>
                                         </table>

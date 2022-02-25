@@ -12,13 +12,12 @@
                 <div class="row align-items-stretch">
                     <div class="col-12">
                         <div class="card mb-4">
-                                                         
-                        <div class="table-responsive">
+                                                        
+                            <div class="table-responsive">
                                 
                                 <div class="card-header">
                                
-                                 <h3 class="card-title">Actuaciones Académicas</h3>
-                               
+                                 <h3 class="card-title">Actuaciones Académicas</h3>                               
                                   
                                 </div>
                                 <!-- /.card-header -->
@@ -27,7 +26,7 @@
                                         <thead>
                                         <tr>
                                           <th>N°</th>
-                                          <th>Codigo</th>
+                                          <th>Código Actuación</th>
                                           <th>Actividad</th>
                                           <th>Período</th>
                                           <th>Entidad</th>
@@ -41,13 +40,12 @@
                                         </tr>
                                         </thead>
                                         <tbody>
-                                          @foreach ($actuaciones as $item)
+                                          @foreach ($actuaciones as $key=>$item)
                                         <tr>
-                                        <td>1</td>  
-                                        <!--<td><a href="{{URL::route('crearactuacion')}}"><font color=#0A0EFC>{{ $item->id_actividad }}-{{ $item->anio }}-{{ $item->cod_actuacion }}</a></td>-->
-                                        <td><a href="/actuacion/edit/{{ $item->id}}"><span class='btn-info badge'><font color=#F2F3F8>{{ $item->cod_actividad }}-{{ $item->anio }}-{{ $item->cod_actuacion }}</span></a>
-                                        <td>{{ $item->nombre }}</td>
-                                          <td ><div aling="center">{{ $item->fecha_inicio }} a {{ $item->fecha_fin }}</div></td>
+                                          <td>{{$key+1}}</td>                                         
+                                          <td><a href="/actuacion/edit/{{ $item->id}}"><span class="btn-info badge"><font color="#F2F3F8">{{ $item->cod_actividad }}-{{ $item->anio }}-{{ $item->cod_actuacion }}</font></span></a></td>  
+                                          <td>{{ $item->nombre }}</td>
+                                          <td >{{ $item->fecha_inicio }} al {{ $item->fecha_fin }}</td>
                                           <td>{{ $item->entidad }}</td>
                                           <td>{{ $item->horas }}</td>
                                           <td>{{ $item->nomb_planificador }} {{ $item->ape_planificador }}</td>                                                                               
@@ -65,14 +63,16 @@
                                           @endif
                                          
                                           <td>{{ $item->estatus }}</td>  
-                                          <td><a href=""><img src="/img/icon/correo.png" class="icon-lg" alt="Correo" title="Enviar Constancia por Correo">
-                                          </a>  <a href=""><img src="/img/icon/imprimir.png" class="icon-lg" alt="Imprimir" title="Imprimir"></a></td>                                                  </tr>
+                                          <td><a href=""><img src="/img/icon/correo.png" class="icon-lg" alt="Correo" title="Enviar Constancia por Correo"></a>
+                                              <a href=""><img src="/img/icon/imprimir.png" class="icon-lg" alt="Imprimir" title="Imprimir"></a>
+                                          </td>                                                 
+                                        </tr>
                                         @endforeach
                                         </tbody>
                                         <tfoot>
                                         <tr>
-                                        <th>N°</th>                                     
-                                          <th>Codigo</th>
+                                        <th>N°</th>
+                                          <th>Código Actuación</th>
                                           <th>Actividad</th>
                                           <th>Período</th>
                                           <th>Entidad</th>
@@ -103,7 +103,8 @@
         </div> <!-- page-content-wrapper -->
     </div> <!-- wrapper -->
 
-@endsection
+
+    @endsection
 
 @section('scripts')
 <!-- jQuery -->
@@ -123,8 +124,15 @@
 <script src="/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
 <script src="/plugins/datatables-buttons/js/buttons.print.min.js"></script>
 <script src="/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js" defer></script>
+    <script src="https://cdn.datatables.net/1.10.24/js/dataTables.bootstrap4.min.js" defer></script>
+<script
+  src="https://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
 
 <script>
+
     $(function () {
       $("#example1").DataTable({
         "responsive": true, "lengthChange": false, "autoWidth": false,
@@ -141,5 +149,7 @@
       });
     });
   </script>
+
+
 
 @endsection  
