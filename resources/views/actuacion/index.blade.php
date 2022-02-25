@@ -12,66 +12,80 @@
                 <div class="row align-items-stretch">
                     <div class="col-12">
                         <div class="card mb-4">
+                                                         
+                        <div class="table-responsive">
                                 
-                            <div class="table-responsive">
-                                
-                                    <div class="card-header">
-                                        <h3 class="card-title">Actuaciones Académicas</h3>
-                                     
-                                    </div>
-                                    <!-- /.card-header -->
-                                    <div class="card-body">
-                                        <table id="example1" class="table table-bordered table-striped">
-                                                <thead>
-                                                <tr>
-                                                  <th>N°</th>
-                                                  <th>Codigo</th>
-                                                  <th>Actividad</th>
-                                                  <th>Período</th>
-                                                  <th>Entidad</th>
-                                                  <th>Horas Académicas</th>
-                                                  <th>Planificador</th>
-                                                  <th>Participantes</th>
-                                                  <th>Asistencias</th>
-                                                  <th>Facilitadores</th>
-                                                  <th>Estatus</th>
-                                                  <th>opciones</th>
-                                                </tr>
-                                                </thead>
-                                                <tbody>
-                                                  @foreach ($actuaciones as $item)
-                                                <tr>
-                                                <td>1</td>  
-                                                <td><a href="{{URL::route('crearactuacion')}}"><font color=#0A0EFC>{{ $item->codigo }}-{{ $item->anio }}</a></td>
-                                                  <td>{{ $item->nombre }}</td>
-                                                  <td>{{ $item->clasificacion }}</td>
-                                                  <td>{{ $item->tematica }}</td>
-                                                  <td>{{ $item->alcance }}</td>
-                                                  <td>{{ $item->tipo_actividad }}</td>
-                                                  <td><a href=""><font color=#FC0A0A>{{ $item->convenio }}</a></td>
-                                                  <td><a href="/actuacion/edit/{{ $item->codigo }}"><img src="/img/icon/clipboard.ico" class="icon-lg" alt="Acciones"></a></td>
-                                                  <td><a href=""><img src="/img/icon/clipboard.ico" class="icon-lg" alt="Acciones"></a></td>
-                                                  <td><a href=""><img src="/img/icon/clipboard.ico" class="icon-lg" alt="Acciones"></a></td> 
-                                                  <td><a href=""><img src="/img/icon/clipboard.ico" class="icon-lg" alt="Acciones"></a></td>                                                </tr>
-                                                @endforeach
-                                                </tbody>
-                                                <tfoot>
-                                                <tr>
-                                                <th>N°</th>
-                                                  <th>Codigo</th>
-                                                  <th>Actividad</th>
-                                                  <th>Período</th>
-                                                  <th>Entidad</th>
-                                                  <th>Horas Académicas</th>
-                                                  <th>Planificador</th>
-                                                  <th>Participantes</th>
-                                                  <th>Asistencias</th>
-                                                  <th>Facilitadores</th>
-                                                  <th>Estatus</th>
-                                                  <th>opciones</th>
-                                                </tr>
-                                                </tfoot>
-                                        </table>
+                                <div class="card-header">
+                               
+                                 <h3 class="card-title">Actuaciones Académicas</h3>
+                               
+                                  
+                                </div>
+                                <!-- /.card-header -->
+                                <div class="card-body">
+                                      <table id="example1" class="table table-bordered table-striped">
+                                        <thead>
+                                        <tr>
+                                          <th>N°</th>
+                                          <th>Codigo</th>
+                                          <th>Actividad</th>
+                                          <th>Período</th>
+                                          <th>Entidad</th>
+                                          <th>Horas Académicas</th>
+                                          <th>Planificador</th>
+                                          <th><img src="/img/icon/grupo.png" class="icon-lg" alt="Participantes" title="Ver Participantes"></th>
+                                          <th><img src="/img/icon/asistencia.png" class="icon-lg" alt="Asistencias" title="Ver Asistencia"></th>
+                                          <th><img src="/img/icon/facilitadores.png" class="icon-lg" alt="Facilitadores" title="Ver Facilitador(es)"></th>
+                                          <th>Estatus</th>
+                                          <th>Opciones</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                          @foreach ($actuaciones as $item)
+                                        <tr>
+                                        <td>1</td>  
+                                        <!--<td><a href="{{URL::route('crearactuacion')}}"><font color=#0A0EFC>{{ $item->id_actividad }}-{{ $item->anio }}-{{ $item->cod_actuacion }}</a></td>-->
+                                        <td><a href="/actuacion/edit/{{ $item->id}}"><span class='btn-info badge'><font color=#F2F3F8>{{ $item->cod_actividad }}-{{ $item->anio }}-{{ $item->cod_actuacion }}</span></a>
+                                        <td>{{ $item->nombre }}</td>
+                                          <td ><div aling="center">{{ $item->fecha_inicio }} a {{ $item->fecha_fin }}</div></td>
+                                          <td>{{ $item->entidad }}</td>
+                                          <td>{{ $item->horas }}</td>
+                                          <td>{{ $item->nomb_planificador }} {{ $item->ape_planificador }}</td>                                                                               
+                                          <td>{{ $item->cant_participantes }}
+                                          @if($item->cant_participantes=='')
+                                          <a href=""><img src="/img/icon/add.ico" class="icon-lg" alt="Participantes" title="Agregar Pariticpante(s)"></a></td> 
+                                          @endif
+                                          <td>{{ $item->cant_asistencias }}
+                                          @if($item->cant_asistencias=='')
+                                          <a href=""><img src="/img/icon/add.ico" class="icon-lg" alt="Asistencias" title="Agregar Asistencia"></a></td> 
+                                          @endif
+                                          <td>{{ $item->cant_facilitadores }}
+                                          @if($item->cant_facilitadores=='')
+                                          <a href=""><img src="/img/icon/add.ico" class="icon-lg" alt="Participantes" title="Agregar Facilitador(es)"></a></td> 
+                                          @endif
+                                         
+                                          <td>{{ $item->estatus }}</td>  
+                                          <td><a href=""><img src="/img/icon/correo.png" class="icon-lg" alt="Correo" title="Enviar Constancia por Correo">
+                                          </a>  <a href=""><img src="/img/icon/imprimir.png" class="icon-lg" alt="Imprimir" title="Imprimir"></a></td>                                                  </tr>
+                                        @endforeach
+                                        </tbody>
+                                        <tfoot>
+                                        <tr>
+                                        <th>N°</th>                                     
+                                          <th>Codigo</th>
+                                          <th>Actividad</th>
+                                          <th>Período</th>
+                                          <th>Entidad</th>
+                                          <th>Horas Académicas</th>
+                                          <th>Planificador</th>
+                                          <th>Participantes</th>
+                                          <th>Asistencias</th>
+                                          <th>Facilitadores</th>
+                                          <th>Estatus</th>
+                                          <th>Opciones</th>
+                                        </tr>
+                                        </tfoot>
+                                </table>
                                     </div>
                                     <!-- /.card-body -->
                                 

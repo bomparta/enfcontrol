@@ -25,16 +25,28 @@ class ActuacionController extends Controller
      */
     public function index()
     {
-        $actuaciones = DB::table('actividad')
-       ->select('actividad.codigo','actividad.anio','actividad.nombre','clasificacion.descripcion as clasificacion','tematica.descripcion as tematica','alcance.descripcion as alcance','tipo_actividad.descripcion as tipo_actividad','convenio')
-       ->join("tematica", "tematica.id", "=", "actividad.id")
-       ->join("clasificacion", "clasificacion.id", "=", "actividad.id_clasificacion")
-       ->join("alcance", "alcance.id", "=", "actividad.id_alcance")
-       ->join("tipo_actividad", "tipo_actividad.id", "=", "actividad.id_tipo_actividad")
-       ->orderby('actividad.codigo')
-       ->get();
+       
 
-     
+      $actuaciones = DB::select ("SELECT 
+      actuacion.id_actividad,actuacion.anio,actuacion.cod_actuacion,actuacion.cod_actividad,actuacion.id,
+       actuacion.fecha_inicio,actuacion.fecha_fin,entidad.descripcion as entidad,
+       actuacion.horas,actuacion.id_planificador,persona.nombre as nomb_planificador,
+       actividad.nombre,persona.apellido as ape_planificador,
+       status_actividad.descripcion as estatus,
+      (SELECT COUNT(actuacion_participantes.id) AS conteo FROM actuacion_participantes WHERE actuacion_participantes.id_actuacion = actuacion.id AND actuacion_participantes.status = 1 GROUP BY actuacion_participantes.id_actuacion) as cant_participantes,
+      (SELECT COUNT(id) AS conteo FROM asistencia WHERE asistencia.id_actuacion = actuacion.id AND asistencia.certificado_asistencia = 1 AND asistencia.status = 1 GROUP BY asistencia.id_actuacion) as cant_asistencias,
+    (SELECT COUNT(id) AS conteo FROM actuacion_ponente WHERE actuacion_ponente.id_actuacion = actuacion.id AND actuacion_ponente.status = 1 GROUP BY actuacion_ponente.id_actuacion) as cant_facilitadores
+      
+  FROM 
+      actuacion, actividad, entidad, status_actividad, persona 
+  WHERE 	
+      actuacion.cod_actividad = actividad.codigo AND 
+      actuacion.id_entidad = entidad.id AND 
+      actuacion.id_planificador = persona.id AND 
+      actuacion.id_status_actividad = status_actividad.id AND 
+      actuacion.status = 1 
+  Order by  actuacion.id 
+     ");
 
         return view('actuacion/index', compact('actuaciones'));
     }
