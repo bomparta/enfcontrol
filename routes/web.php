@@ -31,12 +31,20 @@ Route::resource('/parametros/actividad', ActividadController::class);
 
 
 Route::get('/actuacion', 'ActuacionController@index')->name('actuacion');
-Route::get('/crearactuacion', 'ActuacionController@create')->name('crearactuacion');
+Route::get('/actuacion/create/{id}', 'ActuacionController@create')->name('crearactuacion');
 Route::get('/actuacion/edit/{id}', 'ActuacionController@edit')->name('editactuacion');
 Route::post('/actuacion/update/{id}', 'ActuacionController@update');
 Route::get('actuacion/contador', 'ActividadController@contador')->name('contador');
 Route::get('/listadoactuacion/{id}', 'ActuacionController@get_actuaciones')->name('listadoactuacion');
+Route::resource('/parametros/actuacion', ActuacionController::class);
 
+Route::get('/participantes', 'ParticipantesController@index')->name('participante');
+/*Route::get('/actuacion/create/{id}', 'ActuacionController@create')->name('crearactuacion');
+Route::get('/actuacion/edit/{id}', 'ActuacionController@edit')->name('editactuacion');
+Route::post('/actuacion/update/{id}', 'ActuacionController@update');
+Route::get('actuacion/contador', 'ActividadController@contador')->name('contador');
+Route::get('/listadoactuacion/{id}', 'ActuacionController@get_actuaciones')->name('listadoactuacion');
+Route::resource('/parametros/actuacion', ActuacionController::class);*/
 
 Route::get('/usuario', 'DashboardController@index')->name('usuario');
 Route::get('/reporte', 'ReporteController@index')->name('reporte');

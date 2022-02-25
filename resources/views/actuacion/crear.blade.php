@@ -17,19 +17,24 @@
                               
                                 <div class="card-header">
                                  @include('layouts.items.card-header', ['titulo' => 'Nueva Actuación'])
-                                
+                                 @foreach ($actividad as $itema)
+                                     <h5 class="card-title">Actividad Académica | {{ $itema->codigo }}-{{ $itema->anio }} {{ $itema->nombre }}</h5>                                    
+                                @endforeach
                                 </div>
                                     <!-- /.card-header -->
-                                <form method="POST" action="/actuacion/create/">
+                                <form method="POST" action="/parametros/actuacion">
                                     @csrf
-                                    <input type="hidden" name="id_actividad" value="{{$actividad}}" />
+                                    <input type="hidden" name="id_actividad" value="{{$itema->id}}" />
+                                    <input type="hidden" name="cod_actividad" value="{{$itema->codigo}}" />
+                                    <input type="hidden" name="anio" value="{{$itema->anio}}" />
+                                    <input type="hidden" name="cod_actuacion" value="{{$codigo}}" />
                                     <div class="row">
                                         <div class="col-md-3">
                                             <div class="form-group">
                                                 
-                                                <label for="nombre">Código de la Actuación </label>
+                                                <label for="nombre"><b>Código Actuación</b> </label>
                                                 
-                                                <input disabled='true' id="cod_actuacion" type="text" class="form-control rounded-pill border-primary @error('cod_actuacion') is-invalid @enderror" name="cod_actuacion" value="" required>
+                                                <input disabled='true' id="cod_actuacion" type="text" class="form-control rounded-pill border-primary @error('cod_actuacion') is-invalid @enderror" name="cod_actuacion" value="{{$cod_actuacion}}" required>
                                                 @error('cod_actuacion')
                                                     <div class="invalid-feedback">
                                                         <strong>{{ $message }}</strong>

@@ -18,7 +18,7 @@
                                     <div class="card-header">
                                     @foreach ($actividad as $itema)
                                      <h3 class="card-title">Actividades Academica | {{ $itema->codigo }}-{{ $itema->anio }} {{ $itema->nombre }}</h3>
-                                     <p align="right"><a class='btn btn-info' href="{{URL::route('crearactuacion')}}">Crear Actuacion</a></p>
+                                     <p align="right"><a class='btn btn-info' href="/actuacion/create/{{$itema->id}}">Crear Actuacion</a></p>
                                     @endforeach
                                       
                                     </div>
@@ -49,9 +49,9 @@
                                           <td>{{ $item->entidad }}</td>
                                           <td>{{ $item->horas }}</td>
                                           <td>{{ $item->nomb_planificador }} {{ $item->ape_planificador }}</td>                                                                               
-                                          <td>{{ $item->cant_participantes }}
+                                          <td> <a href="/participantes/">{{ $item->cant_participantes }}</a>
                                           @if($item->cant_participantes=='')
-                                          <a href=""><img src="/img/icon/add.ico" class="icon-lg" alt="Participantes" title="Agregar Pariticpante(s)"></a></td> 
+                                          <a href="/participantes/"><img src="/img/icon/add.ico" class="icon-lg" alt="Participantes" title="Agregar Pariticpante(s)"></a></td> 
                                           @endif
                                           <td>{{ $item->cant_asistencias }}
                                           @if($item->cant_asistencias=='')

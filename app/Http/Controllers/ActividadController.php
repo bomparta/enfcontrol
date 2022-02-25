@@ -21,7 +21,7 @@ class ActividadController extends Controller
      */
     public function index()
     {
-        
+    
        return view('actividad/actividad');
     }
 
@@ -165,7 +165,7 @@ class ActividadController extends Controller
         INNER JOIN tematica ON tematica.id = actividad.id_tematica
         INNER JOIN clasificacion ON clasificacion.id = actividad.id_clasificacion
         INNER JOIN alcance ON alcance.id = actividad.id_alcance
-        INNER JOIN tipo_actividad ON tipo_actividad.id = actividad.id_tipo_actividad
+        INNER JOIN tipo_actividad ON tipo_actividad.id = actividad.id_tipo_actividad order by actividad.id
         ');
             
         return view('actividad/index', compact('actividades'));

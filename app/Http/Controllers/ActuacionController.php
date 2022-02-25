@@ -56,18 +56,17 @@ class ActuacionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create( )
+    public function create( Request $request,$id)
     {
-        //$tot_actuacion=  DB::table('actuacion')->where('actuacion.id_actividad', $id)
-       // ->select(DB::raw('count(*) as filas'))
-       // ->first();        
-      // $codigo=$id;
-       $actividad = Actividad::where('id', 1)->get();
 
-        $cod_actuacion='002';
-        //$num= $tot_actuacion+1; // aqui debo traerme por post el codigo de la actuacion
-        //$cod_actuacion= str_pad($num, 3, '0', STR_PAD_LEFT);
-        $fecha = 22;
+       $actividad = Actividad::where('id', $id)->get();
+       $tot_actuacion = Actuacion::whereId_actividad($id)->count();
+       $fecha = 22;
+   
+       $num= $tot_actuacion+1; // aqui debo traerme por post el codigo de la actuacion
+       $codigo=str_pad($num, 3, '0', STR_PAD_LEFT);//codigo de la actuacion nuevo
+       $cod_actuacion=str_pad($id, 3, '0', STR_PAD_LEFT).'-'.$fecha.'-'. str_pad($num, 3, '0', STR_PAD_LEFT);
+      
         $ind_financiero = Ind_financiero::where('status', 1)->get();
         $tip_ind_financiero = Tip_ind_financiero::where('status', 1)->get();
         $refrigerio= Refrigerios::where ('status',1)->get();
@@ -75,7 +74,7 @@ class ActuacionController extends Controller
         $entidad= Entidad::where ('status',1)->get();
         $estatus= Status_actividad::where ('status',1)->get();
         $planificador = Persona::where ('status',1)->get(); 
-       return view('actuacion/crear', compact('cod_actuacion','actividad','fecha','ind_financiero','tip_ind_financiero','refrigerio','viatico','entidad','estatus','planificador'));
+       return view('actuacion/crear', compact('actividad','codigo','cod_actuacion','fecha','ind_financiero','tip_ind_financiero','refrigerio','viatico','entidad','estatus','planificador'));
     }
 
     /**
@@ -87,6 +86,50 @@ class ActuacionController extends Controller
     public function store(Request $request)
     {
         //
+        $request->validate([
+            'ind_financiero' => ['required'],
+            'tipo_ind_financiero' => ['required'],
+            'refrigerios' => ['required'],
+            'viaticos' => ['required'],
+            'fecha_inicio' => ['required'],
+            'fecha_fin' => ['required'],
+            'duracion' => ['required'],
+            'horas' => ['required'],
+            'entidad' => ['required'],
+            'status_actividad' => ['required'], 
+            'lugar' => ['required', 'string', 'max:255'],
+            'id_planificador' => ['required'], 
+        ]);
+
+        $actuacion = new Actuacion();
+        $actuacion->id_actividad = $request->id_actividad;    
+        $actuacion->cod_actividad = $request->cod_actividad;   
+        $actuacion->cod_actuacion = $request->cod_actuacion;   
+        $actuacion->anio = $request->anio;   
+        $actuacion->id_ind_financiero = $request->ind_financiero;    
+        $actuacion->id_tipo_ind_financiero = $request->tipo_ind_financiero;
+        $actuacion->id_refrigerios = $request->refrigerios;
+        $actuacion->id_viaticos = $request->viaticos;
+        $actuacion->fecha_inicio = $request->fecha_inicio;
+        $actuacion->fecha_fin = $request->fecha_fin;
+        $actuacion->duracion = $request->duracion;
+        $actuacion->horas = $request->horas;
+        $actuacion->id_entidad = $request->entidad;
+        $actuacion->id_status_actividad = $request->status_actividad;
+        $actuacion->lugar = $request->lugar;
+        $actuacion->observaciones = $request->observacion;
+        $actuacion->mes_reporte = $request->fecha_reporte;
+        $actuacion->aprobatorio = $request->aprobatorio;
+        $actuacion->id_planificador = $request->id_planificador;
+        $actuacion->fecha_asignacion = $request->fecha_limite;
+        $actuacion->hoja_ruta = $request->hoja_ruta;
+        $actuacion->num_participantes = $request->num_participantes;
+        $actuacion->status = 1;
+        $actuacion->save();
+     
+       // return $request;
+        return redirect('/listadoactuacion')->with('success', 'Actuación Guardada con éxito!!.');
+      
     }
 
     /**
