@@ -45,7 +45,7 @@ class UsuarioGrupoSeeder extends Seeder
             'activos' => '0',
         ]);
         DB::table('usuario_grupo')->insert([
-            'nombre' => 'Administrador',
+            'nombre' => 'Super Administrador',
             'activos' => '0',
         ]);
     }

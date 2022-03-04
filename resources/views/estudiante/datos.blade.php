@@ -1,18 +1,14 @@
 @extends('layouts.app')
-@section('title', 'Cantidades')
 @section ('content')
-<div class="d-flex" id="wrapper">
+<div class="container-fluid">
+    <div class="row justify-content-start">
     @include('layouts.appcontrol')
+        <div class="col-xs-11 col-sm-11 col-md-11 col-lg-10 col-xl-10 col-xxl-10">
+            <div class="row pt-2">
 
-    <div id="page-content-wrapper">
-<div class="container pb-4">
-    <div class="row">
-        <div class="col-12">
-            <div class="card">
-                <div class="card-body">
-                    <div class="col-12 text-center">
+            <div class="col-12 text-center">
                         <h1>Informacion</h1>
-                    </div>
+            </div>
                     <form id="formulario" name="formulario" method="post" action="#">
                         
                     <!--	<div class="frame3">-->
@@ -194,17 +190,15 @@
                             </div>
                         </div>
                          <div class="frameContenedor" style="margin:5px;" align="right">
-                            <a class='btn btn-info' href="{{URL::route('direccionestudiante')}}" >Guardar y Continuar</a>
+                            <a class='btn btn-info' href="" >Guardar y Continuar</a>
                         </div>
+                       
                     </form>
-
-                </div>
-            </div> <!-- card -->
+                    
+        
+            </div>
         </div>
-    </div> <!-- row -->
+    </div>
 </div>
-
-</div> <!-- row -->
-</div> 
 
 @endsection

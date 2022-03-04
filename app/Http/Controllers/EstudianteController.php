@@ -22,6 +22,11 @@ class EstudianteController extends Controller
         return view('estudiante/index');
     }
 
+    public function dashboard()
+    {
+        return view('estudiante/dashboard');
+    }
+
     /**
      * Show the form for creating a new resource.
      *

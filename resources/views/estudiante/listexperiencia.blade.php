@@ -1,22 +1,11 @@
 @extends('layouts.app')
-@section('styles')
-
-@endsection
-
-@section('content')
-    <div class="d-flex" id="wrapper">
-        @include('layouts.appcontrol')
-
-        <div id="page-content-wrapper">
-            
-
-            <div class="container pb-4">
-                <div class="row align-items-stretch">
-
-                        <div class="col-12">
-                            <div class="card mb-4">
-                                <div class="card-body">
-                                    @include('layouts.items.card-header', ['titulo' => 'Experiencia laboral del estudiante ENFMP'])
+@section ('content')
+<div class="container-fluid">
+    <div class="row justify-content-start">
+    @include('layouts.appcontrol')
+        <div class="col-xs-11 col-sm-11 col-md-11 col-lg-10 col-xl-10 col-xxl-10">
+            <div class="row pt-2">
+            @include('layouts.items.card-header', ['titulo' => 'Experiencia laboral del estudiante ENFMP'])
                                     {{-- @if(!$experienciaestudiantes->id) --}}
                                     <p align="right"><a class='btn btn-info' href="{{URL::route('experienciaestudiante')}}">Crear Experiencia Laboral</a></p>
                                     {{-- @endif --}}
@@ -29,8 +18,8 @@
                                                     <th>Lugar de Trabajo</th>
                                                     <th>Cargo que Desempeña</th>
                                                     <th>Telefono</th>
-                                                    <th>Jubilado/o ad</th>
-                                                    <th>Estado donde inscribio</th>
+                                                    <th>Fecha Inicio</th>
+                                                    <th>Fecha de Culminacion</th>
                                                     @if(in_array( Auth::user()->id_usuariogrupo, array(9,1) ))
                                                         <th>Opcion</th>
                                                     @endif
@@ -58,14 +47,10 @@
                                             </tbody>
                                         </table>
                                     </div>
-                                
 
-                                </div>
-                            </div> <!-- /.card -->
-                        </div>
-                
-                </div>
             </div>
-        </div> <!-- page-content-wrapper -->
-    </div> <!-- wrapper -->
+        </div>
+    </div>
+</div>
+
 @endsection

@@ -6,7 +6,7 @@
         <h1>Bienvenido, {{Auth::user()->name}}</h1>
     </div>
     <div class="card-columns">
-        @if(in_array( Auth::user()->id_usuariogrupo, array(1, 3, 6) ))
+        @if(in_array( Auth::user()->id_usuariogrupo, array(1) ))
         <a href="{{route('listadoestudiante')}}" style="color: black;">
             <div class="card text-center">
                 <img src="{{url('/img/estudiante.jpeg')}}" class="card-img-top">
@@ -26,8 +26,8 @@
             </div>
         </a>
         @endif
-        @if(in_array( Auth::user()->id_usuariogrupo, array(1, 3, 6) ))
-        <a style="color: black;" href="{{route('home')}}">
+        @if(in_array( Auth::user()->id_usuariogrupo, array(1) ))
+        <a style="color: black;" href="#">
             <div class="card text-center">
                 <img src="{{url('/img/postgrado.jpeg')}}" class="card-img-top">
                 <div class="card-body">
@@ -36,8 +36,8 @@
             </div>
         </a>
         @endif
-        @if(in_array( Auth::user()->id_usuariogrupo, array(1, 3, 6) ))
-        <a style="color: black;" href="{{route('home')}}">
+        @if(in_array( Auth::user()->id_usuariogrupo, array(1) ))
+        <a style="color: black;" href="#">
             <div class="card text-center">
                 <img src="{{url('/img/curso_cpp.jpeg')}}" class="card-img-top">
                 <div class="card-body">
@@ -46,8 +46,8 @@
             </div>
         </a>
         @endif
-        @if(in_array( Auth::user()->id_usuariogrupo, array(1, 3, 6) ))
-        <a style="color: black;" href="{{route('home')}}">
+        @if(in_array( Auth::user()->id_usuariogrupo, array(1) ))
+        <a style="color: black;" href="#">
             <div class="card text-center">
                 <img src="{{url('/img/cursos.jpeg')}}" class="card-img-top">
                 <div class="card-body">
@@ -56,8 +56,8 @@
             </div>
         </a>
         @endif
-        @if(in_array( Auth::user()->id_usuariogrupo, array(1, 3, 6) ))
-        <a style="color: black;" href="{{route('home')}}">
+        @if(in_array( Auth::user()->id_usuariogrupo, array(1) ))
+        <a style="color: black;" href="#">
             <div class="card text-center">
                 <img src="{{url('/img/maestrias.jpeg')}}" class="card-img-top">
                 <div class="card-body">
@@ -96,10 +96,12 @@
             </div>
         </a>
         @endif
+        <!--
         <div class="title m-b-md">
             {!!QrCode::size(100)->generate("www.nigmacode.com") !!}
             
          </div>
+        -->
          
     </div>
 </div>

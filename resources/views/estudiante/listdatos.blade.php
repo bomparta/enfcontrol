@@ -1,24 +1,14 @@
 @extends('layouts.app')
-@section('styles')
-
-@endsection
-
-@section('content')
-    <div class="d-flex" id="wrapper">
-        @include('layouts.appcontrol')
-
-        <div id="page-content-wrapper">
-            
-
-            <div class="container pb-4">
-                <div class="row align-items-stretch">
-
-                        <div class="col-12">
-                            <div class="card mb-4">
-                                <div class="card-body">
+@section ('content')
+<div class="container-fluid">
+    <div class="row justify-content-start">
+    @include('layouts.appcontrol')
+        <div class="col-xs-11 col-sm-11 col-md-11 col-lg-10 col-xl-10 col-xxl-10">
+            <div class="row pt-2">
+                
                                     @include('layouts.items.card-header', ['titulo' => 'Lista de usuarios ENFMP'])
                                     @if($datosestudiantes==NULL)
-                                    <p align="right"><a class='btn btn-info' href="{{URL::route('datosestudiante')}}">Crear Estudiante</a></p>
+                                    <p align="right"><a class='btn btn-info' href="{{URL::route('datosestudiante')}}">Crear Informacion del Estudiante</a></p>
                                     @endif
                                     <p>Desde aqui puedes listar la informacion personal del estudiante. Como por ejemplo nombre,apellidos,correo,telefono habitacion,telefono celular.</p>
                                     
@@ -26,11 +16,11 @@
                                         <table class="table datatable">
                                             <thead>
                                                 <tr>
-                                                    <th>id_tipo_identificacion</th>
-                                                    <th>id_nacionalidad</th>
-                                                    <th>nro identificacion</th>
-                                                    <th>nombre</th>
-                                                    <th>apellido</th>
+                                                    <th>Cedula</th>
+                                                    <th>Nombre y Apellidos</th>
+                                                    <th>Correo</th>
+                                                    <th>Telefono</th>
+                                                    <th>Sexo</th>
                                                     @if(in_array( Auth::user()->id_usuariogrupo, array(9,1) ))
                                                         <th>Opcion</th>
                                                     @endif
@@ -58,14 +48,10 @@
                                             </tbody>
                                         </table>
                                     </div>
-                                
-
-                                </div>
-                            </div> <!-- /.card -->
-                        </div>
-                
-                </div>
+    
             </div>
-        </div> <!-- page-content-wrapper -->
-    </div> <!-- wrapper -->
+        </div>
+    </div>
+</div>
+
 @endsection

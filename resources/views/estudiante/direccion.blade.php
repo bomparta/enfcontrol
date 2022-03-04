@@ -1,16 +1,12 @@
 @extends('layouts.app')
-@section('title', 'Cantidades')
 @section ('content')
-<div class="d-flex" id="wrapper">
+<div class="container-fluid">
+    <div class="row justify-content-start">
     @include('layouts.appcontrol')
+        <div class="col-xs-11 col-sm-11 col-md-11 col-lg-10 col-xl-10 col-xxl-10">
+            <div class="row pt-2">
 
-    <div id="page-content-wrapper">
-<div class="container pb-4">
-    <div class="row">
-        <div class="col-12">
-            <div class="card">
-                <div class="card-body">
-                    <div class="col-12 text-center">
+            <div class="col-12 text-center">
                         <h1>Informacion</h1>
                     </div>
                     <form id="formulario" name="formulario" method="post" action="#">
@@ -24,8 +20,9 @@
                                            <b> DIRECCION</b>
                                     </div>
                                     <div id="divSubTituloIndex2">
-                                        Suministre sus direccion, haga clic en "Guardar" .
+                                        Suministre sus direccion, haga clic en "Guardar y Continuar" .
                                     </div>
+                                    <br><br>
                                 </td>
                             </tr>
                             <tr>
@@ -52,6 +49,11 @@
                                 </td>
                                 
                             </tr>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
                             <!-- FILA 2 -->
                             <tr>
                                 <td>
@@ -59,7 +61,7 @@
                                     <input type="text" name="urbanizacion" id="urbanizacion" value="" style="width:190px;" maxlength="100"  />
                                 </td>
                                 <td>
-                                    &nbsp;Calle/Avenida&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
+                                    &nbsp;Calle/Avenida&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                     <input type="text" name="calleAv" id="calleAv" value="" style="width:190px;" maxlength="100"  />
                                 </td>
                                 <td>
@@ -71,17 +73,13 @@
                       </table>
                           
                          <div class="frameContenedor" style="margin:5px;" align="right">
-                            <a class='btn btn-info' href="{{URL::route('experienciaestudiante')}}" >Guardar y Continuar</a>
+                            <a class='btn btn-info' href="" >Guardar y Continuar</a>
                         </div>
                     </form>
 
-                </div>
-            </div> <!-- card -->
+            </div>
         </div>
-    </div> <!-- row -->
+    </div>
 </div>
-
-</div> <!-- row -->
-</div> 
 
 @endsection

@@ -1,21 +1,11 @@
 @extends('layouts.app')
-@section('styles')
+@section ('content')
+<div class="container-fluid">
+    <div class="row justify-content-start">
+    @include('layouts.appcontrol')
+        <div class="col-xs-11 col-sm-11 col-md-11 col-lg-10 col-xl-10 col-xxl-10">
+            <div class="row pt-2">
 
-@endsection
-
-@section('content')
-    <div class="d-flex" id="wrapper">
-        @include('layouts.appcontrol')
-
-        <div id="page-content-wrapper">
-            
-
-            <div class="container pb-4">
-                <div class="row align-items-stretch">
-
-                        <div class="col-12">
-                            <div class="card mb-4">
-                                <div class="card-body">
                                     @include('layouts.items.card-header', ['titulo' => 'Direccion estudiante ENFMP'])
                                     @if($direccionestudiantes==NULL)
                                     <p align="right"><a class='btn btn-info' href="{{URL::route('direccionestudiante')}}">Crear Direccion</a></p>
@@ -61,15 +51,10 @@
                                                 
                                             </tbody>
                                         </table>
-                                    </div>
-                                
 
-                                </div>
-                            </div> <!-- /.card -->
-                        </div>
-                
-                </div>
             </div>
-        </div> <!-- page-content-wrapper -->
-    </div> <!-- wrapper -->
+        </div>
+    </div>
+</div>
+
 @endsection

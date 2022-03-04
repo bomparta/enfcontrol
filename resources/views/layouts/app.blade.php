@@ -11,10 +11,13 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
+    
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+    <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
@@ -110,9 +113,10 @@
     });
 </script>
 
-        <main class="py-4">
-            @yield('content')
+        <main>
             @yield('scripts')
+            @yield('content')
+            
         </main>
         <footer class="px-2 py-2 fixed-bottom bg-dark">
      <span class="text-muted">Sistema de control de estudio de la Escuela Nacional de Fiscales

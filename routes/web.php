@@ -50,6 +50,7 @@ Route::get('/usuario', 'DashboardController@index')->name('usuario');
 Route::get('/reporte', 'ReporteController@index')->name('reporte');
 Route::get('/pdfconstancia', 'ReporteController@constancia')->name('constanciapdf');
 
+Route::get('/dashboard', 'EstudianteController@dashboard')->name('dashboard');
 Route::get('/estudiante', 'EstudianteController@index')->name('listadoestudiante');
 Route::get('/estudiantedatos', 'EstudianteController@create')->name('datosestudiante');
 Route::get('/editestudiantedatos/{id}', 'EstudianteController@edit')->name('editdatosestudiante');
