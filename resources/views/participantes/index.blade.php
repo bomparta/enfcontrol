@@ -158,6 +158,7 @@
                     <table id="example1" class="table table-bordered table-striped">
                             <thead>
                             <tr>
+                            <th>N°</th>
                             <th>Cédula</th>
                             <th>Nombre</th>
                             <th>Apellido</th>
@@ -167,27 +168,28 @@
                             <th>Tipo de Funcionario</th>
                             <th>Cargo</th>
                             <th>Entidad Federal</th>
-                            <th></th>
+                            
                         </tr>
                             </thead>
                             <tbody>
                               @foreach ($participantes as $key=>$item)
                             <tr>
                             <td>{{$key+1}}</td>  
-                            <td>{{$key+1}}</td> 
-                            <td>{{$key+1}}</td> 
-                            <td>{{$key+1}}</td> 
-                            <td>{{$key+1}}</td> 
-                            <td>{{$key+1}}</td> 
-                            <td>{{$key+1}}</td> 
-                            <td>{{$key+1}}</td> 
-                            <td>{{$key+1}}</td> 
+                            <td>{{$item->nacionalidad}}-{{$item->numero_identificacion}}</td> 
+                            <td>{{$item->nombre}} {{$item->nombreseg}}</td> 
+                            <td>{{$item->apellido}} {{$item->apellidoseg}}</td>                            
+                            <td> {{$item->sexo}} </td>                           
+                            <td>{{$item->email}}</td> 
+                            <td>{{$item->organismo}}</td> 
+                            <td>{{$item->tipo_funcionario}}</td> 
+                            <td>{{$item->cargo}}</td>
+                            <td>{{$item->entidad}}</td> 
                             </tr>
                             @endforeach
                             </tbody>
-                            <tfoot>
-                           
+                            <tfoot>                           
                             <tr>
+                            <th>N°</th>
                             <th>Cédula</th>
                             <th>Nombre</th>
                             <th>Apellido</th>
@@ -197,7 +199,7 @@
                             <th>Tipo de Funcionario</th>
                             <th>Cargo</th>
                             <th>Entidad Federal</th>
-                            <th></th>
+                          
                        
                             </tr>
                             </tfoot>
@@ -208,6 +210,7 @@
                 </div>           
                                           <!-- /.card -->
                                 <br>
+                            <div>
                                 <a class='btn btn-info' href="{{URL::route('actividad')}}">Regresar</a>
                             </div>
             
