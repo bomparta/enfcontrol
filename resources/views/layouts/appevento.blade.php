@@ -1,3 +1,4 @@
+
 <aside class="bg-white" id="sidebar-wrapper-lg">
     <div class="sidebar-heading text-center">
         <h1 class="h5 text-primary">Panel de control</h1>
@@ -7,7 +8,7 @@
 
     <div class="list-group list-group-flush">
         <!-- Menu Secretaria-->
-        @if(in_array( Auth::user()->id_usuariogrupo, array(1, 3, 6) ))
+        @if(in_array( Auth::user()->id_usuariogrupo, array(1, 3, 6,7) ))
         <a href="{{route('listadoactividad')}}" class="list-group-item list-group-item-action border-0">
             <img src="/img/icons-lineal/analiticas.png" class="icon-lg">
             Actividad
@@ -15,7 +16,7 @@
         @endif
         <a href="{{route('actuacion')}}" class="list-group-item list-group-item-action border-0">
             <img src="/img/icons-lineal/analiticas.png" class="icon-lg">
-            Actuacion
+            Actuación
         </a>
         
         <a href="/" class="list-group-item list-group-item-action border-0">
