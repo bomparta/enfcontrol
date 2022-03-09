@@ -23,13 +23,16 @@ class ParticipantesController extends Controller
 
         $participantes = DB::select('SELECT numero_identificacion, nacionalidad.cod as nacionalidad, 
         sexo.descripcion as sexo, nombre,nombreseg, apellido, apellidoseg,
-        email,organismo.organismo ,tipo_funcionario.tipo_funcionario ,cargo, entidad.descripcion as entidad
-        FROM persona
+        email,organismo.organismo ,tipo_funcionario.tipo_funcionario ,persona.cargo, entidad.descripcion as entidad
+        FROM actuacion_participantes
+        INNER JOIN persona ON persona.id = actuacion_participantes.id_persona
         INNER JOIN sexo ON sexo.id = persona.id_genero
         INNER JOIN nacionalidad ON nacionalidad.id = persona.id_nacionalidad
         INNER JOIN organismo ON organismo.id = persona.id_organismo
         INNER JOIN tipo_funcionario ON tipo_funcionario.id = persona.id_tipo_funcionario
         INNER JOIN entidad ON entidad.id = persona.id_entidad
+        INNER JOIN actuacion ON actuacion_participantes.id_actuacion = actuacion.id
+        where actuacion_parTicipantes.id_actuacion= 1
         order by persona.apellido');        
         return view('participantes/index', compact('participantes'));
     }

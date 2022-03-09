@@ -31,9 +31,10 @@
                                             <div class="form-group-sm col-lg-4 col-md-4 col-sm-4 col-xs-12">
                                                 <label for="tipo_identificacion" class="control-label">Documento</label>
                                                 <select name="tipo_identificacion" id="tipo_identificacion" class="form-control">
-                                                <option value='1'>Cédula</option><option value='2'>Pasaporte</option>                        </select>    
+                                                <option value='1'>Cédula</option><option value='2'>Pasaporte</option> 
+                                                </select>    
                                             </div>
-                                            <div class="form-group-sm col-lg-8 col-md-8 col-sm-8 col-xs-12" >
+                                            <div class="form-group-sm col-lg-4 col-md-4 col-sm-4 col-xs-12" >
                                                 <label for="numero_identificacion" class="control-label">N° Identificación</label>
                                                 <div class="input-group input-group-sm">
                                                     <span class="input-group-btn">
@@ -42,13 +43,14 @@
                                                     </span>        
                                                     <input type="text" name="numero_identificacion" id="numero_identificacion" class="form-control" required>
                                                     <span class="input-group-btn">
-                                                        <button class="btn btn-default" type="button" id="get_persona" value="Buscar" formnovalidate>
-                                                            <i class="fa fa-search"></i>
+                                                        <button class="btn btn-primary" type="button" id="get_persona" value="Buscar" onclick="buscar_persona()" >
+                                                        <img src="/img/icon/zoom.ico" class="icon-lg" alt="Participantes" title="Agregar Facilitador(es)">
                                                         </button>
                                                     </span>
                                                 </div> 
+                                            </div>
                                         </div>   
-                                        
+                                        <hr>
 
                                         <div class="row">
                                         
