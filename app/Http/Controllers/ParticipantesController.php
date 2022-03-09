@@ -17,11 +17,11 @@ class ParticipantesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($id)
     {
         //
 
-        $participantes = DB::select('SELECT numero_identificacion, nacionalidad.cod as nacionalidad, 
+        $participantes = DB::select("SELECT numero_identificacion, nacionalidad.cod as nacionalidad, 
         sexo.descripcion as sexo, nombre,nombreseg, apellido, apellidoseg,
         email,organismo.organismo ,tipo_funcionario.tipo_funcionario ,persona.cargo, entidad.descripcion as entidad
         FROM actuacion_participantes
@@ -32,8 +32,8 @@ class ParticipantesController extends Controller
         INNER JOIN tipo_funcionario ON tipo_funcionario.id = persona.id_tipo_funcionario
         INNER JOIN entidad ON entidad.id = persona.id_entidad
         INNER JOIN actuacion ON actuacion_participantes.id_actuacion = actuacion.id
-        where actuacion_parTicipantes.id_actuacion= 1
-        order by persona.apellido');        
+        where actuacion_parTicipantes.id_actuacion= $id
+        order by persona.apellido");        
         return view('participantes/index', compact('participantes'));
     }
 

@@ -49,9 +49,9 @@
                                           <td>{{ $item->entidad }}</td>
                                           <td>{{ $item->horas }}</td>
                                           <td>{{ $item->nomb_planificador }} {{ $item->ape_planificador }}</td>                                                                               
-                                          <td> <a href="/participantes/">{{ $item->cant_participantes }}</a>
+                                          <td> <a href="/participantes/{{ $item->id}}">{{ $item->cant_participantes }}</a>
                                           @if($item->cant_participantes=='')
-                                          <a href="/participantes/"><img src="/img/icon/add.ico" class="icon-lg" alt="Participantes" title="Agregar Pariticpante(s)"></a></td> 
+                                          <a href="/participantes/{{ $item->id}}"><img src="/img/icon/add.ico" class="icon-lg" alt="Participantes" title="Agregar Pariticpante(s)"></a></td> 
                                           @endif
                                           <td>{{ $item->cant_asistencias }}
                                           @if($item->cant_asistencias=='')
