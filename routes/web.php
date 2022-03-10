@@ -39,12 +39,10 @@ Route::get('/listadoactuacion/{id}', 'ActuacionController@get_actuaciones')->nam
 Route::resource('/parametros/actuacion', ActuacionController::class);
 
 Route::get('/participantes/{id}', 'ParticipantesController@index')->name('participante');
-/*Route::get('/actuacion/create/{id}', 'ActuacionController@create')->name('crearactuacion');
-Route::get('/actuacion/edit/{id}', 'ActuacionController@edit')->name('editactuacion');
-Route::post('/actuacion/update/{id}', 'ActuacionController@update');
-Route::get('actuacion/contador', 'ActividadController@contador')->name('contador');
-Route::get('/listadoactuacion/{id}', 'ActuacionController@get_actuaciones')->name('listadoactuacion');
-Route::resource('/parametros/actuacion', ActuacionController::class);*/
+
+Route::get('/asistencias/{id}', 'AsistenciasController@index')->name('asistencias');
+
+Route::get('/facilitadores/{id}', 'FacilitadoresController@index')->name('facilitadores');
 
 Route::get('/usuario', 'DashboardController@index')->name('usuario');
 Route::get('/reporte', 'ReporteController@index')->name('reporte');

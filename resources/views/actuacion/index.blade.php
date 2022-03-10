@@ -49,17 +49,17 @@
                                           <td>{{ $item->entidad }}</td>
                                           <td>{{ $item->horas }}</td>
                                           <td>{{ $item->nomb_planificador }} {{ $item->ape_planificador }}</td>                                                                               
-                                          <td>{{ $item->cant_participantes }}
+                                          <td><a href="/participantes/{{$item->id}}">{{ $item->cant_participantes }}</a>
                                           @if($item->cant_participantes=='')
-                                          <a href=""><img src="/img/icon/add.ico" class="icon-lg" alt="Participantes" title="Agregar Pariticpante(s)"></a></td> 
+                                          <a href="/participantes/{{$item->id}}"><img src="/img/icon/add.ico" class="icon-lg" alt="Participantes" title="Agregar Pariticpante(s)"></a></td> 
                                           @endif
-                                          <td>{{ $item->cant_asistencias }}
+                                          <td><a href="/asistencias/{{$item->id}}">{{ $item->cant_asistencias }}</a>
                                           @if($item->cant_asistencias=='')
-                                          <a href=""><img src="/img/icon/add.ico" class="icon-lg" alt="Asistencias" title="Agregar Asistencia"></a></td> 
+                                          <a href="/asistencias/{{$item->id}}"><img src="/img/icon/add.ico" class="icon-lg" alt="Asistencias" title="Agregar Asistencia"></a></td> 
                                           @endif
-                                          <td>{{ $item->cant_facilitadores }}
+                                          <td><a href="/facilitadores/{{$item->id}}">{{ $item->cant_facilitadores }}</a>
                                           @if($item->cant_facilitadores=='')
-                                          <a href=""><img src="/img/icon/add.ico" class="icon-lg" alt="Participantes" title="Agregar Facilitador(es)"></a></td> 
+                                          <a href="/facilitadores/{{$item->id}}"><img src="/img/icon/add.ico" class="icon-lg" alt="Participantes" title="Agregar Facilitador(es)"></a></td> 
                                           @endif
                                          
                                           <td>{{ $item->estatus }}</td>  

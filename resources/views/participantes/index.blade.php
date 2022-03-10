@@ -44,7 +44,7 @@
                                                     <input type="text" name="numero_identificacion" id="numero_identificacion" class="form-control" required>
                                                     <span class="input-group-btn">
                                                         <button class="btn btn-primary" type="button" id="get_persona" value="Buscar" onclick="buscar_persona()" >
-                                                        <img src="/img/icon/zoom.ico" class="icon-lg" alt="Participantes" title="Agregar Facilitador(es)">
+                                                        <img src="/img/icon/zoom.ico" class="icon-lg" alt="Participantes" title="Buscar Participante(es)">
                                                         </button>
                                                     </span>
                                                 </div> 
