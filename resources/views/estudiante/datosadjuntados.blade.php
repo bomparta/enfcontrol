@@ -27,8 +27,9 @@
                                     <?= Form::file('photo') ?>
                                        <h1 class="card-title">Curriculum</h1>
                                    </div>
-                               </div>
-                               <div class="card text-center">
+                            </div>
+                               
+                            <div class="card text-center">
                                    
                                    <div class="card-body">
                                        <!-- MUESTRA LA FOTO DEL USUARIO SI EXISTE, SINO SE MUESTRA LA IMAGEN POR DEFECTO -->
@@ -37,17 +38,20 @@
                                     <?= Form::file('photo') ?>
                                        <h1 class="card-title">Carta Solicitud</h1>
                                    </div>
-                               </div><div class="card text-center">
+                            </div>
+                               
+                            <div class="card text-center">
                                    
-                                   <div class="card-body">
+                                <div class="card-body">
                                        <!-- MUESTRA LA FOTO DEL USUARIO SI EXISTE, SINO SE MUESTRA LA IMAGEN POR DEFECTO -->
                                        <img src="{{ asset('img/imagen/foto_carnet.png') }}" height="120" width="100"><br><br>
                                     <label for="photo">Foto Carnet</label>
                                     <?= Form::file('photo') ?>
                                        <h1 class="card-title">Foto Carnet</h1>
                                    </div>
-                               </div>
-                               <div class="card text-center">
+                            </div>
+
+                            <div class="card text-center">
                                    
                                    <div class="card-body">
                                        <!-- MUESTRA LA FOTO DEL USUARIO SI EXISTE, SINO SE MUESTRA LA IMAGEN POR DEFECTO -->
@@ -56,9 +60,34 @@
                                     <?= Form::file('photo') ?>
                                        <h1 class="card-title">Foto Cedula</h1>
                                    </div>
-                               </div>
-                       </div>
-                   </div>
+                            </div>
+
+                            <div class="card text-center">
+                                   
+                                   <div class="card-body">
+                                       <!-- MUESTRA LA FOTO DEL USUARIO SI EXISTE, SINO SE MUESTRA LA IMAGEN POR DEFECTO -->
+                                       <img src="{{ asset('img/imagen/foto_carnet.png') }}" height="120" width="100"><br><br>
+                                    <label for="photo">Foto Carnet</label>
+                                    <?= Form::file('photo') ?>
+                                       <h1 class="card-title">Foto Carnet Colegio</h1>
+                                   </div>
+                            </div>
+                               
+                            <div class="card text-center">
+                                   
+                                   <div class="card-body">
+                                       <!-- MUESTRA LA FOTO DEL USUARIO SI EXISTE, SINO SE MUESTRA LA IMAGEN POR DEFECTO -->
+                                       <img src="{{ asset('img/imagen/foto_carnet.png') }}" height="120" width="100"><br><br>
+                                    <label for="photo">Foto Impre de Colegio</label>
+                                    <?= Form::file('photo') ?>
+                                       <h1 class="card-title">Foto Impre Colegio</h1>
+                                   </div>
+                            </div>
+                               
+                                   
+
+                        </div>
+                    </div>
 
 
 

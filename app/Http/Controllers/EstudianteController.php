@@ -2,13 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Cod_Celular;
-use App\Cod_Habitacion;
+
 use App\Genero;
-use App\DatosEstudiante;
+use App\Cod_Celular;
 use App\Estado_civil;
 use App\Nacionalidad;
+use App\Cod_Habitacion;
+use App\DatosEstudiante;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class EstudianteController extends Controller
 {
@@ -80,13 +82,14 @@ class EstudianteController extends Controller
      */
     public function store(Request $request)
     {
+        
         $request->validate([
             'primernombre' => ['required', 'string', 'max:160'],
             'segundonombre' => ['required', 'string', 'max:160'],
             'primerapellido' => ['required', 'string', 'max:160'],
             'segundoapellido' => ['required', 'string', 'max:160'],
             'genero' => ['required'],
-            'id_nacionalidad' => ['required'],
+            'nacionalidad' => ['required'],
             'cedula' => ['required'],
             'estadocivil' => ['required'],
             'correo' => ['required'],
@@ -95,28 +98,35 @@ class EstudianteController extends Controller
             'fechanac' => ['required'],
             'codtelecel' => ['required'],
             'telefonoCel' => ['required'],
+            'cod_what' => ['required'],
+            'telfwhatsapp' => ['required'],
     
            
         ]);
-
+       // dd($request);
         
 
         $estudiantes = new DatosEstudiante();
-        $estudiantes->nombre = $request->primernombre;
-        $estudiantes->nombreseg = $request->segundonombre;
-        $estudiantes->apellido = $request->primerapellido;
-        $estudiantes->apellidoseg = $request->segundoapellido;
-        $estudiantes->id_genero = $request->genero;
-        $estudiantes->id_nacionalidad = $request->id_nacionalidad;
-        $estudiantes->numero_identificacion = $request->cedula;
+        $estudiantes->id_usuario = Auth::user()->id;
+        $estudiantes->nacionalidad = $request->cedula;
+        $estudiantes->cedula = $request->cedula;
+        $estudiantes->nombre_primer = $request->primernombre;
+        $estudiantes->nombre_segundo = $request->segundonombre;
+        $estudiantes->apellido_primer = $request->primerapellido;
+        $estudiantes->apellido_segundo = $request->segundoapellido;
+        $estudiantes->id_sexo = $request->genero;
+        $estudiantes->fecha_nac = $request->fechanac;
         $estudiantes->id_estado_civil = $request->estadocivil;
-        $estudiantes->email = $request->estadocorreocivil;
-        $estudiantes->telefono_hab = $request->codtele.$request->telfhabitacion;
-        $estudiantes->telefono_cel = $request->codtele.$request->telfhabitacion;
-        $estudiantes->edad = $request->fechanac;
+        $estudiantes->correo = $request->correo;
+        $estudiantes->id_codigo_hab = $request->codtele;
+        $estudiantes->tel_habitacion = $request->telfhabitacion;
+        $estudiantes->tel_celular = $request->telefonoCel;
+        $estudiantes->id_codigo_cel = $request->codtelecel;
+        $estudiantes->telefono_whatsapp = $request->telfwhatsapp;
+        $estudiantes->id_codigo_cel_whatsapp = $request->cod_what;
         $estudiantes->save();
 
-        return redirect('/parametros/actividad')->with('success', 'Actividad creada con éxito.');
+        return redirect('/estudiantelist/'.$estudiantes->id_usuario)->with('success', 'Actividad creada con éxito.');
     }
 
     /**
@@ -137,9 +147,18 @@ class EstudianteController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
+    
     {
-        $datos= DatosEstudiante::find($id);
-        return view('estudiante.datos_edit',compact('datos'));
+        $nacionalidades= Nacionalidad::All();
+        $generos= Genero::All();
+        $estado_civils= Estado_civil::All();
+        $cod_habs= Cod_Habitacion::All();
+        $cod_cels= Cod_Celular::All();
+        $datos = DatosEstudiante::select('*')
+       ->where('id', '=',$id)
+       ->get();
+       //dd($datos);
+        return view('estudiante.datos_edit',compact('datos','generos','nacionalidades','estado_civils','cod_habs','cod_cels'));
     }
 
     /**
@@ -167,7 +186,11 @@ class EstudianteController extends Controller
 
     public function datoslistestudiante($id)
     {
-        $datosestudiantes = DatosEstudiante::find($id);
+       // $datosestudiantes = DatosEstudiante::find($id);
+       $datosestudiantes = DatosEstudiante::select('*')
+       ->where('id_usuario', '=',$id)
+       ->get();
+        //dd($datosestudiantes);
         return view('estudiante.listdatos',compact('datosestudiantes'));
     }
 

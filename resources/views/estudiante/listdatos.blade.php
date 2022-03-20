@@ -7,7 +7,7 @@
             <div class="row pt-2">
                 
                                     @include('layouts.items.card-header', ['titulo' => 'Lista de usuarios ENFMP'])
-                                    @if($datosestudiantes==NULL)
+                                    @if(!$datosestudiantes==NULL)
                                     <p align="right"><a class='btn btn-info' href="{{URL::route('datosestudiante')}}">Crear Informacion del Estudiante</a></p>
                                     @endif
                                     <p>Desde aqui puedes listar la informacion personal del estudiante. Como por ejemplo nombre,apellidos,correo,telefono habitacion,telefono celular.</p>
@@ -27,23 +27,26 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                              
-                                                <tr>
-                                                    @if(!$datosestudiantes==NULL)
-                                                    <td>{{ $datosestudiantes->id_tipo_identificacion }}</td>
-                                                    <td>{{ $datosestudiantes->id_nacionalidad }}</td>
-                                                    <td>{{ $datosestudiantes->numero_identificacion}}</td>
-                                                    <td>{{ $datosestudiantes->nombre}}</td>
-                                                    <td>{{ $datosestudiantes->apellido }}</td>
-                                                    @if(in_array( Auth::user()->id_usuariogrupo, array(9,1) ))
-                                                    <td class="text-center">
-                                                            <a href= "/editestudiantedatos/{{$datosestudiantes->id}}" class="btn btn-info" data-tip="Detalle" data-toggle="tooltip" data-original-title="Editar">
-                                                                <img src="/img/icon/modify.ico" class="icon-sm" alt="Listado">
+                                                @if($datosestudiantes<>NULL)
+                                                    @foreach ($datosestudiantes as $datosestudiante)
+                                                    <tr>
+                                                    
+                                                        <td>{{ $datosestudiante->cedula }}</td>
+                                                        <td>{{ $datosestudiante->nombre_primer }} {{ $datosestudiante->nombre_segundo }} {{ $datosestudiante->apellido_primer }} {{ $datosestudiante->apellido_segundo }}</td>
+                                                        <td>{{ $datosestudiante->correo}}</td>
+                                                        <td>{{ $datosestudiante->id_codigo_hab}}-{{ $datosestudiante->tel_habitacion}}</td>
+                                                        <td>{{ $datosestudiante->id_sexo }}</td>
+                                                        @if(in_array( Auth::user()->id_usuariogrupo, array(9,1) ))
+                                                            <td class="text-center">
+                                                            <a href= "/editestudiantedatos/{{$datosestudiante->id}}" class="btn btn-info" data-tip="Detalle" data-toggle="tooltip" data-original-title="Editar">
+                                                            <img src="/img/icon/modify.ico" class="icon-sm" alt="Listado">
                                                             </a>
-                                                        </td>
-                                                    @endif
-                                                    @endif
-                                                </tr>
+                                                            </td>
+                                                        @endif
+                                                            
+                                                    </tr>
+                                                    @endforeach
+                                                @endif
                                                 
                                             </tbody>
                                         </table>

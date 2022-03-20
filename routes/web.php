@@ -51,6 +51,7 @@ Route::get('/pdfconstancia', 'ReporteController@constancia')->name('constanciapd
 Route::get('/dashboard', 'EstudianteController@dashboard')->name('dashboard');
 Route::get('/estudiante', 'EstudianteController@index')->name('listadoestudiante');
 Route::get('/estudiantedatos', 'EstudianteController@create')->name('datosestudiante');
+Route::post('/estudiantestore', 'EstudianteController@store')->name('estudiantestore');
 Route::get('/editestudiantedatos/{id}', 'EstudianteController@edit')->name('editdatosestudiante');
 Route::get('/estudiantelist/{id}', 'EstudianteController@datoslistestudiante')->name('estudiantelist');
 Route::get('/estudiantedireccion', 'EstudianteController@createdireccion')->name('direccionestudiante');

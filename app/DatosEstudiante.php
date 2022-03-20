@@ -9,7 +9,7 @@ class DatosEstudiante extends Model
 {
     use Notifiable;
 
-    protected $table = 'persona';
+    protected $table = 'estudiante';
 
 	    const CREATED_AT = 'created_at';
         const UPDATED_AT = 'updated_at';
@@ -19,6 +19,11 @@ class DatosEstudiante extends Model
      * @var array
      */
     protected $fillable = [
-         'nombre', 'apellido','edad',
+        'id_usuario','primernombre', 'segundonombre','primerapellido',
+         'segundoapellido', 'nacionalidad','cedula',
+         'genero', 'estadocivil','correo',
+         'codtele', 'telfhabitacion','fechanac',
+         'codtelecel', 'telefonoCel','cod_what',
+         'telfwhatsapp',
     ];
 }
