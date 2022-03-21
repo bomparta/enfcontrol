@@ -201,13 +201,13 @@
                     </div>
                     <div class="form-group-sm col-lg-5 col-md-5 col-sm-12 col-xs-12">
                         <label for="observacion" class="control-label">Observaciones</label>
-                        <textarea name="observacion" id="observacion" cols="25" rows="2" maxlength="1000" class="form-control"> </textarea>
+                        <textarea name="observacion" id="observacion" cols="25" rows="2" maxlength="1000" class="form-control">Sin Observaciones</textarea>
                     </div>
                     <div class="form-group-sm col-lg-2 col-md-2 col-sm-4 col-xs-12">
                         <label for="fecha_reporte" class="control-label">Fecha de Reporte</label>
                         <input data-role="date" type="date" name="fecha_reporte" id="dtpicker3" class="form-control"
                             value=" " />
-                         <input type="checkbox" name="aprobatorio" id="aprobatorio" value="">&nbsp;&nbsp;Aprobatorio
+                         <input type="checkbox" name="aprobatorio" id="aprobatorio" value="0">&nbsp;&nbsp;Aprobatorio
                     </div>
                 </div> 
            

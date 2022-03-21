@@ -19,6 +19,6 @@ class Nacionalidad extends Model
      * @var array
      */
     protected $fillable = [
-        'cod','nacionalidad',
+        'cod','nacionalidad','status'
     ];
 }

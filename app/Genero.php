@@ -19,6 +19,6 @@ class Genero extends Model
      * @var array
      */
     protected $fillable = [
-        'cod','genero',
+        'id','cod','genero','status'
     ];
 }

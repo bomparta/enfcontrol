@@ -203,7 +203,7 @@
                         <label for="fecha_reporte" class="control-label">Fecha de Reporte</label>
                         <input data-role="date" type="date" name="fecha_reporte" id="dtpicker3" class="form-control"
                             value=" {{ $actuacion->mes_reporte}}" />
-                         <input type="checkbox" name="aprobatorio" id="aprobatorio" value="{{ $actuacion->aprobatorio }}">&nbsp;&nbsp;Aprobatorio
+                         <input type="checkbox" name="aprobatorio" id="aprobatorio" value="{{ $actuacion->aprobatorio }}"    >&nbsp;&nbsp;Aprobatorio
                     </div>
                 </div> 
            

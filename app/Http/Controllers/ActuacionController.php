@@ -128,7 +128,7 @@ class ActuacionController extends Controller
         $actuacion->save();
      
        // return $request;
-        return redirect('/listadoactuacion')->with('success', 'Actuación Guardada con éxito!!.');
+        return redirect('/actuacion')->with('success', 'Actuación Guardada con éxito!!.');
       
     }
 
