@@ -7,7 +7,9 @@
             <div class="row pt-2">
                 
                                     @include('layouts.items.card-header', ['titulo' => 'Lista de usuarios ENFMP'])
-                                    @if(!$datosestudiantes==NULL)
+                                    @if($datosestudiantes->isNotEmpty())
+                                    
+                                    @else
                                     <p align="right"><a class='btn btn-info' href="{{URL::route('datosestudiante')}}">Crear Informacion del Estudiante</a></p>
                                     @endif
                                     <p>Desde aqui puedes listar la informacion personal del estudiante. Como por ejemplo nombre,apellidos,correo,telefono habitacion,telefono celular.</p>
