@@ -39,6 +39,7 @@ Route::get('/listadoactuacion/{id}', 'ActuacionController@get_actuaciones')->nam
 Route::resource('/parametros/actuacion', ActuacionController::class);
 
 Route::get('/participantes/{id}', 'ParticipantesController@index')->name('participante');
+Route::get('/participantes/create/{id}', 'ParticipantesController@create')->name('agregar');
 Route::get('/edit/{id_actuacion_participante}', 'ParticipantesController@edit')->name('editar');
 Route::get('/delete/{id_actuacion_participante}', 'ParticipantesController@delete')->name('eliminar');
 

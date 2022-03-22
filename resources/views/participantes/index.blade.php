@@ -17,7 +17,7 @@
                                 
                                     <div class="card-header">
                                         <h3 class="card-title">Participantes</h3>
-                                      
+                                        <p align="right"><a class='btn btn-info' href="/participantes/create/{{$id}}">Agregar Participante</a></p>
                                     </div>
                                     <!-- /.card-header -->
                                     <div class="card-body">
