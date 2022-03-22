@@ -142,6 +142,7 @@
                                             <div class="form-group-sm col-lg-3 col-md-3 col-sm-6 col-xs-12">
                                                 <label for="pais" class="control-label">País</label>
                                                 <select name="pais" id="pais" class="form-control"  required>
+                                                <option value="1"selected> Venezuela</option>
                                                 @foreach ($pais as $pais)
                                                         <option value="{{ $pais->id }}"
                                                             @if($pais->id == $participantes->id_pais) selected @endif>
