@@ -268,4 +268,16 @@ class ActuacionController extends Controller
         //return view('actuacion/listadoactuacion', compact('actuaciones','actividad','participantes','asistencia','facilitador'));
         return view('actuacion/listadoactuacion', compact('actuaciones','actividad'));
     }
+    public function get_participante($id,$cedula,$documento)
+    {
+        //
+        $participante = DB::table('actuacion_participantes')
+       ->select('actividad.id','actividad.codigo','actividad.anio','actividad.nombre','clasificacion.descripcion as clasificacion','tematica.descripcion as tematica','alcance.descripcion as alcance','tipo_actividad.descripcion as tipo_actividad','convenio')
+       ->join("persona", "persona.id", "=", "actuacion_participantes.id_persona")
+       ->where('persona.numero_identificacion',$cedula)
+       ->where('persona.id_tipo_identificacion',$documento)
+       ->where('actuacion_participantes.id',$id)
+       ->get();
+       return view('participantes/', compact('participante'));
+    }
 }

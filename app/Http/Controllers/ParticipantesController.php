@@ -25,8 +25,6 @@ class ParticipantesController extends Controller
      */
     public function index($id)
     {
-        //
-
         $participantes = DB::select("SELECT actuacion_participantes.id as id_actuacion_participante,numero_identificacion, nacionalidad.cod as nacionalidad, 
         sexo.descripcion as sexo, nombre,nombreseg, apellido, apellidoseg,
         email,organismo.organismo ,tipo_funcionario.tipo_funcionario ,persona.cargo, entidad.descripcion as entidad,persona.email
