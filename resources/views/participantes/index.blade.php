@@ -21,40 +21,6 @@
                                     </div>
                                     <!-- /.card-header -->
                                     <div class="card-body">
-<<<<<<< Updated upstream
-=======
-                                    <form method="POST" action="participantes/store" id="registrar_participante" >
-                                     
-                                        <div class="row">
-                                        
-                                            <div class="form-group-sm col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                                                <label for="tipo_identificacion" class="control-label">Documento</label>
-                                                <select name="tipo_identificacion" id="tipo_identificacion" class="form-control">
-                                                <option value='1'>Cédula</option><option value='2'>Pasaporte</option> 
-                                                </select>    
-                                            </div>
-                                            <div class="form-group-sm col-lg-4 col-md-4 col-sm-4 col-xs-12" >
-                                                <label for="numero_identificacion" class="control-label">N° Identificación</label>
-                                                <div class="input-group input-group-sm">
-                                                    <span class="input-group-btn">
-                                                    <select id="nacionalidad" name="nacionalidad" class="form-control"> 
-                                                    <option selected disabled>Seleccione...</option>
-                                                    <option value='1'>Cédula</option><option value='2'>Pasaporte</option> 
-                                                    </select>
-                                                   
-                                              
-                                                    </span>        
-                                                    <input type="text" name="numero_identificacion" id="numero_identificacion" class="form-control" required>
-                                                    <span class="input-group-btn">
-                                                        <button class="btn btn-primary" type="button" id="get_persona" value="Buscar" onclick="buscar_persona()" >
-                                                        <img src="/img/icon/zoom.ico" class="icon-lg" alt="Participantes" title="Buscar Participante(es)">
-                                                        </button>
-                                                    </span>
-                                                </div> 
-                                            </div>
-                                        </div>   
-                                        <hr>
->>>>>>> Stashed changes
 
 
                     <table id="example1" class="table table-bordered table-striped">

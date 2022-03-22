@@ -25,7 +25,8 @@ class ParticipantesController extends Controller
      */
     public function index($id)
     {
-        $participantes = DB::select("SELECT actuacion_participantes.id as id_actuacion_participante,numero_identificacion, nacionalidad.cod as nacionalidad, 
+        $participantes = DB::select("SELECT actuacion_participantes.id as id_actuacion_participante,numero_identificacion,
+        nacionalidad.cod as nacionalidad, 
         sexo.descripcion as sexo, nombre,nombreseg, apellido, apellidoseg,
         email,organismo.organismo ,tipo_funcionario.tipo_funcionario ,persona.cargo, entidad.descripcion as entidad,persona.email
         FROM actuacion_participantes
@@ -37,9 +38,11 @@ class ParticipantesController extends Controller
         INNER JOIN entidad ON entidad.id = actuacion_participantes.id_entidad
         INNER JOIN actuacion ON actuacion_participantes.id_actuacion = actuacion.id
         where actuacion_participantes.id_actuacion= $id
-        order by persona.numero_identificacion");        
-        return view('participantes/index', compact('participantes'));
+        order by persona.numero_identificacion");     
+     
+     return view('participantes/index', compact('participantes'));
     }
+
 
     /**
      * Show the form for creating a new resource.
@@ -90,12 +93,10 @@ class ParticipantesController extends Controller
         $tipo_funcionario = Tipo_Funcionario::where('status', 1)->get();
         $pais = pais::where('status', 1)->get();
         $entidad = Entidad::where('status', 1)->get();
-        $tipo_identificacion= Tipo_Identificacion::where('status', 1)->get();
-       
+        $tipo_identificacion= Tipo_Identificacion::where('status', 1)->get();   
         
 
-       // print $persona->id_genero;
-        
+       // print $persona->id_genero;       
 
        //var_dump($sexo);
        return view('participantes/edit', compact('participantes','nacionalidad','tipo_identificacion','persona','sexo', 'organismo','tipo_funcionario', 'pais','entidad'));
