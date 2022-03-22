@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use DataTables;
 use App\Persona;
-<<<<<<< Updated upstream
 use App\Participantes;
 use App\Genero;
 use App\Nacionalidad;
@@ -13,16 +12,6 @@ use App\Organismo;
 use App\Tipo_funcionario;
 use App\Pais;
 use App\Entidad;
-=======
-use App\Tipo_identificacion;
-use App\Genero;
-use App\Tipo_funcionario;
-use App\Entidad;
-use App\Pais;
-use App\Nacionalidad;
-use App\Organismo;
-
->>>>>>> Stashed changes
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
