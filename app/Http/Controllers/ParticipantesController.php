@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use DataTables;
 use App\Persona;
+<<<<<<< Updated upstream
 use App\Participantes;
 use App\Genero;
 use App\Nacionalidad;
@@ -12,6 +13,16 @@ use App\Organismo;
 use App\Tipo_funcionario;
 use App\Pais;
 use App\Entidad;
+=======
+use App\Tipo_identificacion;
+use App\Genero;
+use App\Tipo_funcionario;
+use App\Entidad;
+use App\Pais;
+use App\Nacionalidad;
+use App\Organismo;
+
+>>>>>>> Stashed changes
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
@@ -25,7 +36,20 @@ class ParticipantesController extends Controller
      */
     public function index($id)
     {
+<<<<<<< Updated upstream
         $participantes = DB::select("SELECT actuacion_participantes.id as id_actuacion_participante,numero_identificacion, nacionalidad.cod as nacionalidad, 
+=======
+        //
+       // $tipo_documento = Tipo_identificacion::where('status', 1)->get();
+       // $tipo_funcionario = Tipo_funcionario::where('status', 1)->get(); 
+        $nacionalidad = Nacionalidad::where('status', 1)->get();
+        //$organismo = Organismo::where('status', 1)->get();
+        $genero=Genero::where ('status', 1)->get();
+     //   $pais=Pais::where ('status', 1)->get() ;
+        $entidad= Entidad::where ('status', 1)->get() ;
+
+        $participantes = DB::select("SELECT numero_identificacion, nacionalidad.cod as nacionalidad, 
+>>>>>>> Stashed changes
         sexo.descripcion as sexo, nombre,nombreseg, apellido, apellidoseg,
         email,organismo.organismo ,tipo_funcionario.tipo_funcionario ,persona.cargo, entidad.descripcion as entidad,persona.email
         FROM actuacion_participantes
@@ -36,9 +60,15 @@ class ParticipantesController extends Controller
         INNER JOIN tipo_funcionario ON tipo_funcionario.id = actuacion_participantes.id_tipo_funcionario
         INNER JOIN entidad ON entidad.id = actuacion_participantes.id_entidad
         INNER JOIN actuacion ON actuacion_participantes.id_actuacion = actuacion.id
+<<<<<<< Updated upstream
         where actuacion_participantes.id_actuacion= $id
         order by persona.numero_identificacion");        
         return view('participantes/index', compact('participantes'));
+=======
+        where actuacion_parTicipantes.id_actuacion= $id
+        order by persona.apellido");        //,'nacionalidad','tipo_documento','tipo_funcionario','pais','genero','organismo'
+        return view('participantes/index', compact('participantes','entidad'));
+>>>>>>> Stashed changes
     }
 
     /**
