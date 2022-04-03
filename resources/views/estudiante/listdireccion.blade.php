@@ -7,7 +7,9 @@
             <div class="row pt-2">
 
                                     @include('layouts.items.card-header', ['titulo' => 'Direccion estudiante ENFMP'])
-                                    @if($direccionestudiantes==NULL)
+                                    @if($direccionestudiantes->isNotEmpty())
+                                    
+                                    @else
                                     <p align="right"><a class='btn btn-info' href="{{URL::route('direccionestudiante')}}">Crear Direccion</a></p>
                                     @endif
                                     <p>Desde aqui puedes listar la direccion del estudiante. Como por ejemplo av principal con av central.</p>
@@ -31,24 +33,26 @@
                                             <tbody>
                                               
                                                 <tr>
-                                                    @if(!$direccionestudiantes==NULL)
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
+                                                    @if($direccionestudiantes<>NULL)
+                                                    @foreach ($direccionestudiantes as $direccionestudiante)
+                                                    
+                                                    <td>{{ $direccionestudiante->id_estado }}</td>
+                                                    <td>{{ $direccionestudiante->id_municipio }}</td>
+                                                    <td>{{ $direccionestudiante->id_parroquia }}</td>
+                                                    <td>{{ $direccionestudiante->ciudad_urbanizacion }}</td>
+                                                    <td>{{ $direccionestudiante->calle_avenida }}</td>
+                                                    <td>{{ $direccionestudiante->casa_edificio }}</td>
+                                                    <td>{{ $direccionestudiante->pto_referencia }}</td>
                                                     @if(in_array( Auth::user()->id_usuariogrupo, array(9,1) ))
                                                     <td class="text-center">
-                                                            <a href= "/editestudiantedatos/{{$direccionestudiantes->id}}" class="btn btn-info" data-tip="Detalle" data-toggle="tooltip" data-original-title="Editar">
+                                                            <a href= "/editestudiantedatos/{{$direccionestudiante->id}}" class="btn btn-info" data-tip="Detalle" data-toggle="tooltip" data-original-title="Editar">
                                                                 <img src="/img/icon/modify.ico" class="icon-sm" alt="Listado">
                                                             </a>
                                                         </td>
                                                     @endif
-                                                    @endif
                                                 </tr>
-                                                
+                                                @endforeach
+                                                @endif
                                             </tbody>
                                         </table>
 

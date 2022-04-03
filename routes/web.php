@@ -89,3 +89,6 @@ Route::get('/gestor/usuario', 'UsuariosController@index')->name('gestor.usuario'
 Route::get('/gestor/usuarios/{id}', 'UsuariosController@show')->name('usuarios.show');
 Route::get('/gestore/usuarios/{id}', 'UsuariosController@edit')->name('usuarios.edit');
 Route::put('/gestores/usuarios/{id}', 'UsuariosController@update')->name('usuarios.update');
+
+Route::post('submunicipio', 'EstudianteController@submunicipio')->name('submunicipio');
+Route::post('subparroquia','EstudianteController@subparroquia')->name('subparroquia');

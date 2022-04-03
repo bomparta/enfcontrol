@@ -28,24 +28,21 @@
                             <tr>
                                 <td>
                                     &nbsp;Estado de Residencia&nbsp;<span style="color:red;">*</span>&nbsp;
-                                    <select name="estado"   style="width:190px;">
-                                        <option value="">Seleccione Estado</option>
-                                        
+                                    <select name="estado" id="_estado"   style="width:190px;">
+                                        @foreach($estados as $estado)
+                                        <option value="{{$estado->id}}">{{$estado->descripcion}}</option>
+                                        @endforeach
                                     </select>
                                 </td>
                                 <td>
                                     &nbsp;Municipio de Residencia&nbsp;<span style="color:red;">*</span>&nbsp;
-                                    <select name="municipio" id="municipio"  style="width:190px;"  >
-                                        <option value="">Seleccione un Municipio</option>
+                                    <select name="" id="_submunicipio"></select>
                                         
-                                    </select>
                                 </td>
                                 <td>
                                     &nbsp;Parroquia de Residencia&nbsp;<span style="color:red;">*</span>&nbsp;
-                                    <select name="parroquia" id="parroquia" class="combo select2_single" style="width:190px;">
-                                        <option value="">Seleccione una Parroquia</option>
-                                       
-                                    </select>
+                                    <select name="" id="_subparroquia"></select>
+
                                 </td>
                                 
                             </tr>
@@ -69,6 +66,20 @@
                                     <input type="text" name="nombreCasaApto" id="nombreCasaApto" value=""  style="width:190px;" maxlength="100"  />
                                 </td>
                             </tr>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <!-- FILA 3 -->
+                            <tr>
+                                <td>
+                                    &nbsp;Pto de Referencia:  &nbsp;&nbsp;&nbsp;&nbsp;
+                                    <input type="text" name="urbanizacion" id="urbanizacion" value="" style="width:190px;" maxlength="200"  />
+                                </td>
+                                <td></td>
+                                <td></td>
+                            </tr>
                                                 
                       </table>
                           
@@ -78,8 +89,58 @@
                     </form>
 
             </div>
+            
         </div>
+        <script>
+            const csrfToken = document.head.querySelector("[name~=csrf-token][content]").content;
+            document.getElementById('_estado').addEventListener('change',(e)=>{
+                fetch('submunicipio',{
+                    method : 'POST',
+                    body: JSON.stringify({texto : e.target.value}),
+                    headers:{
+                        'Content-Type': 'application/json',
+                        "X-CSRF-Token": csrfToken
+                    }
+                }).then(response =>{
+                    return response.json()
+                }).then( data =>{
+                    var opciones ="<option value=''>Seleccione ...</option>";
+                    for (let i in data.lista) {
+                       opciones+= '<option value="'+data.lista[i].id+'">'+data.lista[i].nombre+'</option>';
+                    }
+                    document.getElementById("_submunicipio").innerHTML = opciones;
+                }).catch(error =>console.error(error));
+            })
+        
+            document.getElementById('_submunicipio').addEventListener('change',(e)=>{
+                fetch('subparroquia',{
+                    method : 'POST',
+                    body: JSON.stringify({texto : e.target.value}),
+                    headers:{
+                        'Content-Type': 'application/json',
+                        "X-CSRF-Token": csrfToken
+                    }
+                }).then(response =>{
+                    return response.json()
+                }).then( data =>{
+                    var opciones ="<option value=''>Seleccione ...</option>";
+                    for (let i in data.lista) {
+                       opciones+= '<option value="'+data.lista[i].id+'">'+data.lista[i].nombre+'</option>';
+                    }
+                    document.getElementById("_subparroquia").innerHTML = opciones;
+                }).catch(error =>console.error(error));
+            })
+        
+        </script>
     </div>
 </div>
+
+
+@endsection
+
+@section('scripts')
+<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+
+
 
 @endsection

@@ -4,12 +4,17 @@ namespace App\Http\Controllers;
 
 
 use App\Genero;
+use App\Entidad;
+use App\Direccion;
+use App\Municipio;
+use App\Parroquia;
 use App\Cod_Celular;
 use App\Estado_civil;
 use App\Nacionalidad;
 use App\Cod_Habitacion;
 use App\DatosEstudiante;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 
 class EstudianteController extends Controller
@@ -46,8 +51,9 @@ class EstudianteController extends Controller
 
     public function createdireccion()
     {
-       // return view('estudiante/create');
-       return view('estudiante/direccion');
+        $estados= Entidad::All();
+        $municipios= Municipio::All();
+       return view('estudiante/direccion',compact('estados','municipios'));
     }
 
     public function createxperiencia()
@@ -196,7 +202,10 @@ class EstudianteController extends Controller
 
     public function direccionlistestudiante($id)
     {
-        $direccionestudiantes = DatosEstudiante::find($id);
+        
+        $direccionestudiantes = Direccion::select('*')
+       ->where('id_usuario', '=',$id)
+       ->get();
         return view('estudiante.listdireccion',compact('direccionestudiantes'));
     }
 
@@ -217,6 +226,46 @@ class EstudianteController extends Controller
     {
         $adjuntosestudiantes = DatosEstudiante::find($id);
         return view('estudiante.datosadjuntados',compact('adjuntosestudiantes'));
+    }
+
+    public function submunicipio(Request $request){
+        if(isset($request->texto)){
+            $submunicipio = Municipio::where('id_entidad',$request->texto)->get();
+            return response()->json(
+                [
+                    'lista' => $submunicipio,
+                    'success' => true
+                ]
+                );
+        }else{
+            return response()->json(
+                [
+                    'success' => false
+                ]
+                );
+
+        }
+
+    }
+
+    public function subparroquia(Request $request){
+        if(isset($request->texto)){
+            $subparroquia = Parroquia::where('id_municipio',$request->texto)->get();
+            return response()->json(
+                [
+                    'lista' => $subparroquia,
+                    'success' => true
+                ]
+                );
+        }else{
+            return response()->json(
+                [
+                    'success' => false
+                ]
+                );
+
+        }
+
     }
 
 }
