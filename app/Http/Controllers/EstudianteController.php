@@ -10,12 +10,15 @@ use App\Municipio;
 use App\Parroquia;
 use App\Cod_Celular;
 use App\Estado_civil;
+use App\ImagenUpload;
 use App\Nacionalidad;
 use App\Cod_Habitacion;
 use App\DatosEstudiante;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class EstudianteController extends Controller
 {
@@ -227,6 +230,232 @@ class EstudianteController extends Controller
         $adjuntosestudiantes = DatosEstudiante::find($id);
         return view('estudiante.datosadjuntados',compact('adjuntosestudiantes'));
     }
+
+    public function adjuntodatos($id)
+    {
+       // $adjuntosestudiantes = ImagenUpload::find($id);
+        $adjuntosestudiantes = ImagenUpload::select('*')
+       ->where('usuario', '=',$id)
+       ->where('nombre', 'foto')
+       ->get();
+       $adjuntoscedula = ImagenUpload::select('*')
+       ->where('usuario', '=',$id)
+       ->where('nombre', 'cedula')
+       ->get();
+       $adjuntoscurriculum = ImagenUpload::select('*')
+       ->where('usuario', '=',$id)
+       ->where('nombre', 'curriculum')
+       ->get();
+       $adjuntoscarta = ImagenUpload::select('*')
+       ->where('usuario', '=',$id)
+       ->where('nombre', 'carta_solicitud')
+       ->get();
+       $adjuntoscarnetcolegiatura = ImagenUpload::select('*')
+       ->where('usuario', '=',$id)
+       ->where('nombre', 'carnet_colegiatura')
+       ->get();
+       $adjuntosimpre = ImagenUpload::select('*')
+       ->where('usuario', '=',$id)
+       ->where('nombre', 'impre_colegiatura')
+       ->get();
+        return view('estudiante.datosadjuntos',compact('adjuntosestudiantes','adjuntoscedula','adjuntoscurriculum','adjuntoscarta','adjuntoscarnetcolegiatura','adjuntosimpre'));
+    }
+
+    public function crearfoto()
+    {
+        
+        return view('estudiante.crearfoto');
+    }
+
+    public function crearcedula()
+    {
+        
+        return view('estudiante.crearcedula');
+    }
+
+    public function crearcurriculum()
+    {
+        
+        return view('estudiante.crearcurriculum');
+    }
+
+    public function crearcarta()
+    {
+        
+        return view('estudiante.crearcarta');
+    }
+
+    public function crearcarnetcolegiatura()
+    {
+        
+        return view('estudiante.crearcarnetcolegiatura');
+    }
+
+    public function crearimpre()
+    {
+        
+        return view('estudiante.crearimpre');
+    }
+
+    public function subirArchivo(Request $request)
+    {
+            //Recibimos el archivo y lo guardamos en la carpeta storage/app/public
+           // $request->file('archivo')->store('public/foto_carnet');
+            //dd("subido y guardado");
+
+            if($request->hasfile('archivo')):
+                $imagen         = $request->file('archivo');
+                //$usuario        = Auth::user()->id;
+                //$nombre         = 'foto';
+                $nombreimagen   = $imagen.".".$imagen->guessExtension();
+                $ruta           = $request->file('archivo')->store('public/foto_carnet');
+                $imagen->move($ruta,$nombreimagen);  
+                //dd("$ruta / $nombreimagen subido y guardado"); 
+                            
+                $datosimagen = new ImagenUpload();
+                $datosimagen->usuario = Auth::user()->id;
+                $datosimagen->nombre = 'foto';
+                $datosimagen->ruta = $ruta;
+                $datosimagen->save();
+                
+                return redirect('/adjunto_datos/'.Auth::user()->id)->with('success', 'Se adjunto con exito la foto.');
+
+            endif;
+            return redirect('/adjunto_datos/'.Auth::user()->id)->with('danger', 'No se adjunto foto.');
+            //return view('estudiante.datosadjuntos');
+               //dd("$imagen subido y guardado");
+    }
+
+    public function subircedula(Request $request)
+    {
+            //Recibimos el archivo y lo guardamos en la carpeta storage/app/public
+           // $request->file('archivo')->store('public/foto_carnet');
+            //dd("subido y guardado");
+
+            if($request->hasfile('archivo')):
+                $imagen         = $request->file('archivo');
+                //$usuario        = Auth::user()->id;
+                //$nombre         = 'foto';
+                $nombreimagen   = $imagen.".".$imagen->guessExtension();
+                $ruta           = $request->file('archivo')->store('public/foto_cedula');
+                $imagen->move($ruta,$nombreimagen);  
+                //dd("$ruta / $nombreimagen subido y guardado"); 
+                            
+                $datosimagen = new ImagenUpload();
+                $datosimagen->usuario = Auth::user()->id;
+                $datosimagen->nombre = 'cedula';
+                $datosimagen->ruta = $ruta;
+                $datosimagen->save();
+                
+                return redirect('/adjunto_datos/'.Auth::user()->id)->with('success', 'Se adjunto con exito la cedula.');
+
+            endif;
+            return redirect('/adjunto_datos/'.Auth::user()->id)->with('danger', 'No se adjunto la cedula.');
+               //dd("$imagen subido y guardado");
+    }
+
+    public function subircurriculum(Request $request)
+    {
+            //Recibimos el archivo y lo guardamos en la carpeta storage/app/public
+           
+            if($request->hasfile('archivo')):
+                $imagen         = $request->file('archivo');
+                $nombreimagen   = $imagen.".".$imagen->guessExtension();
+                $ruta           = $request->file('archivo')->store('public/archivo_curriculum');
+                $imagen->move($ruta,$nombreimagen);  
+                //dd("$ruta / $nombreimagen subido y guardado"); 
+                            
+                $datosimagen = new ImagenUpload();
+                $datosimagen->usuario = Auth::user()->id;
+                $datosimagen->nombre = 'curriculum';
+                $datosimagen->ruta = $ruta;
+                $datosimagen->save();
+                
+                return redirect('/adjunto_datos/'.Auth::user()->id)->with('success', 'Se adjunto con exito el curriculum.');
+
+            endif;
+            return redirect('/adjunto_datos/'.Auth::user()->id)->with('danger', 'No se adjunto el curricullum.');
+               //dd("$imagen subido y guardado");
+    }
+
+    public function subircarta(Request $request)
+    {
+            //Recibimos el archivo y lo guardamos en la carpeta storage/app/public
+           
+            if($request->hasfile('archivo')):
+                $imagen         = $request->file('archivo');
+                $nombreimagen   = $imagen.".".$imagen->guessExtension();
+                $ruta           = $request->file('archivo')->store('public/carta_solicitud');
+                $imagen->move($ruta,$nombreimagen);  
+                //dd("$ruta / $nombreimagen subido y guardado"); 
+                            
+                $datosimagen = new ImagenUpload();
+                $datosimagen->usuario = Auth::user()->id;
+                $datosimagen->nombre = 'carta_solicitud';
+                $datosimagen->ruta = $ruta;
+                $datosimagen->save();
+                
+                return redirect('/adjunto_datos/'.Auth::user()->id)->with('success', 'Se adjunto con exito la carta de solicitud.');
+
+            endif;
+            return redirect('/adjunto_datos/'.Auth::user()->id)->with('danger', 'No se adjunto la carta de solicitud.');
+               //dd("$imagen subido y guardado");
+    }
+
+    public function subircarnetcolegiatura(Request $request)
+    {
+            //Recibimos el archivo y lo guardamos en la carpeta storage/app/public
+           // $request->file('archivo')->store('public/foto_carnet');
+            //dd("subido y guardado");
+
+            if($request->hasfile('archivo')):
+                $imagen         = $request->file('archivo');
+                $nombreimagen   = $imagen.".".$imagen->guessExtension();
+                $ruta           = $request->file('archivo')->store('public/foto_carnet_colegiatura');
+                $imagen->move($ruta,$nombreimagen);  
+                //dd("$ruta / $nombreimagen subido y guardado"); 
+                            
+                $datosimagen = new ImagenUpload();
+                $datosimagen->usuario = Auth::user()->id;
+                $datosimagen->nombre = 'carnet_colegiatura';
+                $datosimagen->ruta = $ruta;
+                $datosimagen->save();
+                
+                return redirect('/adjunto_datos/'.Auth::user()->id)->with('success', 'Se adjunto con exito carnet de colegiatura.');
+
+            endif;
+            return redirect('/adjunto_datos/'.Auth::user()->id)->with('danger', 'No se adjunto carnet de colegiatura.');
+            //return view('estudiante.datosadjuntos');
+               //dd("$imagen subido y guardado");
+    }
+
+    public function subirimpre(Request $request)
+    {
+            //Recibimos el archivo y lo guardamos en la carpeta storage/app/public
+           // $request->file('archivo')->store('public/foto_carnet');
+            //dd("subido y guardado");
+
+            if($request->hasfile('archivo')):
+                $imagen         = $request->file('archivo');
+                $nombreimagen   = $imagen.".".$imagen->guessExtension();
+                $ruta           = $request->file('archivo')->store('public/foto_impre_colegiatura');
+                $imagen->move($ruta,$nombreimagen);  
+                //dd("$ruta / $nombreimagen subido y guardado"); 
+                            
+                $datosimagen = new ImagenUpload();
+                $datosimagen->usuario = Auth::user()->id;
+                $datosimagen->nombre = 'impre_colegiatura';
+                $datosimagen->ruta = $ruta;
+                $datosimagen->save();
+                
+                return redirect('/adjunto_datos/'.Auth::user()->id)->with('success', 'Se adjunto con exito impre de colegiatura.');
+
+            endif;
+            return redirect('/adjunto_datos/'.Auth::user()->id)->with('danger', 'No se adjunto impre de colegiatura.');
+            //return view('estudiante.datosadjuntos');
+               //dd("$imagen subido y guardado");
+    }
+
 
     public function submunicipio(Request $request){
         if(isset($request->texto)){

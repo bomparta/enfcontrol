@@ -65,7 +65,20 @@ Route::get('/estudianteexperienciadoc', 'EstudianteController@createxperienciado
 Route::get('/estudianteorganizacion', 'EstudianteController@createorganizacion')->name('organizacion');
 Route::get('/estudianteprograma', 'EstudianteController@createprograma')->name('programa');
 Route::get('/estatus', 'EstudianteController@indexestatus')->name('estatus');
-Route::get('/datos_adjunto/{id}', 'EstudianteController@datosadjunto')->name('datos_adjunto');
+Route::post('/datos_adjunto/{id}', 'EstudianteController@datosadjunto')->name('datos_adjunto');
+Route::get('/adjunto_datos/{id}', 'EstudianteController@adjuntodatos')->name('adjunto_datos');
+Route::get('/crearfoto', 'EstudianteController@crearfoto')->name('crearfoto');
+Route::get('/crearcedula', 'EstudianteController@crearcedula')->name('crearcedula');
+Route::get('/crearcurriculum', 'EstudianteController@crearcurriculum')->name('crearcurriculum');
+Route::get('/crearcarta', 'EstudianteController@crearcarta')->name('crearcarta');
+Route::get('/crearcarnetcolegiatura', 'EstudianteController@crearcarnetcolegiatura')->name('crearcarnetcolegiatura');
+Route::get('/crearimpre', 'EstudianteController@crearimpre')->name('crearimpre');
+Route::post('/subirfoto','EstudianteController@subirArchivo')->name('subirfoto');
+Route::post('/subircedula','EstudianteController@subircedula')->name('subircedula');
+Route::post('/subircurriculum','EstudianteController@subircurriculum')->name('subircurriculum');
+Route::post('/subircarta','EstudianteController@subircarta')->name('subircarta');
+Route::post('/subircarnetcolegiatura','EstudianteController@subircarnetcolegiatura')->name('subircarnetcolegiatura');
+Route::post('/subirimpre','EstudianteController@subirimpre')->name('subirimpre');
 
 Route::get('/reporte/capacidad_actividad_global/{codigo}', 'ReporteController@capacitados_actividad_global')->name('reporteactividaglobal');
 
