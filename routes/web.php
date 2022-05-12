@@ -46,6 +46,9 @@ Route::get('/delete/{id_actuacion_participante}', 'ParticipantesController@delet
 Route::get('/asistencias/{id}', 'AsistenciasController@index')->name('asistencias');
 
 Route::get('/facilitadores/{id}', 'FacilitadoresController@index')->name('facilitadores');
+Route::get('/facilitadores/create/{id}', 'FacilitadoresController@create')->name('agregar');
+Route::get('/edit/{id_actuacion_facilitadores}', 'FacilitadoresController@edit')->name('editar');
+Route::get('/delete/{id_actuacion_facilitadores}', 'FacilitadoresController@delete')->name('eliminar');
 
 Route::get('/usuario', 'DashboardController@index')->name('usuario');
 Route::get('/reporte', 'ReporteController@index')->name('reporte');
