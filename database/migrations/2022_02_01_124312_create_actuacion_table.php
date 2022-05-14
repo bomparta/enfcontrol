@@ -30,15 +30,15 @@ class CreateActuacionTable extends Migration
             $table->double('duracion', 8, 2);
             $table->double('horas', 8, 2);
             $table->string("lugar");
-            $table->string("observaciones");
+            $table->string("observaciones")->default(NULL);
             $table->timestamps();
-            $table->smallInteger('status');
+            $table->smallInteger('status')->default(1);
             $table->bigInteger('id_planificador');
-            $table->bigInteger('num_participantes');
-            $table->bigInteger('hoja_ruta');
-            $table->date("fecha_asignacion");
-            $table->date("mes_reporte");
-            $table->boolean('aprobatorio');
+            $table->bigInteger('num_participantes')->default(NULL);
+            $table->bigInteger('hoja_ruta')->default(NULL);
+            $table->date("fecha_asignacion")->default(NULL);
+            $table->date("mes_reporte")->default(NULL);
+            $table->boolean('aprobatorio')->default(NULL);
             
         });
     }
