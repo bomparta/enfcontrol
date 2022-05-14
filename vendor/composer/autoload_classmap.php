@@ -22,6 +22,7 @@ return array(
     'App\\Entidad' => $baseDir . '/app/Entidad.php',
     'App\\Entidad_pla' => $baseDir . '/app/Entidad_pla.php',
     'App\\Estado_civil' => $baseDir . '/app/Estado_civil.php',
+    'App\\EstudiantePrograma' => $baseDir . '/app/EstudiantePrograma.php',
     'App\\Exceptions\\Handler' => $baseDir . '/app/Exceptions/Handler.php',
     'App\\Genero' => $baseDir . '/app/Genero.php',
     'App\\Http\\Controllers\\ActividadController' => $baseDir . '/app/Http/Controllers/ActividadController.php',

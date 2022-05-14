@@ -64,7 +64,7 @@ Route::get('/experiencialist/{id}', 'EstudianteController@experiencialistestudia
 Route::get('/estudianteexperienciadoc', 'EstudianteController@createxperienciadoc')->name('experienciadocente');
 Route::get('/estudianteorganizacion', 'EstudianteController@createorganizacion')->name('organizacion');
 Route::get('/estudianteprograma', 'EstudianteController@createprograma')->name('programa');
-Route::get('/estatus', 'EstudianteController@indexestatus')->name('estatus');
+Route::get('/estatus/{id}', 'EstudianteController@indexestatus')->name('estatus');
 Route::post('/datos_adjunto/{id}', 'EstudianteController@datosadjunto')->name('datos_adjunto');
 Route::get('/adjunto_datos/{id}', 'EstudianteController@adjuntodatos')->name('adjunto_datos');
 Route::get('/crearfoto', 'EstudianteController@crearfoto')->name('crearfoto');

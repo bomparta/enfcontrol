@@ -218,10 +218,34 @@ class EstudianteController extends Controller
         return view('estudiante.listexperiencia',compact('experienciaestudiantes'));
     }
 
-    public function indexestatus()
+    public function indexestatus($id)
     {
        // $estatusproceso = DatosEstudiante::find($id);
-        return view('estudiante.estatus');
+       $adjuntosestudiantes = ImagenUpload::select('*')
+       ->where('usuario', '=',$id)
+       ->where('nombre', 'foto')
+       ->get();
+       $adjuntoscedula = ImagenUpload::select('*')
+       ->where('usuario', '=',$id)
+       ->where('nombre', 'cedula')
+       ->get();
+       $adjuntoscurriculum = ImagenUpload::select('*')
+       ->where('usuario', '=',$id)
+       ->where('nombre', 'curriculum')
+       ->get();
+       $adjuntoscarta = ImagenUpload::select('*')
+       ->where('usuario', '=',$id)
+       ->where('nombre', 'carta_solicitud')
+       ->get();
+       $adjuntoscarnetcolegiatura = ImagenUpload::select('*')
+       ->where('usuario', '=',$id)
+       ->where('nombre', 'carnet_colegiatura')
+       ->get();
+       $adjuntosimpre = ImagenUpload::select('*')
+       ->where('usuario', '=',$id)
+       ->where('nombre', 'impre_colegiatura')
+       ->get();
+        return view('estudiante.estatus',compact('adjuntosestudiantes','adjuntoscedula','adjuntoscurriculum','adjuntoscarta','adjuntoscarnetcolegiatura','adjuntosimpre'));
     }
     
 

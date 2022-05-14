@@ -564,6 +564,7 @@ class ComposerStaticInitefc6c20c86e7c510750f437e82488289
         'App\\Entidad' => __DIR__ . '/../..' . '/app/Entidad.php',
         'App\\Entidad_pla' => __DIR__ . '/../..' . '/app/Entidad_pla.php',
         'App\\Estado_civil' => __DIR__ . '/../..' . '/app/Estado_civil.php',
+        'App\\EstudiantePrograma' => __DIR__ . '/../..' . '/app/EstudiantePrograma.php',
         'App\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',
         'App\\Genero' => __DIR__ . '/../..' . '/app/Genero.php',
         'App\\Http\\Controllers\\ActividadController' => __DIR__ . '/../..' . '/app/Http/Controllers/ActividadController.php',

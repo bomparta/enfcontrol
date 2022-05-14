@@ -30,37 +30,45 @@
                                             <?php //foreach($listado as $listado):?>
                                         <tr>
                                           <td>Actualización de Datos</td>
-                                          <td align="left"><?php 
-                                        // if ($actualizar==true) {
-                                        //   echo "<img width='25px' height='25px'src='../assets/img/button_green.png'> ";
-                                        // }else{
-                                        //  echo "<img width='25px' height='25px'src='../assets/img/button_gray.png'> "; 
-                                       //   }
-                                          ?></td>
+                                          <td align="left">
+                                            @if(empty($adjuntosestudiantes[0]->ruta) )
+                                              <img width='25px' height='25px'src='/img/icon/button_gray.png'>
+                                            @elseif (empty($adjuntoscarta[0]->ruta))
+                                              <img width='25px' height='25px'src='/img/icon/button_blue.jpg'>
+                                            @else
+                                              <img width='25px' height='25px'src='/img/icon/button_green.png'>
+                                              @endif
+                                            </td>
                                         </tr>
                                         <tr>
                                           <td>Preinscripción de Unidades Curriculares</td>
-                                          <td align="left"><?php 
-                                         //  if ($materias==true) {
-                                         //  echo "<img width='25px' height='25px'src='../assets/img/button_green.png'> ";
-                                         //}else{
-                                         // echo "<img width='25px' height='25px'src='../assets/img/button_gray.png'> ";
-                                         // } 
-                                          ?></td>
+                                          <td align="left">
+                                            @if(empty($adjuntosestudiantes[0]->ruta) )
+                                              <img width='25px' height='25px'src='/img/icon/button_gray.png'>
+                                            @else
+                                              <img width='25px' height='25px'src='/img/icon/button_gray.png'>
+                                            @endif
+                                          </td>
                                         </tr>
                                         <tr>
                                           <td>Registro de Pago</td>
-                                          <td align="left"><?php 
-                                          // if ($pago == true) {
-                                           //echo "<img width='25px' height='25px'src='../assets/img/button_green.png'> ";
-                                         //}else{
-                                          //echo "<img width='25px' height='25px'src='../assets/img/button_gray.png'> ";
-                                          //}
-                                           ?></td>
+                                          <td align="left">
+                                            @if(empty($adjuntosestudiantes[0]->ruta) )
+                                              <img width='25px' height='25px'src='/img/icon/button_gray.png'>
+                                            @else
+                                              <img width='25px' height='25px'src='/img/icon/button_gray.png'>
+                                            @endif
+                                          </td>
                                         </tr>
                                         <tr>
                                           <td>Aprobación de Pago</td>
-                                          <td align="left"><?php 
+                                          <td align="left">
+                                            @if(empty($adjuntosestudiantes[0]->ruta) )
+                                              <img width='25px' height='25px'src='/img/icon/button_gray.png'>
+                                            @else
+                                              <img width='25px' height='25px'src='/img/icon/button_gray.png'>
+                                            @endif
+                                            <?php 
                                         //if ($pago == true) {
                                           //  if ($result_conciliado->conciliado == 1) {
                                           //    echo "<img width='25px' height='25px'src='../assets/img/button_green.png'> ";
@@ -78,7 +86,13 @@
                                         </tr>
                                         <tr>
                                           <td>Revision Academica</td>
-                                          <td align="left"><?php 
+                                          <td align="left">
+                                            @if(empty($adjuntosestudiantes[0]->ruta) )
+                                              <img width='25px' height='25px'src='/img/icon/button_gray.png'>
+                                            @else
+                                              <img width='25px' height='25px'src='/img/icon/button_gray.png'>
+                                            @endif
+                                            <?php 
                                           // if ($estadoconciliacion==true) {
                                           //  if ($revicion_academica->rev_academica== 1) {
                                           ///    echo "<img width='25px' height='25px'src='../assets/img/button_green.png'> ";
@@ -96,6 +110,11 @@
                                         <tr>
                                           <td> Unidades Curriculares </td>
                                           <td align="left">
+                                            @if(empty($adjuntosestudiantes[0]->ruta) )
+                                              <img width='25px' height='25px'src='/img/icon/button_gray.png'>
+                                            @else
+                                              <img width='25px' height='25px'src='/img/icon/button_gray.png'>
+                                            @endif
                                             <?php
                                          // if ($revicion_academica==true) {
                       

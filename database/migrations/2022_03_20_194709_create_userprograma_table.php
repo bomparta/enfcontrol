@@ -17,6 +17,7 @@ class CreateUserprogramaTable extends Migration
             $table->id();
             $table->bigInteger('id_usuario');
             $table->bigInteger('id_programa');
+            $table->bigInteger('id_trimestre');
             $table->timestamps();
         });
     }
