@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Pensum;
 use Illuminate\Http\Request;
 
 class PensumController extends Controller
@@ -14,6 +15,14 @@ class PensumController extends Controller
     public function index()
     {
         return view('control.pensum.index');
+    }
+
+    public function list($id)
+    {
+        $datospensum = Pensum::select('*')
+       ->where('id_programa', '=',$id)
+       ->get();
+        return view('control.pensum.list',compact('datospensum'));
     }
 
     /**

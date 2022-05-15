@@ -24,6 +24,7 @@ class CreatePensumTable extends Migration
             $table->string("codigo");
             $table->bigInteger('id_eje');
             $table->smallInteger('status')->default(1)->comment('1 activo / 0 inactivo');
+            $table->string("materia_prela");
             $table->timestamps();
         });
     }

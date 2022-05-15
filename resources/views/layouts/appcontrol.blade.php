@@ -19,36 +19,36 @@
 
                     <!-- Menu Supervisor Control Estudio -->
                     @if(in_array( Auth::user()->id_usuariogrupo, array(6) ))
-                    <a href="{{route('listadoactividad')}}" class="list-group-item list-group-item-action border-0">
+                    <a href="{{route('planificacion')}}" class="list-group-item list-group-item-action border-0">
                         <img src="/img/icons-lineal/analiticas.png" class="icon-lg">
                         Oferta Academica
                     </a>
-                    <a href="{{route('listadoactividad')}}" class="list-group-item list-group-item-action border-0">
+                    <a href="{{route('docente')}}" class="list-group-item list-group-item-action border-0">
                         <img src="/img/icons-lineal/analiticas.png" class="icon-lg">
                         Docentes
                     </a>
-                    <a href="{{route('listadoactividad')}}" class="list-group-item list-group-item-action border-0">
+                    <a href="{{route('listaprograma')}}" class="list-group-item list-group-item-action border-0">
                         <img src="/img/icons-lineal/analiticas.png" class="icon-lg">
                         Pensum Estudio
                     </a>
-                    <a href="{{route('listadoactividad')}}" class="list-group-item list-group-item-action border-0">
+                    <a href="" class="list-group-item list-group-item-action border-0">
                         <img src="/img/icons-lineal/analiticas.png" class="icon-lg">
                         Revision Academica
                         <span class="badge badge-primary badge-pill">14</span>
                     </a>
-                    <a href="{{route('listadoactividad')}}" class="list-group-item list-group-item-action border-0">
+                    <a href="" class="list-group-item list-group-item-action border-0">
                         <img src="/img/icons-lineal/analiticas.png" class="icon-lg">
                         Cupos x Materias
                     </a>
-                    <a href="{{route('listadoactividad')}}" class="list-group-item list-group-item-action border-0">
+                    <a href="" class="list-group-item list-group-item-action border-0">
                         <img src="/img/icons-lineal/analiticas.png" class="icon-lg">
                         Reporte Inscrito
                     </a>
-                    <a href="{{route('listadoactividad')}}" class="list-group-item list-group-item-action border-0">
+                    <a href="" class="list-group-item list-group-item-action border-0">
                         <img src="/img/icons-lineal/analiticas.png" class="icon-lg">
                         Reporte General
                     </a>
-                    <a href="{{route('listadoactividad')}}" class="list-group-item list-group-item-action border-0">
+                    <a href="" class="list-group-item list-group-item-action border-0">
                         <img src="/img/icons-lineal/analiticas.png" class="icon-lg">
                         Reporte Pre-inscrito
                     </a>

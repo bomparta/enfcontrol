@@ -2,11 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Docente;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
-class DocenteController extends Controller
+class PlanificacionController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,22 +13,8 @@ class DocenteController extends Controller
      */
     public function index()
     {
-        $actividades = DB::select('SELECT actividad.id,actividad.codigo,actividad.anio,actividad.nombre,clasificacion.descripcion as clasificacion,tematica.descripcion as tematica,alcance.descripcion as alcance,tipo_actividad.descripcion as tipo_actividad,(SELECT COUNT(*) AS convenio FROM actuacion WHERE cod_actividad = actividad.codigo) FROM actividad 
-        INNER JOIN tematica ON tematica.id = actividad.id_tematica
-        INNER JOIN clasificacion ON clasificacion.id = actividad.id_clasificacion
-        INNER JOIN alcance ON alcance.id = actividad.id_alcance
-        INNER JOIN tipo_actividad ON tipo_actividad.id = actividad.id_tipo_actividad
-        ');
-
-        return view('control/docente/list', compact('actividades'));
-    }
-
-    public function list_docente()
-    {
-       // $docentes = Docente::all();
-        $docentes = Docente::where("status","=",1)->get();
-
-        return view('control/docente/list_docente', compact('docentes'));
+        //$periodos = Periodo::all();
+        return view('planificador.index');
     }
 
     /**
@@ -40,7 +24,7 @@ class DocenteController extends Controller
      */
     public function create()
     {
-        return view('control/docente/add');
+        
     }
 
     /**
@@ -51,7 +35,7 @@ class DocenteController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
     }
 
     /**
@@ -73,7 +57,7 @@ class DocenteController extends Controller
      */
     public function edit($id)
     {
-        //
+        
     }
 
     /**
@@ -85,7 +69,7 @@ class DocenteController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+       
     }
 
     /**

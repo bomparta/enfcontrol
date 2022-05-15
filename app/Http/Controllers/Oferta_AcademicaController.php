@@ -2,7 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Docente;
+use App\Periodo;
+use App\Trimestre;
+use App\Oferta_academica;
+use App\Programa;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class Oferta_AcademicaController extends Controller
 {
@@ -13,7 +19,25 @@ class Oferta_AcademicaController extends Controller
      */
     public function index()
     {
-        return view('control.oferta_academica.list');
+        $periodo = Periodo::where("status","=",1)->get();
+
+        $oferta_academicas = DB::select("
+        SELECT periodo.nombre as id_periodo,programa.programa as id_programa,oferta_academica.codigo as codigo,oferta_academica.unidades_creditos as unidades_creditos,
+        oferta_academica.trimestre as trimestre,oferta_academica.horario as horario,docente.primer_nombre as id_docente,docente.primer_apellido as primer_apellido,oferta_academica.id as id
+        FROM oferta_academica 
+        INNER JOIN programa ON oferta_academica.id_programa = programa.id
+        INNER JOIN periodo ON oferta_academica.id_periodo = periodo.id
+        INNER JOIN docente ON oferta_academica.id_docente = docente.id
+        where oferta_academica.status=1 AND oferta_academica.id_periodo=".$periodo[0]->id);
+        /*$oferta_academicas = Oferta_academica::
+        join("programa","oferta_academica.id_programa","=","programa.id")->
+        join("periodo","oferta_academica.id_periodo","=","periodo.id")->
+        join("docente","oferta_academica.id_docente","=","docente.id")->
+        where("oferta_academica.status","=",1)->
+        where("oferta_academica.id_periodo","=",$periodo[0]->id)->get();
+        */
+        
+        return view('control.oferta_academica.list', compact('oferta_academicas','periodo'));
     }
 
     /**
@@ -23,7 +47,10 @@ class Oferta_AcademicaController extends Controller
      */
     public function create()
     {
-        //
+        $profesores = Docente::where("status","=",1)->get();
+        $trimestres = Trimestre::All();
+        $programas = Programa::All();
+        return view('control.oferta_academica.add',compact('profesores','trimestres','programas'));
     }
 
     /**

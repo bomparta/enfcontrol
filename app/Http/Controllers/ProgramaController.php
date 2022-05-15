@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Programa;
 use Illuminate\Http\Request;
 
 class ProgramaController extends Controller
@@ -13,7 +14,8 @@ class ProgramaController extends Controller
      */
     public function index()
     {
-        //
+        $programa = Programa::all();
+        return view('control.programa.list', compact('programa'));
     }
 
     /**

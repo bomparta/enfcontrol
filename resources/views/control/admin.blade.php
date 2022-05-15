@@ -26,7 +26,7 @@
             </div>
         </a>
         @endif
-        <a style="color: black;" href="{{route('reporte')}}">
+        <a style="color: black;" href="{{route('planificacion')}}">
             <div class="card text-center">
                 <img src="{{url('/img/planificador.jpeg')}}" class="card-img-top">
                 <div class="card-body">

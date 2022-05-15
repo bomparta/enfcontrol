@@ -108,3 +108,11 @@ Route::put('/gestores/usuarios/{id}', 'UsuariosController@update')->name('usuari
 
 Route::post('submunicipio', 'EstudianteController@submunicipio')->name('submunicipio');
 Route::post('subparroquia','EstudianteController@subparroquia')->name('subparroquia');
+
+Route::get('/planificacion', 'Oferta_AcademicaController@index')->name('planificacion');
+Route::get('/oferta_add', 'Oferta_AcademicaController@create')->name('oferta_add');
+Route::get('/docente', 'DocenteController@list_docente')->name('docente');
+Route::get('/docente_add', 'DocenteController@create')->name('docente_add');
+Route::get('/pensum', 'PensumController@index')->name('pensum');
+Route::get('/listaprograma', 'ProgramaController@index')->name('listaprograma');
+Route::get('/listapensum/{id}', 'PensumController@list')->name('listapensum');

@@ -1,28 +1,20 @@
 @extends('layouts.app')
-@section('styles')
-
-@endsection
-
-@section('content')
-    <div class="d-flex" id="wrapper">
-        @include('layouts.appcontrol')
-
-        <div id="page-content-wrapper">
-            <div class="container pb-4">
-                <div class="row align-items-stretch">
-                    <div class="col-12">
-                        <div class="card mb-4">
-                                                        
-                            <div class="table-responsive">
+@section ('content')
+<div class="container-fluid">
+    <div class="row justify-content-start">
+    @include('layouts.appcontrol')
+        <div class="col-xs-11 col-sm-11 col-md-11 col-lg-10 col-xl-10 col-xxl-10">
+            <div class="row pt-2">
+                
+                                    @include('layouts.items.card-header', ['titulo' => 'Lista de Oferta Academica ENFMP'])
                                 
-                                    <div class="card-header">
-                                        <h3 class="card-title">Ofertas Academicas</h3>
-                                        <p align="right"><a class='btn btn-info' href="{{URL::route('adddocente')}}">Crear Oferta Academica</a></p>
-                                    </div>
-                                    <!-- /.card-header -->
-                                    <div class="card-body">
-                                        <table id="example1" class="table table-bordered table-striped">
-                                                <thead>
+                                    <p align="right"><a class='btn btn-info' href="{{URL::route('oferta_add')}}">Crear Ofertas Academica</a></p>
+                                    
+                                    <p>Desde aqui puedes listar la informacion ofertas academicas del periodo {{ $periodo[0]->nombre }}.</p>
+                                    
+                                    <div class="table-responsive mt-3">
+                                        <table class="table datatable">
+                                            <thead>
                                                 <tr>
                                                     <th>periodo</th>
                                                     <th>Programa</th>
@@ -31,97 +23,42 @@
                                                     <th>trimestre</th>
                                                     <th>horario</th>
                                                     <th>Profesor</th>
-                                                    <th>Opcion</th>
+                                                    @if(in_array( Auth::user()->id_usuariogrupo, array(6,9) ))
+                                                        <th>Opcion</th>
+                                                    @endif
                                                 </tr>
-                                                </thead>
-                                                <tbody>
-                                                <tr>
-                                                  <td></td>
-                                                  <td></td>
-                                                  <td></td>
-                                                  <td></td>
-                                                  <td></td>
-                                                  <td></td>
-                                                  <td></td>
-                                                  <td><a href=""><img src="/img/icon/clipboard.ico" class="icon-lg" alt="Editar"></a></td>
-                                                </tr>
-                                                </tbody>
-                                                <tfoot>
-                                                <tr>
-                                                    <th>periodo</th>
-                                                    <th>Programa</th>
-                                                    <th>Codigo</th>
-                                                    <th>Unidad Curricular</th>
-                                                    <th>trimestre</th>
-                                                    <th>horario</th>
-                                                    <th>Profesor</th>
-                                                    <th>Opcion</th>
-                                                </tr>
-                                                </tfoot>
+                                            </thead>
+                                            <tbody>
+                                                @if($oferta_academicas<>NULL)
+                                                    @foreach ($oferta_academicas as $item)
+                                                    <tr>
+                                                    
+                                                        <td>{{ $item->id_periodo }}</td>
+                                                        <td>{{ $item->id_programa }}</td>
+                                                        <td>{{ $item->codigo}}</td>
+                                                        <td>{{ $item->unidades_creditos }}</td>
+                                                        <td>{{ $item->trimestre }}</td>
+                                                        <td>{{ $item->horario }}</td>
+                                                        <td>{{ $item->id_docente }} {{ $item->primer_apellido }} </td>
+                                                        @if(in_array( Auth::user()->id_usuariogrupo, array(9,6) ))
+                                                            <td class="text-center">
+                                                            <a href= "/editestudiantedatos/{{$item->id}}" class="btn btn-info" data-tip="Detalle" data-toggle="tooltip" data-original-title="Editar">
+                                                            <img src="/img/icon/modify.ico" class="icon-sm" alt="Listado">
+                                                            </a>
+                                                            </td>
+                                                        @endif
+                                                            
+                                                    </tr>
+                                                    @endforeach
+                                                @endif
+                                                
+                                            </tbody>
                                         </table>
                                     </div>
-                                    <!-- /.card-body -->
-                                
-                                          <!-- /.card -->
-                                <br>
-                                <a class='btn btn-info' href="{{URL::route('actividad')}}">Regresar</a>
-                            </div>
-            
-                            </div> <!-- /.card -->
-                        </div>
-                    </div>
-
-                </div>
+    
             </div>
-        </div> <!-- page-content-wrapper -->
-    </div> <!-- wrapper -->
-
-@endsection
-
-@section('scripts')
-<!-- jQuery -->
-<script src="/plugins/jquery/jquery.min.js"></script>
-<!-- Bootstrap 4 -->
-<script src="/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-<!-- DataTables  & Plugins -->
-<script src="/plugins/datatables/jquery.dataTables.min.js"></script>
-<script src="/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
-<script src="/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
-<script src="/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
-<script src="/plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
-<script src="/plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
-<script src="/plugins/jszip/jszip.min.js"></script>
-<script src="/plugins/pdfmake/pdfmake.min.js"></script>
-<script src="/plugins/pdfmake/vfs_fonts.js"></script>
-<script src="/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
-<script src="/plugins/datatables-buttons/js/buttons.print.min.js"></script>
-<script src="/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
-<script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js" defer></script>
-    <script src="https://cdn.datatables.net/1.10.24/js/dataTables.bootstrap4.min.js" defer></script>
-<script
-  src="https://code.jquery.com/jquery-3.3.1.min.js"
-  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-  crossorigin="anonymous"></script>
-
-<script>
-
-    $(function () {
-      $("#example1").DataTable({
-        "responsive": true, "lengthChange": false, "autoWidth": false,
-        "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
-      }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-      $('#example2').DataTable({
-        "paging": true,
-        "lengthChange": false,
-        "searching": false,
-        "ordering": true,
-        "info": true,
-        "autoWidth": false,
-        "responsive": true,
-      });
-    });
-  </script>
-
-
+        </div>
+    </div>
+</div>
 
 @endsection
