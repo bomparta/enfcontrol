@@ -161,6 +161,18 @@
                         Informacion Profesor
                     </a>
                     @endif
+                     <!-- Menu Administracion RRHH-->
+                     @if(in_array( Auth::user()->id_usuariogrupo, array(10) ))
+                   <a href="#" class="card bg-light mb-3" style="max-width: 18rem;">
+                      <div class="card-header">Registrar Funcionarios</div>
+                      
+                    </a>
+                    <a href="#"  class="card bg-light mb-3" style="max-width: 18rem;">
+                      <div class="card-header">Expedientes RRHH</div>
+                     
+                     </a>
+                     @endif
+        
 
                     <!-- Menu Comun -->
 

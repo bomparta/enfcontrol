@@ -96,6 +96,16 @@
             </div>
         </a>
         @endif
+        @if(in_array( Auth::user()->id_usuariogrupo, array(10) ))
+        <a style="color: black;" href="{{route('rrhh')}}">
+            <div class="card text-center">
+                <img src="{{url('/img/rrhh.png')}}" class="card-img-top">
+                <div class="card-body">
+                    <h1 class="card-title">Control Expedientes RRHH</h1>
+                </div>
+            </div>
+        </a>
+        @endif
         <!--
         <div class="title m-b-md">
             {!!QrCode::size(100)->generate("www.nigmacode.com") !!}

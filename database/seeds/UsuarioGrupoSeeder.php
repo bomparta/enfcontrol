@@ -48,5 +48,17 @@ class UsuarioGrupoSeeder extends Seeder
             'nombre' => 'Super Administrador',
             'activos' => '0',
         ]);
+        DB::table('usuario_grupo')->insert([
+            'nombre' => 'Personal RRHH',
+            'activos' => '0',
+        ]);
+        DB::table('usuario_grupo')->insert([
+            'nombre' => 'Funcionario',
+            'activos' => '0',
+        ]);
+        DB::table('usuario_grupo')->insert([
+            'nombre' => 'Administrador RRHH',
+            'activos' => '0',
+        ]);
     }
 }
