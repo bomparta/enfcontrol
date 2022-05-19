@@ -61,7 +61,21 @@ class FuncionarioController extends Controller
        
        return view('rrhh/funcionario/experiencia');
     }
-
+    public function createducacion()
+    {
+       
+       return view('rrhh/funcionario/educacion');
+    }
+    public function createfamiliar()
+    {
+        $nacionalidades= Nacionalidad::All();
+        $generos= Genero::All();
+        $estado_civils= Estado_civil::All();
+        $cod_habs= Cod_Habitacion::All();
+        $cod_cels= Cod_Celular::All();
+       return view('rrhh/funcionario/familiar',compact('generos','nacionalidades','estado_civils','cod_habs','cod_cels'));
+    }
+    
    
     /**
      * Store a newly created resource in storage.
@@ -205,10 +219,12 @@ class FuncionarioController extends Controller
     }
     
 
-    public function datosadjunto($id)
+   // public function datosadjunto($id)
+    public function datosadjunto()
     {
-        $adjuntosestudiantes = DatosEstudiante::find($id);
-        return view('rrhh.funcionario.datosadjuntados',compact('adjuntosestudiantes'));
+     //   $adjuntosestudiantes = DatosEstudiante::find($id);
+        //return view('rrhh.funcionario.datosadjuntados',compact('adjuntosestudiantes'));
+        return view('rrhh.funcionario.requisitos');
     }
 
     public function adjuntodatos($id)

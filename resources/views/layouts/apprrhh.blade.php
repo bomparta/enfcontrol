@@ -17,11 +17,11 @@
             <img src="/img/icons-lineal/check_list.png" class="icon-lg">
             Datos Personales
         </a>     
-        <a href="#" class="list-group-item list-group-item-action border-0">
+        <a href="{{route('familiarfuncionario')}}" class="list-group-item list-group-item-action border-0">
             <img src="/img/icons-lineal/check_list.png" class="icon-lg">
             Datos Grupo Familiar
         </a>
-        <a href="/" class="list-group-item list-group-item-action border-0">
+        <a href="{{route('educacionfuncionario')}}" class="list-group-item list-group-item-action border-0">
             <img src="/img/icons-lineal/check_list.png" class="icon-lg">
             Instrucción Formal y Complementaria
         </a>
@@ -29,7 +29,7 @@
             <img src="/img/icons-lineal/check_list.png" class="icon-lg">
             Experiencia Laboral
         </a>
-        <a href="{{route('datosfuncionario')}}" class="list-group-item list-group-item-action border-0">
+        <a href="{{route('requisitos')}}" class="list-group-item list-group-item-action border-0">
             <img src="/img/icons-lineal/check_list.png" class="icon-lg">
             Requisitos
         </a>
@@ -38,12 +38,12 @@
             Planilla de Actualización de Datos
         </a>
         <div class="card-header text-secondary">RRHH</div>
-            <a href="{{route('datosfuncionario')}}" class="list-group-item list-group-item-action border-0">
+            <a href="{{route('movimientosrrhh')}}" class="list-group-item list-group-item-action border-0">
                 <img src="/img/icons-lineal/check_list.png" class="icon-lg">
                 Movimientos de Personal
             </a>
         
-            <a href="#" class="list-group-item list-group-item-action border-0">
+            <a href="{{route('reportesrrhh')}}" class="list-group-item list-group-item-action border-0">
                 <img src="/img/icons-lineal/check_list.png" class="icon-lg">
                 Reportes
             </a>
@@ -77,12 +77,12 @@
         @endif
         @if(in_array( Auth::user()->id_usuariogrupo, array(10) )) <!--Personal rrhh !-->
         <div class="card-header text-secondary">RRHH</div>
-            <a href="{{route('datosfuncionario')}}" class="list-group-item list-group-item-action border-0">
+            <a href="{{route('movimientosrrhh')}}" class="list-group-item list-group-item-action border-0">
                 <img src="/img/icons-lineal/check_list.png" class="icon-lg">
                 Movimientos de Personal
             </a>
         
-            <a href="#" class="list-group-item list-group-item-action border-0">
+            <a href="{{route('reportesrrhh')}}" class="list-group-item list-group-item-action border-0">
                 <img src="/img/icons-lineal/check_list.png" class="icon-lg">
                 Reportes
             </a>

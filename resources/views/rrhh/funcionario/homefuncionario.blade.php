@@ -20,14 +20,14 @@
             </div>
             <div class="card bg-light mb-6" style="max-width: 12rem;">                    
               <div class="card-body">
-              <a href="#" > <h6 class="card-title">Datos del Grupo Familiar</h6>
+              <a href="{{route('familiarfuncionario')}}" > <h6 class="card-title">Datos del Grupo Familiar</h6>
                 <img src="{{url('/img/familia.jpeg')}}" class="card-img-top"  >
               </a>
               </div>
             </div>
             <div class="card bg-light mb-6" style="max-width: 12rem;">                    
               <div class="card-body">
-              <a href="#" > <h6 class="card-title">Instrucción Formal y Complementaria</h6>
+              <a href="{{route('educacionfuncionario')}}" > <h6 class="card-title">Instrucción Formal y Complementaria</h6>
                 <img src="{{url('/img/estudio.png')}}" class="card-img-top"   >
               </a>
               </div>

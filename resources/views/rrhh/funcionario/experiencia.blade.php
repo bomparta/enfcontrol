@@ -2,7 +2,7 @@
 @section ('content')
 <div class="container-fluid">
     <div class="row justify-content-start">
-    @include('layouts.appcontrol')
+    @include('layouts.apprrhh')
         <div class="col-xs-11 col-sm-11 col-md-11 col-lg-10 col-xl-10 col-xxl-10">
             <div class="row pt-2">
 
@@ -11,25 +11,28 @@
                 </div>
                 <form id="formulario" name="formulario" method="post" action="#">
                     <table align="center" border="0" cellpadding="2" cellspacing="5" width="100%" >
-                    <tr>    
-                        <td colspan="4">
-                            <div align="center" id="divTituloIndex2">
-                                           <b> DATOS EXPERIENCIA LABORAL</b>
-                            </div>
-                            <div id="divSubTituloIndex2">
-                                        Suministre sus datos de experiencia laboral comenzando por su trabajo actual, haga clic en "Guardar".
-                            </div>
-                        </td>
-                    </tr>
+                    <tr>
+                            <td colspan="4">
+                                <div align="center" id="divTituloIndex2" class="text-primary">
+                                       <b>EXPERIENCIA LABORAL</b>
+                                </div>
+                                <div id="divSubTituloIndex2">
+                                    <hr>
+                                    <b>Suministre sus datos de experiencia laboraL más reciente, haga clic en "Guardar" para registrar su información <b>
+                                    <hr>   
+                                </div>
+                            </td>
+                        </tr>
+                    
                     <tr>
                         <td>
-                            &nbsp;Empresa u Organizacion&nbsp;<span style="color:red;">*</span>&nbsp;
+                            &nbsp;Empresa u Organización&nbsp;<span style="color:red;">*</span>&nbsp;
                             <input type="text" name="empresa" id="empresa" value="" style="width:190px;" maxlength="25"/>
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            &nbsp;Cargo de desempeño&nbsp;<span style="color:red;">*</span>&nbsp;
+                            &nbsp;Cargo de desempeñado&nbsp;<span style="color:red;">*</span>&nbsp;
                             <input type="text" name="cargo" id="cargo" value="" style="width:190px;" maxlength="25" />
                         </td>
                     </tr>
@@ -47,7 +50,7 @@
                     </tr>
                     <tr>
                     <td>
-                            &nbsp;Telefono&nbsp;<span style="color:red;">*</span>&nbsp;
+                            &nbsp;Teléfono&nbsp;<span style="color:red;">*</span>&nbsp;
                             <input type="text" name="telefono" id="telefono" value="" style="width:190px;" maxlength="25"/>
                         </td>
                         <td></td>

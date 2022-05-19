@@ -32,9 +32,9 @@ class RrhhController extends Controller
         return view('rrhh/homerrhh');
     }
 
-    public function dashboard()
+    public function reporterrhh()
     {
-        return view('estudiante/dashboard');
+        return view('reportes/rrhh/lista_reporte_rrhh');
     }
 
     /**
@@ -49,7 +49,7 @@ class RrhhController extends Controller
         $estado_civils= Estado_civil::All();
         $cod_habs= Cod_Habitacion::All();
         $cod_cels= Cod_Celular::All();
-       return view('estudiante/datos',compact('generos','nacionalidades','estado_civils','cod_habs','cod_cels'));
+       return view('rrhh/movimientos',compact('generos','nacionalidades','estado_civils','cod_habs','cod_cels'));
     }
 
     public function createdireccion()

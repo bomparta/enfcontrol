@@ -24,7 +24,7 @@
                     <div class="card bg-light mb-6" style="max-width: 14rem;">
                       <div class="card-header text-secondary">RRHH</div>
                       <div class="card-body">
-                      <a href="#" > <h6 class="card-title">Expedientes</h6>
+                      <a href="{{route('movimientosrrhh')}}"> <h6 class="card-title">Expedientes</h6>
                         <img src="{{url('/img/expediente.jpeg')}}" class="card-img-top">
                       </a>
                       </div>

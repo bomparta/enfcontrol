@@ -118,8 +118,14 @@ Route::get('/listaprograma', 'ProgramaController@index')->name('listaprograma');
 Route::get('/listapensum/{id}', 'PensumController@list')->name('listapensum');
 ///control de expedientes RRHH
 Route::get('/rrhh', 'RrhhController@index')->name('rrhh');
+Route::get('/rrhh/movimientos', 'RrhhController@create')->name('movimientosrrhh');
+Route::get('reportes/rrhh', 'RrhhController@reporterrhh')->name('reportesrrhh');
+
+
 Route::get('/rrhh/funcionario', 'FuncionarioController@index')->name('funcionario');
 Route::get('/rrhh/funcionario/datos', 'FuncionarioController@create')->name('datosfuncionario');
 Route::post('/rrhh/funcionario/datos', 'FuncionarioController@store')->name('funcionariostore');
 Route::get('/rrhh/funcionario/experiencia', 'FuncionarioController@createxperiencia')->name('laboralfuncionario');
-//Route::get('/rrhh/funcionario/datosadjuntados{id}', 'FuncionarioController@adjuntodatos')->name('requisitosfuncionario');
+Route::get('/rrhh/funcionario/educacion', 'FuncionarioController@createducacion')->name('educacionfuncionario');
+Route::get('/rrhh/funcionario/familiar', 'FuncionarioController@createfamiliar')->name('familiarfuncionario');
+Route::get('/rrhh/funcionario/requisitos', 'FuncionarioController@datosadjunto')->name('requisitos');
