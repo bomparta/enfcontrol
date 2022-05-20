@@ -67,7 +67,7 @@
         </a>
         @endif
         @if(in_array( Auth::user()->id_usuariogrupo, array(4) ))
-        <a style="color: black;" href="{{route('home')}}">
+        <a style="color: black;" href="{{route('adm')}}">
             <div class="card text-center">
                 <img src="{{url('/img/administracion.jpeg')}}" class="card-img-top">
                 <div class="card-body">

@@ -129,3 +129,6 @@ Route::get('/rrhh/funcionario/experiencia', 'FuncionarioController@createxperien
 Route::get('/rrhh/funcionario/educacion', 'FuncionarioController@createducacion')->name('educacionfuncionario');
 Route::get('/rrhh/funcionario/familiar', 'FuncionarioController@createfamiliar')->name('familiarfuncionario');
 Route::get('/rrhh/funcionario/requisitos', 'FuncionarioController@datosadjunto')->name('requisitos');
+
+///administrador
+Route::get('/adm', 'AdministracionController@index')->name('adm');

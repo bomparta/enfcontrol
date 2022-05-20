@@ -2,7 +2,7 @@
     <div class="d-flex flex-column align-items-center align-items-sm-start ">
                 <ul class="nav flex-column pt-2 w-200">
                     <!-- Menu Administrador Control Estudio -->
-                    @if(in_array( Auth::user()->id_usuariogrupo, array(4,5) ))
+                    @if(in_array( Auth::user()->id_usuariogrupo, array(9,5) ))
                     <a href="{{route('listadoactividad')}}" class="list-group-item list-group-item-action border-0">
                         <img src="/img/icons-lineal/analiticas.png" class="icon-lg">
                         Lista de Usuario
@@ -85,7 +85,6 @@
                         Asistencia
                     </a>
                     @endif
-
                     <!-- Menu Participante Control Estudio-->
                     @if(in_array( Auth::user()->id_usuariogrupo, array(1) ))
                     <a href="{{route('dashboard')}}" class="list-group-item list-group-item-action border-0 bg-dark text-white">
@@ -127,7 +126,7 @@
                     @endif
 
                     <!-- Menu Administracion Control Estudio-->
-                    @if(in_array( Auth::user()->id_usuariogrupo, array(9) ))
+                    @if(in_array( Auth::user()->id_usuariogrupo, array(4) ))
                     <a href="{{route('listadoactividad')}}" class="list-group-item list-group-item-action border-0">
                         <img src="/img/icons-lineal/analiticas.png" class="icon-lg">
                         Precio UC

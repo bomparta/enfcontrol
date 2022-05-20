@@ -27,11 +27,31 @@
                             </div>
                         </div>
                         <div class="form-group row">
+                            <label for="inputperiodos" class="col-sm-2 col-form-label">Periodo</label>
+                            <div class="col-sm-10">
+                                <select name="periodos"  class="form-control" required >
+                                    @foreach ($periodos as $periodo)
+                                        <option value="{{ $periodo->id }}">{{ $periodo->nombre }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
                             <label for="inputprograma" class="col-sm-2 col-form-label">Programa</label>
                             <div class="col-sm-10">
                                 <select name="programa"  class="form-control" required >
                                     @foreach ($programas as $programa)
                                         <option value="{{ $programa->id }}">{{ $programa->programa }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="inputpensum" class="col-sm-2 col-form-label">Unidad Curricular</label>
+                            <div class="col-sm-10">
+                                <select name="pensum"  class="form-control" required >
+                                    @foreach ($pensums as $pensum)
+                                        <option value="{{ $pensum->id }}">{{ $pensum->unidad_curricular }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -83,7 +103,11 @@
                         <div class="form-group row">
                             <label for="inputseccion" class="col-sm-2 col-form-label">Seccion</label>
                             <div class="col-sm-10">
-                            <input name="seccion" type="text" class="form-control" id="inputseccion" placeholder="numero de seccion">
+                                <select name="seccion"  class="form-control" required >
+                                    @foreach ($seccions as $seccion)
+                                        <option value="{{ $seccion->id }}">{{ $seccion->descripcion }}</option>
+                                    @endforeach
+                                </select>
                             </div>
                         </div>
                         <div class="form-group row">

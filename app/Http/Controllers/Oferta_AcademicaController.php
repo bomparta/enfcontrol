@@ -6,7 +6,9 @@ use App\Docente;
 use App\Periodo;
 use App\Trimestre;
 use App\Oferta_academica;
+use App\Pensum;
 use App\Programa;
+use App\Seccion;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -48,9 +50,12 @@ class Oferta_AcademicaController extends Controller
     public function create()
     {
         $profesores = Docente::where("status","=",1)->get();
+        $periodos = Periodo::where("status","=",1)->get();
         $trimestres = Trimestre::All();
         $programas = Programa::All();
-        return view('control.oferta_academica.add',compact('profesores','trimestres','programas'));
+        $pensums = Pensum::All();
+        $seccions = Seccion::All();
+        return view('control.oferta_academica.add',compact('profesores','trimestres','programas','periodos','pensums','seccions'));
     }
 
     /**
