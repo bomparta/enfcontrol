@@ -41,7 +41,7 @@
             </div>
             <div class="card bg-light mb-6" style="max-width: 12rem;">                    
               <div class="card-body">
-                <a href="{{route('laboralfuncionario')}}" > <h6 class="card-title">Requisitos <br> Digitalizados </h6>
+                <a href="{{route('requisitos')}}" > <h6 class="card-title">Requisitos <br> Digitalizados </h6>
                   <img src="{{url('/img/requisitos_di.jpeg')}}" class="card-img-top"   >
                 </a>
               </div>
