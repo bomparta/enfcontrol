@@ -5,15 +5,15 @@
     @include('layouts.apprrhh')
         <div class="col-xs-11 col-sm-11 col-md-11 col-lg-10 col-xl-10 col-xxl-10">
             <div class="row pt-2">
-
-                <div class="col-12 text-center">
+            <div align="center" id="divTituloIndex2" class="text-primary">
+               
                 <b>INSTRUCCIÓN FORMAL Y COMPLEMENTARIA</b>
                 </div>
                 <form id="formulario" name="formulario" method="post" action="#">
                     <table align="center" border="0" cellpadding="2" cellspacing="5" width="100%" >
                     <tr>
                             <td colspan="4">
-                                <div align="center" id="divTituloIndex2" class="text-primary">
+                            <div class="col-12 text-center">
                                      
                                        <b>Nivel de Instrucción</b>
                                 </div>
