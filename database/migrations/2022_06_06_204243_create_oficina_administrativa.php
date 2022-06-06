@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateOficnaAdministrativaTable extends Migration
+class CreateOficinaAdministrativa extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,11 @@ class CreateOficnaAdministrativaTable extends Migration
      */
     public function up()
     {
-        Schema::create('oficna_administrativa', function (Blueprint $table) {
+        Schema::create('oficina_administrativa', function (Blueprint $table) {
             $table->id();
-            $table->string('id');
+            $table->string('nombre');
             $table->timestamps();
+            $table->bigInteger('status')->default(1);
         });
     }
 
@@ -27,6 +28,8 @@ class CreateOficnaAdministrativaTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('oficna_administrativa');
+        Schema::dropIfExists('oficina_administrativa');
     }
 }
+
+
