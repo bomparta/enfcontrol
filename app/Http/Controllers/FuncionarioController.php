@@ -13,7 +13,8 @@ use App\Estado_civil;
 use App\ImagenUpload;
 use App\Nacionalidad;
 use App\Cod_Habitacion;
-use App\DatosEstudiante;
+use App\Persona;
+use App\DatosEstudiantes;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -187,6 +188,10 @@ class FuncionarioController extends Controller
         //
     }
 
+    public function buscador(Request $request){// buscar cedula del funcionario
+        $datos_funcionario    =   Persona::where("numero_identificacion",$request->cedula)->get();
+        return view("rrhh/funcionario/datos",compact("datos_funcionario"));        
+    }
     public function datoslistestudiante($id)
     {
        // $datosestudiantes = DatosEstudiante::find($id);
