@@ -45,21 +45,17 @@
           
           <form id="formulario" name="formulario" method="POST" action="{{route('funcionariostore')}}">       
           @csrf
-            <div>
-            @include('rrhh.funcionario.mensaje')  
-            </div>
+               
                 <table align="center" border="0" cellpadding="2" cellspacing="2" width="100%" >     
                     @foreach($datos_funcionario as $key=>$item)   
-                    <tr><td><strong>Cédula de Identidad: @if ($item->id_nacionalidad==1) V @else E @endif - {{$item->numero_identificacion}}</strong></td></tr>
-                    <tr><td colspan="4"><hr></td></tr>
                 <tr> 
                             <td>
                                 &nbsp;Primer Nombre&nbsp;<span style="color:red;">*</span>&nbsp;<br>
  
-                                <input id="primernombre" type="text"  maxlength="25" class="form-control @error('primernombre') is-invalid @enderror" name="primernombre" value="{{$item->nombre}}" require  >
+                                <input id="primernombre" type="text"  maxlength="25" class="form-control @error('primernombre') is-invalid @enderror" name="primernombre" value="{{$item->nombre}}"  >
                                 @error('primernombre')
                                     <div class="invalid-feedback">
-                                    <strong><span  style="color:red;">{{ $message }}</span></strong>
+                                    <strong>{{ $message }}</strong>
                                     </div>
                                 @enderror
                             </td>
@@ -102,7 +98,7 @@
                             <td>
                                 &nbsp;Sexo&nbsp;<span style="color:red;">*</span>&nbsp;<br>
                                 <select class="form-control"  type="text" name="genero" required>
-                                    <option value="{{$item->id_genero}}">Seleccione...</option>
+                                    <option value="">Seleccione...</option>
                                     @foreach ($generos as $genero)
                                         <option value="{{ $genero->id }}">{{ $genero->cod }}</option>
                                     @endforeach
@@ -115,11 +111,11 @@
                             </td>
                             <td>
                                 &nbsp;Fecha Nacimiento&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:red;">*</span><br>
-                                <input type="date" name="fechanac" id="fechanac" value="{{$item->edad}}"  maxlength="25" required/>
+                                <input type="date" name="fechanac" id="fechanac" value=""  maxlength="25" required/>
                             </td>
                                         
                         </tr>
-                        <tr>
+                        <tr>-->
                              <!-- FILA 4 -->
                         <td>
                                 &nbsp;Estado Civil&nbsp;<span style="color:red;">*</span>&nbsp;<br>

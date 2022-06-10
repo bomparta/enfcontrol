@@ -29,25 +29,26 @@ class FuncionarioController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
+    {  
         return view('rrhh/funcionario/homefuncionario');
     }
-
-    
 
     /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
         $nacionalidades= Nacionalidad::All();
         $generos= Genero::All();
         $estado_civils= Estado_civil::All();
         $cod_habs= Cod_Habitacion::All();
         $cod_cels= Cod_Celular::All();
-       return view('rrhh/funcionario/datos',compact('generos','nacionalidades','estado_civils','cod_habs','cod_cels'));
+        $datos_funcionario    =   Persona::where('numero_identificacion','=',$request->cedula)->paginate(5);
+    // var_dump($datos_funcionario);
+        return view('rrhh/funcionario/datos',compact('datos_funcionario','nacionalidades','generos','estado_civils','cod_habs','cod_cels'));    
+       
     }
 
     public function createdireccion()
@@ -188,10 +189,8 @@ class FuncionarioController extends Controller
         //
     }
 
-    public function buscador(Request $request){// buscar cedula del funcionario
-        $datos_funcionario    =   Persona::where("numero_identificacion",$request->cedula)->get();
-        return view("rrhh/funcionario/datos",compact("datos_funcionario"));        
-    }
+    
+ 
     public function datoslistestudiante($id)
     {
        // $datosestudiantes = DatosEstudiante::find($id);
