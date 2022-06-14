@@ -124,8 +124,10 @@ Route::get('reportes/rrhh', 'RrhhController@reporterrhh')->name('reportesrrhh');
 
 Route::get('/rrhh/funcionario', 'FuncionarioController@index')->name('funcionario');
 Route::get('/rrhh/funcionario/datos', 'FuncionarioController@create')->name('datosfuncionario');
+Route::get('/rrhh/funcionario/datosedit', 'FuncionarioController@edit')->name('buscarfuncionario');
 Route::post('/rrhh/funcionario/datos', 'FuncionarioController@store')->name('funcionariostore');
-//Route::get('/rrhh/funcionario/datos', 'FuncionarioController@buscador')->name('buscarfuncionario');
+Route::post('/rrhh/funcionario/datosedit', 'FuncionarioController@update')->name('funcionarioupdate');
+
 
 Route::get('/rrhh/funcionario/experiencia', 'FuncionarioController@createxperiencia')->name('laboralfuncionario');
 Route::get('/rrhh/funcionario/educacion', 'FuncionarioController@createducacion')->name('educacionfuncionario');

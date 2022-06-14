@@ -5,9 +5,8 @@
         @include('layouts.apprrhh')
         <div class="col-xs-11 col-sm-11 col-md-11 col-lg-10 col-xl-10 col-xxl-10">
             <div class="row pt-2">
-               
-                <form id="formulario" name="formulario" method="POST" action="{{route('funcionariostore')}}">
-                @csrf
+          
+           
                     <table align="center" border="0" cellpadding="2" cellspacing="2" width="100%" >
                         <tr>
                             <td colspan="4">
@@ -21,35 +20,57 @@
                                 </div>
                             </td>
                         </tr>
-                       <tr>
-                            <td colspan="2">
-                                &nbsp;Cedula&nbsp;<span style="color:red;">*</span>&nbsp;<br>
-                                <select id="nacionalidad" name="nacionalidad" style="width:70px;" required>
+                        <tr>
+                        <td colspan="4">
+                            <nav class="navbar bg-light">
+                            <div class="container-fluid">
+                            <form class="d-flex" role="search">
+                         
+                            &nbsp;Cédula de Identidad&nbsp;<span style="color:red;">*</span>&nbsp;<br>
+                            <select id="nacionalidad" name="nacionalidad" style="width:70px;" required>
                                     @foreach ($nacionalidades as $nacionalidad)
                                         <option value="{{ $nacionalidad->id  }}">{{ $nacionalidad->cod }}</option>
                                     @endforeach
                                 </select>
-                                <input type="text" name="cedula" id="cedula" value=""  maxlength="12"/>
-                                @error('cedula')
-                                    <div class="invalid-feedback">
-                                    <strong>{{ $message }}</strong>
-                                    </div>
-                                @enderror
+                            <input class="form-control me-2" type="search" name="cedula"placeholder="Sólo números Ej. 123456789" aria-label="Search" require>
+                            <button class="btn btn-outline-success" type="submit">Buscar</button>
+                           
+                           </form>
+                            </div>
+                            </nav>
                             </td>
                         </tr>
-                        <tr>
+                       
+                   
+          
+          <form id="formulario" name="formulario" method="POST" action="{{route('funcionarioupdate')}}">       
+         
+          @csrf
+            <div>
+            @include('rrhh.funcionario.mensaje')  
+            </div>
+                <table align="center" border="0" cellpadding="2" cellspacing="2" width="100%" >     
+                @if (isset($datos_persona))   
+                @foreach($datos_persona as $key=>$item)   
+                    <tr><td><strong>Cédula de Identidad: @if ($item->id_nacionalidad==1) V @else E @endif - {{$item->numero_identificacion}}</strong></td></tr>
+                    <input id="id_persona" type="text" name="id" value="{{$item->id}}" >
+                    <tr><td colspan="4"><hr></td></tr>
+
+                <tr> 
                             <td>
                                 &nbsp;Primer Nombre&nbsp;<span style="color:red;">*</span>&nbsp;<br>
-                                <input id="primernombre" type="text"  maxlength="25" class="form-control @error('primernombre') is-invalid @enderror" name="primernombre" value="" required>
+ 
+                                <input id="primernombre" type="text"  maxlength="25" class="form-control @error('primernombre') is-invalid @enderror" name="primernombre" value="{{$item->nombre}}" require  >
                                 @error('primernombre')
                                     <div class="invalid-feedback">
-                                    <strong>{{ $message }}</strong>
+                                    <strong><span  style="color:red;">{{ $message }}</span></strong>
                                     </div>
                                 @enderror
                             </td>
+                        
                             <td>
                                 &nbsp;Segundo Nombre&nbsp;<br>
-                                <input id="segundonombre" type="text"  maxlength="25" class="form-control @error('segundonombre') is-invalid @enderror" name="segundonombre" value="" >
+                                <input id="segundonombre" type="text"  maxlength="25" class="form-control @error('segundonombre') is-invalid @enderror" name="segundonombre" value="{{$item->nombreseg}}" >
                                 @error('segundonombre')
                                     <div class="invalid-feedback">
                                     <strong>{{ $message }}</strong>
@@ -57,11 +78,12 @@
                                 @enderror
                             </td>
                         </tr>
-                        <!-- FILA 2 -->
-                        <tr>
+   
+                      <!--  FILA 2 -->
+                       <tr>
                             <td>
                                 &nbsp;Primer Apellido&nbsp;<span style="color:red;">*</span>&nbsp;<br>
-                                <input id="primerapellido" type="text"  maxlength="25" class="form-control @error('primerapellido') is-invalid @enderror" name="primerapellido" value="" required>
+                                <input id="primerapellido" type="text"  maxlength="25" class="form-control @error('primerapellido') is-invalid @enderror" name="primerapellido" value="{{$item->apellido}}" required>
                                 @error('primerapellido')
                                     <div class="invalid-feedback">
                                     <strong>{{ $message }}</strong>
@@ -70,7 +92,7 @@
                             </td>
                             <td>
                                 &nbsp;Segundo Apellido&nbsp;<br>
-                                <input id="segundoapellido" type="text"  maxlength="25" class="form-control @error('segundoapellido') is-invalid @enderror" name="segundoapellido" value="" >
+                                <input id="segundoapellido" type="text"  maxlength="25" class="form-control @error('segundoapellido') is-invalid @enderror" name="segundoapellido" value="{{$item->apellidoseg}}" >
                                 @error('segundoapellido')
                                     <div class="invalid-feedback">
                                     <strong>{{ $message }}</strong>
@@ -78,13 +100,13 @@
                                 @enderror
                             </td>
                         </tr>
-                        <!-- FILA 3 -->
+                        <!--FILA 3 -->
                         <tr>
                             
                             <td>
                                 &nbsp;Sexo&nbsp;<span style="color:red;">*</span>&nbsp;<br>
                                 <select class="form-control"  type="text" name="genero" required>
-                                    <option value="">Seleccione...</option>
+                                    <option value="{{$item->id_genero}}">Seleccione...</option>
                                     @foreach ($generos as $genero)
                                         <option value="{{ $genero->id }}">{{ $genero->cod }}</option>
                                     @endforeach
@@ -97,7 +119,7 @@
                             </td>
                             <td>
                                 &nbsp;Fecha Nacimiento&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:red;">*</span><br>
-                                <input type="date" name="fechanac" id="fechanac" value=""  maxlength="25" required/>
+                                <input type="date" name="fechanac" id="fechanac" value="{{$item->edad}}"  maxlength="25" required/>
                             </td>
                                         
                         </tr>
@@ -179,9 +201,17 @@
                             </td>
                             
                         </tr>
+                        @endforeach
+
+                    @endif
                     </table>
+                    
                     <div class="frameContenedor" style="margin:5px;" align="right">
+                 @if($datos_funcionario->count()>0)
                         <input class='btn btn-info' type="submit" value="Guardar y Continuar" >
+                 @else
+                        <a class='btn btn-info' href="{{URL::route('datosfuncionario')}}">Cargar Datos Personales</a>
+                  @endif
                     </div>
                 </form>
             </div>

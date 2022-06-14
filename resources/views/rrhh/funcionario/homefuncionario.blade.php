@@ -13,7 +13,7 @@
         <div class="col ps-6">
           <div class="card bg-light mb-6" style="max-width: 12rem;">                   
               <div class="card-body">
-                <a href="{{route('datosfuncionario')}}#" ><h6 class="card-title">Datos <br> Personales</h6>
+                <a href="{{route('buscarfuncionario')}}#" ><h6 class="card-title">Datos <br> Personales</h6>
                   <img src="{{url('/img/datos.png')}}" class="card-img-bottom">
                 </a>
               </div>

@@ -13,7 +13,7 @@
         <!-- Menu Administrador RRHH-->
         @if(in_array( Auth::user()->id_usuariogrupo, array(12) ))
         <div class="card-header text-secondary">FUNCIONARIOS</div>
-        <a href="{{route('datosfuncionario')}}" class="list-group-item list-group-item-action border-0">
+        <a href="{{route('buscarfuncionario')}}" class="list-group-item list-group-item-action border-0">
             <img src="/img/icons-lineal/check_list.png" class="icon-lg">
             Datos Personales
         </a>     

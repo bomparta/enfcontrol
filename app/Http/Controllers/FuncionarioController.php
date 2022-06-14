@@ -15,6 +15,7 @@ use App\Nacionalidad;
 use App\Cod_Habitacion;
 use App\Persona;
 use App\DatosEstudiantes;
+use App\Funcionario;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -38,17 +39,33 @@ class FuncionarioController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Request $request)
+    public function edit(Request $request)
     {
         $nacionalidades= Nacionalidad::All();
         $generos= Genero::All();
         $estado_civils= Estado_civil::All();
         $cod_habs= Cod_Habitacion::All();
         $cod_cels= Cod_Celular::All();
-        $datos_funcionario    =   Persona::where('numero_identificacion','=',$request->cedula)->paginate(5);
-    // var_dump($datos_funcionario);
-        return view('rrhh/funcionario/datos',compact('datos_funcionario','nacionalidades','generos','estado_civils','cod_habs','cod_cels'));    
+        $datos_persona   =   Persona::where('numero_identificacion','=',$request->cedula)->paginate(1);
+      //  var_dump($datos_persona);
+      if ($request->id_persona!=NULL){
+        $datos_funcionario    =   Funcionario::where('id_persona','=',$request->id_persona)->get();
+      }else{
+        $datos_funcionario    =   Funcionario::All();
+      }
+     //var_dump($datos_funcionario);
+        return view('rrhh/funcionario/datosedit',compact('datos_persona','datos_funcionario','nacionalidades','generos','estado_civils','cod_habs','cod_cels'));    
        
+    }
+
+    public function create()
+    {
+        $nacionalidades= Nacionalidad::All();
+        $generos= Genero::All();
+        $estado_civils= Estado_civil::All();
+        $cod_habs= Cod_Habitacion::All();
+        $cod_cels= Cod_Celular::All();
+       return view('rrhh/funcionario/datos',compact('generos','nacionalidades','estado_civils','cod_habs','cod_cels'));
     }
 
     public function createdireccion()
@@ -151,20 +168,7 @@ class FuncionarioController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
     
-    {
-        $nacionalidades= Nacionalidad::All();
-        $generos= Genero::All();
-        $estado_civils= Estado_civil::All();
-        $cod_habs= Cod_Habitacion::All();
-        $cod_cels= Cod_Celular::All();
-        $datos = DatosEstudiante::select('*')
-       ->where('id', '=',$id)
-       ->get();
-       //dd($datos);
-        return view('estudiante.datos_edit',compact('datos','generos','nacionalidades','estado_civils','cod_habs','cod_cels'));
-    }
 
     /**
      * Update the specified resource in storage.
