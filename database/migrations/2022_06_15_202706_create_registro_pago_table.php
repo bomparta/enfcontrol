@@ -21,6 +21,7 @@ class CreateRegistroPagoTable extends Migration
             $table->bigInteger('id_estudiante');
             $table->bigInteger('id_estado_estudio');
             $table->string("nro_referencia");
+            $table->date("fecha_transferencia");
             $table->string("monto_apagar");
             $table->string("monto_depositado");
             $table->string("postgrado");
@@ -30,6 +31,7 @@ class CreateRegistroPagoTable extends Migration
             $table->smallInteger('conciliado')->comment('0 No conciliado / 1 conciliado / 2 nerror');
             $table->smallInteger('academico')->comment('1 revisado / 0 no revisado');
             $table->smallInteger('aspirante')->comment('1 aspirante / 0 no aspirante');
+
             $table->timestamps();
         });
     }
