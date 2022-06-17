@@ -1,3 +1,4 @@
+
 @extends('layouts.appsecretaria')
 
 @section('content')
@@ -26,32 +27,34 @@
             </div>
         </a>
         @endif
+        @if (Auth::user()->id_usuariogrupo == 6)
         <a style="color: black;" href="{{route('planificacion')}}">
             <div class="card text-center">
                 <img src="{{url('/img/planificador.jpeg')}}" class="card-img-top">
                 <div class="card-body">
-                    <h1 class="card-title">Planificador</h1>
+                    <h1 class="card-title">Revisión Académica</h1>
                 </div>
             </div>
         </a>
-
-        <a style="color: black;" href="{{route('reporte')}}">
+       
+        <a style="color: black;" href="{{route('planificacion')}}">
             <div class="card text-center">
                 <img src="{{url('/img/estudiante.jpeg')}}" class="card-img-top">
                 <div class="card-body">
-                    <h1 class="card-title">Sin Usar</h1>
+                    <h1 class="card-title">Oferta Académica</h1>
                 </div>
             </div>
         </a>
-
+       
         <a style="color: black;" href="{{route('reporte')}}">
             <div class="card text-center">
                 <img src="{{url('/img/supervisor.jpeg')}}" class="card-img-top">
                 <div class="card-body">
-                    <h1 class="card-title">Supervisor</h1>
+                    <h1 class="card-title">Consultar Períodos Preinscritos</h1>
                 </div>
             </div>
         </a>
+        @endif
         
     </div>
 </div>

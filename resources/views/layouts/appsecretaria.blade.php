@@ -7,7 +7,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Control de Estudio ENF') }}</title>
+    <title>{{ config('app.name', 'Sistema Gestion ENFMP') }}</title>
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
@@ -23,20 +23,38 @@
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Control de Estudio ENF') }}
+            <a class="navbar-brand" href="{{ url('/') }}" title ="Ir A la Página Principal">
+                <img src="{{url('/img/logo2.png')}}" >{{ config('app.name', 'Control de Estudio ENF') }}
+
                 </a>
                 <li class="nav-item"><a class="nav-link" href="{{route('home')}}">Inicio&nbsp;<i class="fa fa-home"></i></a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{route('home')}}">Actividad&nbsp;<i class="fa fa-box"></i></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{route('home')}}">Actuacion&nbsp;<i class="fa fa-cart-plus"></i></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{route('home')}}">Reportes Evento&nbsp;<i class="fa fa-list"></i></a>
-                </li>
+                @if(isset(Auth::user()->id_usuariogrupo))
+                    @if(in_array( Auth::user()->id_usuariogrupo, array(6) ))
+                    @if(Route::currentRouteName()=='actividad')
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{route('listadoactividad')}}">Actividad&nbsp;<i class="fa fa-box"></i></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{route('actuacion')}}">Actuacion&nbsp;<i class="fa fa-cart-plus"></i></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{route('reporte')}}">Reportes Evento&nbsp;<i class="fa fa-list"></i></a>
+                    </li>
+                    @endif
+                    @if(Route::currentRouteName()=='admincontrol')
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{route('planificacion')}}">Revisión Académica&nbsp;<i class="fa fa-box"></i></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{route('planificacion')}}">Oferta Académica&nbsp;<i class="fa fa-cart-plus"></i></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{route('reporte')}}">Consultar Períodos Preinscritos&nbsp;<i class="fa fa-list"></i></a>
+                    </li>
+                    @endif
+                    @endif
+                @endif
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
                 </button>

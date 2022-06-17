@@ -2,7 +2,7 @@
 <aside class="bg-white" id="sidebar-wrapper-lg">
     <div class="col-12 text-center">
       <h4 class="text-primary" >CONTROL DE EXPEDIENTES RRHH</h6>   
-      <a href="{{route('rrhh')}}"><img src="{{url('/img/logo2.png')}}" class="card-img-bottom"  style="max-width: 6rem;" title="Fundación Escuela Nacional de Fiscales del Ministerio Público">
+   
       </a>
       <h6 class="text-dark">Bienvenid@, {{Auth::user()->name}}</h6>
     </div>

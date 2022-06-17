@@ -21,7 +21,7 @@
             <div class="card text-center">
                 <img src="{{url('/img/control_estudio.jpeg')}}" class="card-img-top">
                 <div class="card-body">
-                    <h1 class="card-title">Secretaria</h1>
+                    <h1 class="card-title">Control de Estudios</h1>
                 </div>
             </div>
         </a>
@@ -71,7 +71,25 @@
             <div class="card text-center">
                 <img src="{{url('/img/administracion.jpeg')}}" class="card-img-top">
                 <div class="card-body">
-                    <h1 class="card-title">Administracion</h1>
+                    <h1 class="card-title">Administración</h1>
+                </div>
+            </div>
+        </a>
+        @endif
+        @if(in_array( Auth::user()->id_usuariogrupo, array(2) ))
+        <a style="color: black;" href="#">
+            <div class="card text-center">
+                <img src="{{url('/img/informacion_personalenf.jpeg')}}" class="card-img-top">
+                <div class="card-body">
+                    <h1 class="card-title">Información Personal</h1>
+                </div>
+            </div>
+        </a>
+        <a style="color: black;" href="#">
+            <div class="card text-center">
+                <img src="{{url('/img/profesor.jpeg')}}" class="card-img-top">
+                <div class="card-body">
+                    <h1 class="card-title">Notas Académicas</h1>
                 </div>
             </div>
         </a>
@@ -81,7 +99,7 @@
             <div class="card text-center">
                 <img src="{{url('/img/super.jpeg')}}" class="card-img-top">
                 <div class="card-body">
-                    <h1 class="card-title">Informatica</h1>
+                    <h1 class="card-title">Informática</h1>
                 </div>
             </div>
         </a>
@@ -91,7 +109,7 @@
             <div class="card text-center">
                 <img src="{{url('/img/eventos.jpeg')}}" class="card-img-top">
                 <div class="card-body">
-                    <h1 class="card-title">Eventos</h1>
+                    <h1 class="card-title">Eventos Académicos</h1>
                 </div>
             </div>
         </a>

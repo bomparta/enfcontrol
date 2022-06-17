@@ -1,5 +1,12 @@
 <div class="col-xs-1 col-sm-1 col-md-1 col-lg-2 col-xl-2 col-xxl-2 border-rt-e6 px-0">
     <div class="d-flex flex-column align-items-center align-items-sm-start ">
+    <aside class="bg-white" id="sidebar-wrapper-lg">
+    <div class="sidebar-heading text-center">
+        <h1 class="h5 text-primary">Control de Estudios</h1>
+        <h2 class="h6">{{Auth::user()->name}}</h2>
+        <hr class="mb-0">
+    </div>
+
                 <ul class="nav flex-column pt-2 w-200">
                     <!-- Menu Administrador Control Estudio -->
                     @if(in_array( Auth::user()->id_usuariogrupo, array(9,5) ))
@@ -54,37 +61,7 @@
                     </a>
                     @endif
 
-                    <!-- Menu Planificador Control Estudio-->
-                    @if(in_array( Auth::user()->id_usuariogrupo, array(7) ))
-                    <a href="{{route('listadoactividad')}}" class="list-group-item list-group-item-action border-0">
-                        <img src="/img/icons-lineal/analiticas.png" class="icon-lg">
-                        Actuacion
-                    </a>
-                    <a href="{{route('listadoactividad')}}" class="list-group-item list-group-item-action border-0">
-                        <img src="/img/icons-lineal/analiticas.png" class="icon-lg">
-                        Participantes
-                    </a>
-                    <a href="{{route('listadoactividad')}}" class="list-group-item list-group-item-action border-0">
-                        <img src="/img/icons-lineal/analiticas.png" class="icon-lg">
-                        Ponentes
-                    </a>
-                    <a href="{{route('listadoactividad')}}" class="list-group-item list-group-item-action border-0">
-                        <img src="/img/icons-lineal/analiticas.png" class="icon-lg">
-                        Asistencia
-                    </a>
-                    @endif
-
-                    <!-- Menu Operador Control Estudio-->
-                    @if(in_array( Auth::user()->id_usuariogrupo, array(8) ))
-                    <a href="{{route('listadoactividad')}}" class="list-group-item list-group-item-action border-0">
-                        <img src="/img/icons-lineal/analiticas.png" class="icon-lg">
-                        Ponente
-                    </a>
-                    <a href="{{route('listadoactividad')}}" class="list-group-item list-group-item-action border-0">
-                        <img src="/img/icons-lineal/analiticas.png" class="icon-lg">
-                        Asistencia
-                    </a>
-                    @endif
+                  
                     <!-- Menu Participante Control Estudio-->
                     @if(in_array( Auth::user()->id_usuariogrupo, array(1) ))
                     <a href="{{route('dashboard')}}" class="list-group-item list-group-item-action border-0 bg-dark text-white">
@@ -117,7 +94,7 @@
                     </a>
                     <a href="/adjunto_datos/{{ Auth::user()->id }}" class="list-group-item list-group-item-action border-0">
                         <img src="/img/icons-lineal/analiticas.png" class="icon-lg">
-                        Datos Adjuntados
+                        Requisitos
                     </a>
                     <a href="/estatus/{{ Auth::user()->id }}" class="list-group-item list-group-item-action border-0">
                         <img src="/img/icons-lineal/analiticas.png" class="icon-lg">
@@ -127,11 +104,15 @@
 
                     <!-- Menu Administracion Control Estudio-->
                     @if(in_array( Auth::user()->id_usuariogrupo, array(4) ))
-                    <a href="{{route('listadoactividad')}}" class="list-group-item list-group-item-action border-0">
+                    <a href="{{route('adm')}}" class="list-group-item list-group-item-action border-0">
                         <img src="/img/icons-lineal/analiticas.png" class="icon-lg">
-                        Precio UC
+                        Valor Unidad Crédito
                     </a>
-                    <a href="{{route('listadocente')}}" class="list-group-item list-group-item-action border-0">
+                    <a href="{{route('adm')}}" class="list-group-item list-group-item-action border-0">
+                        <img src="/img/icons-lineal/analiticas.png" class="icon-lg">
+                        Valor Aranceles
+                    </a>
+                    <a href="{{route('adm')}}" class="list-group-item list-group-item-action border-0">
                         <img src="/img/icons-lineal/analiticas.png" class="icon-lg">
                         Listado Docente
                     </a>
@@ -147,6 +128,10 @@
                         <img src="/img/icons-lineal/analiticas.png" class="icon-lg">
                         Conciliado Error
                     </a>
+                    <a href="{{route('adm')}}" class="list-group-item list-group-item-action border-0">
+                        <img src="/img/icons-lineal/analiticas.png" class="icon-lg">
+                        Pagos Adicionales
+                    </a>
                     @endif
 
                     <!-- Menu Profesor Control Estudio-->
@@ -158,6 +143,10 @@
                     <a href="{{route('listadoactividad')}}" class="list-group-item list-group-item-action border-0">
                         <img src="/img/icons-lineal/analiticas.png" class="icon-lg">
                         Informacion Profesor
+                    </a>
+                    <a href="{{route('listadoactividad')}}" class="list-group-item list-group-item-action border-0">
+                        <img src="/img/icons-lineal/analiticas.png" class="icon-lg">
+                        Carga de Calificaciones
                     </a>
                     @endif
                      <!-- Menu Administracion RRHH-->
@@ -185,7 +174,7 @@
                                                                 document.getElementById('logout-form').submit();">
                                                     {{ __('Cerrar sesion') }}
                     </a>
-
+                    </aside>
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                         @csrf
                     </form>

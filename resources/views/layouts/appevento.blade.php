@@ -1,8 +1,8 @@
 
 <aside class="bg-white" id="sidebar-wrapper-lg">
     <div class="sidebar-heading text-center">
-        <h1 class="h5 text-primary">Panel de control</h1>
-        <h2 class="h6">Nombre menu Usuario</h2>
+        <h1 class="h5 text-primary">Eventos Académicos</h1>
+        <h2 class="h6">{{Auth::user()->name}}</h2>
         <hr class="mb-0">
     </div>
 
@@ -10,34 +10,31 @@
         <!-- Menu Secretaria-->
         @if(in_array( Auth::user()->id_usuariogrupo, array(1, 3, 6,7) ))
         <a href="{{route('listadoactividad')}}" class="list-group-item list-group-item-action border-0">
-            <img src="/img/icons-lineal/analiticas.png" class="icon-lg">
+            <img src="/img/icons-lineal/check_list.png" class="icon-lg">
             Actividad
         </a>
         @endif
         <a href="{{route('actuacion')}}" class="list-group-item list-group-item-action border-0">
-            <img src="/img/icons-lineal/analiticas.png" class="icon-lg">
+            <img src="/img/icons-lineal/check_list.png" class="icon-lg">
             Actuación
         </a>
         
-        <a href="/" class="list-group-item list-group-item-action border-0">
-            <img src="/img/icons-lineal/analiticas.png" class="icon-lg">
-            Ajustes
-        </a>
+        
 
         <a href="/" class="list-group-item list-group-item-action border-0">
-            <img src="/img/icons-lineal/analiticas.png" class="icon-lg">
+            <img src="/img/icons-lineal/check_list.png" class="icon-lg">
             Buscar
         </a>
 
-        <a href="/" class="list-group-item list-group-item-action border-0">
-            <img src="/img/icons-lineal/analiticas.png" class="icon-lg">
+        <a href="{{route('reporte')}}" class="list-group-item list-group-item-action border-0">
+            <img src="/img/icons-lineal/check_list.png" class="icon-lg">
             Reportes
         </a>
 
         <!-- Menu Comun -->
 
         <a href="/password/reset" class="list-group-item list-group-item-action border-0">
-            <img src="/img/icons-lineal/analiticas.png" class="icon-lg">
+            <img src="/img/icons-lineal/check_list.png" class="icon-lg">
             Cambio de clave
         </a>
 
