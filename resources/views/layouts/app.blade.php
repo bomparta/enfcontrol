@@ -76,6 +76,16 @@
                         <a class="nav-link" href="{{route('actividad')}}">Eventos Académicos&nbsp;<i class="fa fa-list"></i></a>
                     </li>
                     @endif
+                    @if(in_array( Auth::user()->id_usuariogrupo, array(9) ))
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{route('usuario')}}">Informática&nbsp;<i class="fa fa-box"></i></a>
+                    </li>
+                    @endif
+                    @if(in_array( Auth::user()->id_usuariogrupo, array(12) ))
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{route('rrhh')}}">Control de Expedientes&nbsp;<i class="fa fa-box"></i></a>
+                    </li>
+                    @endif
                 @endif
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
@@ -140,12 +150,12 @@
             
         </main>
         <footer class="px-2 py-2 fixed-bottom bg-dark">
-     <span class="text-muted">Sistema de control de estudio de la Escuela Nacional de Fiscales. 
+     <span class="text-muted">Sistema de Gestión de la Escuela Nacional de Fiscales del Ministerio Público. 
         <i class="fa fa-code text-white">Bompart</i>
         con
         <i class="fa fa-code text-white">Colmenares</i>
         por
-        <a target="_blank" class="text-white" href="http://www.enfmp.edu.ve">Coordinacion de IT</a>
+        <a target="_blank" class="text-white" href="http://www.enf.edu.ve">Coordinación de Tecnología</a>
         &nbsp;
     </span>
 </footer>

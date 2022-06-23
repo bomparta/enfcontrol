@@ -96,15 +96,15 @@
             @yield('content')
         </main>
         <footer class="px-2 py-2 fixed-bottom bg-dark">
-     <span class="text-muted">Sistema de control de estudio de la Escuela Nacional de Fiscales
+     <span class="text-muted">Sistema de Gestión de la Escuela Nacional de Fiscales del Ministerio Público
         <i class="fa fa-code text-white"></i>
         con
         <i class="fa fa-heart" style="color: #ff2b56;"></i>
         por
         <a class="text-white" href="//parzibyte.me/blog">Parzibyte</a>
         &nbsp;|&nbsp;
-        <a target="_blank" class="text-white" href="//github.com/parzibyte/sistema_ventas_laravel">
-            <i class="fab fa-github"></i>
+        <a target="_blank" class="text-white" href="www.enf.edu.ve">
+            <i class="fab fa-web"></i>
         </a>
     </span>
 </footer>

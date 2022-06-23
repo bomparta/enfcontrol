@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
      <div class="col-12 text-center">
-        <h1>Bienvenido, {{Auth::user()->name}}</h1>
+        <h1>Bienvenido(a), {{Auth::user()->name}}</h1>
     </div>
     <div class="card-columns">
         <a href="{{route('listadoactividad')}}" style="color: black;" href="index">
@@ -19,7 +19,7 @@
             <div class="card text-center">
                 <img src="{{url('/img/control_estudio.jpeg')}}" class="card-img-top">
                 <div class="card-body">
-                    <h1 class="card-title">Actuacion</h1>
+                    <h1 class="card-title">Actuación</h1>
                 </div>
             </div>
         </a>

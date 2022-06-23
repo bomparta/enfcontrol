@@ -11,7 +11,7 @@
             <div class="card text-center">
                 <img src="{{url('/img/informacion_personalenf.jpeg')}}" class="card-img-top">
                 <div class="card-body">
-                    <h1 class="card-title">Inf. Personal</h1>
+                    <h1 class="card-title">Información Personal</h1>
                 </div>
             </div>
         </a>
@@ -31,7 +31,7 @@
             <div class="card text-center">
                 <img src="{{url('/img/preinscripcionenf.jpeg')}}" class="card-img-top">
                 <div class="card-body">
-                    <h1 class="card-title">Preinscripcion</h1>
+                    <h1 class="card-title">Preinscripción</h1>
                 </div>
             </div>
         </a>
@@ -41,7 +41,7 @@
             <div class="card text-center">
                 <img src="{{url('/img/control_estudioenf.jpeg')}}" class="card-img-top">
                 <div class="card-body">
-                    <h1 class="card-title">Constancia Estudio</h1>
+                    <h1 class="card-title">Constancia Estudio </h1>
                 </div>
             </div>
         </a>

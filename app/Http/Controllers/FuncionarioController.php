@@ -16,6 +16,7 @@ use App\Cod_Habitacion;
 use App\Persona;
 use App\DatosEstudiantes;
 use App\Funcionario;
+use App\Tipo_trabajador;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -39,23 +40,92 @@ class FuncionarioController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function edit(Request $request)
+    public function edit(Request $request)// editar datos personales
     {
         $nacionalidades= Nacionalidad::All();
         $generos= Genero::All();
         $estado_civils= Estado_civil::All();
         $cod_habs= Cod_Habitacion::All();
         $cod_cels= Cod_Celular::All();
-        $datos_persona   =   Persona::where('numero_identificacion','=',$request->cedula)->paginate(1);
-      //  var_dump($datos_persona);
-      if ($request->id_persona!=NULL){
-        $datos_funcionario    =   Funcionario::where('id_persona','=',$request->id_persona)->get();
-      }else{
-        $datos_funcionario    =   Funcionario::All();
-      }
+        $entidad = Entidad::All();
+        $tipo_trabajador= Tipo_Trabajador::All();
+         $cedula_usuario=Auth::user()->cedula;// buscar la manera que este valor de usuario este referenciado en la tabla funcionario y Usuario
+      
+  
+     
+        $datos_funcionario  =   Funcionario::select ('*', 'funcionario.id as id_funcionario','funcionario.id_tipo_funcionario as id_tipo_trabajador',
+        'funcionario.cargo as cargo_func')->join ('persona', 'persona.id','=','funcionario.persona_id')
+        ->where('persona.numero_identificacion','=',$cedula_usuario)->get();
+     
      //var_dump($datos_funcionario);
-        return view('rrhh/funcionario/datosedit',compact('datos_persona','datos_funcionario','nacionalidades','generos','estado_civils','cod_habs','cod_cels'));    
+     //var_dump($generos);
+     if(count($datos_funcionario)>0){
+        return view('rrhh/funcionario/datosedit',compact('datos_funcionario','nacionalidades','generos','estado_civils','cod_habs','cod_cels','entidad','tipo_trabajador'));    
+     }else{
+        $datos_funcionario  =   Persona::select ('*','persona.id as persona_id')->where('persona.numero_identificacion','=',$cedula_usuario)->get();
+        return view('rrhh/funcionario/datosedit',compact('datos_funcionario','nacionalidades','generos','estado_civils','cod_habs','cod_cels','entidad','tipo_trabajador'));    
+     }
+    }
+    public function updatedatospersonales(Request $request)
+    {
+        //
+        $request->validate([
+            'id_persona' => ['required'],
+            'id_tipo_trabajador' => ['required'],
+            'id_oficina_administrativa' => ['required'],
+            'cargo' => ['required', 'string', 'max:160'],
+            'estado_nac' => ['required'],
+            
+        ]);
+       // dd($request);
+        if(!isset($request->id_funcionario)){
+            $datos_funcionario = new Funcionario();
+            $datos_funcionario->persona_id = $request->id_persona ;
+            $datos_funcionario->id_tipo_funcionario = $request->id_tipo_trabajador;
+            $datos_funcionario->id_oficina_administrativa = $request->id_oficina_administrativa;
+            $datos_funcionario->cargo = $request->cargo;          
+            $datos_funcionario->save();
+
+        }else{
        
+
+        Funcionario::where('id', $request->id_funcionario)
+        ->update([
+            'persona_id'=> $request->id_persona,
+            'id_tipo_funcionario'=> $request->id_tipo_trabajador,
+            'id_oficina_administrativa' => $request->id_oficina_administrativa,
+            'cargo' =>$request->cargo,
+                 
+        ]);
+    }
+
+        Persona::where('id', $request->id_persona)
+        ->update([          
+            'id_tipo_identificacion' =>'1',
+            'id_nacionalidad' =>$request->nacionalidad,
+            'numero_identificacion'=>$request->cedula,
+            'nombre'=>$request->primernombre,
+            'nombreseg'=>$request->segundonombre,
+            'apellido'=>$request->primerapellido,
+            'apellidoseg'=>$request->segundoapellido,
+            'edad'=>$request->fechanac,
+            'ciudad_nac'=>$request->ciudad_nac,
+            'estado_nac'=>$request->estado_nac,
+            'id_genero'=>$request->genero,
+            'email'=>$request->correo,
+            'id_estado_civil'=>$request->estadocivil,
+            'telefono_hab'=>'',
+            'telefono_cel'=>'',
+            'id_organismo'=>0,
+            'id_tipo_funcionario'=>0,
+            'cargo'=>'',
+            'id_adscripcion'=>0,
+            'id_dependencia'=>0,
+            'id_pais'=>1,
+            'id_entidad'=>0,   
+        ]);
+     
+        return redirect('rrhh/funcionario/datosedit')->with('message', ' Datos Personales actualizados con éxito!!.');
     }
 
     public function create()
@@ -65,7 +135,16 @@ class FuncionarioController extends Controller
         $estado_civils= Estado_civil::All();
         $cod_habs= Cod_Habitacion::All();
         $cod_cels= Cod_Celular::All();
-       return view('rrhh/funcionario/datos',compact('generos','nacionalidades','estado_civils','cod_habs','cod_cels'));
+        $entidad = Entidad::All();
+        $tipo_trabajador= Tipo_Trabajador::All();
+        $cedula_usuario=Auth::user()->cedula;// buscar la manera que este valor de usuario este referenciado en la tabla funcionario y Usuario
+      
+        $datos_persona  =   Persona::select ('*')->where('numero_identificacion','=',$cedula_usuario)->paginate(1);
+        var_dump($cedula_usuario);
+        if(count($datos_persona)==0){
+            return view('rrhh/funcionario/datos',compact('cedula_usuario','generos','nacionalidades','estado_civils','cod_habs','cod_cels','entidad','tipo_trabajador'));               
+        }
+     
     }
 
     public function createdireccion()
@@ -92,7 +171,8 @@ class FuncionarioController extends Controller
         $estado_civils= Estado_civil::All();
         $cod_habs= Cod_Habitacion::All();
         $cod_cels= Cod_Celular::All();
-       return view('rrhh/funcionario/familiar',compact('generos','nacionalidades','estado_civils','cod_habs','cod_cels'));
+        $familiar= NULL;
+       return view('rrhh/funcionario/familiar',compact('familiar','generos','nacionalidades','estado_civils','cod_habs','cod_cels'));
     }
     
    
@@ -106,49 +186,40 @@ class FuncionarioController extends Controller
     {
         
         $request->validate([
-            'primernombre' => ['required', 'string', 'max:160'],
-            'segundonombre' => ['required', 'string', 'max:160'],
-            'primerapellido' => ['required', 'string', 'max:160'],
-            'segundoapellido' => ['required', 'string', 'max:160'],
-            'genero' => ['required'],
-            'nacionalidad' => ['required'],
-            'cedula' => ['required'],
-            'estadocivil' => ['required'],
-            'correo' => ['required'],
-            'codtele' => ['required'],
-            'telfhabitacion' => ['required'],
-            'fechanac' => ['required'],
-            'codtelecel' => ['required'],
-            'telefonoCel' => ['required'],
-            'cod_what' => ['required'],
-            'telfwhatsapp' => ['required'],
-    
-           
+            
+            'id_oficina_administrativa' => ['required'],
+            'cargo' => ['required', 'string', 'max:160'],
+            'estado_nac' => ['required'],
+            
         ]);
-       // dd($request);
-        
+        //dd($request);  
+        $datos_persona = new Persona();      
+   
+        $datos_persona->id_tipo_identificacion = 1 ;
+        $datos_persona->id_nacionalidad = $request->nacionalidad;
+        $datos_persona->numero_identificacion = $request->cedula;
+        $datos_persona->nombre = $request->primernombre;  
+        $datos_persona->nombreseg = $request->segundonombre;
+        $datos_persona->apellido = $request->primerapellido;
+        $datos_persona->apellidoseg = $request->segundoapellido;
+        $datos_persona->edad = $request->fechanac;
+        $datos_persona->ciudad_nac = $request->ciudad_nac;
+        $datos_persona->estado_nac = $request->estado_nac;
+        $datos_persona->id_genero = $request->genero;        
+        $datos_persona->email = $request->correo; 
+        $datos_persona->id_estado_civil = $request->estadocivil; 
+        $datos_persona->save();      
+          //dd($request);  
+         $id_persona= $datos_persona->id ;
+       //   dd($datos_persona);  
+        $datos_funcionario = new Funcionario();
+        $datos_funcionario->persona_id = $id_persona;
+        $datos_funcionario->id_tipo_funcionario = $request->id_tipo_trabajador;
+        $datos_funcionario->id_oficina_administrativa = $request->id_oficina_administrativa;
+        $datos_funcionario->cargo = $request->cargo;          
+        $datos_funcionario->save();
 
-        $estudiantes = new DatosEstudiante();
-        $estudiantes->id_usuario = Auth::user()->id;
-        $estudiantes->nacionalidad = $request->cedula;
-        $estudiantes->cedula = $request->cedula;
-        $estudiantes->nombre_primer = $request->primernombre;
-        $estudiantes->nombre_segundo = $request->segundonombre;
-        $estudiantes->apellido_primer = $request->primerapellido;
-        $estudiantes->apellido_segundo = $request->segundoapellido;
-        $estudiantes->id_sexo = $request->genero;
-        $estudiantes->fecha_nac = $request->fechanac;
-        $estudiantes->id_estado_civil = $request->estadocivil;
-        $estudiantes->correo = $request->correo;
-        $estudiantes->id_codigo_hab = $request->codtele;
-        $estudiantes->tel_habitacion = $request->telfhabitacion;
-        $estudiantes->tel_celular = $request->telefonoCel;
-        $estudiantes->id_codigo_cel = $request->codtelecel;
-        $estudiantes->telefono_whatsapp = $request->telfwhatsapp;
-        $estudiantes->id_codigo_cel_whatsapp = $request->cod_what;
-        $estudiantes->save();
-
-        //return redirect('/estudiantelist/'.$estudiantes->id_usuario)->with('success', 'Actividad creada con éxito.');
+        return redirect('rrhh/funcionario/datosedit')->with('message', ' Datos Personales actualizados con éxito!!.');
     }
 
     /**
@@ -177,10 +248,7 @@ class FuncionarioController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
-    {
-        //
-    }
+
 
     /**
      * Remove the specified resource from storage.

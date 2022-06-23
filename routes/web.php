@@ -120,13 +120,14 @@ Route::get('/listapensum/{id}', 'PensumController@list')->name('listapensum');
 Route::get('/rrhh', 'RrhhController@index')->name('rrhh');
 Route::get('/rrhh/movimientos', 'RrhhController@create')->name('movimientosrrhh');
 Route::get('reportes/rrhh', 'RrhhController@reporterrhh')->name('reportesrrhh');
+Route::get('/rrhh/funcionario/planillarrhh', 'RrhhController@planillarrhh')->name('planillarrhh');
 
 
 Route::get('/rrhh/funcionario', 'FuncionarioController@index')->name('funcionario');
 Route::get('/rrhh/funcionario/datos', 'FuncionarioController@create')->name('datosfuncionario');
 Route::get('/rrhh/funcionario/datosedit', 'FuncionarioController@edit')->name('buscarfuncionario');
 Route::post('/rrhh/funcionario/datos', 'FuncionarioController@store')->name('funcionariostore');
-Route::post('/rrhh/funcionario/datosedit', 'FuncionarioController@update')->name('funcionarioupdate');
+Route::post('/rrhh/funcionario/datosedit', 'FuncionarioController@updatedatospersonales')->name('funcionarioupdate');
 
 
 Route::get('/rrhh/funcionario/experiencia', 'FuncionarioController@createxperiencia')->name('laboralfuncionario');

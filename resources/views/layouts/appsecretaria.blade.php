@@ -36,7 +36,7 @@
                         <a class="nav-link" href="{{route('listadoactividad')}}">Actividad&nbsp;<i class="fa fa-box"></i></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{route('actuacion')}}">Actuacion&nbsp;<i class="fa fa-cart-plus"></i></a>
+                        <a class="nav-link" href="{{route('actuacion')}}">Actuación&nbsp;<i class="fa fa-cart-plus"></i></a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{route('reporte')}}">Reportes Evento&nbsp;<i class="fa fa-list"></i></a>

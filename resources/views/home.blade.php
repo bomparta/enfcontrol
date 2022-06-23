@@ -1,9 +1,8 @@
 @extends('layouts.app')
-
 @section('content')
 <div class="container">
      <div class="col-12 text-center">
-        <h1>Bienvenido, {{Auth::user()->name}}</h1>
+        <h1>Bienvenido(a), {{Auth::user()->name}}</h1>
     </div>
     <div class="card-columns">
         @if(in_array( Auth::user()->id_usuariogrupo, array(1) ))
@@ -114,7 +113,7 @@
             </div>
         </a>
         @endif
-        @if(in_array( Auth::user()->id_usuariogrupo, array(12) ))
+        @if(in_array( Auth::user()->id_usuariogrupo, array(12,10,11) ))
         <a style="color: black;" href="{{route('rrhh')}}">
             <div class="card text-center">
                 <img src="{{url('/img/rrhh.png')}}" class="card-img-top">

@@ -33,7 +33,7 @@
             <img src="/img/icons-lineal/check_list.png" class="icon-lg">
             Requisitos
         </a>
-        <a href="{{route('constanciapdf')}}" class="list-group-item list-group-item-action border-0">
+        <a href="{{route('planillarrhh')}}" class="list-group-item list-group-item-action border-0">
             <img src="/img/icons-lineal/check_list.png" class="icon-lg">
             Planilla de Actualización de Datos
         </a>
@@ -70,7 +70,7 @@
             <img src="/img/icons-lineal/check_list.png" class="icon-lg">
             Requisitos
         </a>
-        <a href="{{route('constanciapdf')}}" class="list-group-item list-group-item-action border-0">
+        <a href="{{route('planillarrhh')}}" class="list-group-item list-group-item-action border-0">
             <img src="/img/icons-lineal/check_list.png" class="icon-lg">
             Planilla de Actualización de Datos
         </a>

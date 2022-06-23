@@ -51,6 +51,7 @@ class DatabaseSeeder extends Seeder
             BancoSeeder::class,
             CodigoCelSeeder::class,
             CodigoHabSeeder::class,
+          //  TipoTrabajadorSeeder::class,
 
             ]);
     }

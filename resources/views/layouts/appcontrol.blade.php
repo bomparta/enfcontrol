@@ -9,7 +9,9 @@
 
                 <ul class="nav flex-column pt-2 w-200">
                     <!-- Menu Administrador Control Estudio -->
+
                     @if(in_array( Auth::user()->id_usuariogrupo, array(9,5) ))
+                     
                     <a href="{{route('listadoactividad')}}" class="list-group-item list-group-item-action border-0">
                         <img src="/img/icons-lineal/analiticas.png" class="icon-lg">
                         Lista de Usuario
@@ -26,6 +28,7 @@
 
                     <!-- Menu Supervisor Control Estudio -->
                     @if(in_array( Auth::user()->id_usuariogrupo, array(6) ))
+                   
                     <a href="{{route('planificacion')}}" class="list-group-item list-group-item-action border-0">
                         <img src="/img/icons-lineal/analiticas.png" class="icon-lg">
                         Oferta Academica
@@ -64,6 +67,7 @@
                   
                     <!-- Menu Participante Control Estudio-->
                     @if(in_array( Auth::user()->id_usuariogrupo, array(1) ))
+                     
                     <a href="{{route('dashboard')}}" class="list-group-item list-group-item-action border-0 bg-dark text-white">
                         <img src="/img/icons-lineal/analiticas.png" class="icon-lg">
                         Inicio
@@ -104,6 +108,7 @@
 
                     <!-- Menu Administracion Control Estudio-->
                     @if(in_array( Auth::user()->id_usuariogrupo, array(4) ))
+                 
                     <a href="{{route('adm')}}" class="list-group-item list-group-item-action border-0">
                         <img src="/img/icons-lineal/analiticas.png" class="icon-lg">
                         Valor Unidad Crédito
@@ -136,6 +141,7 @@
 
                     <!-- Menu Profesor Control Estudio-->
                     @if(in_array( Auth::user()->id_usuariogrupo, array(2) ))
+                    <div class="text-primary" >CONTROL DE ESTUDIOS</div>   
                     <a href="{{route('listadoactividad')}}" class="list-group-item list-group-item-action border-0">
                         <img src="/img/icons-lineal/analiticas.png" class="icon-lg">
                         Materias
@@ -151,6 +157,7 @@
                     @endif
                      <!-- Menu Administracion RRHH-->
                      @if(in_array( Auth::user()->id_usuariogrupo, array(10) ))
+
                    <a href="#" class="card bg-light mb-3" style="max-width: 18rem;">
                       <div class="card-header">Registrar Funcionarios</div>
                       

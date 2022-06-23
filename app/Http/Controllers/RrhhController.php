@@ -14,11 +14,14 @@ use App\ImagenUpload;
 use App\Nacionalidad;
 use App\Cod_Habitacion;
 use App\DatosEstudiante;
+use App\Persona;
+use App\Funcionario;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\App;
 
 class RrhhController extends Controller
 {
@@ -36,7 +39,27 @@ class RrhhController extends Controller
     {
         return view('reportes/rrhh/lista_reporte_rrhh');
     }
-
+    public function planillarrhh()
+    {
+      /*se instalo composer require barryvdh/laravel-dompdf 
+        * se coloco en 'providers' este codigo  Barryvdh\DomPDF\ServiceProvider::class,
+        * y en 'aliases' se coloco esto 'PDF' => Barryvdh\DomPDF\Facade::class,
+        */
+        $cedula_usuario=Auth::user()->cedula;
+       $datos_funcionario  =   Funcionario::select ('*')->join ('persona', 'persona.id','=','funcionario.persona_id')
+        ->where('persona.numero_identificacion','=',$cedula_usuario)->get();
+       if($datos_funcionario->count()>0){
+        $view = \view('rrhh/funcionario/planillarrhh', compact('datos_funcionario'));
+       $pdf = App::make('dompdf.wrapper');
+       $pdf->loadHTML($view);
+       return $pdf->download('planillarrhh'.'.pdf');
+     }else{
+        return redirect('rrhh/funcionario/datosedit')->with('advertencia', ' Debe completar los datos para imprimir la PLANILLA DE ACTUALIZACION DE DATOS!!.');
+     }
+       
+  
+       
+    }
     /**
      * Show the form for creating a new resource.
      *

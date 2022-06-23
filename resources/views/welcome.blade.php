@@ -80,11 +80,10 @@
 
                 </div>
             @endif
-
             <div class="content">
             <div>
                 <img src="{{url('/img/logo2.png')}}"  width="150px" height="150px" >
-                <hr style=" height: 10px;border-radius: 5px; background-color: gray;">
+                <hr style=" height: 10px;border-radius: 5px; background-color: #c8c5c5;">
             </div>
                 <div class="title m-b-md">
                     Fundación Escuela de Fiscales
@@ -93,9 +92,11 @@
                 del Ministerio Público
                 </div>
             <div class="container-fluid">
-                <strong>"El ente articulador del Ministerio Público en el Sistema de Justicia venezolano, <br>en materia de función Fiscal que coadyuven en la resolución de problemas<br>en el Sistema de Justicia Penal venezolano."</strong>
+                <strong>"El ente articulador del Ministerio Público en el Sistema de Justicia Venezolano, 
+                    <br>en materia de Función Fiscal que coadyuven en la resolución de problemas<br>en el Sistema de Justicia Penal venezolano."
+                </strong>
                 <p>
-                <hr style=" height: 10px;border-radius: 5px; background-color: gray;">
+                <hr style=" height: 10px;border-radius: 5px; background-color: #c8c5c5;">
             </div>
             
             <div class="links">

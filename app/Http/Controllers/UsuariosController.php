@@ -92,6 +92,7 @@ class UsuariosController extends Controller
             'nombre' => ['string', 'max:120'],
             'email' => ['required', 'email', 'max:150'],
             'id_usuariogrupo' => ['required'],
+            'cedula'=>['required'],
         ]);
 
         User::where('users.id', $id)
@@ -99,7 +100,8 @@ class UsuariosController extends Controller
             'username' => $request->username,
             'name' => $request->nombre,
             'email' => $request->email,
-            'id_usuariogrupo' => $request->id_usuariogrupo
+            'id_usuariogrupo' => $request->id_usuariogrupo,
+            'email' => $request->cedula,
         ]);
 
         return redirect()->route('usuarios.index')

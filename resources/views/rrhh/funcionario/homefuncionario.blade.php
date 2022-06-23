@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section ('content')
-<div class="container-fluid">
+<div class="container">
     <div class="row justify-content-start">  
       <div class="col-12 text-center">
       <h4 class="text-primary" >CONTROL DE EXPEDIENTES RRHH</h6>   
@@ -48,7 +48,7 @@
             </div>
             <div class="card bg-light mb-6" style="max-width: 12rem;">                    
               <div class="card-body">
-              <a href="{{route('constanciapdf')}}" > <h6 class="card-title">Planilla de Actualización de Datos</h6>
+              <a href="{{route('planillarrhh')}}" > <h6 class="card-title">Planilla de Actualización de Datos</h6>
                 <img src="{{url('/img/cv.jpeg')}}" class="card-img-top" title="Descargar Planilla de Actualización"  >
               </a>
               </div>
