@@ -35,10 +35,10 @@
                 @if (isset($datos_funcionario))   
                 @foreach($datos_funcionario as $key=>$item)   
                     <tr><td><strong>Cédula de Identidad: @if ($item->id_nacionalidad==1) V @else E @endif - {{$item->numero_identificacion}}</strong></td></tr>
-                    <input id="id_persona" type="text" name="id_persona" value="{{$item->persona_id}}" >
-                    <input id="id_funcionario" type="text" name="id_funcionario" value="{{$item->id_funcionario}}" >
-                    <input id="nacionalidad" type="text" name="nacionalidad" value="{{$item->id_nacionalidad}}" >
-                    <input id="cedula" type="text" name="cedula" value="{{$item->numero_identificacion}}" >
+                    <input id="id_persona" type="hidden" name="id_persona" value="{{$item->persona_id}}" >
+                    <input id="id_funcionario" type="hidden" name="id_funcionario" value="{{$item->id_funcionario}}" >
+                    <input id="nacionalidad" type="hidden" name="nacionalidad" value="{{$item->id_nacionalidad}}" >
+                    <input id="cedula" type="hidden" name="cedula" value="{{$item->numero_identificacion}}" >
                     <tr><td colspan="4"><hr></td></tr>
 
                 <tr> 

@@ -82,7 +82,7 @@
             @endif
             <div class="content">
             <div>
-                <img src="{{url('/img/logo2.png')}}"  width="150px" height="150px" >
+                <a href="http://www.enf.edu.ve" target="_new"><img src="{{url('/img/logo2.png')}}"  width="150px" height="150px" ></a>
                 <hr style=" height: 10px;border-radius: 5px; background-color: #c8c5c5;">
             </div>
                 <div class="title m-b-md">
