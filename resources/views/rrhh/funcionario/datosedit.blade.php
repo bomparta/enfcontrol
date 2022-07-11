@@ -92,7 +92,7 @@
                             <td>
                                 &nbsp;Sexo&nbsp;<span style="color:red;">*</span>&nbsp;<br>
                                 <select class="form-control"  type="text" name="genero" id="genero" required>
-                                    <option value="{{$item->id_genero}}">Seleccione...</option>
+                                    <option value="0">Seleccione...</option>
                                     @foreach ($generos as $generos)
                                     <option value="{{ $generos->id }}"
                                     @if($item->id_genero == $generos->id)selected @endif >

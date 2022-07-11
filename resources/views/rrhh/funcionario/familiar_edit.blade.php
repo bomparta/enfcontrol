@@ -18,6 +18,7 @@
                                     <b>Suministre los datos de su grupo familiar, haga clic en "Guardar" par registrar su información <b>
                                     <hr>   
                                     @include('rrhh.funcionario.mensaje')  
+
                                 </div>
                             </td>
                         </tr>
@@ -25,11 +26,17 @@
                        
                     <table>
                   
-                        <form id="formulario" name="formulario" method="POST" action="{{route('registrarfamiliar')}}">
+                        <form id="formulario" name="formulario" method="POST" action="{{route('actualizarfamiliar')}}">
                             @csrf
                             <tr>
                                 
-                                    <input id="id_funcionario" type="hidden" name="id_funcionario" value="{{$funcionario_id}}" >
+                            @if (isset($familiar))   
+                                @foreach($familiar as $key=>$item)       
+                            <td>
+                                <input id="id_persona" type="hidden" name="id_persona" value="{{$item->id_persona}}" >
+                                <input id="id_funcionario" type="hidden" name="id_funcionario" value="{{$item->funcionario_id}}" >
+                                <input id="id_familiar" type="hidden" name="id_familiar" value="{{$item->id_familiar}}" >
+                            </td>
                                 </td>
                             </tr>
                             <tr>
@@ -40,7 +47,7 @@
                                             <option value="{{ $nacionalidad->id  }}">{{ $nacionalidad->cod }}</option>
                                         @endforeach
                                     </select>
-                                    <input type="text" name="cedula" id="cedula" value=""  maxlength="12"/>
+                                    <input type="text" name="cedula" id="cedula" value="{{$item->numero_identificacion}}"  maxlength="12"/>
                                     @error('cedula')
                                         <div class="invalid-feedback">
                                         <strong>{{ $message }}</strong>
@@ -50,7 +57,7 @@
                                 <tr>
                                 <td>
                                     &nbsp;Primer Nombre&nbsp;<span style="color:red;">*</span>&nbsp;<br>
-                                    <input id="primernombre" type="text"  maxlength="25" class="form-control @error('primernombre') is-invalid @enderror" name="primernombre" value="" required>
+                                    <input id="primernombre" type="text"  maxlength="25" class="form-control @error('primernombre') is-invalid @enderror" name="primernombre" value="{{$item->nombre}}" required>
                                     @error('primernombre')
                                         <div class="invalid-feedback">
                                         <strong>{{ $message }}</strong>
@@ -59,7 +66,7 @@
                                 </td>
                                 <td>
                                     &nbsp;Segundo Nombre&nbsp;<br>
-                                    <input id="segundonombre" type="text"  maxlength="25" class="form-control @error('segundonombre') is-invalid @enderror" name="segundonombre" value="" >
+                                    <input id="segundonombre" type="text"  maxlength="25" class="form-control @error('segundonombre') is-invalid @enderror" name="segundonombre" value="{{$item->nombreseg}}" >
                                     @error('segundonombre')
                                         <div class="invalid-feedback">
                                         <strong>{{ $message }}</strong>
@@ -71,7 +78,7 @@
                             <tr>
                                 <td>
                                     &nbsp;Primer Apellido&nbsp;<span style="color:red;">*</span>&nbsp;<br>
-                                    <input id="primerapellido" type="text"  maxlength="25" class="form-control @error('primerapellido') is-invalid @enderror" name="primerapellido" value=""  required>
+                                    <input id="primerapellido" type="text"  maxlength="25" class="form-control @error('primerapellido') is-invalid @enderror" name="primerapellido" value="{{$item->apellido}}"  required>
                                     @error('primerapellido')
                                         <div class="invalid-feedback">
                                         <strong>{{ $message }}</strong>
@@ -80,7 +87,7 @@
                                 </td>
                                 <td>
                                     &nbsp;Segundo Apellido&nbsp;<br>
-                                    <input id="segundoapellido" type="text"  maxlength="25" class="form-control @error('segundoapellido') is-invalid @enderror" name="segundoapellido" value=""  >
+                                    <input id="segundoapellido" type="text"  maxlength="25" class="form-control @error('segundoapellido') is-invalid @enderror" name="segundoapellido" value="{{$item->apellidoseg}}"  >
                                     @error('segundoapellido')
                                         <div class="invalid-feedback">
                                         <strong>{{ $message }}</strong>
@@ -88,18 +95,19 @@
                                     @enderror
                                 </td>
                             </tr>
-                            <!-- FILA 3 -->
-                            <tr>
+                        <!-- FILA 3 -->
+                        <tr>
                                 
                                 <td>
                                     &nbsp;Sexo&nbsp;<span style="color:red;">*</span>&nbsp;<br>
-                                    <select class="form-control"  type="text" name="genero" required>
-                                        <option value="0">Seleccione...</option>
-                                        @foreach ($generos as $generos)
-                                        <option value="{{ $generos->id }}" >
-                                        {{ $generos->cod }}</option>
-                                        @endforeach
-                                    </select>
+                                    <select class="form-control"  type="text" name="genero" id="genero" required>
+                                    <option value="0">Seleccione...</option>
+                                    @foreach ($generos as $generos)
+                                    <option value="{{ $generos->id }}"
+                                    @if($item->id_genero == $generos->id)selected @endif >
+                                       {{ $generos->cod }}</option>
+                                    @endforeach
+                                </select>
                                     @error('sexo')
                                         <div class="invalid-feedback">
                                             <strong>{{ $message }}</strong>
@@ -108,7 +116,7 @@
                                 </td>
                                 <td>
                                     &nbsp;Fecha Nacimiento&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:red;">*</span><br>
-                                    <input type="date" name="fechanac" id="fechanac"  value=""  maxlength="25" required/>
+                                    <input type="date" name="fechanac" id="fechanac"  value="{{$item->edad}}"  maxlength="25" required/>
                                 </td>
                                             
                             </tr>
@@ -119,8 +127,9 @@
                                     <select name="parentezco" id="parentezco"   class="form-control" required >
                                     <option value="0">Seleccione...</option>
                                         @foreach ($parentezco as $parentezco)
-                                        
-                                            <option value="{{ $parentezco->id }}">{{ $parentezco->descripcion }}</option>
+                                        <option value="{{ $parentezco->id }}"
+                                        @if($item->id_parentezco == $parentezco->id)selected @endif >    
+                                           {{ $parentezco->descripcion }}</option>
                                         @endforeach
                                     </select>
                                 </td>
@@ -130,13 +139,13 @@
                             <tr>
                                 <td>
                                     &nbsp;Ocupación&nbsp;<span style="color:red;">*</span>&nbsp;<br>
-                                    <input id="ocupacion" type="text"name="ocupacion"  class="form-control" required >
+                                    <input id="ocupacion" type="text"name="ocupacion"  class="form-control" value="{{$item->ocupacion}}" required >
                                     
                                     
                                 </td>
                                 <td>
                                 &nbsp;Teléfono&nbsp;<span style="color:red;">*</span>&nbsp;<br>
-                                    <input id="text" type="text"  maxlength="25" class="form-control @error('telefono') is-invalid @enderror" name="telefono" value="" required>
+                                    <input id="text" type="text"  maxlength="25" class="form-control @error('telefono') is-invalid @enderror" name="telefono" value="{{$item->telefono}}" required>
                                     @error('telefono')
                                         <div class="invalid-feedback">
                                         <strong>{{ $message }}</strong>
@@ -151,9 +160,10 @@
                                 <td>
                                     &nbsp;Vive con Usted?&nbsp;<span style="color:red;">*</span>&nbsp;<br>
                                     <select id="vive" name="vive"class="form-control" required >
+                                        
                                             <option value="0">Seleccione...</option>
-                                            <option value="1">SI</option>
-                                            <option value="2">NO</option>
+                                            <option value="1"   @if ($item->vive_id==1) echo "selected" @endif >SI</option>
+                                            <option value="2"  selected @if ($item->vive_id==1) echo "selected" @endif >NO</option>
                                         
                                     </select>
                                 
@@ -169,62 +179,16 @@
                                 </td>
                                 
                             </tr>
-                       
-                    </table>
-             
+
+                       @endforeach
+                        @endif                    
+                    </table> 
                     <div class="frameContenedor" style="margin:5px;" align="right">
-                        <input class='btn btn-info' type="submit" value="Registrar Familiar" >
+                        <input class='btn btn-info' type="submit" value="Guardar" >
+                        <a class='btn btn-secondary' href="{{URL::route('familiarfuncionario')}}">Regresar</a>
                     </div>
-                    
-                    <div class="table-responsive mt-3">
-                    <table id="example" class="table table-striped table-bordered" style="width:100%">
-                        
-                                            <thead>
-                                                <tr>
-                                                    <th>Cedula</th>
-                                                    <th>Nombre y Apellidos</th>
-                                                    <th>Correo</th>
-                                                    <th>Telefono</th>
-                                                    <th>Sexo</th>
-                                                    @if(in_array( Auth::user()->id_usuariogrupo, array(9,12,10) ))
-                                                        <th>Opcion</th>
-                                                    @endif
-                                                </tr>
-                                            </thead>
-                                  
-                                          @foreach($familiar as $familiar)
-                                                    <tr>
-                                                    
-                                                    <td>{{ $familiar->nacionalidad }}-{{ $familiar->numero_identificacion }}</td>
-                                                        <td>{{ $familiar->nombre }} {{ $familiar->nombreseg }} {{ $familiar->apellido }} {{ $familiar->apellidoseg }}</td>
-                                                        <td>{{ $familiar->email}}</td>
-                                                        <td>{{ $familiar->telefono}}</td>
-                                                        <td>{{ $familiar->cod }}</td>
-                                                        @if(in_array( Auth::user()->id_usuariogrupo, array(9,12,10) ))
-                                                            <td class="text-center">
-                                                            <a href= "familiar_edit/{{$familiar->id_familiar}}" class="btn btn-info" data-tip="Detalle" title="Actualizar familiar" data-toggle="tooltip" data-original-title="Editar">
-                                                            <img src="/img/icon/modify.ico" class="icon-sm" alt="Listado">
-                                                            </a>
-                                                            </td>
-                                                        @endif
-                                                            
-                                                    </tr>
-                                            @endforeach     
-                                            </tbody>
-                                            <tfoot>
-                                                <tr>
-                                                    <th>Cedula</th>
-                                                    <th>Nombre y Apellidos</th>
-                                                    <th>Correo</th>
-                                                    <th>Telefono</th>
-                                                    <th>Sexo</th>
-                                                    @if(in_array( Auth::user()->id_usuariogrupo, array(9,12,10) ))
-                                                        <th>Opcion</th>
-                                                    @endif
-                                                </tr>
-                                            </tfoot>
-                                        </table>
-                                    </div>
+          
+                </div>
                 </form>
             </div>
         </div>

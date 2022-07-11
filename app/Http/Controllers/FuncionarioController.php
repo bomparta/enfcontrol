@@ -168,39 +168,37 @@ class FuncionarioController extends Controller
         ->join ('funcionario', 'familiares.funcionario_id','=','funcionario.id')
         ->join ('persona', 'persona.id','=','familiares.persona_id')
         ->join ('genero', 'persona.id_genero','=','genero.id')
-        ->where('familiares.funcionario_id','=',$funcionario_id)->paginate(5);
+        ->where('familiares.funcionario_id','=',$funcionario_id)->paginate(10);
   // var_dump($familiar);
     return view('rrhh/funcionario/familiar',compact('funcionario_id','familiar','generos','parentezco','nacionalidades','estado_civils','cod_habs','cod_cels'));    }
    
-    public function editfamiliar(Request $request,$id_persona,$id_funcionario,$id_familiar)// editar datos familiares
+    public function editfamiliar(Request $request,$id)// editar datos familiares
     {
         $nacionalidades= Nacionalidad::All();
         $generos= Genero::All();
         $estado_civils= Estado_civil::All();
         $cod_habs= Cod_Habitacion::All();
         $cod_cels= Cod_Celular::All();
-        $entidad = Entidad::All();
-        $tipo_trabajador= Tipo_Trabajador::All();
-        $funcionario_id=$id_funcionario;
-        $persona_id=$id_persona;
-        $familiar_id=$id_familiar;
-  
+        $parentezco=Parentezco::All();       
+   
+        $familiar_id=$id;
+       
+      
     
-         $familiar  =   Familiares::select ('*')
+         $familiar  =   Familiares::select ('*','familiares.id as id_familiar','familiares.persona_id as id_persona')
         ->join ('funcionario', 'familiares.funcionario_id','=','funcionario.id')
         ->join ('persona', 'persona.id','=','familiares.persona_id')
-        ->join ('genero', 'persona.id_genero','=','genero.id')
-        ->where('familiares.funcionario_id','=',$funcionario_id)
-        ->where('familiares.id','=',$persona_id)
-        ->get();   
-        dd($request);
-        return view('rrhh/funcionario/familiaredit',compact('familiar','generos','parentezco','nacionalidades','estado_civils','cod_habs','cod_cels'));         
+        ->join ('genero', 'persona.id_genero','=','genero.id')     
+        ->where('familiares.id','=',$familiar_id)->get();   
+      //dd($familiar);
+        return view('rrhh.funcionario.familiar_edit',compact('familiar','generos','parentezco','nacionalidades','estado_civils','cod_habs','cod_cels'));         
      
     }
    
     public function updatefamiliar(Request $request)
     {
         //
+       
         $request->validate([
             'id_persona' => ['required'],
             'id_funcionario' => ['required'],
@@ -209,11 +207,11 @@ class FuncionarioController extends Controller
             'fechanac' => ['required'],
             
         ]);
-      
+      //  dd($request);
         Familiares::where('id', $request->id_familiar)
         ->update([
             'persona_id'=> $request->id_persona,
-            'funcioanrio_id'=> $request->id_funcionario,
+            'funcionario_id'=> $request->id_funcionario,
             'parentezco_id'=> $request->parentezco,
             'ocupacion' =>$request->ocupacion,
             'telefono' =>$request->telefono,
@@ -234,7 +232,7 @@ class FuncionarioController extends Controller
            
         ]);
      
-        return redirect('rrhh/funcionario/familiaredit')->with('message', ' Datos Familiar actualizados con éxito!!.');
+        return redirect('rrhh/funcionario/familiar')->with('message', ' Datos Familiar actualizados con éxito!!.');
     }
    
     public function createdireccion()

@@ -138,8 +138,9 @@ Route::get('/rrhh/funcionario/educacion', 'FuncionarioController@createducacion'
 
 Route::get('/rrhh/funcionario/familiar', 'FuncionarioController@createfamiliar')->name('familiarfuncionario');
 Route::post('/rrhh/funcionario/familiar', 'FuncionarioController@storefamiliar')->name('registrarfamiliar');
-Route::post('/rrhh/funcionario/familiaredit', 'FuncionarioController@updatefamiliar')->name('actualizarfamiliar');
-Route::get('/rrhh/funcionario/familiaredit/{$id_persona}/{$id_funcionario}/{$id_familiar}', 'FuncionarioController@editfamiliar')->name('editarfuncionario');
+Route::get('/rrhh/funcionario/familiar_edit/{id}', 'FuncionarioController@editfamiliar');
+Route::post('/rrhh/funcionario/familiar_edit', 'FuncionarioController@updatefamiliar')->name('actualizarfamiliar');;
+
 
 Route::get('/rrhh/funcionario/requisitos', 'FuncionarioController@datosadjunto')->name('requisitos');
 
