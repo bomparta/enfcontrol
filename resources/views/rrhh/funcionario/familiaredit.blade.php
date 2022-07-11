@@ -24,11 +24,11 @@
                        
                     <table>
                   
-                        <form id="formulario" name="formulario" method="POST" action="{{route('registrarfamiliar')}}">
+                        <form id="formulario" name="formulario" method="POST" action="{{route('actualizarfamiliar')}}">
                             @csrf
                             <tr>
                                 
-                                    <input id="id_funcionario" type="hidden" name="id_funcionario" value="{{$funcionario_id}}" >
+                                    <input id="id_funcionario" type="hidden" name="id_funcionario" value="" >
                                 </td>
                             </tr>
                             <tr>
@@ -175,42 +175,7 @@
                         <input class='btn btn-info' type="submit" value="Registrar Familiarr" >
                     </div>
                     
-                    <div class="table-responsive mt-3">
-                                        <table class="table datatable">
-                                            <thead>
-                                                <tr>
-                                                    <th>Cedula</th>
-                                                    <th>Nombre y Apellidos</th>
-                                                    <th>Correo</th>
-                                                    <th>Telefono</th>
-                                                    <th>Sexo</th>
-                                                    @if(in_array( Auth::user()->id_usuariogrupo, array(9,12,10) ))
-                                                        <th>Opcion</th>
-                                                    @endif
-                                                </tr>
-                                            </thead>
-                                  
-                                          @foreach($familiar as $familiar)
-                                                    <tr>
-                                                    
-                                                    <td>{{ $familiar->numero_identificacion }}</td>
-                                                        <td>{{ $familiar->nombre }} {{ $familiar->nombreseg }} {{ $familiar->apellido }} {{ $familiar->apellidoseg }}</td>
-                                                        <td>{{ $familiar->email}}</td>
-                                                        <td>{{ $familiar->telefono}}</td>
-                                                        <td>{{ $familiar->cod }}</td>
-                                                        @if(in_array( Auth::user()->id_usuariogrupo, array(9,12,10) ))
-                                                            <td class="text-center">
-                                                            <a href= "familiaredit/{{$familiar->id_persona}}/{{$familiar->funcionario_id}}/{{$familiar->id_familiar}}" class="btn btn-info" data-tip="Detalle" data-toggle="tooltip" data-original-title="Editar">
-                                                            <img src="/img/icon/modify.ico" class="icon-sm" alt="Listado">
-                                                            </a>
-                                                            </td>
-                                                        @endif
-                                                            
-                                                    </tr>
-                                            @endforeach     
-                                            </tbody>
-                                        </table>
-                                    </div>
+                   
                 </form>
             </div>
         </div>

@@ -17,6 +17,8 @@ use App\Persona;
 use App\DatosEstudiantes;
 use App\Funcionario;
 use App\Tipo_trabajador;
+use App\Parentezco;
+use App\Familiares;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -136,17 +138,105 @@ class FuncionarioController extends Controller
         $cod_habs= Cod_Habitacion::All();
         $cod_cels= Cod_Celular::All();
         $entidad = Entidad::All();
+        $parentezco=Parentezco::All();
         $tipo_trabajador= Tipo_Trabajador::All();
         $cedula_usuario=Auth::user()->cedula;// buscar la manera que este valor de usuario este referenciado en la tabla funcionario y Usuario
       
         $datos_persona  =   Persona::select ('*')->where('numero_identificacion','=',$cedula_usuario)->paginate(1);
-        var_dump($cedula_usuario);
+        //var_dump($cedula_usuario);
         if(count($datos_persona)==0){
-            return view('rrhh/funcionario/datos',compact('cedula_usuario','generos','nacionalidades','estado_civils','cod_habs','cod_cels','entidad','tipo_trabajador'));               
+            return view('rrhh/funcionario/datos',compact('cedula_usuario','parentezco','generos','nacionalidades','estado_civils','cod_habs','cod_cels','entidad','tipo_trabajador'));               
         }
      
     }
+    public function createfamiliar()
+    {
+        $nacionalidades= Nacionalidad::All();
+        $generos= Genero::All();
+        $estado_civils= Estado_civil::All();
+        $cod_habs= Cod_Habitacion::All();
+        $cod_cels= Cod_Celular::All();
+        $parentezco=Parentezco::All();       
+        $cedula_usuario=Auth::user()->cedula;// buscar la manera que este valor de usuario este referenciado en la tabla funcionario y Usuario
+       $funcionario= Funcionario::select('funcionario.id as funcionario_id') 
+       ->join ('persona', 'persona.id','=','funcionario.persona_id')
+       ->where('persona.numero_identificacion','=',$cedula_usuario)->get();
+       foreach($funcionario as $funcionario){
+        $funcionario_id=$funcionario->funcionario_id;
+       }
+        $familiar  =   Familiares::select ('*','familiares.id as id_familiar','familiares.persona_id as id_persona')
+        ->join ('funcionario', 'familiares.funcionario_id','=','funcionario.id')
+        ->join ('persona', 'persona.id','=','familiares.persona_id')
+        ->join ('genero', 'persona.id_genero','=','genero.id')
+        ->where('familiares.funcionario_id','=',$funcionario_id)->paginate(5);
+  // var_dump($familiar);
+    return view('rrhh/funcionario/familiar',compact('funcionario_id','familiar','generos','parentezco','nacionalidades','estado_civils','cod_habs','cod_cels'));    }
+   
+    public function editfamiliar(Request $request,$id_persona,$id_funcionario,$id_familiar)// editar datos familiares
+    {
+        $nacionalidades= Nacionalidad::All();
+        $generos= Genero::All();
+        $estado_civils= Estado_civil::All();
+        $cod_habs= Cod_Habitacion::All();
+        $cod_cels= Cod_Celular::All();
+        $entidad = Entidad::All();
+        $tipo_trabajador= Tipo_Trabajador::All();
+        $funcionario_id=$id_funcionario;
+        $persona_id=$id_persona;
+        $familiar_id=$id_familiar;
+  
+    
+         $familiar  =   Familiares::select ('*')
+        ->join ('funcionario', 'familiares.funcionario_id','=','funcionario.id')
+        ->join ('persona', 'persona.id','=','familiares.persona_id')
+        ->join ('genero', 'persona.id_genero','=','genero.id')
+        ->where('familiares.funcionario_id','=',$funcionario_id)
+        ->where('familiares.id','=',$persona_id)
+        ->get();   
+        dd($request);
+        return view('rrhh/funcionario/familiaredit',compact('familiar','generos','parentezco','nacionalidades','estado_civils','cod_habs','cod_cels'));         
+     
+    }
+   
+    public function updatefamiliar(Request $request)
+    {
+        //
+        $request->validate([
+            'id_persona' => ['required'],
+            'id_funcionario' => ['required'],
+            'id_familiar' => ['required'],
+            'parentezco' => ['required', 'string', 'max:160'],
+            'fechanac' => ['required'],
+            
+        ]);
+      
+        Familiares::where('id', $request->id_familiar)
+        ->update([
+            'persona_id'=> $request->id_persona,
+            'funcioanrio_id'=> $request->id_funcionario,
+            'parentezco_id'=> $request->parentezco,
+            'ocupacion' =>$request->ocupacion,
+            'telefono' =>$request->telefono,
+            'vive_id' =>$request->vive,                 
+        ]);
+   
 
+        Persona::where('id', $request->id_persona)
+        ->update([          
+            
+            'nombre'=>$request->primernombre,
+            'nombreseg'=>$request->segundonombre,
+            'apellido'=>$request->primerapellido,
+            'apellidoseg'=>$request->segundoapellido,
+            'edad'=>$request->fechanac,            
+            'id_genero'=>$request->genero,
+            'email'=>$request->correo,
+           
+        ]);
+     
+        return redirect('rrhh/funcionario/familiaredit')->with('message', ' Datos Familiar actualizados con éxito!!.');
+    }
+   
     public function createdireccion()
     {
         $estados= Entidad::All();
@@ -164,16 +254,7 @@ class FuncionarioController extends Controller
        
        return view('rrhh/funcionario/educacion');
     }
-    public function createfamiliar()
-    {
-        $nacionalidades= Nacionalidad::All();
-        $generos= Genero::All();
-        $estado_civils= Estado_civil::All();
-        $cod_habs= Cod_Habitacion::All();
-        $cod_cels= Cod_Celular::All();
-        $familiar= NULL;
-       return view('rrhh/funcionario/familiar',compact('familiar','generos','nacionalidades','estado_civils','cod_habs','cod_cels'));
-    }
+    
     
    
     /**
@@ -221,7 +302,52 @@ class FuncionarioController extends Controller
 
         return redirect('rrhh/funcionario/datosedit')->with('message', ' Datos Personales actualizados con éxito!!.');
     }
+ /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function storefamiliar(Request $request)
+    {
+        
+        $request->validate([
+            
+            'id_funcionario' => ['required'],
+           
+            
+        ]);
+       //dd($request);  
+        $datos_persona = new Persona();      
+   
+        $datos_persona->id_tipo_identificacion = 1 ;
+        $datos_persona->id_nacionalidad = $request->nacionalidad;
+        $datos_persona->numero_identificacion = $request->cedula;
+        $datos_persona->nombre = $request->primernombre;  
+        $datos_persona->nombreseg = $request->segundonombre;
+        $datos_persona->apellido = $request->primerapellido;
+        $datos_persona->apellidoseg = $request->segundoapellido;
+        $datos_persona->edad = $request->fechanac;
+        $datos_persona->ciudad_nac = $request->ciudad_nac;
+        $datos_persona->estado_nac = $request->estado_nac;
+        $datos_persona->id_genero = $request->genero;        
+        $datos_persona->email = $request->correo; 
+        $datos_persona->id_estado_civil = $request->estadocivil; 
+        $datos_persona->save();      
+          //dd($request);  
+         $id_persona= $datos_persona->id ;
+       //   dd($datos_persona);  
+        $familiar = new Familiares();
+        $familiar->persona_id = $id_persona;
+        $familiar->funcionario_id = $request->id_funcionario;
+        $familiar->parentezco_id = $request->parentezco;
+        $familiar->ocupacion = $request->ocupacion;          
+        $familiar->telefono = $request->telefono;          
+        $familiar->vive_id = $request->vive;          
+        $familiar->save();
 
+        return redirect('rrhh/funcionario/familiar')->with('message', ' Familiar fue agregado con éxito!!.');
+    }
     /**
      * Display the specified resource.
      *
@@ -232,23 +358,6 @@ class FuncionarioController extends Controller
     {
         //
     }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-
 
     /**
      * Remove the specified resource from storage.

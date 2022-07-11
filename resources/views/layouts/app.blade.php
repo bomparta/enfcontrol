@@ -42,7 +42,7 @@
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}" title ="Ir A la Página Principal">
-                <img src="{{url('/img/logo2.png')}}" >{{ config('app.name', 'Control de Estudio ENF') }}
+                <img src="{{url('/img/logo2.png')}}" >{{ config('app.name', 'Sistema Gestión ENFMP') }}
 
                 </a>
                

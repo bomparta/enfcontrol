@@ -28,4 +28,5 @@ class HomeController extends Controller
         SEOTools::setDescription('Somos la primera escuela de fiscales a nivel nacional');
         return view('home');
     }
+    
 }

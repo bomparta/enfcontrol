@@ -24,7 +24,7 @@
                         <td colspan="4">
                             <nav class="navbar bg-light">
                             <div class="container-fluid">
-                            <form class="d-flex" role="search">
+                            <form class="d-flex" role="search" action="{{route('buscarcedula')}}">
                             @csrf
                             &nbsp;Cedula&nbsp;<span style="color:red;">*</span>&nbsp;<br>
                             <select id="nacionalidad" name="nacionalidad" style="width:70px;" required>
