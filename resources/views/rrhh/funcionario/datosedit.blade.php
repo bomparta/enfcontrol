@@ -8,17 +8,33 @@
         
         <div class="col-xs-11 col-sm-11 col-md-11 col-lg-10 col-xl-10 col-xxl-10">
             <div class="row pt-2">
-          
+            <div align="center" id="divTituloIndex2" class="text-primary">
+              
+              <b>DATOS PERSONALES</b>
+              </div>
            
                     <table align="center" border="0" cellpadding="2" cellspacing="2" width="100%" >
                         <tr>
                             <td colspan="4">
-                                <div align="center" id="divTituloIndex2" class="text-primary">
-                                       <b> DATOS PERSONALES</b>
-                                </div>
+                   
                                 <div id="divSubTituloIndex2">
+                                <ul class="nav nav-tabs">
+                                    <li class="nav-item">
+                                        <a class="nav-link active " href="{{route('buscarfuncionario')}}">Datos Básicos</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{{route('direccionfuncionario')}}">Dirección de Domicilio</a>
+                                    </li>
+                                    <li class="nav-item">
+                                    <a class="nav-link "  href="{{route('hist_medicofuncionario')}}">Historial Médico</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link  " href="{{route('bancofuncionario')}}">Cuentas Bancarias</a>
+                                    </li>
+                                   
+                                    </ul>
                                     <hr>
-                                    <b>Suministre sus datos, haga clic en "Guardar" para registrar su información <b>
+                                    <b>Suministre sus <span style="color:gray; ">Datos Personales</span>, haga clic en "Guardar" para registrar su información <b>
                                     <hr>   
                                     @include('rrhh.funcionario.mensaje')  
                            

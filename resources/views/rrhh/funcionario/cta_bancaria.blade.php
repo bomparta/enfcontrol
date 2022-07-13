@@ -6,65 +6,74 @@
         <div class="col-xs-11 col-sm-11 col-md-11 col-lg-10 col-xl-10 col-xxl-10">
             <div class="row pt-2">
             <div align="center" id="divTituloIndex2" class="text-primary">
-              
-                <b>EXPERIENCIA LABORAL</b>
+               
+            <b>DATOS PERSONALES</b>
                 </div>
                 <form id="formulario" name="formulario" method="post" action="#">
-                    <table align="center" border="0" cellpadding="2" cellspacing="5" width="100%" >
+                    <table  align="center" border="0" cellpadding="5" cellspacing="2" width="100%" >
                     <tr>
                             <td colspan="4">
                             <div class="col-12 text-center">
-                                     
+                
+                            <ul class="nav nav-tabs">
+                                    <li class="nav-item">
+                                        <a class="nav-link " href="{{route('buscarfuncionario')}}">Datos Básicos</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{{route('direccionfuncionario')}}">Dirección de Domicilio</a>
+                                    </li>
+                                    <li class="nav-item">
+                                    <a class="nav-link "  href="{{route('hist_medicofuncionario')}}">Historial Médico</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link active " href="{{route('bancofuncionario')}}">Cuentas Bancarias</a>
+                                    </li>
+                                   
+                                    </ul>
                                 </div>
                                 <div id="divSubTituloIndex2">
                                     <hr>
-                                    <b>Suministre sus datos de su <span style="color:gray;">Experiencia Laboral</span> más reciente, haga clic en "Guardar" para registrar su información <b>
+                                    <b>Suministre sus datos de las <span style="color:gray;">Cuentas Bancarias</span> que posee, haga clic en "Guardar" para registrar su información <b>
                                     <hr>   
                                 </div>
                             </td>
                         </tr>
                     
-                    <tr>
+                    <tr> 
+                        
                         <td>
-                            &nbsp;Empresa u Organización&nbsp;<span style="color:red;">*</span>&nbsp;
-                            <input type="text" class="form-control" name="empresa" id="empresa" value="" maxlength="25"/>
+                            &nbsp;Cuenta Bancaria N°&nbsp;<span style="color:red;">*</span>&nbsp;
+                            <input type="text" class="form-control" required name="num_cuenta" id="num_cuenta" value="" style="width:190px;" maxlength="25"/>
                         </td>
+                        <td>
+                            &nbsp;Tipo de Cuenta&nbsp;<span style="color:red;">*</span>&nbsp;
+                            <input type="text"class="form-control" required name="tipo_cuenta" id="tipo_cuenta" value="" style="width:190px;" maxlength="100"/>
+                        </td>
+                        <td>
+                            &nbsp;Nombre del Banco&nbsp;<span style="color:red;">*</span>&nbsp;
+                            <input type="text" class="form-control"  required name="nom_banco" id="nom_banco" maxlength="200" value=""/>
+                        </td>
+                        </tr>
+                    
+                    <tr> 
+                    <td >
                    
-                        <td>
-                            &nbsp;Cargo de desempeñado&nbsp;<span style="color:red;">*</span>&nbsp;
-                            <input type="text" class="form-control" name="cargo" id="cargo" value=""  maxlength="25" />
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            &nbsp;Fecha Ingreso&nbsp;<span style="color:red;">*</span>&nbsp;
-                            <input type="date" class="form-control" name="fechaingreso" id="fechaingreso" value="" style="width:190px;" maxlength="25"/>
-                        </td>
+                    </td>
                    
-                        <td>
-                            &nbsp;Fecha de Egreso&nbsp;<span style="color:red;">*</span>&nbsp;
-                            <input type="date" class="form-control" name="fechaegreso" id="fechaegreso" value="" style="width:190px;" maxlength="25" />
-                        </td>
-          
-                    <td>
-                            &nbsp;Teléfono&nbsp;<span style="color:red;">*</span>&nbsp;
-                            <input type="text" class="form-control" name="telefono" id="telefono" value="" style="width:190px;" maxlength="25"/>
-                        </td>
-                        <td></td>
-                    </tr>
                     </table>
+
                     <div class="frameContenedor" style="margin:5px;" align="right">
-                            <a class='btn btn-info' href="" >Registrar Exp. Laboral</a>
+                        <input class='btn btn-info' type="submit" value="Registrar Curso" >
                     </div>
+
                     <div class="table-responsive mt-3">
                         <table id="example" class="table table-striped table-bordered" style="width:100%">                        
                             <thead>
                                 <tr>
-                                    <th>Empresa u Organización</th>
-                                    <th>Cargo Desempeñado</th>
-                                    <th>Teléfono</th>
-                                    <th>Fecha de Ingreso</th>
-                                    <th>Fecha de Egreso</th>
+                                    <th>N° Cuenta</th>
+                                    <th>Nombre del Banco</th>
+                                    <th>Tipo de Cuenta</th>
+                                    <th>N° Cuenta</th>                                   
                                     @if(in_array( Auth::user()->id_usuariogrupo, array(9,12,10) ))
                                         <th>Opcion</th>
                                     @endif
@@ -72,7 +81,6 @@
                             </thead>    
                             <tbody>                              
                                 <tr>                                                    
-                                        <td></td>
                                         <td></td>
                                         <td></td>
                                         <td></td>
@@ -89,11 +97,10 @@
                             </tbody>
                             <tfoot>
                                 <tr>
-                                <th>Empresa u Organización</th>
-                                    <th>Cargo Desempeñado</th>
-                                    <th>Teléfono</th>
-                                    <th>Fecha de Ingreso</th>
-                                    <th>Fecha de Egreso</th>
+                                <th>N° Cuenta</th>
+                                    <th>Nombre del Banco</th>
+                                    <th>Tipo de Cuenta</th>
+                                    <th>N° Cuenta</th>                                   
                                     @if(in_array( Auth::user()->id_usuariogrupo, array(9,12,10) ))
                                         <th>Opcion</th>
                                     @endif
@@ -103,6 +110,7 @@
                         </table>
                     </div>
                 </form>
+
             </div>
         </div>
     </div>

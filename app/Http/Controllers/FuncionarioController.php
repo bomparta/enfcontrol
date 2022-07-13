@@ -239,7 +239,19 @@ class FuncionarioController extends Controller
     {
         $estados= Entidad::All();
         $municipios= Municipio::All();
-       return view('rrhh/funcionario/direccion',compact('estados','municipios'));
+        $cod_habs= Cod_Habitacion::All();
+        $cod_cels= Cod_Celular::All();
+       return view('rrhh/funcionario/direccion',compact('estados','municipios','cod_habs','cod_cels'));
+    }
+    public function createhist_medico()
+    {
+       
+       return view('rrhh/funcionario/hist_medico');
+    }
+    public function createbanco()
+    {
+       
+       return view('rrhh/funcionario/cta_bancaria');
     }
 
     public function createxperiencia()
@@ -252,8 +264,21 @@ class FuncionarioController extends Controller
        
        return view('rrhh/funcionario/educacion');
     }
-    
-    
+    public function createstudios_act()
+    {
+       
+       return view('rrhh/funcionario/estudios_act');
+    }
+    public function createcursos()
+    {
+       $cursos=NULL;
+       return view('rrhh/funcionario/cursos',compact($cursos));
+    }
+    public function createidiomas()
+    {
+       
+       return view('rrhh/funcionario/idiomas');
+    }
    
     /**
      * Store a newly created resource in storage.

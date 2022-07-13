@@ -15,7 +15,7 @@
                                 </div>
                                 <div id="divSubTituloIndex2">
                                     <hr>
-                                    <b>Suministre los datos de su grupo familiar, haga clic en "Guardar" par registrar su información <b>
+                                    <b>Suministre los <span style="color:gray;">Datos del Grupo Familiar</span>, haga clic en "Guardar" par registrar su información <b>
                                     <hr>   
                                     @include('rrhh.funcionario.mensaje')  
                                 </div>
@@ -153,10 +153,8 @@
                                     <select id="vive" name="vive"class="form-control" required >
                                             <option value="0">Seleccione...</option>
                                             <option value="1">SI</option>
-                                            <option value="2">NO</option>
-                                        
-                                    </select>
-                                
+                                            <option value="2">NO</option>                                        
+                                    </select>                                
                                 </td>
                                 <td>
                                     &nbsp;Correo&nbsp;<span style="color:red;">*</span>&nbsp;<br>
@@ -166,19 +164,14 @@
                                         <strong>{{ $message }}</strong>
                                         </div>
                                     @enderror
-                                </td>
-                                
-                            </tr>
-                       
-                    </table>
-             
+                                </td>                                
+                            </tr>                       
+                    </table>             
                     <div class="frameContenedor" style="margin:5px;" align="right">
                         <input class='btn btn-info' type="submit" value="Registrar Familiar" >
-                    </div>
-                    
+                    </div>                    
                     <div class="table-responsive mt-3">
-                    <table id="example" class="table table-striped table-bordered" style="width:100%">
-                        
+                    <table id="example" class="table table-striped table-bordered" style="width:100%">                        
                                             <thead>
                                                 <tr>
                                                     <th>Cedula</th>
@@ -190,15 +183,13 @@
                                                         <th>Opcion</th>
                                                     @endif
                                                 </tr>
-                                            </thead>
-                                  
-                                          @foreach($familiar as $familiar)
-                                                    <tr>
-                                                    
+                                            </thead>                                  
+                                            @foreach($familiar as $familiar)
+                                                    <tr>                                                    
                                                     <td>{{ $familiar->nacionalidad }}-{{ $familiar->numero_identificacion }}</td>
                                                         <td>{{ $familiar->nombre }} {{ $familiar->nombreseg }} {{ $familiar->apellido }} {{ $familiar->apellidoseg }}</td>
                                                         <td>{{ $familiar->email}}</td>
-                                                        <td>{{ $familiar->telefono}}</td>
+                                                        <td>{{ $familiar->telefono}}</td>                                                        
                                                         <td>{{ $familiar->cod }}</td>
                                                         @if(in_array( Auth::user()->id_usuariogrupo, array(9,12,10) ))
                                                             <td class="text-center">
@@ -206,8 +197,7 @@
                                                             <img src="/img/icon/modify.ico" class="icon-sm" alt="Listado">
                                                             </a>
                                                             </td>
-                                                        @endif
-                                                            
+                                                        @endif                                                            
                                                     </tr>
                                             @endforeach     
                                             </tbody>
