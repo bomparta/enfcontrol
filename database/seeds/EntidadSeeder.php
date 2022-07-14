@@ -12,9 +12,7 @@ class EntidadSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('entidad')->insert([
-            'descripcion' => 'Distrito Capital',
-        ]);
+        
         DB::table('entidad')->insert([
             'descripcion' => 'Amazonas',
         ]);
@@ -55,6 +53,9 @@ class EntidadSeeder extends Seeder
             'descripcion' => 'Mérida',
         ]);
         DB::table('entidad')->insert([
+            'descripcion' => 'Miranda',
+        ]);
+        DB::table('entidad')->insert([
             'descripcion' => 'Monagas',
         ]);
         DB::table('entidad')->insert([
@@ -87,6 +88,11 @@ class EntidadSeeder extends Seeder
         DB::table('entidad')->insert([
             'descripcion' => 'Zulia',
         ]);
+
+        DB::table('entidad')->insert([
+            'descripcion' => 'Distrito Capital',
+        ]);
+
         DB::table('entidad')->insert([
             'descripcion' => 'Exterior',
         ]);

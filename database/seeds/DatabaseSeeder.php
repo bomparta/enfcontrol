@@ -22,6 +22,8 @@ class DatabaseSeeder extends Seeder
             StatusactividadSeeder::class,
             PersonaSeeder::class,
             EntidadSeeder::class, 
+            //MunicipioSeeder::class,
+            //ParroquiaSeeder::class,
             EjeSeeder::class,
             PeriodoSeeder::class,
             TrimestreSeeder::class,

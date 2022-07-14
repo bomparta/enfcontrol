@@ -14,18 +14,7 @@
                 </div>
            
                     <table align="center" border="0" cellpadding="2" cellspacing="2" width="100%" >
-                    <td colspan="4">
-                            <div class="col-12 text-center">
-                                     
-                                </div>
-                                <div id="divSubTituloIndex2">
-                                    <hr>
-                                    <b>Suministre sus datos de su <span style="color:gray;">Experiencia Laboral</span> más reciente, haga clic en "Guardar" para registrar su información <b>
-                                    <hr>   
-                                </div>
-                            </td>
-                        </tr>
-                                
+                   
                                 <div id="divSubTituloIndex2">
                                     <ul class="nav nav-tabs">
                                     <li class="nav-item">

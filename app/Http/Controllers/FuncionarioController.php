@@ -238,7 +238,7 @@ class FuncionarioController extends Controller
     public function createdireccion()
     {
         $estados= Entidad::All();
-        $municipios= Municipio::All();
+        $municipios= Municipio::All(); 
         $cod_habs= Cod_Habitacion::All();
         $cod_cels= Cod_Celular::All();
        return view('rrhh/funcionario/direccion',compact('estados','municipios','cod_habs','cod_cels'));
