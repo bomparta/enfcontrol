@@ -16,7 +16,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('logout');
+
 
 Auth::routes();
 
@@ -130,12 +131,24 @@ Route::get('/rrhh/funcionario/datosedit', 'FuncionarioController@edit')->name('b
 Route::post('/rrhh/funcionario/datos', 'FuncionarioController@store')->name('funcionariostore');
 Route::post('/rrhh/funcionario/datosedit', 'FuncionarioController@updatedatospersonales')->name('funcionarioupdate');
 Route::get('/rrhh/funcionario/direccion', 'FuncionarioController@createdireccion')->name('direccionfuncionario');
+Route::post('/rrhh/funcionario/direccion', 'FuncionarioController@updatedireccion')->name('updatedireccion');
+
+Route::post('/rrhh/funcionario/submunicipio_fun', 'FuncionarioController@submunicipio')->name('submunicipio_fun');
+Route::post('/rrhh/funcionario/subparroquia_fun','FuncionarioController@subparroquia')->name('subparroquia_fun');
+
 Route::get('/rrhh/funcionario/hist_medico', 'FuncionarioController@createhist_medico')->name('hist_medicofuncionario');
+Route::post('/rrhh/funcionario/hist_medico', 'FuncionarioController@updatehist_medico')->name('updatehist_medico');
+
 Route::get('/rrhh/funcionario/cta_bancaria', 'FuncionarioController@createbanco')->name('bancofuncionario');
-
-
+Route::post('/rrhh/funcionario/cta_bancaria', 'FuncionarioController@storebanco')->name('storecuentas');
+Route::get('/rrhh/funcionario/cta_bancariaedit/{id}', 'FuncionarioController@editbanco')->name('editarcuentas');
+Route::post('/rrhh/funcionario/cta_bancariaedit', 'FuncionarioController@updatebanco')->name('actualizarcuentas');
 
 Route::get('/rrhh/funcionario/experiencia', 'FuncionarioController@createxperiencia')->name('laboralfuncionario');
+Route::post('/rrhh/funcionario/experiencia', 'FuncionarioController@storexperiencia')->name('laboralregistrar');
+Route::get('/rrhh/funcionario/experiencia_edit/{id}', 'FuncionarioController@editexperiencia')->name('editarlaboral');
+Route::post('/rrhh/funcionario/experiencia_edit', 'FuncionarioController@updatexperiencia')->name('actualizarlaboral');
+
 Route::get('/rrhh/funcionario/educacion', 'FuncionarioController@createducacion')->name('educacionfuncionario');
 Route::get('/rrhh/funcionario/estudios_act', 'FuncionarioController@createstudios_act')->name('estudios_actfuncionario');
 Route::get('/rrhh/funcionario/cursos', 'FuncionarioController@createcursos')->name('cursos_funcionario');

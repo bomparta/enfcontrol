@@ -28,7 +28,7 @@
                             <tr>
                                 <td>
                                     &nbsp;Estado de Residencia&nbsp;<span style="color:red;">*</span>&nbsp;
-                                    <select name="estado" id="_estado"   style="width:190px;">
+                                    <select name="_estado" id="_estado"   style="width:190px;">
                                         @foreach($estados as $estado)
                                         <option value="{{$estado->id}}">{{$estado->descripcion}}</option>
                                         @endforeach

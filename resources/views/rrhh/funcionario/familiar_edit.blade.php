@@ -128,7 +128,7 @@
                                     <option value="0">Seleccione...</option>
                                         @foreach ($parentezco as $parentezco)
                                         <option value="{{ $parentezco->id }}"
-                                        @if($item->id_parentezco == $parentezco->id)selected @endif >    
+                                        @if($item->parentezco_id == $parentezco->id)selected @endif >    
                                            {{ $parentezco->descripcion }}</option>
                                         @endforeach
                                     </select>
@@ -139,9 +139,7 @@
                             <tr>
                                 <td>
                                     &nbsp;Ocupación&nbsp;<span style="color:red;">*</span>&nbsp;<br>
-                                    <input id="ocupacion" type="text"name="ocupacion"  class="form-control" value="{{$item->ocupacion}}" required >
-                                    
-                                    
+                                    <input id="ocupacion" type="text"name="ocupacion"  class="form-control" value="{{$item->ocupacion}}" required >                         
                                 </td>
                                 <td>
                                 &nbsp;Teléfono&nbsp;<span style="color:red;">*</span>&nbsp;<br>
@@ -170,7 +168,7 @@
                                 </td>
                                 <td>
                                     &nbsp;Correo&nbsp;<span style="color:red;">*</span>&nbsp;<br>
-                                    <input id="correo" type="email"  maxlength="250" class="form-control @error('correo') is-invalid @enderror" name="correo" value="" required>
+                                    <input id="correo" type="email"  maxlength="250" class="form-control @error('correo') is-invalid @enderror" name="correo" value="{{$item->email}}" required>
                                     @error('correo')
                                         <div class="invalid-feedback">
                                         <strong>{{ $message }}</strong>

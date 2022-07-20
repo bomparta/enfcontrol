@@ -3,44 +3,47 @@
 <div class="container-fluid">
     <div class="row justify-content-start">
     @include('layouts.apprrhh')
-        <div class="col-xs-11 col-sm-11 col-md-11 col-lg-10 col-xl-10 col-xxl-10">
+    <div class="col-xs-11 col-sm-11 col-md-11 col-lg-10 col-xl-10 col-xxl-10">
             <div class="row pt-2">
             <div align="center" id="divTituloIndex2" class="text-primary">
-               
-            <b>DATOS PERSONALES</b>
+              
+                <b>DATOS PERSONALES</b>
                 </div>
-                <form id="formulario" name="formulario" method="post" action="#">
-                    <table  align="center" border="0" cellpadding="5" cellspacing="2" width="100%" >
-                    <tr>
-                            <td colspan="4">
-                            <div class="col-12 text-center">
-                
-                            <ul class="nav nav-tabs">
+           
+                    <table align="center" border="0" cellpadding="2" cellspacing="2" width="100%" >
+                   
+                                <div id="divSubTituloIndex2">
+                                    <ul class="nav nav-tabs">
                                     <li class="nav-item">
                                         <a class="nav-link " href="{{route('buscarfuncionario')}}">Datos Básicos</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="{{route('direccionfuncionario')}}">Dirección de Domicilio</a>
+                                        <a class="nav-link " href="{{route('direccionfuncionario')}}">Dirección de Domicilio</a>
                                     </li>
                                     <li class="nav-item">
-                                    <a class="nav-link "  href="{{route('hist_medicofuncionario')}}">Historial Médico</a>
+                                    <a class="nav-link  "  href="{{route('hist_medicofuncionario')}}">Historial Médico</a>
                                     </li>
                                     <li class="nav-item">
                                         <a class="nav-link active " href="{{route('bancofuncionario')}}">Cuentas Bancarias</a>
                                     </li>
                                    
                                     </ul>
-                                </div>
-                                <div id="divSubTituloIndex2">
                                     <hr>
-                                    <b>Suministre sus datos de las <span style="color:gray;">Cuentas Bancarias</span> que posee, haga clic en "Guardar" para registrar su información <b>
+                                    <b>Suministre sus <span style="color:gray; ">Cuentas Bancarias</span>, haga clic en "Registrar Cuenta" para guardar su información <b>
                                     <hr>   
+                                    @include('rrhh.funcionario.mensaje')  
+                           
                                 </div>
                             </td>
                         </tr>
-                    
-                    <tr> 
-                        
+                        </table>
+                       
+                       <table>          
+          <form id="formulario" name="formulario" method="POST" action="{{route('storecuentas')}}">    
+            @if(isset($funcionario_id)) 
+          <input id="id_funcionario" type="hidden" name="id_funcionario" value="{{$funcionario_id}}" >
+          @csrf
+          <tr>
                         <td>
                             &nbsp;Cuenta Bancaria N°&nbsp;<span style="color:red;">*</span>&nbsp;
                             <input type="text" class="form-control" required name="num_cuenta" id="num_cuenta" value="" style="width:190px;" maxlength="25"/>
@@ -63,7 +66,7 @@
                     </table>
 
                     <div class="frameContenedor" style="margin:5px;" align="right">
-                        <input class='btn btn-info' type="submit" value="Registrar Curso" >
+                        <input class='btn btn-info' type="submit" value="Registrar Cuenta" >
                     </div>
 
                     <div class="table-responsive mt-3">
@@ -71,36 +74,41 @@
                             <thead>
                                 <tr>
                                     <th>N° Cuenta</th>
-                                    <th>Nombre del Banco</th>
                                     <th>Tipo de Cuenta</th>
-                                    <th>N° Cuenta</th>                                   
+                                    <th>Nombre del Banco</th>
+                                                               
                                     @if(in_array( Auth::user()->id_usuariogrupo, array(9,12,10) ))
                                         <th>Opcion</th>
                                     @endif
                                 </tr>
                             </thead>    
-                            <tbody>                              
+                            @if(isset($cuentas))
+                           
+                            <tbody>  
+                            @foreach($cuentas as $cuentas)              
                                 <tr>                                                    
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
+                                        <td>{{$cuentas->cuenta}}</td>
+                                        <td>{{$cuentas->tipo_cuenta}}</td>
+                                        <td>{{$cuentas->nombre_banco}}</td>
+                                       
                                         @if(in_array( Auth::user()->id_usuariogrupo, array(9,12,10) ))
                                             <td class="text-center">
-                                            <a href= "#" class="btn btn-info" data-tip="Detalle" title="Actualizar Curso" data-toggle="tooltip" data-original-title="Editar">
+                                            <a href= "cta_bancariaedit/{{$cuentas->id}}" class="btn btn-info" data-tip="Detalle" title="Actualizar Cuenta Bancaria" data-toggle="tooltip" data-original-title="Editar">
                                             <img src="/img/icon/modify.ico" class="icon-sm" alt="Listado">
                                             </a>
                                             </td>
                                         @endif                                                            
                                     </tr>
-                            
+                           @endforeach
+                           
                             </tbody>
+                            @endif  
                             <tfoot>
                                 <tr>
                                 <th>N° Cuenta</th>
-                                    <th>Nombre del Banco</th>
                                     <th>Tipo de Cuenta</th>
-                                    <th>N° Cuenta</th>                                   
+                                    <th>Nombre del Banco</th>
+                                                                   
                                     @if(in_array( Auth::user()->id_usuariogrupo, array(9,12,10) ))
                                         <th>Opcion</th>
                                     @endif
@@ -109,9 +117,17 @@
                             </tfoot>
                         </table>
                     </div>
+                  
+                      
+                    @else
+                 <div class="frameContenedor" style="margin:5px;"align="center">
+                           <h2 aling="center"><b>DEBE COMPLETAR LOS DATOS BÁSICOS</b></h2>
+                        </div>
+                 @endif  
+                   
                 </form>
 
-            </div>
+                </div>
         </div>
     </div>
 </div>

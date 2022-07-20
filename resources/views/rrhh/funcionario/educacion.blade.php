@@ -9,7 +9,7 @@
                
                 <b>INSTRUCCIÓN FORMAL Y COMPLEMENTARIA</b>
                 </div>
-                <form id="formulario" name="formulario" method="post" action="#">
+               
                     <table  align="center" border="0" cellpadding="5" cellspacing="2" width="100%" >
                     <tr>
                             <td colspan="4">
@@ -38,7 +38,10 @@
                                 </div>
                             </td>
                         </tr>
-                    
+                        </table>
+                        <table>
+                        <form id="formulario" name="formulario" method="post" action="#">
+                            @csrf
                     <tr> 
                         <td class="table-primary" rowspan="2">&nbsp;<b>PRIMARIA</b> </td>
                         <td>
@@ -177,6 +180,7 @@
                     <div class="frameContenedor" style="margin:5px;" align="right">
                         <input class='btn btn-info' type="submit" value="Guardar" >
                     </div>
+                    
                 </form>
 
             </div>

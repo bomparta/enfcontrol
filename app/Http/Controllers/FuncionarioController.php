@@ -19,7 +19,10 @@ use App\Funcionario;
 use App\Tipo_trabajador;
 use App\Parentezco;
 use App\Familiares;
+use App\Cuentas_bancarias;
+use App\Laboral;
 use Illuminate\Support\Str;
+use Illuminate\Support\Arr;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
@@ -161,16 +164,23 @@ class FuncionarioController extends Controller
        $funcionario= Funcionario::select('funcionario.id as funcionario_id') 
        ->join ('persona', 'persona.id','=','funcionario.persona_id')
        ->where('persona.numero_identificacion','=',$cedula_usuario)->get();
+       $funcionario_id=null;
        foreach($funcionario as $funcionario){
         $funcionario_id=$funcionario->funcionario_id;
        }
-        $familiar  =   Familiares::select ('*','familiares.id as id_familiar','familiares.persona_id as id_persona')
+      
+        $familiar  =   Familiares::select ('*','familiares.id as id_familiar','familiares.persona_id as id_persona', 'nacionalidad.cod as nacionalidad',
+        'parentezco.descripcion as parentezco')
         ->join ('funcionario', 'familiares.funcionario_id','=','funcionario.id')
         ->join ('persona', 'persona.id','=','familiares.persona_id')
+        ->join ('nacionalidad', 'nacionalidad.id','=','persona.id_nacionalidad')
+        ->join ('parentezco', 'parentezco.id','=','familiares.parentezco_id')
         ->join ('genero', 'persona.id_genero','=','genero.id')
         ->where('familiares.funcionario_id','=',$funcionario_id)->paginate(10);
+        
   // var_dump($familiar);
-    return view('rrhh/funcionario/familiar',compact('funcionario_id','familiar','generos','parentezco','nacionalidades','estado_civils','cod_habs','cod_cels'));    }
+    return view('rrhh/funcionario/familiar',compact('funcionario_id','familiar','generos','parentezco','nacionalidades','estado_civils','cod_habs','cod_cels'));    
+}
    
     public function editfamiliar(Request $request,$id)// editar datos familiares
     {
@@ -185,7 +195,7 @@ class FuncionarioController extends Controller
        
       
     
-         $familiar  =   Familiares::select ('*','familiares.id as id_familiar','familiares.persona_id as id_persona')
+         $familiar  =   Familiares::select ('*','familiares.id as id_familiar','familiares.persona_id as id_persona','familiares.ocupacion')
         ->join ('funcionario', 'familiares.funcionario_id','=','funcionario.id')
         ->join ('persona', 'persona.id','=','familiares.persona_id')
         ->join ('genero', 'persona.id_genero','=','genero.id')     
@@ -241,23 +251,213 @@ class FuncionarioController extends Controller
         $municipios= Municipio::All(); 
         $cod_habs= Cod_Habitacion::All();
         $cod_cels= Cod_Celular::All();
-       return view('rrhh/funcionario/direccion',compact('estados','municipios','cod_habs','cod_cels'));
+        $todos_cod = Arr::collapse([$cod_habs, $cod_cels]);
+        $cedula_usuario=Auth::user()->cedula;// buscar la manera que este valor de usuario este referenciado en la tabla funcionario y Usuario
+        $funcionario= Funcionario::select('funcionario.id as funcionario_id','funcionario.*') 
+        ->join ('persona', 'persona.id','=','funcionario.persona_id')
+        ->where('persona.numero_identificacion','=',$cedula_usuario)->paginate(1);
+
+        //var_dump($funcionario);
+       // if (COUNT($funcionario)>0  ) {
+          
+            return view('rrhh/funcionario/direccion',compact('funcionario','estados','municipios','cod_habs','cod_cels','todos_cod'));
+      //  }
     }
     public function createhist_medico()
     {
-       
-       return view('rrhh/funcionario/hist_medico');
+        $cedula_usuario=Auth::user()->cedula;
+        $funcionario= Funcionario::select('funcionario.id as funcionario_id','funcionario.*') 
+        ->join ('persona', 'persona.id','=','funcionario.persona_id')
+        ->where('persona.numero_identificacion','=',$cedula_usuario)->paginate(1);
+
+
+
+       return view('rrhh/funcionario/hist_medico',compact('funcionario'));
+    }
+    public function updatehist_medico (Request $request)
+    {
+        
+        $request->validate([            
+            'posee_enfermedad' => ['required'],
+            'es_alergico' => ['required'],
+            'grupo_sanguineo' => ['required'],
+            'estatura' => ['required'],
+            'peso' => ['required'],
+            'pantalon' => ['required'],
+            'camisa' => ['required'],
+            'calzado' => ['required'],            
+        ]);
+
+      // dd($request);
+
+       Funcionario::where('id', $request->id_funcionario)
+       ->update([          
+           
+           'posee_enfermedad'=>$request->posee_enfermedad,
+           'tipo_enfermedad'=>$request->tipo_enfermedad,
+           'es_alergico'=>$request->es_alergico,
+           'tipo_alergia'=>$request->tipo_alergia,
+           'tratamiento'=>$request->tratamiento,     //agregar migrate       
+           'grupo_sanguineo'=>$request->grupo_sanguineo,
+           'estatura'=>$request->estatura,
+           'peso'=>$request->peso,
+           'camisa'=>$request->camisa,
+           'pantalon'=>$request->pantalon,
+           'calzado'=>$request->calzado,
+       ]);
+
+        return redirect('rrhh/funcionario/hist_medico')->with('message', ' Historial Médico actualizado con éxito!!.');
     }
     public function createbanco()
     {
-       
-       return view('rrhh/funcionario/cta_bancaria');
-    }
+       $cedula_usuario=Auth::user()->cedula;
+        $funcionario= Funcionario::select('funcionario.id as funcionario_id','funcionario.*') 
+        ->join ('persona', 'persona.id','=','funcionario.persona_id')        
+        ->where('persona.numero_identificacion','=',$cedula_usuario)->get();
+        $funcionario_id=null;
+        foreach($funcionario as $funcionario){
+            $funcionario_id=$funcionario->funcionario_id;
+        }
+        $cuentas=Cuentas_bancarias::select('*')->where('cuentas_bancarias.funcionario_id','=',$funcionario_id)->paginate(5);
 
+       return view('rrhh/funcionario/cta_bancaria',compact('cuentas','funcionario_id'));
+    }
+    public function storebanco(Request $request)
+    {
+        
+        $request->validate([
+            
+            'id_funcionario' => ['required'],
+            'num_cuenta'=>['required', 'string', 'max:20'],
+            'tipo_cuenta'=>['required'],
+            'nom_banco'=>['required'],
+        ]);
+      
+        $cuentas = new Cuentas_bancarias();        
+        $cuentas->funcionario_id = $request->id_funcionario;
+        $cuentas->cuenta = $request->num_cuenta;
+        $cuentas->tipo_cuenta = $request->tipo_cuenta;          
+        $cuentas->nombre_banco = $request->nom_banco;          
+      
+        $cuentas->save();
+
+        return redirect('rrhh/funcionario/cta_bancaria')->with('message', ' La Cuenta Bancaria fue agregado con éxito!!.');
+    }
+    public function editbanco(Request $request,$id)// editar datos familiares
+    {
+        
+        $cuenta_id=$id;
+         $cuentas  =   Cuentas_bancarias::select ('*')       
+        ->where('cuentas_bancarias.id','=',$cuenta_id)->get();   
+     // dd($request);
+        return view('rrhh/funcionario/cta_bancaria_edit',compact('cuentas'));         
+     
+    }
+    public function updatebanco (Request $request)
+    {
+        
+        $request->validate([            
+            'id_cuenta' => ['required'],
+            'num_cuenta'=>['required', 'string', 'max:20'],
+            'tipo_cuenta'=>['required'],
+            'nom_banco'=>['required'],           
+        ]);
+
+      // dd($request);
+
+       Cuentas_bancarias::where('id', $request->id_cuenta)
+       ->update([         
+  
+           'cuenta'=>$request->num_cuenta,
+           'tipo_cuenta'=>$request->tipo_cuenta,
+           'nombre_banco'=>$request->nom_banco,
+          
+       ]);
+
+        return redirect('rrhh/funcionario/cta_bancaria')->with('message', ' Cuenta Bancaria actualizada con éxito!!.');
+    }
     public function createxperiencia()
     {
-       
-       return view('rrhh/funcionario/experiencia');
+        $cod_habs= Cod_Habitacion::All();
+        $cod_cels= Cod_Celular::All();
+        $todos_cod = Arr::collapse([$cod_habs, $cod_cels]);
+        $cedula_usuario=Auth::user()->cedula;
+        $funcionario= Funcionario::select('funcionario.id as funcionario_id','funcionario.*') 
+        ->join ('persona', 'persona.id','=','funcionario.persona_id')        
+        ->where('persona.numero_identificacion','=',$cedula_usuario)->get();
+        $funcionario_id=null;
+        $laboral=null;
+        foreach($funcionario as $funcionario){
+            $funcionario_id=$funcionario->funcionario_id;
+        }
+        $laboral=Laboral::select('*')->where('laboral.funcionario_id','=',$funcionario_id)->paginate(5);
+
+       return view('rrhh/funcionario/experiencia',compact('laboral','funcionario_id','todos_cod'));
+     
+
+     // return view('rrhh/funcionario/experiencia');
+    }
+    public function storexperiencia(Request $request)
+    {
+        
+        $request->validate([
+            
+            'id_funcionario' => ['required'],
+            'empresa'=>['required', 'string', 'max:150'],
+            'cargo'=>['required'],
+            'fechaingreso'=>['required'],
+            'fechaegreso'=>['required'],
+        ]);
+      
+        $laboral = new Laboral();        
+        $laboral->funcionario_id = $request->id_funcionario;
+        $laboral->nombre_empresa = $request->empresa;
+        $laboral->cargo = $request->cargo;          
+        $laboral->fecha_ingreso = $request->fechaingreso;         
+        $laboral->fecha_egreso = $request->fechaegreso;           
+        $laboral->telefono_empresa = $request->cod_telefono.$request->telefono;           
+      
+        $laboral->save();
+
+        return redirect('rrhh/funcionario/experiencia')->with('message', ' Su Experiencia Laboral fue agregada con éxito!!.');
+    }
+    public function editexperiencia(Request $request,$id)// editar datos familiares
+    {
+        $cod_habs= Cod_Habitacion::All();
+        $cod_cels= Cod_Celular::All();
+        $todos_cod = Arr::collapse([$cod_habs, $cod_cels]);
+        $experiencia_id=$id;
+         $laboral  =   Laboral::select ('*')       
+        ->where('laboral.id','=',$experiencia_id)->get();   
+     // dd($request);
+        return view('rrhh/funcionario/experiencia_edit',compact('laboral','todos_cod'));         
+     
+    }
+    public function updatexperiencia (Request $request)
+    {
+        
+        $request->validate([            
+            'id_experiencia' => ['required'],            
+            'empresa'=>['required', 'string', 'max:150'],
+            'cargo'=>['required'],
+            'fechaingreso'=>['required'],
+            'fechaegreso'=>['required'],        
+        ]);
+
+      // dd($request);
+         $telefono=$request->cod_telefono.$request->telefono;
+       Laboral::where('id', $request->id_experiencia)
+       ->update([         
+  
+           'nombre_empresa'=>$request->empresa,
+           'cargo'=>$request->cargo,
+           'fecha_ingreso'=>$request->fechaingreso,
+           'fecha_egreso'=>$request->fechaegreso,
+           'telefono_empresa'=>$telefono,
+
+       ]);
+
+        return redirect('rrhh/funcionario/experiencia')->with('message', ' Su Experiencia Laboral fue actualizada con éxito!!.');
     }
     public function createducacion()
     {
@@ -324,6 +524,60 @@ class FuncionarioController extends Controller
         $datos_funcionario->save();
 
         return redirect('rrhh/funcionario/datosedit')->with('message', ' Datos Personales actualizados con éxito!!.');
+    }
+    public function updatedireccion(Request $request)
+    {
+        
+        $request->validate([
+            
+            '_estado' => ['required'],
+            '_submunicipio' => ['required'],
+            '_subparroquia' => ['required'],
+            'urbanizacion' => ['required','string', 'max:160'],
+            'calleAv' => ['required','string', 'max:160'],
+            'nroCasaApto' => ['required','string', 'max:160'],
+            'nombreCasaApto' => ['required','string', 'max:160'],
+            'pto_referencia' => ['required','string', 'max:160'],
+            'condicon_viv' => ['required'],
+            'cod_postal' => ['required'],
+            'codhab' => ['required'],
+            'telfhabitacion' => ['required'],
+            'codtelecel' => ['required'],
+            'telefonoCel' => ['required'],
+            'dir_contacto' => ['required','string', 'max:250'],
+            'cod_contacto' => ['required'],
+            'telf_contacto' => ['required'],
+            'per_contacto' => ['required','string', 'max:160'],
+        ]);
+         
+          //dd($request);  
+          $telefono_hab=$request->codhab.$request->telfhabitacion;
+          $telefono_cel=$request->codtelecel.$request->telefonoCel;
+          $telefono_contacto=$request->cod_contacto.$request->telf_contacto;
+
+       Funcionario::where('id', $request->id_funcionario)
+       ->update([          
+           
+           'estado_domicilio'=>$request->_estado,
+           'municipio_domicilio'=>$request->_submunicipio,
+           'parroquia_domicilio'=>$request->_subparroquia,
+           'codigo_postal'=>$request->cod_postal,
+           'sector_urbanizacion'=>$request->urbanizacion,            
+           'calle_avenida'=>$request->calleAv,
+           'nro_casa_apartamento'=>$request->nroCasaApto,
+           'nombre_casa_edificio_residencia'=>$request->nombreCasaApto,
+           'piso_nro_casa'=>$request->pto_referencia,//corregir el migrate
+           'condicion_casa_id'=>$request->condicon_viv,
+
+           'telfhabitacion'=>$telefono_hab,
+          'telcelular'=>$telefono_cel,
+          'telefono_contacto'=>$telefono_contacto,
+           'persona_contacto'=>$request->per_contacto,
+          'direccion_contacto'=>$request->dir_contacto,           
+          
+       ]);
+
+        return redirect('rrhh/funcionario/direccion')->with('message', ' Dirección de Domicilio actualizados con éxito!!.');
     }
  /**
      * Store a newly created resource in storage.
@@ -392,18 +646,9 @@ class FuncionarioController extends Controller
     {
         //
     }
-
     
  
-    public function datoslistestudiante($id)
-    {
-       // $datosestudiantes = DatosEstudiante::find($id);
-       $datosestudiantes = DatosEstudiante::select('*')
-       ->where('id_usuario', '=',$id)
-       ->get();
-        //dd($datosestudiantes);
-        return view('estudiante.listdatos',compact('datosestudiantes'));
-    }
+    
 
     public function direccionlistestudiante($id)
     {
@@ -662,6 +907,7 @@ class FuncionarioController extends Controller
 
 
     public function submunicipio(Request $request){
+     //   dd($request);
         if(isset($request->texto)){
             $submunicipio = Municipio::where('id_entidad',$request->texto)->get();
             return response()->json(

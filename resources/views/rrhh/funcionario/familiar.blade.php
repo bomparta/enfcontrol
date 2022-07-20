@@ -15,7 +15,7 @@
                                 </div>
                                 <div id="divSubTituloIndex2">
                                     <hr>
-                                    <b>Suministre los <span style="color:gray;">Datos del Grupo Familiar</span>, haga clic en "Guardar" par registrar su información <b>
+                                    <b>Suministre los <span style="color:gray;">Datos del Grupo Familiar</span>, haga clic en "Registrar Familiar" para guardar su información <b>
                                     <hr>   
                                     @include('rrhh.funcionario.mensaje')  
                                 </div>
@@ -27,6 +27,7 @@
                   
                         <form id="formulario" name="formulario" method="POST" action="{{route('registrarfamiliar')}}">
                             @csrf
+                            @if (isset($funcionario_id))
                             <tr>
                                 
                                     <input id="id_funcionario" type="hidden" name="id_funcionario" value="{{$funcionario_id}}" >
@@ -176,6 +177,7 @@
                                                 <tr>
                                                     <th>Cedula</th>
                                                     <th>Nombre y Apellidos</th>
+                                                    <th>Parentezco</th>
                                                     <th>Correo</th>
                                                     <th>Telefono</th>
                                                     <th>Sexo</th>
@@ -188,6 +190,7 @@
                                                     <tr>                                                    
                                                     <td>{{ $familiar->nacionalidad }}-{{ $familiar->numero_identificacion }}</td>
                                                         <td>{{ $familiar->nombre }} {{ $familiar->nombreseg }} {{ $familiar->apellido }} {{ $familiar->apellidoseg }}</td>
+                                                        <th>{{ $familiar->parentezco }}</th>
                                                         <td>{{ $familiar->email}}</td>
                                                         <td>{{ $familiar->telefono}}</td>                                                        
                                                         <td>{{ $familiar->cod }}</td>
@@ -205,6 +208,7 @@
                                                 <tr>
                                                     <th>Cedula</th>
                                                     <th>Nombre y Apellidos</th>
+                                                    <th>Parentezco</th>
                                                     <th>Correo</th>
                                                     <th>Telefono</th>
                                                     <th>Sexo</th>
@@ -215,6 +219,11 @@
                                             </tfoot>
                                         </table>
                                     </div>
+                @else
+                         <div class="frameContenedor" style="margin:5px;"align="center">
+                           <h2 aling="center"><b>DEBE COMPLETAR LOS DATOS BÁSICOS</b></h2>
+                        </div>
+                @endif
                 </form>
             </div>
         </div>
