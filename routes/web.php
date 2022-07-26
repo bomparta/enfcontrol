@@ -16,8 +16,10 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
-})->name('logout');
-
+});
+Route::get('/logout', function () {
+    return view('login');
+});
 
 Auth::routes();
 
@@ -164,3 +166,32 @@ Route::get('/rrhh/funcionario/requisitos', 'FuncionarioController@datosadjunto')
 
 ///administrador
 Route::get('/adm', 'AdministracionController@index')->name('adm');
+
+// BIENES NACIONALES
+Route::get('/bienes_nacionales/homebienes', 'BienesController@home')->name('menubienes');
+
+Route::get('/bienes_nacionales/listado_bienes', 'BienesController@index')->name('bienes');
+Route::get('/bienes_nacionales/bienes', 'BienesController@create')->name('crearbienes');
+Route::post('/bienes_nacionales/bienes', 'BienesController@store')->name('registrar_bienes');
+Route::get('/bienes_nacionales/bienes_edit/{id}', 'BienesController@edit')->name('verbien');
+Route::post('/bienes_nacionales/bienes_edit', 'BienesController@update')->name('actualizarbien');
+
+Route::get('/bienes_nacionales/listado_bienes_mov', 'BienesController@movimientos')->name('mov_bienes');
+Route::get('/bienes_nacionales/listado_bienes_mov_todos', 'BienesController@movimientos_todos')->name('todos_mov_bienes');
+Route::get('/bienes_nacionales/bienesmov/{id}/{id_bien}', 'BienesController@createmov')->name('crear_mov_bienes');
+Route::post('/bienes_nacionales/bienes_mov', 'BienesController@storemov')->name('registrar_mov_bienes');
+Route::get('/bienes_nacionales/bienes_mov_edit/{id}', 'BienesController@editmov')->name('editar_mov_bienes');
+Route::post('/bienes_nacionales/bienes_mov_edit', 'BienesController@updatemov')->name('actualizar_mov_bienes');
+
+
+
+
+Route::get('/bienes_nacionales/listado_bienes_desin', 'BienesController@list_desincorporar')->name('desin_bienes');
+Route::get('/bienes_nacionales/bienes_desin/{id}/{id_bien}', 'BienesController@createdesin')->name('crear_desin_bienes');
+Route::post('/bienes_nacionales/bienes_desin', 'BienesController@storedesin')->name('registrar_desin_bienes');
+Route::get('/bienes_nacionales/listado_bienes_desin_todos', 'BienesController@desincorporados_todos')->name('todos_desin_bienes');
+
+Route::get('/bienes_nacionales/menu_reportes', 'BienesController@reportes')->name('reportes_bienes');
+Route::get('/bienes_nacionales/reportes/ficha', 'BienesController@ficha')->name('ficha');
+Route::get('/bienes_nacionales/reportes/activos', 'BienesController@activos')->name('activos');
+Route::get('/bienes_nacionales/reportes/desincorporados', 'BienesController@desincorporados')->name('desincorporados');

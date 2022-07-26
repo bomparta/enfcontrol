@@ -123,6 +123,16 @@
             </div>
         </a>
         @endif
+        @if(in_array( Auth::user()->id_usuariogrupo, array(13) ))
+        <a style="color: black;" href="{{route('menubienes')}}">
+            <div class="card text-center">
+                <img src="{{url('/img/bienes.jpeg')}}" class="card-img-top">
+                <div class="card-body">
+                    <h1 class="card-title">Bienes Nacionales</h1>
+                </div>
+            </div>
+        </a>
+        @endif
         <!--
         <div class="title m-b-md">
             {!!QrCode::size(100)->generate("www.nigmacode.com") !!}

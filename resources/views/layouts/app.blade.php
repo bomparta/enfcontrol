@@ -86,6 +86,11 @@
                         <a class="nav-link" href="{{route('rrhh')}}">Control de Expedientes&nbsp;<i class="fa fa-box"></i></a>
                     </li>
                     @endif
+                    @if(in_array( Auth::user()->id_usuariogrupo, array(13) ))
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{route('menubienes')}}">Registro y Control de Bienes Nacionales&nbsp;<i class="fa fa-box"></i></a>
+                    </li>
+                    @endif
                 @endif
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>

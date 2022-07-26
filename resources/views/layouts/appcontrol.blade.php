@@ -168,7 +168,15 @@
                      </a>
                      @endif
         
+                     <!-- Menu Administracion Bienes Nacionales-->
+                     @if(in_array( Auth::user()->id_usuariogrupo, array(13) ))
 
+                   <a href="#" class="card bg-light mb-3" style="max-width: 18rem;">
+                      <div class="card-header">Bienes Nacionales</div>
+                      
+                    </a>
+                    
+                     @endif
                     <!-- Menu Comun -->
 
                     <a href="/password/reset" class="list-group-item list-group-item-action border-0">
