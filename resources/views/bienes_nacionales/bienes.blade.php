@@ -48,9 +48,9 @@
                                    
                                     <select name="tipo_bien"  id="tipo_bien" class="form-control" required >
                                 <option value="0">Seleccione...</option>                                 
-                                        <option value="1" > CPU</option>
-                                        <option value="2" > Monitor</option>
-                                        <option value="3" > Teclado</option>                                   
+                                        <option value="1" > Mueble</option>
+                                        <option value="2" > Tecnológico</option>
+                                        <option value="3" > Otro</option>                                   
                                 </select>
                                 </td>
                                 <td>

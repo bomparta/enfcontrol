@@ -49,9 +49,9 @@
                                    
                                     <select name="tipo_bien"  id="tipo_bien" class="form-control" required >
                                 <option value="0">Seleccione...</option>                                 
-                                        <option value="1" @if($item->tipo_bien_id==1)echo selected @endif > CPU</option>
-                                        <option value="2"  @if($item->tipo_bien_id==2)echo selected @endif  > Monitor</option>
-                                        <option value="3"  @if($item->tipo_bien_id==3)echo selected @endif  > Teclado</option>                                   
+                                <option value="1" @if($item->tipo_bien_id==1)echo selected @endif > Mueble</option>
+                        <option value="2"  @if($item->tipo_bien_id==2)echo selected @endif  > Tecnológico</option>
+                        <option value="3"  @if($item->tipo_bien_id==3)echo selected @endif  > Otros</option>                                            
                                 </select>
                                 </td>
                                 <td>
