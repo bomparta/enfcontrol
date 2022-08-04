@@ -33,7 +33,7 @@
                   <div class="card bg-light mb-6" style="max-width: 14rem;">
                      
                       <div class="card-body">
-                        <a href="#" ><h6 class="card-title">Ubicación Administrativa</h6>
+                        <a href="{{route('adm')}}" ><h6 class="card-title">Ubicación Administrativa</h6>
                           <img src="{{url('/img/bienes_ubi_adm.jpeg')}}" class="card-img-bottom" >
                         </a>
                       </div>

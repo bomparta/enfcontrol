@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'Control de Estudio ENFMP'),
+    'name' => env('APP_NAME', 'Sistema de Gestion ENFMP'),
 
     /*
     |--------------------------------------------------------------------------
@@ -139,6 +139,7 @@ return [
         /*
          * Laravel Framework Service Providers...
          */
+      
         Illuminate\Auth\AuthServiceProvider::class,
         Illuminate\Broadcasting\BroadcastServiceProvider::class,
         Illuminate\Bus\BusServiceProvider::class,
@@ -199,7 +200,7 @@ return [
 
     'aliases' => [
 
-        'App' => Illuminate\Support\Facades\App::class,
+        'App' => Illuminate\Support\Facades\App::class,        
         'Arr' => Illuminate\Support\Arr::class,
         'Artisan' => Illuminate\Support\Facades\Artisan::class,
         'Auth' => Illuminate\Support\Facades\Auth::class,
@@ -240,7 +241,7 @@ return [
         'Html' => Collective\Html\HtmlFacade::class,
         'DataTables' => Yajra\DataTables\Facades\DataTables::class,
         'SEO' => Artesaos\SEOTools\Facades\SEOTools::class,
-
+        'Input' => Illuminate\Support\Facades\Request::class,
     ],
 
 ];

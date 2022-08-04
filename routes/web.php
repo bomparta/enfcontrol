@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Http\Request;
 
 /*
 |--------------------------------------------------------------------------
@@ -195,3 +196,14 @@ Route::get('/bienes_nacionales/menu_reportes', 'BienesController@reportes')->nam
 Route::get('/bienes_nacionales/reportes/ficha', 'BienesController@ficha')->name('ficha');
 Route::get('/bienes_nacionales/reportes/activos', 'BienesController@activos')->name('activos');
 Route::get('/bienes_nacionales/reportes/desincorporados', 'BienesController@desincorporados')->name('desincorporados');
+Route::get('/bienes_nacionales/reportes/bienes_adm', 'BienesController@buscaradm')->name('adm');
+Route::get('/bienes/searchredirect', function(){
+     
+    /* Nuevo: si el argumento search está vacío regresar a la página anterior */
+    if (empty(Input::get('search'))) return redirect()->back();
+    
+    $search = urlencode(e(Input::get('search')));
+    $route = "/bienes_nacionales/bienes_adm/$search";
+    return redirect($route);
+});
+Route::get("/bienes_nacionales/bienes_adm/{search}", "BienesController@search");

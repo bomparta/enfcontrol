@@ -23,7 +23,7 @@
         text-align: left;
         padding: 8px;
     }
-    tr:nth-child(even){
+    tr.encabezado){
         
         background-color: #dddddd;
     }

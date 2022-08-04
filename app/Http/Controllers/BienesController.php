@@ -6,6 +6,7 @@ use App\Bienes;
 use App\Control_Bienes;
 use App\Mov_Bienes;
 use App\Entidad;
+use App\Ubic_Administrativa;
 use Illuminate\Support\Str;
 use Illuminate\Support\Arr;
 use Illuminate\Http\Request;
@@ -13,6 +14,7 @@ use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\App;
+
 
 class BienesController extends Controller
 {
@@ -423,4 +425,42 @@ class BienesController extends Controller
         return $pdf->download('activos'.'.pdf');       
         }
     }
+    
+    public function search($search)
+    {
+        //      
+        $search = urldecode($search);
+        $bienes=Bienes::select('*','bienes_nacionales.bienes.id as id_bien','ubic_administrativa.descripcion as ubic_adm')
+        ->join('bienes_nacionales.mov_bienes','bienes_nacionales.mov_bienes.bienes_id','=','bienes_nacionales.bienes.id')  
+        ->join('ubic_administrativa','bienes_nacionales.mov_bienes.ubic_adm_id','=','ubic_administrativa.id')  
+        ->where('bienes_nacionales.mov_bienes.status','=',1)
+        ->where('bienes_nacionales.bienes.status','=',1)
+        ->where('bienes_nacionales.mov_bienes.tipo_movimiento_id','=',1)
+        ->where('bienes_nacionales.mov_bienes.ubic_adm_id','=',$search)
+        ->get();
+
+      $lista_adm=  Ubic_Administrativa::All();
+      
+        if($bienes->count()>0){
+            $view = \view('bienes_nacionales/reportes/adm',compact('bienes'));
+            $pdf = App::make('dompdf.wrapper');
+            $pdf->loadHTML($view)->setPaper('a4', 'landscape');
+            return $pdf->download('inv_ubic_administrativa'.'.pdf');       
+        }else {
+            return redirect('/bienes_nacionales/reportes/bienes_adm') 
+             ->with('advertencia', 'No hay resultados que mostrar.');
+             
+        }
+    }
+    public function buscaradm()
+    {
+        //    
+        $lista_adm=  Ubic_Administrativa::All();
+        //var_dump($lista_adm);
+        return view('bienes_nacionales/bienes_adm',compact('lista_adm'));
+
+      
+       
+    }
+    
 }
