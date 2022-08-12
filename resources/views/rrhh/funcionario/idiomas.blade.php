@@ -9,7 +9,7 @@
                
                 <b>INSTRUCCIÓN FORMAL Y COMPLEMENTARIA</b>
                 </div>
-                <form id="formulario" name="formulario" method="post" action="#">
+              
                     <table  align="center" border="0" cellpadding="5" cellspacing="2" width="100%" >
                     <tr>
                             <td colspan="4">
@@ -38,12 +38,19 @@
                                 </div>
                             </td>
                         </tr>
-                    
+                        </table>
+                       
+                       <table>
+               <form id="formulario" name="formulario" method="post" action="{{route('idiomasregistrar')}}">
+               @if(isset($funcionario_id))     
+                <input id="id_funcionario" type="hidden" name="id_funcionario" value="{{$funcionario_id}}" >
+                @csrf
+               
                     <tr> 
                         
                         <td>
                             &nbsp;Idioma&nbsp;<span style="color:red;">*</span>&nbsp;
-                            <input type="text" class="form-control" required name="nommbre_curso" id="nommbre_curso" value="" maxlength="25"/>
+                            <input type="text" class="form-control" required name="nommbre_idioma" id="nommbre_idioma" value="" maxlength="25"/>
                         </td>
                     </tr>
                     <tr>
@@ -97,22 +104,24 @@
                                     @endif
                                 </tr>
                             </thead>   
-                            <tbody>                               
-                                <tr>                                                    
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
+                            <tbody>      
+                                @foreach($idiomas as $idiomas)                         
+                                <tr>      
+                                <td>{{$idiomas->nommbre_idioma}}</td>                                              
+                                <td>@if($idiomas->habla==1)REGULAR @elseif($idiomas->habla==2)BIEN @elseif($idiomas->habla==3)MUY BIEN @endif  </td>
+                      
+                                <td>@if($idiomas->lee==1)REGULAR @elseif($idiomas->lee==2)BIEN @elseif($idiomas->lee==3)MUY BIEN @endif  </td>
+                                <td>@if($idiomas->escribe==1)REGULAR @elseif($idiomas->escribe==2)BIEN @elseif($idiomas->escribe==3)MUY BIEN @endif  </td>
                                       
                                         @if(in_array( Auth::user()->id_usuariogrupo, array(9,12,10) ))
                                             <td class="text-center">
-                                            <a href= "#" class="btn btn-info" data-tip="Detalle" title="Actualizar Idioma" data-toggle="tooltip" data-original-title="Editar">
+                                            <a href= "idiomas_edit/{{$idiomas->id}}" class="btn btn-info" data-tip="Detalle" title="Actualizar Idioma" data-toggle="tooltip" data-original-title="Editar">
                                             <img src="/img/icon/modify.ico" class="icon-sm" alt="Listado">
                                             </a>
                                             </td>
                                         @endif                                                            
                                     </tr>
-                            
+                            @endforeach
                             </tbody>
                             <tfoot>
                                 <tr>
@@ -128,6 +137,7 @@
                             </tfoot>
                         </table>
                     </div>
+                    @endif
                 </form>
 
             </div>

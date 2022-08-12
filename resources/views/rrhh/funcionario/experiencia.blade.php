@@ -74,7 +74,8 @@
                        
                     </div>
                     <div class="table-responsive mt-3">
-                        <table id="example" class="table table-striped table-bordered" style="width:100%">                        
+                    <table id="example" class="table table-striped table-bordered" style="width:100%">                        
+                                                         
                             <thead>
                                 <tr>
                                     <th>Empresa u Organización</th>
@@ -85,10 +86,11 @@
                                     @if(in_array( Auth::user()->id_usuariogrupo, array(9,12,10) ))
                                         <th>Opcion</th>
                                     @endif
+                                    <th>Requisitos</th>
                                 </tr>
                             </thead>  
                             @foreach($laboral as $laboral)
-                            <tbody>                              
+                                                    
                                 <tr>                                                    
                                         <td>{{$laboral->nombre_empresa}}</td>
                                         <td>{{$laboral->cargo}}</td>
@@ -101,10 +103,15 @@
                                             <img src="/img/icon/modify.ico" class="icon-sm" alt="Listado">
                                             </a>
                                             </td>
-                                        @endif                                                            
+                                        @endif  
+                                        <td>
+                                        <a href= "creardocumento_laboral/{{$tipo_documento='carta_trab'}}/{{$laboral->id}}/{{$ir='laboralfuncionario'}}" class="btn btn-success" data-tip="Detalle" title="Cargar Carta de Trabajo o Antecedentes de Servicios" data-toggle="tooltip" data-original-title="documento">
+                                                            <img src="/img/icon/constancia.png" class="icon-sm" alt="Listado">
+                                        </a>
+                                        </td>                                                           
                                     </tr>
                             
-                            </tbody>
+                          
                             @endforeach
                             <tfoot>
                                 <tr>
@@ -116,7 +123,7 @@
                                     @if(in_array( Auth::user()->id_usuariogrupo, array(9,12,10) ))
                                         <th>Opcion</th>
                                     @endif
-                                    
+                                    <th>Requisitos</th>
                                 </tr>
                             </tfoot>
                         </table>

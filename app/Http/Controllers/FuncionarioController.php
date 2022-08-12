@@ -5,22 +5,28 @@ namespace App\Http\Controllers;
 
 use App\Genero;
 use App\Entidad;
-use App\Direccion;
+
 use App\Municipio;
 use App\Parroquia;
 use App\Cod_Celular;
 use App\Estado_civil;
 use App\ImagenUpload;
+use App\Imagen_uploads_familiar;
+use App\Imagen_uploads_cursos;
+use App\Imagen_uploads_laborales;
 use App\Nacionalidad;
 use App\Cod_Habitacion;
 use App\Persona;
-use App\DatosEstudiantes;
+
 use App\Funcionario;
 use App\Tipo_trabajador;
 use App\Parentezco;
 use App\Familiares;
 use App\Cuentas_bancarias;
 use App\Laboral;
+use App\Cursos;
+use App\Idiomas;
+use App\Educacion_funcionarios;
 use Illuminate\Support\Str;
 use Illuminate\Support\Arr;
 use Illuminate\Http\Request;
@@ -177,6 +183,7 @@ class FuncionarioController extends Controller
         ->join ('parentezco', 'parentezco.id','=','familiares.parentezco_id')
         ->join ('genero', 'persona.id_genero','=','genero.id')
         ->where('familiares.funcionario_id','=',$funcionario_id)->paginate(10);
+       
         
   // var_dump($familiar);
     return view('rrhh/funcionario/familiar',compact('funcionario_id','familiar','generos','parentezco','nacionalidades','estado_civils','cod_habs','cod_cels'));    
@@ -461,25 +468,304 @@ class FuncionarioController extends Controller
     }
     public function createducacion()
     {
-       
-       return view('rrhh/funcionario/educacion');
+        $cedula_usuario=Auth::user()->cedula;
+        $funcionario= Funcionario::select('funcionario.id as funcionario_id','funcionario.*') 
+        ->join ('persona', 'persona.id','=','funcionario.persona_id')
+        ->where('persona.numero_identificacion','=',$cedula_usuario)->paginate(1);
+        $funcionario_id=null;
+        $educacion=null;
+        foreach($funcionario as $funcionario){
+            $funcionario_id=$funcionario->funcionario_id;
+        }
+        $educacion= Educacion_funcionarios::where('funcionario_id',$funcionario_id)->get();
+       return view('rrhh/funcionario/educacion',compact('educacion','funcionario_id'));
+    } 
+    public function editeducacion()
+    {
+        $cedula_usuario=Auth::user()->cedula;
+        $funcionario= Funcionario::select('funcionario.id as funcionario_id','funcionario.*') 
+        ->join ('persona', 'persona.id','=','funcionario.persona_id')
+        ->where('persona.numero_identificacion','=',$cedula_usuario)->paginate(1);
+        $funcionario_id=null;
+        $educacion=null;
+        foreach($funcionario as $funcionario){
+            $funcionario_id=$funcionario->funcionario_id;
+        }
+        $educacion= Educacion_funcionarios::where('funcionario_id',$funcionario_id)->get();
+       return view('rrhh/funcionario/educacion_edit',compact('educacion','funcionario_id'));
+    }
+    public function storeducacion(Request $request)
+    {
+        
+        $request->validate([
+            
+            'id_funcionario' => ['required'],
+            'profesion'=>['required', 'string', 'max:150'],
+           
+        ]);
+      
+        $educacion = new Educacion_funcionarios();        
+        $educacion->funcionario_id = $request->id_funcionario;
+        $educacion->profesion_ocup = $request->profesion;
+        $educacion->otros_estudios = $request->otros_estudios;
+        $educacion->pri_ult_anio = $request->pri_ultimo_anno;
+        $educacion->institucion_pri = $request->institucion_pri;          
+        $educacion->dir_ref_pri = $request->dir_ref_pri;         
+        $educacion->fecha_ini_pri = $request->fechainicio_pri;           
+        $educacion->fecha_fin_pri = $request->fechaculminacion_pri;    
+        $educacion->sec_ult_anio = $request->sec_ultimo_anno;
+        $educacion->institucion_sec = $request->institucion_sec;          
+        $educacion->dir_ref_sec = $request->dir_ref_sec;         
+        $educacion->fecha_ini_sec = $request->fechainicio_sec;           
+        $educacion->fecha_fin_sec = $request->fechaculminacion_sec;     
+        $educacion->tec_ult_anio = $request->tec_ultimo_anno;
+        $educacion->institucion_tec = $request->institucion_tec;          
+        $educacion->dir_ref_tec = $request->dir_ref_tec;         
+        $educacion->fecha_ini_tec = $request->fechainicio_tec;           
+        $educacion->fecha_fin_tec = $request->fechaculminacion_tec;            
+        $educacion->tec_ult_anio = $request->tec_ultimo_anno;
+        $educacion->institucion_tec = $request->institucion_tec;          
+        $educacion->dir_ref_tec = $request->dir_ref_tec;         
+        $educacion->fecha_ini_tec = $request->fechainicio_tec;           
+        $educacion->fecha_fin_tec = $request->fechaculminacion_tec;            
+        $educacion->uni_ult_anio = $request->uni_ultimo_anno;
+        $educacion->institucion_tec = $request->institucion_tec;          
+        $educacion->dir_ref_uni = $request->dir_ref_uni;         
+        $educacion->fecha_ini_uni = $request->fechainicio_uni;           
+        $educacion->fecha_fin_uni = $request->fechaculminacion_uni;    
+        $educacion->institucion_uni = $request->institucion_uni; 
+        $educacion->save();
+
+        return redirect('rrhh/funcionario/educacion_edit')->with('message', ' Su datos Educativos fueron agregados con éxito!!.');
+    }
+    public function updateducacion(Request $request)
+    {
+        $request->validate([
+            
+            'id_funcionario' => ['required'],
+            'profesion'=>['required', 'string', 'max:150'],
+           
+        ]);
+      
+        Educacion_funcionarios::where('funcionario_id', $request->id_funcionario)->where('status',1)
+        ->update([         
+           
+            'profesion_ocup' => $request->profesion,
+            'otros_estudios' => $request->otros_estudios,
+            'pri_ult_anio' => $request->pri_ultimo_anno,
+            'institucion_pri' => $request->institucion_pri,        
+            'dir_ref_pri' => $request->dir_ref_pri,       
+            'fecha_ini_pri' => $request->fechainicio_pri,         
+            'fecha_fin_pri' => $request->fechaculminacion_pri,  
+            'sec_ult_anio' => $request->sec_ultimo_anno,
+            'institucion_sec' => $request->institucion_sec,        
+            'dir_ref_sec' => $request->dir_ref_sec,      
+            'fecha_ini_sec' => $request->fechainicio_sec,         
+            'fecha_fin_sec' => $request->fechaculminacion_sec,     
+            'tec_ult_anio' => $request->tec_ultimo_anno,
+            'institucion_tec' => $request->institucion_tec,        
+            'dir_ref_tec' => $request->dir_ref_tec,       
+            'fecha_ini_tec' => $request->fechainicio_tec,          
+            'fecha_fin_tec' => $request->fechaculminacion_tec,          
+            'tec_ult_anio' => $request->tec_ultimo_anno,
+            'institucion_tec' => $request->institucion_tec,       
+            'dir_ref_tec' => $request->dir_ref_tec,     
+            'fecha_ini_tec' => $request->fechainicio_tec,       
+            'fecha_fin_tec' => $request->fechaculminacion_tec,          
+            'uni_ult_anio' => $request->uni_ultimo_anno,
+            'institucion_tec' => $request->institucion_tec,        
+            'dir_ref_uni' => $request->dir_ref_uni,     
+            'fecha_ini_uni' => $request->fechainicio_uni,        
+            'fecha_fin_uni' => $request->fechaculminacion_uni,   
+            'institucion_uni' => $request->institucion_uni,       
+ 
+        ]);
+       return redirect('rrhh/funcionario/educacion_edit')->with('message', ' Su datos Educativos fueron actualizados con éxito!!.');;
     }
     public function createstudios_act()
     {
-       
-       return view('rrhh/funcionario/estudios_act');
+        $cedula_usuario=Auth::user()->cedula;
+        $funcionario= Funcionario::select('funcionario.id as funcionario_id','funcionario.*') 
+        ->join ('persona', 'persona.id','=','funcionario.persona_id')
+        ->where('persona.numero_identificacion','=',$cedula_usuario)->paginate(1);
+       return view('rrhh/funcionario/estudios_act',compact('funcionario'));
     }
+    public function updatestudios_act(Request $request)
+    {
+        $request->validate([
+            
+            'id_funcionario' => ['required'],
+            'estudia'=>['required'],
+            'nivel_curso'=>['required'],
+            'universidad'=>['required'],
+            'especialidad'=>['required'],
+           
+        ]);
+      
+        Funcionario::where('id', $request->id_funcionario)
+        ->update([         
+   
+            'estudia'=>$request->estudia,
+            'nivel_cursa'=>$request->nivel_curso,
+            'especialidad'=>$request->especialidad,
+            'institucion_estudia'=>$request->universidad,
+           
+ 
+        ]);
+       return redirect('rrhh/funcionario/estudios_act')->with('message', ' Sus Estudios Actuales fue actualizado con éxito!!.');;
+    }
+    
     public function createcursos()
     {
-       $cursos=NULL;
-       return view('rrhh/funcionario/cursos',compact($cursos));
+        $cedula_usuario=Auth::user()->cedula;
+        $funcionario= Funcionario::select('funcionario.id as funcionario_id','funcionario.*') 
+        ->join ('persona', 'persona.id','=','funcionario.persona_id')        
+        ->where('persona.numero_identificacion','=',$cedula_usuario)->get();
+        $funcionario_id=null;
+        $cursos=null;
+        foreach($funcionario as $funcionario){
+            $funcionario_id=$funcionario->funcionario_id;
+        }
+        $cursos=Cursos::select('*')->where('cursos.funcionario_id','=',$funcionario_id)->paginate(5);
+
+       return view('rrhh/funcionario/cursos',compact('cursos','funcionario_id'));
+    }
+    
+    public function storecursos(Request $request)
+    {
+        
+        $request->validate([
+            
+            'id_funcionario' => ['required'],
+            'nommbre_curso'=>['required', 'string', 'max:150'],
+            'institucion_curso'=>['required', 'string', 'max:150'],
+            'dir_ref_curso'=>['required'],
+            'fechainicio_curso'=>['required'],
+            'fechaculminacion_curso'=>['required'],
+        ]);
+      
+        $cursos = new Cursos();        
+        $cursos->funcionario_id = $request->id_funcionario;
+        $cursos->nommbre_curso = $request->nommbre_curso;
+        $cursos->institucion_curso = $request->institucion_curso;          
+        $cursos->dir_ref_curso = $request->dir_ref_curso;         
+        $cursos->fechainicio_curso = $request->fechainicio_curso;           
+        $cursos->fechaculminacion_curso = $request->fechaculminacion_curso;           
+      
+        $cursos->save();
+
+        return redirect('rrhh/funcionario/cursos')->with('message', ' Su Curso fue agregado con éxito!!.');
+    }
+    public function editcursos(Request $request,$id)// editar datos familiares
+    {       
+         $curso_id=$id;
+         $cursos  =   Cursos::select ('*')       
+        ->where('cursos.id','=',$curso_id)->get();   
+        // dd($request);
+        return view('rrhh/funcionario/cursos_edit',compact('cursos'));         
+     
+    }
+    public function updatecursos (Request $request)
+    {
+        
+        $request->validate([           
+            'id_curso'=>['required'],
+            'nommbre_curso'=>['required', 'string', 'max:150'],
+            'institucion_curso'=>['required', 'string', 'max:150'],
+            'dir_ref_curso'=>['required'],
+            'fechainicio_curso'=>['required'],
+            'fechaculminacion_curso'=>['required'],      
+        ]);
+
+      // dd($request);
+     
+       Cursos::where('id', $request->id_curso)
+       ->update([         
+  
+           'nommbre_curso'=>$request->nommbre_curso,
+           'institucion_curso'=>$request->institucion_curso,
+           'dir_ref_curso'=>$request->dir_ref_curso,
+           'fechainicio_curso'=>$request->fechainicio_curso,
+           'fechaculminacion_curso'=>$request->fechaculminacion_curso,
+
+       ]);
+
+        return redirect('rrhh/funcionario/cursos')->with('message', ' Su Curso realizado fue actualizado con éxito!!.');
     }
     public function createidiomas()
     {
-       
-       return view('rrhh/funcionario/idiomas');
+        $cedula_usuario=Auth::user()->cedula;
+        $funcionario= Funcionario::select('funcionario.id as funcionario_id','funcionario.*') 
+        ->join ('persona', 'persona.id','=','funcionario.persona_id')        
+        ->where('persona.numero_identificacion','=',$cedula_usuario)->get();
+        $funcionario_id=null;
+        $cursos=null;
+        foreach($funcionario as $funcionario){
+            $funcionario_id=$funcionario->funcionario_id;
+        }
+        $idiomas=Idiomas::select('*')->where('idiomas.funcionario_id','=',$funcionario_id)->paginate(5);
+       return view('rrhh/funcionario/idiomas',compact('idiomas','funcionario_id'));
     }
-   
+    public function storeidiomas(Request $request)
+    {
+        
+        $request->validate([
+            
+            'id_funcionario' => ['required'],
+            'nommbre_idioma'=>['required', 'string', 'max:150'],
+           
+            'lee'=>['required'],
+            'habla'=>['required'],
+            'escribe'=>['required'],
+        ]);
+      
+        $idiomas = new Idiomas();        
+        $idiomas->funcionario_id = $request->id_funcionario;
+        $idiomas->nommbre_idioma = $request->nommbre_idioma;
+        $idiomas->lee = $request->lee;          
+        $idiomas->habla = $request->habla;         
+        $idiomas->escribe = $request->escribe;           
+              
+      
+        $idiomas->save();
+
+        return redirect('rrhh/funcionario/idiomas')->with('message', ' Su Idioma fue agregado con éxito!!.');
+    }
+    public function editidiomas(Request $request,$id)// editar datos familiares
+    {       
+         $idioma_id=$id;
+         $idiomas  =   Idiomas::select ('*')       
+        ->where('idiomas.id','=',$idioma_id)->get();   
+        // dd($request);
+        return view('rrhh/funcionario/idiomas_edit',compact('idiomas'));         
+     
+    }
+    public function updateidiomas (Request $request)
+    {
+        
+        $request->validate([           
+            'id_idioma'=>['required'],
+             'nommbre_idioma'=>['required', 'string', 'max:150'],          
+            'lee'=>['required'],
+            'habla'=>['required'],
+            'escribe'=>['required'],      
+        ]);
+
+      // dd($request);
+     
+       Idiomas::where('id', $request->id_idioma)
+       ->update([         
+  
+           'nommbre_idioma'=>$request->nommbre_idioma,
+           'lee'=>$request->lee,
+           'habla'=>$request->habla,
+           'escribe'=>$request->escribe,
+          
+
+       ]);
+
+        return redirect('rrhh/funcionario/idiomas')->with('message', ' Su Idioma fue actualizado con éxito!!.');
+    }
     /**
      * Store a newly created resource in storage.
      *
@@ -648,104 +934,79 @@ class FuncionarioController extends Controller
     }
     
  
-    
-
-    public function direccionlistestudiante($id)
-    {
-        
-        $direccionestudiantes = Direccion::select('*')
-       ->where('id_usuario', '=',$id)
-       ->get();
-        return view('estudiante.listdireccion',compact('direccionestudiantes'));
-    }
-
-    public function experiencialistestudiante($id)
-    {
-        $experienciaestudiantes = DatosEstudiante::find($id);
-        return view('estudiante.listexperiencia',compact('experienciaestudiantes'));
-    }
-
-    public function indexestatus()
-    {
-       // $estatusproceso = DatosEstudiante::find($id);
-        return view('estudiante.estatus');
-    }
+  
     
 
    // public function datosadjunto($id)
     public function datosadjunto()
     {
-     //   $adjuntosestudiantes = DatosEstudiante::find($id);
-        //return view('rrhh.funcionario.datosadjuntados',compact('adjuntosestudiantes'));
-        return view('rrhh.funcionario.requisitos');
-    }
+        $cedula_usuario=Auth::user()->cedula;
+        $funcionario= Funcionario::select('funcionario.id as funcionario_id','funcionario.*') 
+        ->join ('persona', 'persona.id','=','funcionario.persona_id')        
+        ->where('persona.numero_identificacion','=',$cedula_usuario)->get();
+        $funcionario_id=null;
+        $laboral=null;
+        foreach($funcionario as $funcionario){
+            $funcionario_id=$funcionario->funcionario_id;
+        }
+        $laboral=Laboral::select('*')->where('laboral.funcionario_id','=',$funcionario_id)->paginate(10);
+        $cursos=Cursos::select('*')->where('cursos.funcionario_id','=',$funcionario_id)->paginate(15);
+        $familiar  =   Familiares::select ('*','familiares.id as id_familiar','familiares.persona_id as id_persona', 'nacionalidad.cod as nacionalidad',
+        'parentezco.descripcion as parentezco')
+        ->join ('funcionario', 'familiares.funcionario_id','=','funcionario.id')
+        ->join ('persona', 'persona.id','=','familiares.persona_id')
+        ->join ('nacionalidad', 'nacionalidad.id','=','persona.id_nacionalidad')
+        ->join ('parentezco', 'parentezco.id','=','familiares.parentezco_id')
+        ->join ('genero', 'persona.id_genero','=','genero.id')
+        ->where('familiares.funcionario_id','=',$funcionario_id)->paginate(10);
 
-    public function adjuntodatos($id)
-    {
-       // $adjuntosestudiantes = ImagenUpload::find($id);
-        $adjuntosestudiantes = ImagenUpload::select('*')
+        $id= Auth::user()->id;
+        $foto = ImagenUpload::select('*')
        ->where('usuario', '=',$id)
        ->where('nombre', 'foto')
        ->get();
-       $adjuntoscedula = ImagenUpload::select('*')
+       $cedula = ImagenUpload::select('*')
        ->where('usuario', '=',$id)
        ->where('nombre', 'cedula')
        ->get();
-       $adjuntoscurriculum = ImagenUpload::select('*')
+       $partida = ImagenUpload::select('*')
        ->where('usuario', '=',$id)
-       ->where('nombre', 'curriculum')
+       ->where('nombre', 'partida_nac')
        ->get();
-       $adjuntoscarta = ImagenUpload::select('*')
+       $matrimonio = ImagenUpload::select('*')
        ->where('usuario', '=',$id)
-       ->where('nombre', 'carta_solicitud')
+       ->where('nombre', 'matrimonio')
        ->get();
-       $adjuntoscarnetcolegiatura = ImagenUpload::select('*')
+       $constancia = ImagenUpload::select('*')
        ->where('usuario', '=',$id)
-       ->where('nombre', 'carnet_colegiatura')
+       ->where('nombre', 'matrimonio')
        ->get();
-       $adjuntosimpre = ImagenUpload::select('*')
+       $horario = ImagenUpload::select('*')
        ->where('usuario', '=',$id)
-       ->where('nombre', 'impre_colegiatura')
+       ->where('nombre', 'horario')
        ->get();
-        return view('estudiante.datosadjuntos',compact('adjuntosestudiantes','adjuntoscedula','adjuntoscurriculum','adjuntoscarta','adjuntoscarnetcolegiatura','adjuntosimpre'));
-    }
+       $curriculum = ImagenUpload::select('*')
+       ->where('usuario', '=',$id)
+       ->where('nombre', 'horario')
+       ->get();
+       $titulo = ImagenUpload::select('*')
+       ->where('usuario', '=',$id)
+       ->where('nombre', 'titulo')
+       ->get();
 
-    public function crearfoto()
-    {
+        return view('rrhh.funcionario.requisitos',compact('familiar','laboral','cursos','foto','cedula','partida','matrimonio','constancia','horario','curriculum','titulo'));
         
-        return view('estudiante.crearfoto');
     }
 
-    public function crearcedula()
+   
+
+    public function creardocumento(Request $request,$tipo_documento)
     {
-        
-        return view('estudiante.crearcedula');
+
+        return view('rrhh.funcionario.creardocumento',compact('tipo_documento'));
     }
 
-    public function crearcurriculum()
-    {
-        
-        return view('estudiante.crearcurriculum');
-    }
-
-    public function crearcarta()
-    {
-        
-        return view('estudiante.crearcarta');
-    }
-
-    public function crearcarnetcolegiatura()
-    {
-        
-        return view('estudiante.crearcarnetcolegiatura');
-    }
-
-    public function crearimpre()
-    {
-        
-        return view('estudiante.crearimpre');
-    }
-
+    
     public function subirArchivo(Request $request)
     {
             //Recibimos el archivo y lo guardamos en la carpeta storage/app/public
@@ -754,104 +1015,69 @@ class FuncionarioController extends Controller
 
             if($request->hasfile('archivo')):
                 $imagen         = $request->file('archivo');
-                //$usuario        = Auth::user()->id;
-                //$nombre         = 'foto';
                 $nombreimagen   = $imagen.".".$imagen->guessExtension();
-                $ruta           = $request->file('archivo')->store('public/foto_carnet');
+                $ruta           = $request->file('archivo')->store('public/documentos_rrhh/'.$request->tipo_documento);
                 $imagen->move($ruta,$nombreimagen);  
-                //dd("$ruta / $nombreimagen subido y guardado"); 
-                            
-                $datosimagen = new ImagenUpload();
-                $datosimagen->usuario = Auth::user()->id;
-                $datosimagen->nombre = 'foto';
-                $datosimagen->ruta = $ruta;
-                $datosimagen->save();
                 
-                return redirect('/adjunto_datos/'.Auth::user()->id)->with('success', 'Se adjunto con exito la foto.');
+                $id= Auth::user()->id;
+                $requisitos =  ImagenUpload::select('*')
+                ->where('usuario', '=',$id)
+                ->where('nombre', '=', $request->tipo_documento)
+                ->get();
+                if(count($requisitos)==0 ){
+                            
+                    $datosimagen = new ImagenUpload();
+                    $datosimagen->usuario = Auth::user()->id;
+                    $datosimagen->nombre = $request->tipo_documento;
+                    $datosimagen->ruta = $ruta;
+                    $datosimagen->save();
+                }else{
+                    
+                    ImagenUpload::where('id', Auth::user()->id)
+                    ->update([                                  
+                        'ruta'=>$ruta
+                    ]);
+                }
+                
+                return redirect('rrhh/funcionario/requisitos/')->with('message', 'Se adjunto el documento con exito!! .');
 
             endif;
-            return redirect('/adjunto_datos/'.Auth::user()->id)->with('danger', 'No se adjunto foto.');
-            //return view('estudiante.datosadjuntos');
-               //dd("$imagen subido y guardado");
+            return redirect('rrhh/funcionario/requisitos/')->with('error', 'No se adjunto el documento correctamente.');
+         
     }
-
-    public function subircedula(Request $request)
+    
+    
+    public function requisito_familiar(Request $request,$tipo_documento,$id_familiar,$ir=null)
     {
-            //Recibimos el archivo y lo guardamos en la carpeta storage/app/public
-           // $request->file('archivo')->store('public/foto_carnet');
-            //dd("subido y guardado");
-
-            if($request->hasfile('archivo')):
-                $imagen         = $request->file('archivo');
-                //$usuario        = Auth::user()->id;
-                //$nombre         = 'foto';
-                $nombreimagen   = $imagen.".".$imagen->guessExtension();
-                $ruta           = $request->file('archivo')->store('public/foto_cedula');
-                $imagen->move($ruta,$nombreimagen);  
-                //dd("$ruta / $nombreimagen subido y guardado"); 
-                            
-                $datosimagen = new ImagenUpload();
-                $datosimagen->usuario = Auth::user()->id;
-                $datosimagen->nombre = 'cedula';
-                $datosimagen->ruta = $ruta;
-                $datosimagen->save();
-                
-                return redirect('/adjunto_datos/'.Auth::user()->id)->with('success', 'Se adjunto con exito la cedula.');
-
-            endif;
-            return redirect('/adjunto_datos/'.Auth::user()->id)->with('danger', 'No se adjunto la cedula.');
-               //dd("$imagen subido y guardado");
+        $cedula =null;
+        $partida =null;
+        if($tipo_documento=='cedula_familiar'){
+        $cedula = Imagen_uploads_familiar::select('*')
+        ->where('familiar_id', '=',$id_familiar)
+        ->where('nombre', 'cedula_familiar')
+        ->get();
+        }
+        if($tipo_documento=='partida_nac_familiar'){
+        $partida = Imagen_uploads_familiar::select('*')
+        ->where('familiar_id', '=',$id_familiar)
+        ->where('nombre', 'partida_nac_familiar')
+        ->get();
+        }
+        //dd($cedula);
+        //dd($partida);
+        $familiar= Familiares::select ('*','familiares.id as id_familiar','familiares.persona_id as id_persona', 'nacionalidad.cod as nacionalidad',
+        'parentezco.descripcion as parentezco')
+        ->join ('funcionario', 'familiares.funcionario_id','=','funcionario.id')
+        ->join ('persona', 'persona.id','=','familiares.persona_id')
+        ->join ('nacionalidad', 'nacionalidad.id','=','persona.id_nacionalidad')
+        ->join ('parentezco', 'parentezco.id','=','familiares.parentezco_id')
+        ->join ('genero', 'persona.id_genero','=','genero.id')
+        ->where('familiares.id',$id_familiar)
+        ->get();
+        //dd($familiar);
+    return view('rrhh.funcionario.creardocumento_familiar',compact('ir','tipo_documento','id_familiar','cedula','partida','familiar'));
     }
-
-    public function subircurriculum(Request $request)
-    {
-            //Recibimos el archivo y lo guardamos en la carpeta storage/app/public
-           
-            if($request->hasfile('archivo')):
-                $imagen         = $request->file('archivo');
-                $nombreimagen   = $imagen.".".$imagen->guessExtension();
-                $ruta           = $request->file('archivo')->store('public/archivo_curriculum');
-                $imagen->move($ruta,$nombreimagen);  
-                //dd("$ruta / $nombreimagen subido y guardado"); 
-                            
-                $datosimagen = new ImagenUpload();
-                $datosimagen->usuario = Auth::user()->id;
-                $datosimagen->nombre = 'curriculum';
-                $datosimagen->ruta = $ruta;
-                $datosimagen->save();
-                
-                return redirect('/adjunto_datos/'.Auth::user()->id)->with('success', 'Se adjunto con exito el curriculum.');
-
-            endif;
-            return redirect('/adjunto_datos/'.Auth::user()->id)->with('danger', 'No se adjunto el curricullum.');
-               //dd("$imagen subido y guardado");
-    }
-
-    public function subircarta(Request $request)
-    {
-            //Recibimos el archivo y lo guardamos en la carpeta storage/app/public
-           
-            if($request->hasfile('archivo')):
-                $imagen         = $request->file('archivo');
-                $nombreimagen   = $imagen.".".$imagen->guessExtension();
-                $ruta           = $request->file('archivo')->store('public/carta_solicitud');
-                $imagen->move($ruta,$nombreimagen);  
-                //dd("$ruta / $nombreimagen subido y guardado"); 
-                            
-                $datosimagen = new ImagenUpload();
-                $datosimagen->usuario = Auth::user()->id;
-                $datosimagen->nombre = 'carta_solicitud';
-                $datosimagen->ruta = $ruta;
-                $datosimagen->save();
-                
-                return redirect('/adjunto_datos/'.Auth::user()->id)->with('success', 'Se adjunto con exito la carta de solicitud.');
-
-            endif;
-            return redirect('/adjunto_datos/'.Auth::user()->id)->with('danger', 'No se adjunto la carta de solicitud.');
-               //dd("$imagen subido y guardado");
-    }
-
-    public function subircarnetcolegiatura(Request $request)
+    public function subirArchivo_familiar(Request $request)
     {
             //Recibimos el archivo y lo guardamos en la carpeta storage/app/public
            // $request->file('archivo')->store('public/foto_carnet');
@@ -860,25 +1086,53 @@ class FuncionarioController extends Controller
             if($request->hasfile('archivo')):
                 $imagen         = $request->file('archivo');
                 $nombreimagen   = $imagen.".".$imagen->guessExtension();
-                $ruta           = $request->file('archivo')->store('public/foto_carnet_colegiatura');
+                $ruta           = $request->file('archivo')->store('public/documentos_rrhh/'.$request->tipo_documento);
                 $imagen->move($ruta,$nombreimagen);  
-                //dd("$ruta / $nombreimagen subido y guardado"); 
-                            
-                $datosimagen = new ImagenUpload();
-                $datosimagen->usuario = Auth::user()->id;
-                $datosimagen->nombre = 'carnet_colegiatura';
-                $datosimagen->ruta = $ruta;
-                $datosimagen->save();
                 
-                return redirect('/adjunto_datos/'.Auth::user()->id)->with('success', 'Se adjunto con exito carnet de colegiatura.');
+                $id= Auth::user()->id;
+                $requisitos =  Imagen_uploads_familiar::select('*')
+                ->where('familiar_id', '=', $request->familiar_id)
+                ->where('nombre', '=', $request->tipo_documento)
+                ->get();
+                if(count($requisitos)==0 ){
+                            
+                    $datosimagen = new Imagen_uploads_familiar();
+                    $datosimagen->usuario = Auth::user()->id;
+                    $datosimagen->familiar_id = $request->familiar_id;
+                    $datosimagen->nombre = $request->tipo_documento;
+                    $datosimagen->ruta = $ruta;
+                    $datosimagen->save();
+                }else{
+                    
+                    Imagen_uploads_familiar::where('familiar_id', $request->familiar_id)
+                    ->update([                                  
+                        'ruta'=>$ruta
+                    ]);
+                }
+                
+                return redirect('rrhh/funcionario/familiar/')->with('message', 'Se adjunto el documento con exito!! .');
 
             endif;
-            return redirect('/adjunto_datos/'.Auth::user()->id)->with('danger', 'No se adjunto carnet de colegiatura.');
-            //return view('estudiante.datosadjuntos');
-               //dd("$imagen subido y guardado");
+            return redirect('rrhh/funcionario/familiar/')->with('error', 'No se adjunto el documento correctamente.');
+         
     }
-
-    public function subirimpre(Request $request)
+    public function requisito_cursos(Request $request,$tipo_documento,$id_curso,$ir=null)
+    {
+        $curso =null;
+   
+        if($tipo_documento=='curso'){
+        $curso = Imagen_uploads_cursos::select('*')
+        ->where('cursos_id', '=',$id_curso)
+        ->where('nombre', 'curso')
+        ->get();
+        }       
+        $cursos= Cursos::select ('*')
+        ->where('cursos.id',$id_curso)
+        ->get();
+      // dd($curso);
+    return view('rrhh.funcionario.creardocumento_curso',compact('ir','tipo_documento','id_curso','cursos','curso'));
+    }
+    public function subirArchivo_cursos(Request $request)
     {
             //Recibimos el archivo y lo guardamos en la carpeta storage/app/public
            // $request->file('archivo')->store('public/foto_carnet');
@@ -887,24 +1141,91 @@ class FuncionarioController extends Controller
             if($request->hasfile('archivo')):
                 $imagen         = $request->file('archivo');
                 $nombreimagen   = $imagen.".".$imagen->guessExtension();
-                $ruta           = $request->file('archivo')->store('public/foto_impre_colegiatura');
+                $ruta           = $request->file('archivo')->store('public/documentos_rrhh/'.$request->tipo_documento);
                 $imagen->move($ruta,$nombreimagen);  
-                //dd("$ruta / $nombreimagen subido y guardado"); 
-                            
-                $datosimagen = new ImagenUpload();
-                $datosimagen->usuario = Auth::user()->id;
-                $datosimagen->nombre = 'impre_colegiatura';
-                $datosimagen->ruta = $ruta;
-                $datosimagen->save();
                 
-                return redirect('/adjunto_datos/'.Auth::user()->id)->with('success', 'Se adjunto con exito impre de colegiatura.');
+                $id= Auth::user()->id;
+                $requisitos =  Imagen_uploads_cursos::select('*')
+                ->where('cursos_id', '=', $request->cursos_id)
+                ->where('nombre', '=', $request->tipo_documento)
+                ->get();
+                if(count($requisitos)==0 ){
+                            
+                    $datosimagen = new Imagen_uploads_cursos();
+                    $datosimagen->usuario = Auth::user()->id;
+                    $datosimagen->cursos_id = $request->cursos_id;
+                    $datosimagen->nombre = $request->tipo_documento;
+                    $datosimagen->ruta = $ruta;
+                    $datosimagen->save();
+                }else{
+                    
+                    Imagen_uploads_cursos::where('cursos_id', $request->cursos_id)
+                    ->update([                                  
+                        'ruta'=>$ruta
+                    ]);
+                }
+                
+                return redirect('rrhh/funcionario/cursos/')->with('message', 'Se adjunto el documento con exito!! .');
 
             endif;
-            return redirect('/adjunto_datos/'.Auth::user()->id)->with('danger', 'No se adjunto impre de colegiatura.');
-            //return view('estudiante.datosadjuntos');
-               //dd("$imagen subido y guardado");
+            return redirect('rrhh/funcionario/cursos/')->with('error', 'No se adjunto el documento correctamente.');
+         
     }
+    public function requisito_laboral(Request $request,$tipo_documento,$id_laboral,$ir=null)
+    {
+        $carta_trab =null;
+   
+        if($tipo_documento=='carta_trab'){
+        $carta_trab = Imagen_uploads_laborales::select('*')
+        ->where('laboral_id', '=',$id_laboral)
+        ->where('nombre', 'carta_trab')
+        ->get();
+        }       
+        $laboral= Laboral::select ('*')
+        ->where('laboral.id',$id_laboral)
+        ->get();
+      // dd($curso);
+    return view('rrhh.funcionario.creardocumento_laboral',compact('ir','tipo_documento','id_laboral','laboral','carta_trab'));
+    }
+    public function subirArchivo_laboral(Request $request)
+    {
+            //Recibimos el archivo y lo guardamos en la carpeta storage/app/public
+           // $request->file('archivo')->store('public/foto_carnet');
+            //dd("subido y guardado");
 
+            if($request->hasfile('archivo')):
+                $imagen         = $request->file('archivo');
+                $nombreimagen   = $imagen.".".$imagen->guessExtension();
+                $ruta           = $request->file('archivo')->store('public/documentos_rrhh/'.$request->tipo_documento);
+                $imagen->move($ruta,$nombreimagen);  
+                
+                $id= Auth::user()->id;
+                $requisitos =  Imagen_uploads_laborales::select('*')
+                ->where('laboral_id', '=', $request->laboral_id)
+                ->where('nombre', '=', $request->tipo_documento)
+                ->get();
+                if(count($requisitos)==0 ){
+                            
+                    $datosimagen = new Imagen_uploads_laborales();
+                    $datosimagen->usuario = Auth::user()->id;
+                    $datosimagen->laboral_id = $request->laboral_id;
+                    $datosimagen->nombre = $request->tipo_documento;
+                    $datosimagen->ruta = $ruta;
+                    $datosimagen->save();
+                }else{
+                    
+                    Imagen_uploads_laborales::where('laboral_id', $request->laboral_id)
+                    ->update([                                  
+                        'ruta'=>$ruta
+                    ]);
+                }
+                
+                return redirect('rrhh/funcionario/experiencia/')->with('message', 'Se adjunto el documento con exito!! .');
+
+            endif;
+            return redirect('rrhh/funcionario/experiencia/')->with('error', 'No se adjunto el documento correctamente.');
+         
+    }
 
     public function submunicipio(Request $request){
      //   dd($request);
@@ -926,6 +1247,7 @@ class FuncionarioController extends Controller
         }
 
     }
+   
 
     public function subparroquia(Request $request){
         if(isset($request->texto)){

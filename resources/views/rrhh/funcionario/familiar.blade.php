@@ -182,7 +182,8 @@
                                                     <th>Telefono</th>
                                                     <th>Sexo</th>
                                                     @if(in_array( Auth::user()->id_usuariogrupo, array(9,12,10) ))
-                                                        <th>Opcion</th>
+                                                        <th>Opción</th>
+                                                        <th>Requisitos</th>
                                                     @endif
                                                 </tr>
                                             </thead>                                  
@@ -200,6 +201,17 @@
                                                             <img src="/img/icon/modify.ico" class="icon-sm" alt="Listado">
                                                             </a>
                                                             </td>
+                                                            <td>
+                                                            @if($familiar->parentezco_id==2)
+                                                            <a href= "creardocumento_familiar/{{$tipo_documento='partida_nac_familiar'}}/{{$familiar->id_familiar}}/{{$ir='familiarfuncionario'}}" class="btn btn-success" data-tip="Detalle" title="Cargar Partida de Nacimiento" data-toggle="tooltip" data-original-title="documento">
+                                                            <img src="/img/icon/constancia.png" class="icon-sm" alt="Listado">
+                                                            </a>
+                                                            @endif
+                                                            <a href= "creardocumento_familiar/{{$tipo_documento='cedula_familiar'}}/{{$familiar->id_familiar}}/{{$ir='familiarfuncionario'}}" class="btn btn-warning" data-tip="Detalle" title="Cargar Cédula de Identidad" data-toggle="tooltip" data-original-title="documento">
+                                                            <img src="/img/icon/cedula.png" class="icon-sm" alt="Listado">
+                                                            
+                                                            </a>
+                                                            </td>
                                                         @endif                                                            
                                                     </tr>
                                             @endforeach     
@@ -213,7 +225,8 @@
                                                     <th>Telefono</th>
                                                     <th>Sexo</th>
                                                     @if(in_array( Auth::user()->id_usuariogrupo, array(9,12,10) ))
-                                                        <th>Opcion</th>
+                                                    <th>Opción</th>
+                                                     <th>Requisitos</th>
                                                     @endif
                                                 </tr>
                                             </tfoot>

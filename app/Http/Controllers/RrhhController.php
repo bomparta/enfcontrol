@@ -5,17 +5,22 @@ namespace App\Http\Controllers;
 
 use App\Genero;
 use App\Entidad;
-use App\Direccion;
 use App\Municipio;
 use App\Parroquia;
 use App\Cod_Celular;
 use App\Estado_civil;
-use App\ImagenUpload;
 use App\Nacionalidad;
 use App\Cod_Habitacion;
-use App\DatosEstudiante;
 use App\Persona;
 use App\Funcionario;
+use App\Tipo_trabajador;
+use App\Parentezco;
+use App\Familiares;
+use App\Cuentas_bancarias;
+use App\Laboral;
+use App\Cursos;
+use App\Idiomas;
+use App\Educacion_funcionarios;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -46,12 +51,38 @@ class RrhhController extends Controller
         * y en 'aliases' se coloco esto 'PDF' => Barryvdh\DomPDF\Facade::class,
         */
         $cedula_usuario=Auth::user()->cedula;
-       $datos_funcionario  =   Funcionario::select ('*')->join ('persona', 'persona.id','=','funcionario.persona_id')
+        $funcionario= Funcionario::select('funcionario.id as funcionario_id','funcionario.*','persona.*') 
+        ->join ('persona', 'persona.id','=','funcionario.persona_id')        
         ->where('persona.numero_identificacion','=',$cedula_usuario)->get();
-       if($datos_funcionario->count()>0){
-        $view = \view('rrhh/funcionario/planillarrhh', compact('datos_funcionario'));
+        $funcionario_id=null;
+        $laboral=null;
+        foreach($funcionario as $funcionario){
+            $funcionario_id=$funcionario->funcionario_id;
+        }
+        $datos_funcionario= Funcionario::select('funcionario.id as funcionario_id',
+        'funcionario.*','persona.*') 
+        ->join ('persona', 'persona.id','=','funcionario.persona_id')    
+         
+        ->where('persona.numero_identificacion','=',$cedula_usuario)->get();
+
+        $laboral=Laboral::select('*')->where('laboral.funcionario_id','=',$funcionario_id)->paginate(10);
+        $educacion= Educacion_funcionarios::where('funcionario_id',$funcionario_id)->get();
+        $cursos=Cursos::select('*')->where('cursos.funcionario_id','=',$funcionario_id)->paginate(15);
+        $familiar  =   Familiares::select ('*','familiares.id as id_familiar','familiares.persona_id as id_persona', 'nacionalidad.cod as nacionalidad',
+        'parentezco.descripcion as parentezco')
+        ->join ('funcionario', 'familiares.funcionario_id','=','funcionario.id')
+        ->join ('persona', 'persona.id','=','familiares.persona_id')
+        ->join ('nacionalidad', 'nacionalidad.id','=','persona.id_nacionalidad')
+        ->join ('parentezco', 'parentezco.id','=','familiares.parentezco_id')
+        ->join ('genero', 'persona.id_genero','=','genero.id')
+        ->where('familiares.funcionario_id','=',$funcionario_id)->paginate(10);
+        $idiomas=Idiomas::select('*')->where('idiomas.funcionario_id','=',$funcionario_id)->paginate(5);
+        $cuentas=Cuentas_bancarias::select('*')->where('cuentas_bancarias.funcionario_id','=',$funcionario_id)->paginate(5);
+       if($funcionario->count()>0){
+        $view = \view('rrhh/funcionario/planillarrhh', compact('datos_funcionario','familiar','cursos','laboral','idiomas','cuentas','educacion'));
+       
        $pdf = App::make('dompdf.wrapper');
-       $pdf->loadHTML($view);
+       $pdf->loadHTML($view)->setPaper('legal');
        return $pdf->download('planillarrhh'.'.pdf');
      }else{
         return redirect('rrhh/funcionario/datosedit')->with('advertencia', ' Debe completar los datos para imprimir la PLANILLA DE ACTUALIZACION DE DATOS!!.');

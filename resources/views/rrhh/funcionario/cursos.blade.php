@@ -9,7 +9,7 @@
                
                 <b>INSTRUCCIÓN FORMAL Y COMPLEMENTARIA</b>
                 </div>
-                <form id="formulario" name="formulario" method="post" action="#">
+            
                     <table  align="center" border="0" cellpadding="5" cellspacing="2" width="100%" >
                     <tr>
                             <td colspan="4">
@@ -34,11 +34,18 @@
                                 <div id="divSubTituloIndex2">
                                     <hr>
                                     <b>Suministre sus datos de los <span style="color:gray;">Cursos Realizados</span> de adiestramiento,seminarios, entrenamientos especiales, haga clic en "Guardar" para registrar su información <b>
-                                    <hr>   
+                                    <hr>  
+                                    @include('rrhh.funcionario.mensaje')   
                                 </div>
                             </td>
                         </tr>
-                    
+                        </table>
+                       
+                       <table>
+               <form id="formulario" name="formulario" method="post" action="{{route('cursosregistrar')}}">
+               @if(isset($funcionario_id))     
+                <input id="id_funcionario" type="hidden" name="id_funcionario" value="{{$funcionario_id}}" >
+                @csrf
                     <tr> 
                         
                         <td>
@@ -87,24 +94,31 @@
                                     @if(in_array( Auth::user()->id_usuariogrupo, array(9,12,10) ))
                                         <th>Opcion</th>
                                     @endif
+                                    <th>Requisitos</th>
                                 </tr>
                             </thead>    
-                            <tbody>                              
+                            <tbody>   
+                            @foreach($cursos as $cursos)                           
                                 <tr>                                                    
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
+                                        <td>{{$cursos->nommbre_curso}}</td>
+                                        <td>{{$cursos->institucion_curso}}</td>
+                                        <td>{{$cursos->dir_ref_curso}}</td>
+                                        <td>{{$cursos->fechainicio_curso}}</td>
+                                        <td>{{$cursos->fechaculminacion_curso}}</td>
                                         @if(in_array( Auth::user()->id_usuariogrupo, array(9,12,10) ))
                                             <td class="text-center">
-                                            <a href= "#" class="btn btn-info" data-tip="Detalle" title="Actualizar Curso" data-toggle="tooltip" data-original-title="Editar">
+                                            <a href= "cursos_edit/{{$cursos->id}}" class="btn btn-info" data-tip="Detalle" title="Actualizar Curso" data-toggle="tooltip" data-original-title="Editar">
                                             <img src="/img/icon/modify.ico" class="icon-sm" alt="Listado">
                                             </a>
                                             </td>
-                                        @endif                                                            
+                                        @endif   
+                                        <td>
+                                        <a href= "creardocumento_curso/{{$tipo_documento='curso'}}/{{$cursos->id}}/{{$ir='cursos_funcionario'}}" class="btn btn-success" data-tip="Detalle" title="Cargar Curso" data-toggle="tooltip" data-original-title="documento">
+                                                            <img src="/img/icon/constancia.png" class="icon-sm" alt="Listado">
+                                        </a>
+                                        </td>                                                             
                                     </tr>
-                            
+                            @endforeach
                             </tbody>
                             <tfoot>
                                 <tr>
@@ -116,10 +130,15 @@
                                     @if(in_array( Auth::user()->id_usuariogrupo, array(9,12,10) ))
                                         <th>Opcion</th>
                                     @endif
-                                    
+                                    <th>Requisitos</th>
                                 </tr>
                             </tfoot>
                         </table>
+                        @else
+                 <div class="frameContenedor" style="margin:5px;"align="center">
+                           <h2 aling="center"><b>DEBE COMPLETAR LOS DATOS BÁSICOS</b></h2>
+                        </div>
+                 @endif  
                     </div>
                 </form>
 

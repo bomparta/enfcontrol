@@ -82,7 +82,7 @@ body { margin-left: 0.31527777777778in; margin-right: 0.31527777777778in; margin
             <td colspan="2"></td>
           </tr>
           <tr >
-            <th colspan="12" ali  aalig="center">6.- CARACTERÍSTICAS DE LOS  BIENES MUEBLES</th>
+            <th colspan="12" ali  aling="center">6.- CARACTERÍSTICAS DE LOS  BIENES MUEBLES</th>
           </tr>
           <tr >
             <th >CODIGO DE LA SUDEBIP</th>

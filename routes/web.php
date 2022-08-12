@@ -19,7 +19,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 Route::get('/logout', function () {
-    return view('login');
+    return view('auth/login');
 });
 
 Auth::routes();
@@ -151,19 +151,42 @@ Route::get('/rrhh/funcionario/experiencia', 'FuncionarioController@createxperien
 Route::post('/rrhh/funcionario/experiencia', 'FuncionarioController@storexperiencia')->name('laboralregistrar');
 Route::get('/rrhh/funcionario/experiencia_edit/{id}', 'FuncionarioController@editexperiencia')->name('editarlaboral');
 Route::post('/rrhh/funcionario/experiencia_edit', 'FuncionarioController@updatexperiencia')->name('actualizarlaboral');
+Route::get('/rrhh/funcionario/creardocumento_laboral/{tipo_documento}/{id_laboral}/{ir}', 'FuncionarioController@requisito_laboral')->name('requisitoslaboral');
+Route::post('/rrhh/funcionario/creardocumeto_laboral', 'FuncionarioController@subirArchivo_laboral')->name('subirarchivo_laboral');
 
 Route::get('/rrhh/funcionario/educacion', 'FuncionarioController@createducacion')->name('educacionfuncionario');
+Route::post('/rrhh/funcionario/educacion', 'FuncionarioController@storeducacion')->name('registrareducacion');
+Route::get('/rrhh/funcionario/educacion_edit', 'FuncionarioController@editeducacion')->name('editeducacion');
+Route::post('/rrhh/funcionario/educacion_edit', 'FuncionarioController@updateducacion')->name('actualizareducacion');
+
 Route::get('/rrhh/funcionario/estudios_act', 'FuncionarioController@createstudios_act')->name('estudios_actfuncionario');
+Route::post('/rrhh/funcionario/estudios_act', 'FuncionarioController@updatestudios_act')->name('registrarestudios_act');
+
 Route::get('/rrhh/funcionario/cursos', 'FuncionarioController@createcursos')->name('cursos_funcionario');
+Route::post('/rrhh/funcionario/cursos', 'FuncionarioController@storecursos')->name('cursosregistrar');
+
+Route::get('/rrhh/funcionario/cursos_edit/{id}', 'FuncionarioController@editcursos')->name('editar_funcionario');
+Route::post('/rrhh/funcionario/cursos_edit', 'FuncionarioController@updatecursos')->name('actualizarcursos');
+Route::get('/rrhh/funcionario/creardocumento_curso/{tipo_documento}/{id_curso}/{ir}', 'FuncionarioController@requisito_cursos')->name('requisitoscurso');
+Route::post('/rrhh/funcionario/creardocumeto_curso', 'FuncionarioController@subirArchivo_cursos')->name('subirarchivo_curso');
+
 Route::get('/rrhh/funcionario/idiomas', 'FuncionarioController@createidiomas')->name('idiomas_funcionario');
+Route::post('/rrhh/funcionario/idiomas', 'FuncionarioController@storeidiomas')->name('idiomasregistrar');
+Route::get('/rrhh/funcionario/idiomas_edit/{id}', 'FuncionarioController@editidiomas')->name('editaridiomas');
+Route::post('/rrhh/funcionario/idiomas_edit', 'FuncionarioController@updateidiomas')->name('actualizaridiomas');
 
 Route::get('/rrhh/funcionario/familiar', 'FuncionarioController@createfamiliar')->name('familiarfuncionario');
 Route::post('/rrhh/funcionario/familiar', 'FuncionarioController@storefamiliar')->name('registrarfamiliar');
 Route::get('/rrhh/funcionario/familiar_edit/{id}', 'FuncionarioController@editfamiliar');
 Route::post('/rrhh/funcionario/familiar_edit', 'FuncionarioController@updatefamiliar')->name('actualizarfamiliar');
+Route::get('/rrhh/funcionario/creardocumento_familiar/{tipo_documento}/{id_familiar}/{ir}', 'FuncionarioController@requisito_familiar')->name('requisitosfamiliar');
+Route::post('/rrhh/funcionario/creardocumeto_familiar', 'FuncionarioController@subirArchivo_familiar')->name('subirarchivo_familiar');
 
 
 Route::get('/rrhh/funcionario/requisitos', 'FuncionarioController@datosadjunto')->name('requisitos');
+Route::get('/rrhh/funcionario/creardocumeto/{tipo_documento}', 'FuncionarioController@creardocumento')->name('creardocumento');
+Route::post('/rrhh/funcionario/creardocumeto', 'FuncionarioController@subirArchivo')->name('subirarchivo');
+
 
 ///administrador
 Route::get('/adm', 'AdministracionController@index')->name('adm');

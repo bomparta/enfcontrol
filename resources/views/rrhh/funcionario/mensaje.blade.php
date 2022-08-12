@@ -21,3 +21,9 @@
         {{ session()->get('advertencia') }}
         </div>
 @endif
+@if(session()->has('error'))
+        <div class="alert alert-danger" data-dismiss="alert" >
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        {{ session()->get('error') }}
+        </div>
+@endif

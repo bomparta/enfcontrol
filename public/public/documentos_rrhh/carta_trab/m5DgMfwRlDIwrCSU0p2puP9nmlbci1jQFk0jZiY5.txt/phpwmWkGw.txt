@@ -1,0 +1,80 @@
+hola yoma ese no es el servidor viejop
+
+
+necesoik servidor viejo para ubicarme
+
+okey ya le pregunto a publio
+acaba de llegar
+yo tambien me fije que no era porque no veia la carpeta de replica qye tu creaste
+
+
+preguntale que servicio tiene intalado
+
+php
+mysql
+pstgres
+apache
+
+y las libreria de php instaladas
+
+le faltan algunas lilbreria
+
+pgsql
+intl
+
+revisa a ver que libreria tiene la maquina que le puedan faltar y le dices
+
+que paso 
+
+
+bien ya le pregunto 
+b ajo un memnto 
+momento
+
+que me de acceso al servidor viejo quiero ver que tiene el disco
+ok
+
+gracias yoma
+
+
+necesito la clave de l
+la calve de root de mysql
+okey 
+
+te pregunto pudiste ver lo de las consultas
+yo hoy no he adelantado mucho
+me quede pegada con lo de los respaldos
+
+si la vi en la casa
+falta solo es bajar a excel, pero nos falta algo para descargar
+
+si  eso es lo que estaba viendo ahorita
+pero ya vi una manera
+
+otro cosa
+ya publio me esta ubicando el disco viejo
+ para instalar 
+la bd
+
+
+si pero para levantar el servicio la maquina que la monta debe de estarcon la misma ip del servidor para que levante sino me equivoso
+sino tenfras que hacer la prueba de todas manera yo salgo y voy para alla
+
+okey 
+a que hora vienes 5
+esta conectada la base de datps
+si lo esta lo unico que hay que hacer es actualizar el respaldo
+con lo que tienes 
+la ultima version
+
+
+no esa es la base de datos 
+la que tiene ahorita montada tiene datos de un respaldo viejo
+hay que montar lo ultimo
+po
+
+contrab -e   /comando 
+
+
+
+
