@@ -16,7 +16,7 @@ class AddPersonaCiudadNac extends Migration
         //
         Schema::table('persona', function (Blueprint $table) {
             $table->string('ciudad_nac')->nullable()->after('edad');  
-            $table->string('estado_nac')->nullable()->after('ciudad_nac');                
+            $table->bigint('estado_nac')->nullable()->after('ciudad_nac');                
             });
     }
 

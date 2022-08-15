@@ -27,7 +27,7 @@ use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\App;
-
+use Carbon\Carbon;
 class RrhhController extends Controller
 {
     /**
@@ -58,13 +58,24 @@ class RrhhController extends Controller
         $laboral=null;
         foreach($funcionario as $funcionario){
             $funcionario_id=$funcionario->funcionario_id;
+            $edad=Carbon::parse($funcionario->edad)->age;
         }
         $datos_funcionario= Funcionario::select('funcionario.id as funcionario_id',
-        'funcionario.*','persona.*') 
+        'funcionario.*','persona.*','funcionario.cargo as cargo','funcionario.id_oficina_administrativa'     ,
+        'estado_civil.descripcion as est_civil','entidad.descripcion as estado_nac',
+        'tipo_trabajador.descripcion as trabajador','ubic_administrativa.descripcion as administrativa',
+        'ent_domicilio.descripcion as ent_domi','municipio.nombre as muni_domi','parroquia.nombre as parr_muni') 
         ->join ('persona', 'persona.id','=','funcionario.persona_id')    
-         
+        ->join('estado_civil','estado_civil.id','=','persona.id_estado_civil')  
+        ->join('entidad','entidad.id','=','persona.estado_nac') 
+        ->JOIN('tipo_trabajador','tipo_trabajador.id','funcionario.id_tipo_funcionario')      
+        ->JOIN('ubic_administrativa','ubic_administrativa.id','funcionario.id_oficina_administrativa')          
+        ->join('entidad as ent_domicilio','ent_domicilio.id','=','funcionario.estado_domicilio') 
+        ->join('municipio','municipio.id','=','funcionario.municipio_domicilio')     
+        ->join('parroquia','parroquia.id','=','funcionario.parroquia_domicilio')      
         ->where('persona.numero_identificacion','=',$cedula_usuario)->get();
 
+      
         $laboral=Laboral::select('*')->where('laboral.funcionario_id','=',$funcionario_id)->paginate(10);
         $educacion= Educacion_funcionarios::where('funcionario_id',$funcionario_id)->get();
         $cursos=Cursos::select('*')->where('cursos.funcionario_id','=',$funcionario_id)->paginate(15);
@@ -79,7 +90,7 @@ class RrhhController extends Controller
         $idiomas=Idiomas::select('*')->where('idiomas.funcionario_id','=',$funcionario_id)->paginate(5);
         $cuentas=Cuentas_bancarias::select('*')->where('cuentas_bancarias.funcionario_id','=',$funcionario_id)->paginate(5);
        if($funcionario->count()>0){
-        $view = \view('rrhh/funcionario/planillarrhh', compact('datos_funcionario','familiar','cursos','laboral','idiomas','cuentas','educacion'));
+        $view = \view('rrhh/funcionario/planillarrhh', compact('edad','datos_funcionario','familiar','cursos','laboral','idiomas','cuentas','educacion'));
        
        $pdf = App::make('dompdf.wrapper');
        $pdf->loadHTML($view)->setPaper('legal');

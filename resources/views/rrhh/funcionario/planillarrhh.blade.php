@@ -115,9 +115,9 @@ body { margin-left: 0.1in; margin-right: 0.1in; margin-top: 0.1in; margin-bottom
 		
 		<td  align="center" colspan="4"  > {{$funcionario->est_civil}}   </td>
 		
-		<td  align="center"  colspan=5  >   07/07/1979   DTTO. CAPITAL  CARACAS   </td>
+		<td  align="center"  colspan=5  >   {{date('d-m-Y', strtotime($funcionario->edad))}}   {{$funcionario->ciudad_nac}}  {{$funcionario->estado_nac}}   </td>
 		
-		<td  align="center"   >    42    </td>
+		<td  align="center"   >{{$edad}}  AÑOS </td>
 	</tr>
 	
 	<tr>
@@ -126,9 +126,9 @@ body { margin-left: 0.1in; margin-right: 0.1in; margin-top: 0.1in; margin-bottom
 		<th  colspan=4 align="center"   >   UNIDAD DE ADSCRIPCIÓN    </th>
 	</tr>
 	<tr>
-		<td  colspan=6 align="center"   >   EMPLEADO FIJO    </td>
-		<td  colspan=3 rowspan=2 align="center"   >   ASESOR    </td>
-		<td  colspan=4 rowspan=2 align="center"   >   COORDINACION DE TECNOLOGIA    </td>
+		<td  colspan=6 align="center"   >   {{$funcionario->trabajador}}   </td>
+		<td  colspan=3 rowspan=2 align="center"   >   {{$funcionario->cargo}}   </td>
+		<td  colspan=4 rowspan=2 align="center"   >   {{$funcionario->administrativa}}   </td>
 	</tr>
 	<tr>
 		<th class="th_encabezado1"  colspan=13  height="22" align="center"   >   DIRECCIÓN DE HABITACIÓN     </th>
@@ -139,18 +139,17 @@ body { margin-left: 0.1in; margin-right: 0.1in; margin-top: 0.1in; margin-bottom
 		<th  colspan=6 align="center"   >   TIPO DE VIVIENDA    </th>
 	</tr>
 	<tr>
-		<td  colspan=4 rowspan=2  align="center"   >   URB. LA ESTRELLA    </td>
-		<td   colspan=3 rowspan=2 align="center"   >   PRINCIPAL    </td>
-		<td   align="left"   >   CASA Nº    </td>
-		<td  align="left"   >   APARTAMENTO N°      </td>
-		<td      align="left"   >    PISO N°    </td>
-		<td  colspan=3 align="center"   >   NOMBRE DE LA CASA O EDIFICIO    </td>
+		<td  colspan=4 rowspan=2  align="center"   >  {{$funcionario->sector_urbanizacion}}     </td>
+		<td   colspan=3 rowspan=2 align="center"   >    {{$funcionario->calle_avenida}}     </td>
+		<th   align="left"   colspan="2">   CASA - APARTAMENTO Nº    </th>	
+		<th      align="left"   >    PISO N°    </th>
+		<th  colspan=3 align="center"   >   NOMBRE DE LA CASA O EDIFICIO    </th>
 	</tr>
 	<tr>
-		<td  align="left"   >   <br>    </td>
-		<td  align="right"  >   51    </td>
-		<td  align="right"  >   5    </td>
-		<td  colspan=3 align="center"   >   NEPTUNO 4A    </td>
+		
+		<td  align="right" colspan="2"  >       {{$funcionario->nro_casa_apartamento}}    </td>
+		<td  align="left"   > {{$funcionario->piso_nro_casa}}    </td>
+		<td  colspan=3 align="center"   >{{$funcionario->piso_nro_casa}}  {{$funcionario->nombre_casa_edificio_residencia}}     </td>
 	</tr>
 	<tr>
 		<th  colspan=4  align="center"   >   PARROQUIA    </th>
@@ -159,10 +158,10 @@ body { margin-left: 0.1in; margin-right: 0.1in; margin-top: 0.1in; margin-bottom
 		<th       colspan=2 align="center"   >   CODIGO POSTAL    </th>
 	</tr>
 	<tr>
-		<td  colspan=4  align="center"   >   CHARALLAVE    </td>
-		<td  colspan=4  align="center"   >   CRISTOBAL ROJAS    </td>
-		<td  colspan=3  align="center"   >   MIRANDA    </td>
-		<td  colspan=2 align="center"   >   1210    </td>
+		<td  colspan=4  align="center"   >   {{$funcionario->parr_domi}}   </td>
+		<td  colspan=4  align="center"   >   {{$funcionario->muni_domi}}   </td>
+		<td  colspan=3  align="center"   >    {{$funcionario->enti_domi}}    </td>
+		<td  colspan=2 align="center"   >   {{$funcionario->codigo_postal}}     </td>
 	</tr>	
 	<tr>
 		<th  colspan=5  align="center"   >   CONDICIÓN DE LA VIVIENDA    </th>
