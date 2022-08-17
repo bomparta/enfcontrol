@@ -416,7 +416,7 @@ body { margin-left: 0.1in; margin-right: 0.1in; margin-top: 0.1in; margin-bottom
 		<td   align="center"   >    {{$laboral->cargo}}     </td>
 		<td  align="right"   >    {{$laboral->fecha_ingreso}}     </td>
 		<td  align="left"    >    {{$laboral->fecha_egreso}}    </td>
-		<td   align="center"   >   -    </td>
+		<td   align="center"   >   -     </td>
 		<td align="center"   >     </td>     
 	</tr>
 		@endforeach
