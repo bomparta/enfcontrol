@@ -64,29 +64,29 @@ class RrhhController extends Controller
         'funcionario.*','persona.*','funcionario.cargo as cargo','funcionario.id_oficina_administrativa'     ,
         'estado_civil.descripcion as est_civil','entidad.descripcion as estado_nac',
         'tipo_trabajador.descripcion as trabajador','ubic_administrativa.descripcion as administrativa',
-        'ent_domicilio.descripcion as ent_domi','municipio.nombre as muni_domi','parroquia.nombre as parr_muni') 
+        'ent.descripcion as ent_domi','municipio.nombre as muni_domi','parroquia.nombre as parr_domi') 
         ->join ('persona', 'persona.id','=','funcionario.persona_id')    
         ->join('estado_civil','estado_civil.id','=','persona.id_estado_civil')  
         ->join('entidad','entidad.id','=','persona.estado_nac') 
         ->JOIN('tipo_trabajador','tipo_trabajador.id','funcionario.id_tipo_funcionario')      
         ->JOIN('ubic_administrativa','ubic_administrativa.id','funcionario.id_oficina_administrativa')          
-        ->join('entidad as ent_domicilio','ent_domicilio.id','=','funcionario.estado_domicilio') 
+        ->join('entidad as ent','ent.id','=','funcionario.estado_domicilio') 
         ->join('municipio','municipio.id','=','funcionario.municipio_domicilio')     
-        ->join('parroquia','parroquia.id','=','funcionario.parroquia_domicilio')      
+        ->join('parroquia','parroquia.id','=','funcionario.parroquia_domicilio')             
         ->where('persona.numero_identificacion','=',$cedula_usuario)->get();
 
       
-        $laboral=Laboral::select('*')->where('laboral.funcionario_id','=',$funcionario_id)->paginate(10);
+        $laboral=Laboral::select('*')->where('laboral.funcionario_id','=',$funcionario_id)->paginate(5);
         $educacion= Educacion_funcionarios::where('funcionario_id',$funcionario_id)->get();
         $cursos=Cursos::select('*')->where('cursos.funcionario_id','=',$funcionario_id)->paginate(15);
         $familiar  =   Familiares::select ('*','familiares.id as id_familiar','familiares.persona_id as id_persona', 'nacionalidad.cod as nacionalidad',
-        'parentezco.descripcion as parentezco')
+        'parentezco.descripcion as parentezco','familiares.ocupacion as ocupacion_fam')
         ->join ('funcionario', 'familiares.funcionario_id','=','funcionario.id')
         ->join ('persona', 'persona.id','=','familiares.persona_id')
         ->join ('nacionalidad', 'nacionalidad.id','=','persona.id_nacionalidad')
         ->join ('parentezco', 'parentezco.id','=','familiares.parentezco_id')
         ->join ('genero', 'persona.id_genero','=','genero.id')
-        ->where('familiares.funcionario_id','=',$funcionario_id)->paginate(10);
+        ->where('familiares.funcionario_id','=',$funcionario_id)->paginate(5);
         $idiomas=Idiomas::select('*')->where('idiomas.funcionario_id','=',$funcionario_id)->paginate(5);
         $cuentas=Cuentas_bancarias::select('*')->where('cuentas_bancarias.funcionario_id','=',$funcionario_id)->paginate(5);
        if($funcionario->count()>0){
