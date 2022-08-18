@@ -21,6 +21,7 @@ use App\Laboral;
 use App\Cursos;
 use App\Idiomas;
 use App\Educacion_funcionarios;
+use App\ImagenUpload;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -89,8 +90,13 @@ class RrhhController extends Controller
         ->where('familiares.funcionario_id','=',$funcionario_id)->paginate(5);
         $idiomas=Idiomas::select('*')->where('idiomas.funcionario_id','=',$funcionario_id)->paginate(5);
         $cuentas=Cuentas_bancarias::select('*')->where('cuentas_bancarias.funcionario_id','=',$funcionario_id)->paginate(5);
+        $id= Auth::user()->id;
+        $foto = ImagenUpload::select('*')
+       ->where('usuario', '=',$id)
+       ->where('nombre', 'foto')
+       ->get();
        if($funcionario->count()>0){
-        $view = \view('rrhh/funcionario/planillarrhh', compact('edad','datos_funcionario','familiar','cursos','laboral','idiomas','cuentas','educacion'));
+        $view = \view('rrhh/funcionario/planillarrhh', compact('foto','edad','datos_funcionario','familiar','cursos','laboral','idiomas','cuentas','educacion'));
        
        $pdf = App::make('dompdf.wrapper');
        $pdf->loadHTML($view)->setPaper('legal');

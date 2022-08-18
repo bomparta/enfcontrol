@@ -80,8 +80,8 @@ body { margin-left: 0.1in; margin-right: 0.1in; margin-top: 0.1in; margin-bottom
         @foreach($datos_funcionario as $key=>$funcionario)
 	<tr>
 		<th colspan="6" align="center"   >  FECHA DE ELABORACIÓN</th>
-		<th colspan="7" align="center"   >    NACIONALIDAD - CEDULA DE IDENTIDAD </th>
-		
+		<th colspan="6" align="center"   >    NACIONALIDAD - CEDULA DE IDENTIDAD </th>
+		<td class="td_encabezado" colspan="2"  height="22" >  <img src="{{public_path($foto->ruta)}}" style="width: 15mm; height: 15mm; margin: 0;" /> </td>
 	</tr>
 	<tr>
 		<td   colspan="6" align="center"  > <div align="center"> {{ date('d-m-Y') }}   </div></td>
@@ -409,15 +409,15 @@ body { margin-left: 0.1in; margin-right: 0.1in; margin-top: 0.1in; margin-bottom
 		@foreach($laboral as $laboral)
 	<tr>
 		<td  colspan=3  align="center"   >  {{$laboral->nombre_empresa}}   </td>
-		<td  colspan=2 align="center"   >    </td>
+		<td  colspan=2 align="center"   >     {{$laboral->direccion_empresa}} </td>
 		<td  align="center"   >   {{$laboral->telefono_empresa}}    </td>
-		<td   align="center"   >  </td>
-		<td   align="center"   >         </td>
-		<td   align="center"   >    {{$laboral->cargo}}     </td>
+		<td   align="center"   > {{$laboral->persona_contacto}}   </td>
+		<td   align="center"   >  {{$laboral->cargo}}        </td>
+		<td   align="center"   >    {{$laboral->cargo_final}}     </td>
 		<td  align="right"   >    {{$laboral->fecha_ingreso}}     </td>
 		<td  align="left"    >    {{$laboral->fecha_egreso}}    </td>
-		<td   align="center"   >   -     </td>
-		<td align="center"   >     </td>     
+		<td   align="center"   >  {{$laboral->motivo_retiro}}     </td>
+		<td align="center"   >   {{$laboral->tareas}}     </td>     
 	</tr>
 		@endforeach
 	
