@@ -38,8 +38,8 @@
                       
                     
                 <div class="table-responsive">
-    <table id="example1" class="table table-bordered table-striped">                
-                            <thead>
+                <table id="example" class="table table-striped table-bordered" style="width:100%"> 
+                            <thead>  
                                 <tr>
                                     <th>N° Bien</th>
                                     <th>Descripción</th>
@@ -52,9 +52,8 @@
                                     @endif
                                 </tr>
                             </thead>  
-                           
-                           @foreach($bienes as $bienes)
-                            <tbody>                              
+                            <tbody>    
+                           @foreach($bienes as $bienes)                                                   
                                 <tr>                                                    
                                         <td>{{$bienes->num_bien}}</td>
                                         <td>{{$bienes->tipo_bien_id}}</td>
@@ -70,9 +69,8 @@
                                             </td>
                                         @endif                                                            
                                     </tr>
-                            
-                            </tbody>
-                          @endforeach
+                            @endforeach
+                            </tbody>                      
                             <tfoot>
                                 <tr>
                                 <th>N° Bien</th>

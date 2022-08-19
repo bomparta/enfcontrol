@@ -31,7 +31,7 @@
 </head>
 <body>
     <h2>PLANILLA ASIGNACIÖN DE BIENES NACIONALES</h2>
- <table>
+    <table id="example" class="table table-striped table-bordered" style="width:100%"> 
  @foreach ($bienes as $item)
     <tr>
         <th>Fecha de Asignación</th><th>Funcionario Asignado</th>

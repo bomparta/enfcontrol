@@ -37,7 +37,7 @@
                       
                     
                     <div class="table-responsive mt-3">
-                        <table id="example" class="table table-striped" style="width:100%">                        
+                        <table id="example" class="table table-striped table-bordered" style="width:100%">                        
                             <thead>
                                 <tr>
                                     <th>N° Bien</th>
@@ -50,9 +50,10 @@
                                         <th>Opción</th>
                                     @endif
                                 </tr>
-                            </thead>  
-                            @foreach($bienes as $bienes)   
+                            </thead> 
                             <tbody>   
+                            @foreach($bienes as $bienes)   
+                            
                                                  
                                 <tr>                                                    
                                 <td>{{$bienes->num_bien}}</td>
@@ -74,10 +75,8 @@
                                             </td>
                                         @endif                                                            
                                     </tr>
-                            
-                            </tbody>
                             @endforeach
-                          
+                            </tbody>    
                             <tfoot>
                             <tr>
                                     <th>N° Bien</th>

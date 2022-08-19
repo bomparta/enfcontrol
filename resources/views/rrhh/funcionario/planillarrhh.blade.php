@@ -67,22 +67,28 @@ body { margin-left: 0.1in; margin-right: 0.1in; margin-top: 0.1in; margin-bottom
 
 <tr class="tr_encabezado">
     <td class="td_encabezado" colspan="2">  <img src="{{public_path('/img/logo1.png')}}" style="width: 15mm; height: 15mm; margin: 0;" /> </td>
-    <td class="td_encabezado" colspan="9">REPUBLICA BOLIVARIANA DE VENEZUELA <br>
+    <td class="td_encabezado" colspan="9" style="font-size:150%;"><b>REPUBLICA BOLIVARIANA DE VENEZUELA <br>
         FUNDACIÓN ESCUELA NACIONAL DE FISCALES DEL MINISTERIO PÚBLICO <br>
         PLANILLA ACTUALIZACIÓN DE DATOS EXPEDIENTES DE PERSONAL 
         <br><br>
-        AÑO {{ date('Y') }}   
+        AÑO {{ date('Y') }}   </b>
     </td>
     <td class="td_encabezado" colspan="2"> <img  src="{{public_path('/img/logo2.png')}}"   style="width: 15mm; height: 15mm; " /></td>
 </tr>
-   <tr class="tr_encabezado"><td  height="22" colspan="13" ><br></td></tr>
+<tr  class="tr_encabezado" ><td colspan=12 height="22" align="center" class="td_encabezado" ></td>
+	<td height="22" align="center" class="td_encabezado">
+		<div align="center"> <img src="{{storage_path('app/'.$foto[0]->ruta)}}" style="width: 15mm; height: 15mm; margin: 0;" /> 
+		</div>
+	</td>
+</tr>
+
         <tbody>
         @foreach($datos_funcionario as $key=>$funcionario)
-	<tr>
-		<th colspan="6" align="center"   >  FECHA DE ELABORACIÓN</th>
-		<th colspan="6" align="center"   >    NACIONALIDAD - CEDULA DE IDENTIDAD </th>
-		<td class="td_encabezado" colspan="2"  height="22" >  <img src="{{public_path($foto->ruta)}}" style="width: 15mm; height: 15mm; margin: 0;" /> </td>
-	</tr>
+		<tr>
+			<th colspan="6" align="center"   >  FECHA DE ELABORACIÓN</th>
+			<th colspan="6" align="center"   >    NACIONALIDAD - CEDULA DE IDENTIDAD </th>		
+			
+		</tr>
 	<tr>
 		<td   colspan="6" align="center"  > <div align="center"> {{ date('d-m-Y') }}   </div></td>
 		<td   colspan="7" ><div align="center">  @if($funcionario->id_nacionalidad==1) V 
@@ -197,10 +203,10 @@ body { margin-left: 0.1in; margin-right: 0.1in; margin-top: 0.1in; margin-bottom
 	</tr>
 	<tr>
 		<th  align="center">   ESTATURA    </th>
-		<td  align="center">   PESO    </th>
-		<td  align="center">   PANTALON    </th>
-		<td  align="center">   CAMISA    </th>
-		<td  align="center">   CALZADO    </th>
+		<th  align="center">   PESO    </th>
+		<th  align="center">   PANTALON    </th>
+		<th  align="center">   CAMISA    </th>
+		<th  align="center">   CALZADO    </th>
 		<td  colspan=5 rowspan=2 align="center"   >   @if ($funcionario->es_alergico==1) SI @else NO @endif POSEE ALERGIA <br>{{$funcionario->tipo_alergia}}     </td>
 		</tr>
 	<tr>
@@ -422,30 +428,30 @@ body { margin-left: 0.1in; margin-right: 0.1in; margin-top: 0.1in; margin-bottom
 		@endforeach
 	
 	<tr>
-		<th class="th_encabezado1"  colspan=13 height="27" align="center"   >   NORMATIVA PLANILLA DE ACTUALIZACIÓN DE DATOS EXPEDIENTE DEL PERSONAL    </th>
+		<th class="th_encabezado1"  colspan=13 height="22" align="center"   >   NORMATIVA PLANILLA DE ACTUALIZACIÓN DE DATOS EXPEDIENTE DEL PERSONAL    </th>
 		</tr>
 	<tr>
-		<td  colspan=13 height="27" align="justify"   >   1.- LLENE LA PLANILLA CON TODOS LOS DATOS SOLICITADOS.    </td>
+		<td  colspan=13 height="22" align="justify"   >   1.- LLENE LA PLANILLA CON TODOS LOS DATOS SOLICITADOS.    </td>
 		</tr>
 	<tr>
-		<td  colspan=13 height="27" align="justify"   >   2.- NO DEBE PRESENTAR TACHADURAS NI ENMENDADURAS.    </td>
+		<td  colspan=13 height="22" align="justify"   >   2.- NO DEBE PRESENTAR TACHADURAS NI ENMENDADURAS.    </td>
 		</tr>
 	<tr>
-		<td  colspan=13 height="27" align="justify"   >   3.- DEBE ESTAR FIRMADA Y SELLADA POR EL (LA) TRABAJADOR (A)    </td>
+		<td  colspan=13 height="22" align="justify"   >   3.- DEBE ESTAR FIRMADA Y SELLADA POR EL (LA) TRABAJADOR (A)    </td>
 		</tr>
 	<tr>
-		<td  colspan=13 height="27" align="justify"   >   4.- DEBE ANEXAR LOS SOPORTES SIGUIENTES:     </td>
+		<td  colspan=13 height="22" align="justify"   >   4.- DEBE ANEXAR LOS SOPORTES SIGUIENTES:     </td>
 		</tr>
 	<tr>
-		<td  height="27" align="center"   >   <br>    </td>
+		<td  height="22" align="center"   >   <br>    </td>
 		<td  colspan=12 align="left"   >   COPIA AMPLIADA Y A COLOR DE LA CEDULA DE IDENTIDAD    </td>
 		</tr>
 	<tr>
-		<td  height="27" align="center"   >   <br>    </td>
+		<td  height="22" align="center"   >   <br>    </td>
 		<td  colspan=12 align="left"   >   COPIA DE LA PARTIDA DE NACIMIENTO DEL TRABAJADOR    </td>
 		</tr>
 	<tr>
-		<td  height="27" align="center"   >   <br>    </td>
+		<td  height="22" align="center"   >   <br>    </td>
 		<td  colspan=12 align="left"   >   COPIA DEL ACTA DE MATRIMONIO Y/O CONCUBINATO    </td>
 		</tr>
 	<tr>
@@ -453,24 +459,24 @@ body { margin-left: 0.1in; margin-right: 0.1in; margin-top: 0.1in; margin-bottom
 		<td  colspan=12 align="left"   >   COPIA DE LA PARTIDA DE NACIMIENTO DE SUS HIJOS    </td>
 		</tr>
         <tr>
-		<td  height="27" align="center"   >   <br>    </td>
+		<td  height="22" align="center"   >   <br>    </td>
 		<td  colspan=12 align="left"   >   COPIA DEL ÜlTIMO TITULO OBTENIDO REGISTRADO (BACHILLER,TÉCNICO,UNIVERSITARIO)    </td>
 		</tr>
 	<tr>
-		<td  height="27" align="center"   >   <br>    </td>
+		<td  height="22" align="center"   >   <br>    </td>
 		<td  colspan=12 align="left"   >   EN CASO DE ESTAR CURSANDO ESTUDIOS ANEXE CONSTANCIA DE ESTUDIOS Y HORARIO DE CLASES    </td>
 		</tr>
 	<tr>
-		<td  height="27" align="center"   >   <br>    </td>
+		<td  height="22" align="center"   >   <br>    </td>
 		<td  colspan=12 align="left"   >   CERTIFICADOS DE CURSOS DE CAPACITACION Y ADIESTRAMIENTO.     </td>
 		</tr>
 	<tr>
-		<td  height="27" align="center"   >   <br>    </td>
+		<td  height="22" align="center"   >   <br>    </td>
 		<td  colspan=12 align="left"   >   CONSTANCIAS DE TRABAJOS ANTERIORES O ANTECEDENTES DE SERVICIOS ORIGINALES O COPIAS CERTIFICADAS    </td>
 		</tr>
 	
 	<tr >
-		<td   colspan=13  height="27" align="center"   >   <br>    </td>
+		<td   colspan=13  height="15" align="center"   >   <br>    </td>
 		
 	</tr>
 	<tr >
@@ -479,29 +485,29 @@ body { margin-left: 0.1in; margin-right: 0.1in; margin-top: 0.1in; margin-bottom
 		
 	</tr>
 	<tr >
-		<td   colspan=13  height="27" align="center"   >   <br>    </td>
+		<td   colspan=13  height="15" align="center"   >   <br>    </td>
 		
 	</tr>
 	<tr>
-		<th class="th_encabezado1"  colspan=13 height="27" align="center"   >   SOLO PARA USO DE LA COORDINACION DE RECURSOS HUMANOS    </th>
+		<th class="th_encabezado1"  colspan=13 height="22" align="center"   >   SOLO PARA USO DE LA COORDINACION DE RECURSOS HUMANOS    </th>
 		</tr>
 	<tr>
-		<th  colspan=5 height="27" align="center"   >    FECHA DE RECIBIDO COORDINACION DE RECURSOS HUMANOS    </th>
+		<th  colspan=5 height="22" align="center"   >    FECHA DE RECIBIDO COORDINACION DE RECURSOS HUMANOS    </th>
 		<th  colspan=3 align="center"   >   NOMBRES Y APELLIDOS    </th>
 		<th  colspan=2 align="center"   >   CEDULA DE IDENTIDAD    </th>
 		<th  colspan=3 align="center"   >   CARGO    </th>
 		</tr>
 	<tr>
-		<td  colspan=5 height="27" align="center"   >   <br>    </td>
+		<td  colspan=5 height="22" align="center"   >   <br>    </td>
 		<td  colspan=3 align="center"   >   <br>    </td>
 		<td  colspan=2 align="center"   >   <br>    </td>
 		<td  colspan=3 align="center"   >   <br>    </td>
 		</tr>
 	<tr>
-		<th class="th_encabezado1"   colspan=13 height="27" align="center"   >   OBSERVACIONES    </th>
+		<th class="th_encabezado1"   colspan=13 height="22" align="center"   >   OBSERVACIONES    </th>
 		</tr>
 	<tr>
-		<td  colspan=13 height="27" align="center"   >   <br>    </td>
+		<td  colspan=13 height="22" align="center"   >   <br>    </td>
 		</tr>
         
         </tbody>

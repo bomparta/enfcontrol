@@ -16,22 +16,22 @@ class CreateEducacionFuncionariosTable extends Migration
         Schema::create('educacion_funcionarios', function (Blueprint $table) {
             $table->id();
             $table->smallInteger('funcionario_id');
-            $table->integer('pri_ult_anio')->nullable();
+            $table->string('pri_ult_anio')->nullable();
             $table->date('fecha_ini_pri')->nullable();
             $table->date('fecha_fin_pri')->nullable();
             $table->string('dir_ref_pri','255')->nullable();
             $table->string('institucion_pri','255')->nullable();
-            $table->integer('sec_ult_anio')->nullable();
+            $table->string('sec_ult_anio')->nullable();
             $table->date('fecha_ini_sec')->nullable();
             $table->date('fecha_fin_sec')->nullable();
             $table->string('dir_ref_sec','255')->nullable();
             $table->string('institucion_sec','255')->nullable();
-            $table->integer('tec_ult_anio')->nullable();
+            $table->string('tec_ult_anio')->nullable();
             $table->date('fecha_ini_tec')->nullable();
             $table->date('fecha_fin_tec')->nullable();
             $table->string('dir_ref_tec','255')->nullable();
             $table->string('institucion_tec','255')->nullable();
-            $table->integer('uni_ult_anio')->nullable();
+            $table->string('uni_ult_anio')->nullable();
             $table->date('fecha_ini_uni')->nullable();
             $table->date('fecha_fin_uni')->nullable();
             $table->string('dir_ref_uni','255')->nullable();
