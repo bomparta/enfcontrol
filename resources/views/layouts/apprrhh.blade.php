@@ -38,7 +38,7 @@
             Planilla de Actualización de Datos
         </a>
         <div class="card-header text-secondary">RRHH</div>
-            <a href="{{route('movimientosrrhh')}}" class="list-group-item list-group-item-action border-0">
+            <a href="{{route('ver_trabajador')}}" class="list-group-item list-group-item-action border-0">
                 <img src="/img/icons-lineal/check_list.png" class="icon-lg">
                 Movimientos de Personal
             </a>

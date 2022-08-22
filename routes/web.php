@@ -121,13 +121,25 @@ Route::get('/pensum', 'PensumController@index')->name('pensum');
 Route::get('/listaprograma', 'ProgramaController@index')->name('listaprograma');
 Route::get('/listapensum/{id}', 'PensumController@list')->name('listapensum');
 ///control de expedientes RRHH
+//-------------------------------------RRHH-----------------------------------------------------
 Route::get('/rrhh', 'RrhhController@index')->name('rrhh');
-Route::get('/rrhh/movimientos', 'RrhhController@create')->name('movimientosrrhh');
 Route::get('reportes/rrhh', 'RrhhController@reporterrhh')->name('reportesrrhh');
+
 Route::get('/rrhh/funcionario/planillarrhh', 'RrhhController@planillarrhh')->name('planillarrhh');
+Route::get('/rrhh/ver_trabajador', 'RrhhController@create')->name('ver_trabajador');
 
-
-
+Route::get('/rrhh/searchredirect', function(){     
+    /* Nuevo: si el argumento search está vacío regresar a la página anterior */
+    if (empty(Input::get('search'))) return redirect()->back();
+    
+    $search = urlencode(e(Input::get('search')));
+    $route = "/rrhh/ver_trabajador/$search";
+    return redirect($route);
+});
+Route::get("/rrhh/ver_trabajador/{search}", "RrhhController@search");
+Route::get("/rrhh/datos_rrhh/{cedula}", "RrhhController@search_datos")->name('datos_rrhh');
+Route::get("/rrhh/movimientos/{cedula}", "RrhhController@movimientos")->name('mov_rrhh');
+//-------------------------------------FUNCIONARIO-----------------------------------------------------
 Route::get('/rrhh/funcionario', 'FuncionarioController@index')->name('funcionario');
 Route::get('/rrhh/funcionario/datos', 'FuncionarioController@create')->name('datosfuncionario');
 Route::get('/rrhh/funcionario/datosedit', 'FuncionarioController@edit')->name('buscarfuncionario');
