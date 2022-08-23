@@ -134,7 +134,7 @@ body { margin-left: 0.1in; margin-right: 0.1in; margin-top: 0.1in; margin-bottom
 	<tr>
 		<td  colspan=6 align="center"   >   {{$funcionario->trabajador}}   </td>
 		<td  colspan=3 rowspan=2 align="center"   >   {{$funcionario->cargo}}   </td>
-		<td  colspan=4 rowspan=2 align="center"   >   {{$funcionario->administrativa}}   </td>
+		<td  colspan=4 rowspan=2 align="center"   >   {{$funcionario->adscripcion}}   </td>
 	</tr>
 	<tr>
 		<th class="th_encabezado1"  colspan=13  height="22" align="center"   >   DIRECCIÓN DE HABITACIÓN     </th>
