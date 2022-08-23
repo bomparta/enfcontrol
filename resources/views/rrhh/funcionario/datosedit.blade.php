@@ -218,10 +218,10 @@
                                 &nbsp;Unidad de Adscripción&nbsp;<span style="color:red;">*</span>&nbsp;<br>
                                 <select id="id_oficina_administrativa" name="id_oficina_administrativa"class="form-control" required >
                                 <option value="0">Seleccione...</option>
-                                    @foreach ($cod_cels as $cod_cel)
-                                        <option value="{{ $cod_cel->id }}"
-                                        @if($item->id_oficina_administrativa == $cod_cel->id)selected @endif >
-                                        {{ $cod_cel->descripcion }}</option>
+                                    @foreach ($uni_adscripcion as $uni_adscripcion)
+                                        <option value="{{ $uni_adscripcion->id }}"
+                                        @if($item->id_oficina_administrativa == $uni_adscripcion->id)selected @endif >
+                                        {{ $uni_adscripcion->descripcion }}</option>
                                     @endforeach
                                 </select>
                                 @error('id_oficina_administrativa')

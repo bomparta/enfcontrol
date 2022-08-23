@@ -27,6 +27,7 @@ use App\Laboral;
 use App\Cursos;
 use App\Idiomas;
 use App\Educacion_funcionarios;
+use App\Ubic_Administrativa;
 use Illuminate\Support\Str;
 use Illuminate\Support\Arr;
 use Illuminate\Http\Request;
@@ -61,7 +62,7 @@ class FuncionarioController extends Controller
         $entidad = Entidad::All();
         $tipo_trabajador= Tipo_Trabajador::All();
          $cedula_usuario=Auth::user()->cedula;// buscar la manera que este valor de usuario este referenciado en la tabla funcionario y Usuario
-      
+         $uni_adscripcion= Ubic_Administrativa::All();
   
      
         $datos_funcionario  =   Funcionario::select ('*', 'funcionario.id as id_funcionario','funcionario.id_tipo_funcionario as id_tipo_trabajador',
@@ -71,10 +72,10 @@ class FuncionarioController extends Controller
      //var_dump($datos_funcionario);
      //var_dump($generos);
      if(count($datos_funcionario)>0){
-        return view('rrhh/funcionario/datosedit',compact('datos_funcionario','nacionalidades','generos','estado_civils','cod_habs','cod_cels','entidad','tipo_trabajador'));    
+        return view('rrhh/funcionario/datosedit',compact('uni_adscripcion','datos_funcionario','nacionalidades','generos','estado_civils','cod_habs','cod_cels','entidad','tipo_trabajador'));    
      }else{
         $datos_funcionario  =   Persona::select ('*','persona.id as persona_id')->where('persona.numero_identificacion','=',$cedula_usuario)->get();
-        return view('rrhh/funcionario/datosedit',compact('datos_funcionario','nacionalidades','generos','estado_civils','cod_habs','cod_cels','entidad','tipo_trabajador'));    
+        return view('rrhh/funcionario/datosedit',compact('uni_adscripcion','datos_funcionario','nacionalidades','generos','estado_civils','cod_habs','cod_cels','entidad','tipo_trabajador'));    
      }
     }
     public function updatedatospersonales(Request $request)
@@ -142,6 +143,7 @@ class FuncionarioController extends Controller
     public function create()
     {
         $nacionalidades= Nacionalidad::All();
+        $uni_adscripcion= Ubic_Administrativa::All();
         $generos= Genero::All();
         $estado_civils= Estado_civil::All();
         $cod_habs= Cod_Habitacion::All();
@@ -154,7 +156,7 @@ class FuncionarioController extends Controller
         $datos_persona  =   Persona::select ('*')->where('numero_identificacion','=',$cedula_usuario)->paginate(1);
         //var_dump($cedula_usuario);
         if(count($datos_persona)==0){
-            return view('rrhh/funcionario/datos',compact('cedula_usuario','parentezco','generos','nacionalidades','estado_civils','cod_habs','cod_cels','entidad','tipo_trabajador'));               
+            return view('rrhh/funcionario/datos',compact('uni_adscripcion','cedula_usuario','parentezco','generos','nacionalidades','estado_civils','cod_habs','cod_cels','entidad','tipo_trabajador'));               
         }
      
     }
