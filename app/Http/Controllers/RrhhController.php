@@ -64,7 +64,7 @@ class RrhhController extends Controller
             $edad=Carbon::parse($funcionario->edad)->age;
         }
         $datos_funcionario= Funcionario::select('funcionario.id as funcionario_id',
-        'funcionario.*','persona.*','funcionario.cargo as cargo','funcionario.id_oficina_administrativa'     ,
+        'funcionario.*','persona.*','funcionario.cargo as cargo','funcionario.id_oficina_administrativa as adscripcion'     ,
         'estado_civil.descripcion as est_civil','entidad.descripcion as estado_nac',
         'tipo_trabajador.descripcion as trabajador','ubic_administrativa.descripcion as administrativa',
         'ent.descripcion as ent_domi','municipio.nombre as muni_domi','parroquia.nombre as parr_domi') 
