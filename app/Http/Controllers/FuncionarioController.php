@@ -68,9 +68,7 @@ class FuncionarioController extends Controller
         $datos_funcionario  =   Funcionario::select ('*', 'funcionario.id as id_funcionario','funcionario.id_tipo_funcionario as id_tipo_trabajador',
         'funcionario.cargo as cargo_func')->join ('persona', 'persona.id','=','funcionario.persona_id')
         ->where('persona.numero_identificacion','=',$cedula_usuario)->get();
-     
-     //var_dump($datos_funcionario);
-     //var_dump($generos);
+
      if(count($datos_funcionario)>0){
         return view('rrhh/funcionario/datosedit',compact('uni_adscripcion','datos_funcionario','nacionalidades','generos','estado_civils','cod_habs','cod_cels','entidad','tipo_trabajador'));    
      }else{
