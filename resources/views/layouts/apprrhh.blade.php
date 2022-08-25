@@ -48,7 +48,7 @@
                 Reportes
             </a>
         @endif
-        @if(in_array( Auth::user()->id_usuariogrupo, array(11) ))<!--Funcionarios !-->
+        @if(in_array( Auth::user()->id_usuariogrupo, array(11,13,6,4) ))<!--Funcionarios !-->
         <div class="card-header text-secondary">FUNCIONARIOS</div>
         <a href="{{route('datosfuncionario')}}" class="list-group-item list-group-item-action border-0">
             <img src="/img/icons-lineal/check_list.png" class="icon-lg">
@@ -77,7 +77,7 @@
         @endif
         @if(in_array( Auth::user()->id_usuariogrupo, array(10) )) <!--Personal rrhh !-->
         <div class="card-header text-secondary">RRHH</div>
-            <a href="{{route('movimientosrrhh')}}" class="list-group-item list-group-item-action border-0">
+            <a href="{{route('ver_trabajador')}}" class="list-group-item list-group-item-action border-0">
                 <img src="/img/icons-lineal/check_list.png" class="icon-lg">
                 Movimientos de Personal
             </a>
@@ -89,10 +89,10 @@
         @endif
         <!-- Menu Comun -->
 
-        <a href="/password/reset" class="list-group-item list-group-item-action border-0">
+       <!-- <a href="/password/reset" class="list-group-item list-group-item-action border-0">
             <img src="/img/icons-lineal/check_list.png" class="icon-lg">
             Cambio de clave
-        </a>
+        </a>-->
 
         <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();

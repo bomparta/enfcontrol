@@ -24,7 +24,7 @@ class HomeController extends Controller
     public function index()
     {
         
-        SEOTools::setTitle('Escuela de Fiscales');
+        SEOTools::setTitle('Escuela  Nacional de Fiscales del Ministerio Público');
         SEOTools::setDescription('Somos la primera escuela de fiscales a nivel nacional');
         return view('home');
     }

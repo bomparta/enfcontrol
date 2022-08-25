@@ -81,7 +81,7 @@
                         <a class="nav-link" href="{{route('usuario')}}">Informática&nbsp;<i class="fa fa-box"></i></a>
                     </li>
                     @endif
-                    @if(in_array( Auth::user()->id_usuariogrupo, array(12) ))
+                    @if(in_array( Auth::user()->id_usuariogrupo, array(12,13,6,4) ))
                     <li class="nav-item">
                         <a class="nav-link" href="{{route('rrhh')}}">Control de Expedientes&nbsp;<i class="fa fa-box"></i></a>
                     </li>

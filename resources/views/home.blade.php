@@ -113,7 +113,7 @@
             </div>
         </a>
         @endif
-        @if(in_array( Auth::user()->id_usuariogrupo, array(12,10,11) ))
+        @if(in_array( Auth::user()->id_usuariogrupo, array(12,10,11,13,6,4) ))
         <a style="color: black;" href="{{route('rrhh')}}">
             <div class="card text-center">
                 <img src="{{url('/img/rrhh.png')}}" class="card-img-top">
