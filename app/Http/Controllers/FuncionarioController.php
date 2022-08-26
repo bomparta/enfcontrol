@@ -878,6 +878,24 @@ class FuncionarioController extends Controller
             
         ]);
        //dd($request);  
+   
+       $persona=Persona::select(('*'))->where('numero_identificacion','=',$request->cedula)->get();
+       if($persona->count()>0){
+        foreach($persona as $persona){
+            $id_persona_familiar=$persona->id;
+        } 
+        Persona::where('id', $id_persona_familiar)
+        ->update([          
+            
+           
+            'edad'=>$request->fechanac,            
+            'id_genero'=>$request->genero,
+          
+           
+        ]);
+     
+
+       }else{
         $datos_persona = new Persona();      
    
         $datos_persona->id_tipo_identificacion = 1 ;
@@ -893,9 +911,12 @@ class FuncionarioController extends Controller
         $datos_persona->id_genero = $request->genero;        
         $datos_persona->email = $request->correo; 
         $datos_persona->id_estado_civil = $request->estadocivil; 
-        $datos_persona->save();      
+        $datos_persona->save();    
+        $id_persona_familiar= $datos_persona->id ;
+  
+}
           //dd($request);  
-         $id_persona= $datos_persona->id ;
+         $id_persona= $id_persona_familiar ;
        //   dd($datos_persona);  
         $familiar = new Familiares();
         $familiar->persona_id = $id_persona;

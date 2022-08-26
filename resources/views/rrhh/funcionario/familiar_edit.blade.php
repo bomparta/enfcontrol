@@ -47,7 +47,7 @@
                                             <option value="{{ $nacionalidad->id  }}">{{ $nacionalidad->cod }}</option>
                                         @endforeach
                                     </select>
-                                    <input type="text" name="cedula" id="cedula" value="{{$item->numero_identificacion}}"  maxlength="12"/>
+                                    <input type="text" name="cedula" id="cedula" value="{{$item->numero_identificacion}}"  maxlength="12" disabled/>
                                     @error('cedula')
                                         <div class="invalid-feedback">
                                         <strong>{{ $message }}</strong>

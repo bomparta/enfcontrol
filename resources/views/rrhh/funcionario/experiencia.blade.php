@@ -83,7 +83,7 @@
                                     <th>Teléfono</th>
                                     <th>Fecha de Ingreso</th>
                                     <th>Fecha de Egreso</th>
-                                    @if(in_array( Auth::user()->id_usuariogrupo, array(9,12,10) ))
+                                    @if(in_array( Auth::user()->id_usuariogrupo, array(9,12,10,11,13,4,6) ))
                                         <th>Opcion</th>
                                     @endif
                                     <th>Requisitos</th>
@@ -97,7 +97,7 @@
                                         <td>{{$laboral->telefono_empresa}}</td>
                                         <td>{{date('d-m-Y', strtotime($laboral->fecha_ingreso))}}</td>
                                         <td>{{date('d-m-Y', strtotime($laboral->fecha_egreso))}}</td>
-                                        @if(in_array( Auth::user()->id_usuariogrupo, array(9,12,10) ))
+                                        @if(in_array( Auth::user()->id_usuariogrupo, array(9,12,10,11,13,4,6) ))
                                             <td class="text-center">
                                             <a href= "experiencia_edit/{{$laboral->id}}" class="btn btn-info" data-tip="Detalle" title="Actualizar Exp. Laboral" data-toggle="tooltip" data-original-title="Editar">
                                             <img src="/img/icon/modify.ico" class="icon-sm" alt="Listado">
@@ -120,7 +120,7 @@
                                     <th>Teléfono</th>
                                     <th>Fecha de Ingreso</th>
                                     <th>Fecha de Egreso</th>
-                                    @if(in_array( Auth::user()->id_usuariogrupo, array(9,12,10) ))
+                                    @if(in_array( Auth::user()->id_usuariogrupo, array(9,12,10,11,13,4,6) ))
                                         <th>Opcion</th>
                                     @endif
                                     <th>Requisitos</th>

@@ -116,7 +116,7 @@
                             <tr>
                                 <!-- FILA 4 -->
                             <td>
-                                    &nbsp;Parentezco&nbsp;<span style="color:red;">*</span>&nbsp;<br>
+                                    &nbsp;Parentesco&nbsp;<span style="color:red;">*</span>&nbsp;<br>
                                     <select name="parentezco" id="parentezco"   class="form-control" required >
                                     <option value="0">Seleccione...</option>
                                         @foreach ($parentezco as $parentezco)
@@ -177,11 +177,11 @@
                                                 <tr>
                                                     <th>Cedula</th>
                                                     <th>Nombre y Apellidos</th>
-                                                    <th>Parentezco</th>
+                                                    <th>Parentesco</th>
                                                     <th>Correo</th>
                                                     <th>Telefono</th>
                                                     <th>Sexo</th>
-                                                    @if(in_array( Auth::user()->id_usuariogrupo, array(9,12,10) ))
+                                                    @if(in_array( Auth::user()->id_usuariogrupo, array(9,12,10,11,13,4,6) ))
                                                         <th>Opción</th>
                                                         <th>Requisitos</th>
                                                     @endif
@@ -195,7 +195,7 @@
                                                         <td>{{ $familiar->email}}</td>
                                                         <td>{{ $familiar->telefono}}</td>                                                        
                                                         <td>{{ $familiar->cod }}</td>
-                                                        @if(in_array( Auth::user()->id_usuariogrupo, array(9,12,10) ))
+                                                        @if(in_array( Auth::user()->id_usuariogrupo, array(9,12,10,11,13,4,6) ))
                                                             <td class="text-center">
                                                             <a href= "familiar_edit/{{$familiar->id_familiar}}" class="btn btn-info" data-tip="Detalle" title="Actualizar familiar" data-toggle="tooltip" data-original-title="Editar">
                                                             <img src="/img/icon/modify.ico" class="icon-sm" alt="Listado">
@@ -224,7 +224,7 @@
                                                     <th>Correo</th>
                                                     <th>Telefono</th>
                                                     <th>Sexo</th>
-                                                    @if(in_array( Auth::user()->id_usuariogrupo, array(9,12,10) ))
+                                                    @if(in_array( Auth::user()->id_usuariogrupo, array(9,12,10,11,13,4,6) ))
                                                     <th>Opción</th>
                                                      <th>Requisitos</th>
                                                     @endif
