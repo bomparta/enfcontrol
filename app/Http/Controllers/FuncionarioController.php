@@ -17,7 +17,7 @@ use App\Imagen_uploads_laborales;
 use App\Nacionalidad;
 use App\Cod_Habitacion;
 use App\Persona;
-
+use App\Banco;
 use App\Funcionario;
 use App\Tipo_trabajador;
 use App\Parentezco;
@@ -318,13 +318,16 @@ class FuncionarioController extends Controller
         $funcionario= Funcionario::select('funcionario.id as funcionario_id','funcionario.*') 
         ->join ('persona', 'persona.id','=','funcionario.persona_id')        
         ->where('persona.numero_identificacion','=',$cedula_usuario)->get();
+        $banco=Banco::All();
         $funcionario_id=null;
         foreach($funcionario as $funcionario){
             $funcionario_id=$funcionario->funcionario_id;
         }
-        $cuentas=Cuentas_bancarias::select('*')->where('cuentas_bancarias.funcionario_id','=',$funcionario_id)->paginate(5);
+        $cuentas=Cuentas_bancarias::select('*')
+        ->join ('banco', 'banco.id','=','cuentas_bancarias.nombre_banco')    
+        ->where('cuentas_bancarias.funcionario_id','=',$funcionario_id)->paginate(5);
 
-       return view('rrhh/funcionario/cta_bancaria',compact('cuentas','funcionario_id'));
+       return view('rrhh/funcionario/cta_bancaria',compact('cuentas','funcionario_id','banco'));
     }
     public function storebanco(Request $request)
     {
@@ -349,12 +352,12 @@ class FuncionarioController extends Controller
     }
     public function editbanco(Request $request,$id)// editar datos familiares
     {
-        
+        $banco=Banco::All();
         $cuenta_id=$id;
          $cuentas  =   Cuentas_bancarias::select ('*')       
         ->where('cuentas_bancarias.id','=',$cuenta_id)->get();   
      // dd($request);
-        return view('rrhh/funcionario/cta_bancaria_edit',compact('cuentas'));         
+        return view('rrhh/funcionario/cta_bancaria_edit',compact('cuentas','banco'));         
      
     }
     public function updatebanco (Request $request)

@@ -47,11 +47,19 @@
                         </td>
                         <td>
                             &nbsp;Tipo de Cuenta&nbsp;<span style="color:red;">*</span>&nbsp;
-                            <input type="text"class="form-control" required name="tipo_cuenta" id="tipo_cuenta" value="{{$item->tipo_cuenta}}" style="width:190px;" maxlength="100"/>
+                            <select id="tipo_cuenta" name="tipo_cuenta"class="form-control" required >
+                                            <option value="0">Seleccione...</option>
+                                            <option value="1" @if($item->tipo_cuenta=='1') selected @endif >CORRIENTE</option>
+                                            <option value="2"@if($item->tipo_cuenta=='2') selected @endif >AHORRO</option>                                        
+                                    </select>  
                         </td>
                         <td>
                             &nbsp;Nombre del Banco&nbsp;<span style="color:red;">*</span>&nbsp;
-                            <input type="text" class="form-control"  required name="nom_banco" id="nom_banco" maxlength="200" value="{{$item->nombre_banco}}"/>
+                            <select id="nom_banco" name="nom_banco"class="form-control" required >
+                            <option value="0">Seleccione...</option>
+                            @foreach ($banco as $banco)
+                                <option value="{{ $banco->id }}"    @if($item->nombre_banco == $banco->id)selected @endif >    {{ $banco->nombre }}</option>
+                            @endforeach
                         </td>
                         </tr>
                     

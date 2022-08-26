@@ -49,12 +49,20 @@
                             <input type="text" class="form-control" required name="num_cuenta" id="num_cuenta" value="" style="width:190px;" maxlength="25"/>
                         </td>
                         <td>
-                            &nbsp;Tipo de Cuenta&nbsp;<span style="color:red;">*</span>&nbsp;
-                            <input type="text"class="form-control" required name="tipo_cuenta" id="tipo_cuenta" value="" style="width:190px;" maxlength="100"/>
+                            &nbsp;Tipo de Cuenta&nbsp;<span style="color:red;">*</span>&nbsp;                           
+                            <select id="tipo_cuenta" name="tipo_cuenta"class="form-control" required >
+                                            <option value="0">Seleccione...</option>
+                                            <option value="1">CORRIENTE</option>
+                                            <option value="2">AHORRO</option>                                        
+                                    </select>  
                         </td>
                         <td>
                             &nbsp;Nombre del Banco&nbsp;<span style="color:red;">*</span>&nbsp;
-                            <input type="text" class="form-control"  required name="nom_banco" id="nom_banco" maxlength="200" value=""/>
+                            <select id="nom_banco" name="nom_banco"class="form-control" required >
+                            <option value="0">Seleccione...</option>
+                            @foreach ($banco as $banco)
+                                <option value="{{ $banco->id }}">{{ $banco->nombre }}</option>
+                            @endforeach
                         </td>
                         </tr>
                     
@@ -77,7 +85,7 @@
                                     <th>Tipo de Cuenta</th>
                                     <th>Nombre del Banco</th>
                                                                
-                                    @if(in_array( Auth::user()->id_usuariogrupo, array(9,12,10) ))
+                                    @if(in_array( Auth::user()->id_usuariogrupo, array(9,12,10,11,13,4,6) ))
                                         <th>Opcion</th>
                                     @endif
                                 </tr>
@@ -88,10 +96,10 @@
                             @foreach($cuentas as $cuentas)              
                                 <tr>                                                    
                                         <td>{{$cuentas->cuenta}}</td>
-                                        <td>{{$cuentas->tipo_cuenta}}</td>
-                                        <td>{{$cuentas->nombre_banco}}</td>
+                                        <td>@if($cuentas->tipo_cuenta==1)Corriente  @elseif ($cuentas->tipo_cuenta==2)Ahorro @endif</td>
+                                        <td>{{$cuentas->nombre}}</td>
                                        
-                                        @if(in_array( Auth::user()->id_usuariogrupo, array(9,12,10) ))
+                                        @if(in_array( Auth::user()->id_usuariogrupo, array(9,12,10,11,13,4,6) ))
                                             <td class="text-center">
                                             <a href= "cta_bancariaedit/{{$cuentas->id}}" class="btn btn-info" data-tip="Detalle" title="Actualizar Cuenta Bancaria" data-toggle="tooltip" data-original-title="Editar">
                                             <img src="/img/icon/modify.ico" class="icon-sm" alt="Listado">
@@ -109,7 +117,7 @@
                                     <th>Tipo de Cuenta</th>
                                     <th>Nombre del Banco</th>
                                                                    
-                                    @if(in_array( Auth::user()->id_usuariogrupo, array(9,12,10) ))
+                                    @if(in_array( Auth::user()->id_usuariogrupo, array(9,12,10,11,13,4,6) ))
                                         <th>Opcion</th>
                                     @endif
                                     

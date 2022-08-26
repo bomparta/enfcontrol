@@ -24,8 +24,8 @@ class CreateFuncionarioTable extends Migration
             $table->string('tipo_alergia')->nullable();
             $table->bigInteger('posee_enfermedad')->nullable();
             $table->string('tipo_enfermedad')->nullable();
-            $table->bigInteger('estatura')->nullable();
-            $table->bigInteger('peso')->nullable();
+            $table->string('estatura')->nullable();
+            $table->string('peso')->nullable();
             $table->string('pantalon')->nullable();
             $table->string('camisa')->nullable();
             $table->bigInteger('calzado')->nullable();
