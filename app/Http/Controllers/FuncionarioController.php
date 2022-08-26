@@ -59,7 +59,7 @@ class FuncionarioController extends Controller
         $estado_civils= Estado_civil::All();
         $cod_habs= Cod_Habitacion::All();
         $cod_cels= Cod_Celular::All();
-        $entidad = Entidad::All();
+        $entidad = Entidad::orderBy('descripcion')->get();
         $tipo_trabajador= Tipo_Trabajador::All();
          $cedula_usuario=Auth::user()->cedula;// buscar la manera que este valor de usuario este referenciado en la tabla funcionario y Usuario
          $uni_adscripcion= Ubic_Administrativa::All();
@@ -143,7 +143,7 @@ class FuncionarioController extends Controller
         $estado_civils= Estado_civil::All();
         $cod_habs= Cod_Habitacion::All();
         $cod_cels= Cod_Celular::All();
-        $entidad = Entidad::All();
+        $entidad = Entidad::orderBy('descripcion')->get();
         $parentezco=Parentezco::All();
         $tipo_trabajador= Tipo_Trabajador::All();
         $cedula_usuario=Auth::user()->cedula;// buscar la manera que este valor de usuario este referenciado en la tabla funcionario y Usuario
@@ -251,7 +251,7 @@ class FuncionarioController extends Controller
    
     public function createdireccion()
     {
-        $estados= Entidad::All();
+        $estados= Entidad::select('*')->whereNotin('id',[25])->orderBy('descripcion')->get();
         $municipios= Municipio::All(); 
         $cod_habs= Cod_Habitacion::All();
         $cod_cels= Cod_Celular::All();
