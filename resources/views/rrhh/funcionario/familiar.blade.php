@@ -220,7 +220,7 @@
                                                 <tr>
                                                     <th>Cedula</th>
                                                     <th>Nombre y Apellidos</th>
-                                                    <th>Parentezco</th>
+                                                    <th>Parentesco</th>
                                                     <th>Correo</th>
                                                     <th>Telefono</th>
                                                     <th>Sexo</th>
