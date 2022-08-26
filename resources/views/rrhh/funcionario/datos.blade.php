@@ -46,12 +46,12 @@
                                 @enderror
                             </td>
                         </tr>
-
+                        @foreach($datos_funcionario as $datos_funcionario)
                 <tr> 
                             <td>
                                 &nbsp;Primer Nombre&nbsp;<span style="color:red;">*</span>&nbsp;<br>
  
-                                <input id="primernombre" type="text"  maxlength="25" class="form-control @error('primernombre') is-invalid @enderror" name="primernombre" value="" require  >
+                                <input id="primernombre" type="text"  maxlength="25" class="form-control @error('primernombre') is-invalid @enderror" name="primernombre" value="{{$datos_funcionario->nombre}}" require  >
                                 @error('primernombre')
                                     <div class="invalid-feedback">
                                     <strong><span  style="color:red;">{{ $message }}</span></strong>
@@ -61,7 +61,7 @@
                         
                             <td>
                                 &nbsp;Segundo Nombre&nbsp;<br>
-                                <input id="segundonombre" type="text"  maxlength="25" class="form-control @error('segundonombre') is-invalid @enderror" name="segundonombre" value="" >
+                                <input id="segundonombre" type="text"  maxlength="25" class="form-control @error('segundonombre') is-invalid @enderror" name="segundonombre" value="{{$datos_funcionario->nombreseg}}" >
                                 @error('segundonombre')
                                     <div class="invalid-feedback">
                                     <strong>{{ $message }}</strong>
@@ -74,7 +74,7 @@
                        <tr>
                             <td>
                                 &nbsp;Primer Apellido&nbsp;<span style="color:red;">*</span>&nbsp;<br>
-                                <input id="primerapellido" type="text"  maxlength="25" class="form-control @error('primerapellido') is-invalid @enderror" name="primerapellido" value="" required>
+                                <input id="primerapellido" type="text"  maxlength="25" class="form-control @error('primerapellido') is-invalid @enderror" name="primerapellido" value="{{$datos_funcionario->apellido}}" required>
                                 @error('primerapellido')
                                     <div class="invalid-feedback">
                                     <strong>{{ $message }}</strong>
@@ -84,7 +84,7 @@
                             <td>
                                 &nbsp;Segundo Apellido&nbsp;<br>
                                 <input id="segundoapellido" type="text"  maxlength="25" class="form-control @error('segundoapellido') is-invalid @enderror" 
-                                name="segundoapellido" value="" >
+                                name="segundoapellido" value="{{$datos_funcionario->apellidoseg}}" >
                                 @error('segundoapellido')
                                     <div class="invalid-feedback">
                                     <strong>{{ $message }}</strong>
@@ -100,7 +100,8 @@
                                 <select class="form-control"  type="text" name="genero" id="genero" required>
                                     <option value="0">Seleccione...</option>
                                     @foreach ($generos as $generos)
-                                    <option value="{{ $generos->id }}">
+                                    <option value="{{ $generos->id }}"
+                                    @if($datos_funcionario->id_genero == $generos->id)selected @endif >
                                        {{ $generos->cod }}</option>
                                     @endforeach
                                 </select>
@@ -114,7 +115,7 @@
                             </td>
                             <td>
                                 &nbsp;Fecha Nacimiento&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:red;">*</span><br>
-                                <input type="date" name="fechanac" id="fechanac" value=""  maxlength="25" required/>
+                                <input type="date" name="fechanac" id="fechanac" value="{{$datos_funcionario->edad}}"  maxlength="25" required/>
                             </td>
                                         
                         </tr>
@@ -125,7 +126,8 @@
                                 <select name="estadocivil"  class="form-control" required >
                                 <option value="0">Seleccione...</option>
                                     @foreach ($estado_civils as $estado_civil)
-                                    <option value="{{ $estado_civil->id }}">
+                                    <option value="{{ $estado_civil->id }}"
+                                    @if($datos_funcionario->id_estado_civil == $estado_civil->id)selected @endif >
                                        {{ $estado_civil->descripcion }}</option>
                                        
                                     @endforeach
@@ -140,7 +142,8 @@
                                 <select name="estado_nac"  id="estado_nac" class="form-control" required >
                                 <option value="0">Seleccione...</option>
                                     @foreach ($entidad as $entidad)
-                                        <option value="{{ $entidad->id }}">
+                                        <option value="{{ $entidad->id }}"
+                                        @if($datos_funcionario->estado_nac == $entidad->id)selected @endif >
                                         {{ $entidad->descripcion }}</option>
                                     @endforeach
                                 </select>
@@ -149,7 +152,7 @@
                             <td>
                             &nbsp;&nbsp;<br>
                                 &nbsp;Ciudad&nbsp;<span style="color:red;">*</span>&nbsp;                             
-                                <input id="ciudad_nac" type="text"  maxlength="10" class="form-control @error('ciudad_nac') is-invalid @enderror" name="ciudad_nac" value="" required>
+                                <input id="ciudad_nac" type="text"  maxlength="10" class="form-control @error('ciudad_nac') is-invalid @enderror" name="ciudad_nac" value="{{$datos_funcionario->ciudad_nac}}" required>
                                 @error('ciudad_nac')
                                     <div class="invalid-feedback">
                                     <strong>{{ $message }}</strong>
@@ -201,7 +204,7 @@
                             </td>
                             
                         </tr>
-                    
+                    @endforeach
 
                   
                     </table>

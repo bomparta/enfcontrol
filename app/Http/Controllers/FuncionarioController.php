@@ -63,18 +63,15 @@ class FuncionarioController extends Controller
         $tipo_trabajador= Tipo_Trabajador::All();
          $cedula_usuario=Auth::user()->cedula;// buscar la manera que este valor de usuario este referenciado en la tabla funcionario y Usuario
          $uni_adscripcion= Ubic_Administrativa::All();
-  
-     
+         
         $datos_funcionario  =   Funcionario::select ('*', 'funcionario.id as id_funcionario','funcionario.id_tipo_funcionario as id_tipo_trabajador',
         'funcionario.cargo as cargo_func')->join ('persona', 'persona.id','=','funcionario.persona_id')
         ->where('persona.numero_identificacion','=',$cedula_usuario)->get();
-
-     if(count($datos_funcionario)>0){
-        return view('rrhh/funcionario/datosedit',compact('uni_adscripcion','datos_funcionario','nacionalidades','generos','estado_civils','cod_habs','cod_cels','entidad','tipo_trabajador'));    
-     }else{
-        $datos_funcionario  =   Persona::select ('*','persona.id as persona_id')->where('persona.numero_identificacion','=',$cedula_usuario)->get();
-        return view('rrhh/funcionario/datosedit',compact('uni_adscripcion','datos_funcionario','nacionalidades','generos','estado_civils','cod_habs','cod_cels','entidad','tipo_trabajador'));    
+//dd($datos_funcionario);
+     if(count($datos_funcionario)==0){
+         $datos_funcionario  =   Persona::select ('*','persona.id as persona_id')->where('persona.numero_identificacion','=',$cedula_usuario)->get();     
      }
+   return view('rrhh/funcionario/datosedit',compact('uni_adscripcion','datos_funcionario','nacionalidades','generos','estado_civils','cod_habs','cod_cels','entidad','tipo_trabajador'));    
     }
     public function updatedatospersonales(Request $request)
     {
@@ -1245,7 +1242,7 @@ class FuncionarioController extends Controller
                 );
 
         }
-
+ 
     }
    
 

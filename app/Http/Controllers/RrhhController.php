@@ -97,14 +97,14 @@ class RrhhController extends Controller
        ->where('usuario', '=',$id)
        ->where('nombre', 'foto')
        ->get();
-       if($funcionario->count()>0){
+       if($funcionario->count()>0  and $foto->count()>0 ){
         $view = \view('rrhh/funcionario/planillarrhh', compact('foto','edad','datos_funcionario','familiar','cursos','laboral','idiomas','cuentas','educacion'));
        
        $pdf = App::make('dompdf.wrapper');
        $pdf->loadHTML($view)->setPaper('legal');
        return $pdf->download('planillarrhh'.'.pdf');
      }else{
-        return redirect('rrhh/funcionario/datosedit')->with('advertencia', ' Debe completar los datos para imprimir la PLANILLA DE ACTUALIZACION DE DATOS!!.');
+        return redirect('rrhh/funcionario/datosedit')->with('advertencia', ' Debe completar al menos los datos personales, dirección de domicilio y el requisito de la foto tipo carnet para imprimir la PLANILLA DE ACTUALIZACION DE DATOS!!.');
      }
        
   
