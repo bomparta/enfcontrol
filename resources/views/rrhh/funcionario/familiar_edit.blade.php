@@ -123,7 +123,7 @@
                             <tr>
                                 <!-- FILA 4 -->
                             <td>
-                                    &nbsp;Parentezco&nbsp;<span style="color:red;">*</span>&nbsp;<br>
+                                    &nbsp;Parentesco&nbsp;<span style="color:red;">*</span>&nbsp;<br>
                                     <select name="parentezco" id="parentezco"   class="form-control" required >
                                     <option value="0">Seleccione...</option>
                                         @foreach ($parentezco as $parentezco)
