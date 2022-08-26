@@ -17,8 +17,8 @@ class CreateCuentasBancariasTable extends Migration
             $table->id();
             $table->smallInteger('funcionario_id');
            $table->string('cuenta',20)->nullable();
-           $table->string('tipo_cuenta')->nullable();
-           $table->string('nombre_banco')->nullable();
+           $table->bigint('tipo_cuenta')->nullable();
+           $table->bigint('nombre_banco')->nullable();
             $table->timestamps();
         });
     }
