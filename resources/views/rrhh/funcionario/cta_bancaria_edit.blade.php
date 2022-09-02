@@ -43,7 +43,7 @@
           <tr>
                         <td>
                             &nbsp;Cuenta Bancaria N°&nbsp;<span style="color:red;">*</span>&nbsp;
-                            <input type="text" class="form-control" required name="num_cuenta" id="num_cuenta" value="{{$item->cuenta}}" style="width:190px;" maxlength="20"/>
+                            <input type="text" class="form-control" required name="num_cuenta" id="num_cuenta" onkeypress="return isNumberKey(event);" value="{{$item->cuenta}}" style="width:190px;" maxlength="20"/>
                         </td>
                         <td>
                             &nbsp;Tipo de Cuenta&nbsp;<span style="color:red;">*</span>&nbsp;
@@ -82,5 +82,8 @@
         </div>
     </div>
 </div>
+@endsection
 
+@section('scripts')
+<script src="{{url('js/funciones_generales.js')}}"></script>
 @endsection

@@ -136,9 +136,21 @@ Route::get('/rrhh/searchredirect', function(){
     $route = "/rrhh/ver_trabajador/$search";
     return redirect($route);
 });
+
 Route::get("/rrhh/ver_trabajador/{search}", "RrhhController@search");
 Route::get("/rrhh/datos_rrhh/{cedula}", "RrhhController@search_datos")->name('datos_rrhh');
 Route::get("/rrhh/movimientos/{cedula}", "RrhhController@movimientos")->name('mov_rrhh');
+Route::get("/rrhh/registrar_rrhh/{cedula}","RrhhController@create_mov")->name('registrar_mov_rrhh');
+Route::post("/rrhh/registrar_rrhh", "RrhhController@store_mov")->name('store_rrhh');
+Route::get("/rrhh/registrar_rrhhedit/{id}","RrhhController@edit_mov")->name('editar_mov_rrhh');
+Route::post("/rrhh/registrar_rrhhedit", "RrhhController@update_mov")->name('update_rrhh');
+Route::get('/rrhh/requisitos_trab/{cedula}', 'RrhhController@requisitos_cargados')->name('requisitos_rrhh');
+Route::get('/rrhh/ver_documento_familiar/{tipo_documento}/{id_familiar}', 'RrhhController@doc_familiar')->name('requisitos_fam');
+Route::get('/rrhh/ver_documento_cursos/{tipo_documento}/{id_cursos}', 'RrhhController@doc_cursos')->name('requisitos_cur');
+Route::get('/rrhh/ver_documento_laboral/{tipo_documento}/{id_laboral}', 'RrhhController@doc_laboral')->name('requisitos_lab');
+Route::get('/rrhh/creardocumento_rrhh/{tipo_documento}/{id_rrhh_mov}/{cedula}', 'RrhhController@requisito_rrhh')->name('req_rrhh');
+Route::post('/rrhh/creardocumento_rrhh', 'RrhhController@subirArchivo_rrhh')->name('subirarchivo_rrhh');
+
 //-------------------------------------FUNCIONARIO-----------------------------------------------------
 Route::get('/rrhh/funcionario', 'FuncionarioController@index')->name('funcionario');
 Route::get('/rrhh/funcionario/datos', 'FuncionarioController@create')->name('datosfuncionario');

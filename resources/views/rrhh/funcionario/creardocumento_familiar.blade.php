@@ -33,7 +33,7 @@
                             <input class="btn btn-info" type="submit" value="Cargar Archivo" >
                         </div>
                         <div class="frameContenedor" style="margin:5px;" align="right">
-                   
+                 
                     <a class='btn btn-secondary' href="{{URL::route($ir)}}">Regresar</a> 
                     </div>
                     <div class="frameContenedor" style="margin:5px;" align="center">

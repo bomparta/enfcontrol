@@ -1,0 +1,6 @@
+	/*actualizado 29-03-2022*/
+$this->db->query("SET sql_mode=(SELECT REPLACE(@@sql_mode, 'ONLY_FULL_GROUP_BY', ''));");	
+
+
+	$this->db->group_by("r.id_usuario");
+

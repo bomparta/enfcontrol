@@ -54,7 +54,7 @@
                         </td>
                         <td colspan="2"> 
                         &nbsp; Especifíque:&nbsp;               
-                           <input type="text" class="form-control"name="tipo_enfermedad" id="tipo_enfermedad" value="{{$item->tipo_enfermedad}}"  maxlength="200" size="50" />        
+                           <input type="text" class="form-control"name="tipo_enfermedad" id="tipo_enfermedad" onkeyup="mayusculas(this);" value="{{$item->tipo_enfermedad}}"  maxlength="200" size="50" />        
                               
                         </td>
                        
@@ -70,18 +70,18 @@
                         </td>
                          <td colspan="2">
                             &nbsp; Especifíque:&nbsp;               
-                           <input type="text" class="form-control"name="tipo_alergia" id="tipo_alergia" value="{{$item->tipo_alergia}}"  maxlength="200" size="50" />              
+                           <input type="text" class="form-control"name="tipo_alergia" id="tipo_alergia" onkeyup="mayusculas(this);" value="{{$item->tipo_alergia}}"  maxlength="200" size="50" />              
                         </td>
                     </tr>
 
                     <tr>
                         <td colspan="2"> 
                             &nbsp;Si está bajo algún tratamiento médico especifíque:&nbsp;&nbsp;
-                            <input type="text" class="form-control" name="tratamiento" id="tratamiento" value="{{$item->tratamiento}}"  maxlength="200" size="50" />
+                            <input type="text" class="form-control" name="tratamiento" id="tratamiento" onkeyup="mayusculas(this);" value="{{$item->tratamiento}}"  maxlength="200" size="50" />
                         </td>
                         <td colspan="2"> 
                             &nbsp;Grupo Sanguíneo<span style="color:red;">*</span>&nbsp;
-                            <input type="text" class="form-control"name="grupo_sanguineo" id="grupo_sanguineo" value="{{$item->grupo_sanguineo}}"  maxlength="200" size="50" required/>
+                            <input type="text" class="form-control"name="grupo_sanguineo" id="grupo_sanguineo" value="{{$item->grupo_sanguineo}}" onkeyup="mayusculas(this);"   maxlength="200" size="50" required/>
                         </td>
                     </tr>   
                     <tr> 
@@ -93,17 +93,17 @@
                         </td>
                         <td>
                             &nbsp;Peso&nbsp;<span style="color:red;">*</span>&nbsp;
-                            <input type="text"class="form-control" required name="peso" id="peso" value="{{$item->peso}}" maxlength="100" required/>
+                            <input type="text"class="form-control" required name="peso" id="peso" value="{{$item->peso}}" onkeypress="return isNumberKey(event);" maxlength="100" required/>
                         </td>
                         </tr>
                     <tr>
                         <td>
                             &nbsp;Pantalón&nbsp;<span style="color:red;">*</span>&nbsp;
-                            <input type="text" class="form-control"  required name="pantalon" id="pantalon"  maxlength="200" value="{{$item->pantalon}}" required/>
+                            <input type="text" class="form-control"  required name="pantalon" id="pantalon"  maxlength="200" onkeyup="mayusculas(this);" value="{{$item->pantalon}}" required/>
                         </td>                     
                         <td>
                             &nbsp;Camisa&nbsp;<span style="color:red;">*</span>&nbsp;
-                            <input type="text" class="form-control"  required name="camisa" id="camisa"  maxlength="200" value="{{$item->camisa}}" required/>
+                            <input type="text" class="form-control"  required name="camisa" id="camisa"  maxlength="200" onkeyup="mayusculas(this);" value="{{$item->camisa}}" required/>
                         </td> 
                         </tr>
                     <tr>
@@ -131,4 +131,7 @@
     </div>
 </div>
 
+@endsection
+@section('scripts')
+<script src="{{url('js/funciones_generales.js')}}"></script>
 @endsection

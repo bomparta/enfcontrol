@@ -35,12 +35,12 @@
                     <tr>
                         <td>
                             &nbsp;Empresa u Organización&nbsp;<span style="color:red;">*</span>&nbsp;
-                            <input type="text" class="form-control" name="empresa" id="empresa" value="" maxlength="200" required/>
+                            <input type="text" class="form-control" name="empresa" id="empresa" onkeyup="mayusculas(this);" value="" maxlength="200" required/>
                         </td>
                    
                         <td>
                             &nbsp;Cargo de desempeñado&nbsp;<span style="color:red;">*</span>&nbsp;
-                            <input type="text" class="form-control" name="cargo" id="cargo" value=""  maxlength="150" required/>
+                            <input type="text" class="form-control" name="cargo" id="cargo"  onkeyup="mayusculas(this);" value=""  maxlength="150" required/>
                         </td>
                     </tr>
                     <tr>
@@ -63,7 +63,7 @@
                                     @endforeach
                                     
                                 </select>
-                                <input type="text" class="form-control" name="telefono" id="telf_contacto" value="" maxlength="7" />
+                                <input type="text" class="form-control" name="telefono" id="telf_contacto"  onkeypress="return isNumberKey(event);" value="" maxlength="7" />
                                 </div>
                             </td>
                         <td></td>
@@ -74,7 +74,7 @@
                        
                     </div>
                     <div class="table-responsive mt-3">
-                    <table id="example" class="table table-striped table-bordered" style="width:100%">                        
+                    <table id="example1" class="table table-striped table-bordered" style="width:100%">                        
                                                          
                             <thead>
                                 <tr>
@@ -141,4 +141,51 @@
     </div>
 </div>
 
+@endsection
+
+@section('scripts')
+<script src="{{url('js/funciones_generales.js')}}"></script>
+
+<!-- jQuery -->
+<script src="/plugins/jquery/jquery.min.js"></script>
+<!-- Bootstrap 4 -->
+<script src="/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- DataTables  & Plugins -->
+<script src="/plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+<script src="/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+<script src="/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+<script src="/plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
+<script src="/plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
+<script src="/plugins/jszip/jszip.min.js"></script>
+<script src="/plugins/pdfmake/pdfmake.min.js"></script>
+<script src="/plugins/pdfmake/vfs_fonts.js"></script>
+<script src="/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
+<script src="/plugins/datatables-buttons/js/buttons.print.min.js"></script>
+<script src="/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js" defer></script>
+    <script src="https://cdn.datatables.net/1.10.24/js/dataTables.bootstrap4.min.js" defer></script>
+<script
+  src="https://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
+
+<script>
+
+    $(function () {
+      $("#example1").DataTable({
+        "responsive": true, "lengthChange": false, "autoWidth": false,
+        "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+      }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+      $('#example2').DataTable({
+        "paging": true,
+        "lengthChange": false,
+        "searching": false,
+        "ordering": true,
+        "info": true,
+        "autoWidth": false,
+        "responsive": true,
+      });
+    });
+  </script>
 @endsection

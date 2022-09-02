@@ -59,17 +59,17 @@
                         </td>
                         <td colspan="2"> 
                             &nbsp;Nivel que cursa&nbsp;
-                            <input type="text" class="form-control"name="nivel_curso" id="nivel_curso" value="{{$item->nivel_cursa}}"  maxlength="200" size="50" />
+                            <input type="text" class="form-control"name="nivel_curso" id="nivel_curso" onkeyup="mayusculas(this);" value="{{$item->nivel_cursa}}"  maxlength="200" size="50" />
                         </td>
                     </tr>
                     <tr>
                         <td colspan="2"> 
                             &nbsp;Especialidad&nbsp;&nbsp;
-                            <input type="text" class="form-control" name="especialidad" id="especialidad" value="{{$item->especialidad}}"  maxlength="200" size="50"  />
+                            <input type="text" class="form-control" name="especialidad" id="especialidad" onkeyup="mayusculas(this);" value="{{$item->especialidad}}"  maxlength="200" size="50"  />
                         </td>
                         <td colspan="2"> 
                             &nbsp;Nombre de la institución donde estudia&nbsp;
-                            <input type="text" class="form-control"name="universidad" id="universidad" value="{{$item->institucion_estudia}}"  maxlength="200" size="50" />
+                            <input type="text" class="form-control"name="universidad" id="universidad" onkeyup="mayusculas(this);" value="{{$item->institucion_estudia}}"  maxlength="200" size="50" />
                         </td>
                     </tr>   
                     @endforeach
@@ -90,4 +90,8 @@
     </div>
 </div>
 
+@endsection
+
+@section('scripts')
+<script src="{{url('js/funciones_generales.js')}}"></script>
 @endsection

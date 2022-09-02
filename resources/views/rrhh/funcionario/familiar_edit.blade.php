@@ -47,7 +47,7 @@
                                             <option value="{{ $nacionalidad->id  }}">{{ $nacionalidad->cod }}</option>
                                         @endforeach
                                     </select>
-                                    <input type="text" name="cedula" id="cedula" value="{{$item->numero_identificacion}}"  maxlength="12" disabled/>
+                                    <input type="text" name="cedula" id="cedula" onkeypress="return isNumberKey(event);" value="{{$item->numero_identificacion}}"  maxlength="12" disabled/>
                                     @error('cedula')
                                         <div class="invalid-feedback">
                                         <strong>{{ $message }}</strong>
@@ -57,7 +57,7 @@
                                 <tr>
                                 <td>
                                     &nbsp;Primer Nombre&nbsp;<span style="color:red;">*</span>&nbsp;<br>
-                                    <input id="primernombre" type="text"  maxlength="25" class="form-control @error('primernombre') is-invalid @enderror" name="primernombre" value="{{$item->nombre}}" required>
+                                    <input id="primernombre" type="text"  maxlength="25"  onkeyup="mayusculas(this);" class="form-control @error('primernombre') is-invalid @enderror" name="primernombre" value="{{$item->nombre}}" required>
                                     @error('primernombre')
                                         <div class="invalid-feedback">
                                         <strong>{{ $message }}</strong>
@@ -66,7 +66,7 @@
                                 </td>
                                 <td>
                                     &nbsp;Segundo Nombre&nbsp;<br>
-                                    <input id="segundonombre" type="text"  maxlength="25" class="form-control @error('segundonombre') is-invalid @enderror" name="segundonombre" value="{{$item->nombreseg}}" >
+                                    <input id="segundonombre" type="text"  maxlength="25"  onkeyup="mayusculas(this);"class="form-control @error('segundonombre') is-invalid @enderror" name="segundonombre" value="{{$item->nombreseg}}" >
                                     @error('segundonombre')
                                         <div class="invalid-feedback">
                                         <strong>{{ $message }}</strong>
@@ -78,7 +78,7 @@
                             <tr>
                                 <td>
                                     &nbsp;Primer Apellido&nbsp;<span style="color:red;">*</span>&nbsp;<br>
-                                    <input id="primerapellido" type="text"  maxlength="25" class="form-control @error('primerapellido') is-invalid @enderror" name="primerapellido" value="{{$item->apellido}}"  required>
+                                    <input id="primerapellido" type="text"  maxlength="25"  onkeyup="mayusculas(this);" class="form-control @error('primerapellido') is-invalid @enderror" name="primerapellido" value="{{$item->apellido}}"  required>
                                     @error('primerapellido')
                                         <div class="invalid-feedback">
                                         <strong>{{ $message }}</strong>
@@ -87,7 +87,7 @@
                                 </td>
                                 <td>
                                     &nbsp;Segundo Apellido&nbsp;<br>
-                                    <input id="segundoapellido" type="text"  maxlength="25" class="form-control @error('segundoapellido') is-invalid @enderror" name="segundoapellido" value="{{$item->apellidoseg}}"  >
+                                    <input id="segundoapellido" type="text"  maxlength="25"  onkeyup="mayusculas(this);" class="form-control @error('segundoapellido') is-invalid @enderror" name="segundoapellido" value="{{$item->apellidoseg}}"  >
                                     @error('segundoapellido')
                                         <div class="invalid-feedback">
                                         <strong>{{ $message }}</strong>
@@ -139,11 +139,11 @@
                             <tr>
                                 <td>
                                     &nbsp;Ocupación&nbsp;<span style="color:red;">*</span>&nbsp;<br>
-                                    <input id="ocupacion" type="text"name="ocupacion"  class="form-control" value="{{$item->ocupacion}}" required >                         
+                                    <input id="ocupacion" type="text"name="ocupacion"  onkeyup="mayusculas(this);" class="form-control" value="{{$item->ocupacion}}" required >                         
                                 </td>
                                 <td>
                                 &nbsp;Teléfono&nbsp;<span style="color:red;">*</span>&nbsp;<br>
-                                    <input id="text" type="text"  maxlength="25" class="form-control @error('telefono') is-invalid @enderror" name="telefono" value="{{$item->telefono}}" required>
+                                    <input id="text" type="text"  maxlength="25" onkeypress="return isNumberKey(event);" class="form-control @error('telefono') is-invalid @enderror" name="telefono" value="{{$item->telefono}}" required>
                                     @error('telefono')
                                         <div class="invalid-feedback">
                                         <strong>{{ $message }}</strong>
@@ -168,7 +168,7 @@
                                 </td>
                                 <td>
                                     &nbsp;Correo&nbsp;<span style="color:red;">*</span>&nbsp;<br>
-                                    <input id="correo" type="email"  maxlength="250" class="form-control @error('correo') is-invalid @enderror" name="correo" value="{{$item->email}}" required>
+                                    <input id="correo" type="email"  maxlength="250" onkeyup="mayusculas(this);" class="form-control @error('correo') is-invalid @enderror" name="correo" value="{{$item->email}}" required>
                                     @error('correo')
                                         <div class="invalid-feedback">
                                         <strong>{{ $message }}</strong>
@@ -193,4 +193,8 @@
     </div>
 </div>
 
+@endsection
+
+@section('scripts')
+<script src="{{url('js/funciones_generales.js')}}"></script>
 @endsection

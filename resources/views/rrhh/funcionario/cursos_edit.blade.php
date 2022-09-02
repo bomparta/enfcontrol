@@ -52,15 +52,15 @@
                         
                         <td>
                             &nbsp;Nombre del Curso&nbsp;<span style="color:red;">*</span>&nbsp;
-                            <input type="text" class="form-control" required name="nommbre_curso" id="nommbre_curso" value="{{$item->nommbre_curso}}" style="width:190px;" maxlength="25"/>
+                            <input type="text" class="form-control" required name="nommbre_curso" id="nommbre_curso" onkeyup="mayusculas(this);"  value="{{$item->nommbre_curso}}" maxlength="25"/>
                         </td>
                         <td>
                             &nbsp;Nombre de la Institución&nbsp;<span style="color:red;">*</span>&nbsp;
-                            <input type="text"class="form-control" required name="institucion_curso" id="institucion_curso" value="{{$item->institucion_curso}}" style="width:190px;" maxlength="100"/>
+                            <input type="text"class="form-control" required name="institucion_curso" id="institucion_curso" onkeyup="mayusculas(this);" value="{{$item->institucion_curso}}"  maxlength="100"/>
                         </td>
                         <td>
                             &nbsp;Dirección Referencial&nbsp;<span style="color:red;">*</span>&nbsp;
-                            <input type="text" class="form-control"  required name="dir_ref_curso" id="dir_ref_curso" maxlength="200" value="{{$item->dir_ref_curso}}"/>
+                            <input type="text" class="form-control"  required name="dir_ref_curso" id="dir_ref_curso" onkeyup="mayusculas(this);"  maxlength="200" value="{{$item->dir_ref_curso}}"/>
                         </td>
                         </tr>
                     <tr> 
@@ -90,4 +90,9 @@
     </div>
 </div>
 
+@endsection
+
+
+@section('scripts')
+<script src="{{url('js/funciones_generales.js')}}"></script>
 @endsection

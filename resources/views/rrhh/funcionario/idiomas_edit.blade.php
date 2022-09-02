@@ -50,7 +50,7 @@
                         
                         <td>
                             &nbsp;Idioma&nbsp;<span style="color:red;">*</span>&nbsp;
-                            <input type="text" class="form-control" required name="nommbre_idioma" id="nommbre_idioma" value="{{$item->nommbre_idioma}}" maxlength="25"/>
+                            <input type="text" class="form-control" required name="nommbre_idioma" id="nommbre_idioma" onkeyup="mayusculas(this);" value="{{$item->nommbre_idioma}}" maxlength="25"/>
                         </td>
                     </tr>
                     <tr>
@@ -88,7 +88,7 @@
                     </table>
 
                     <div class="frameContenedor" style="margin:5px;" align="right">
-                        <input class='btn btn-info' type="submit" value="Registrar Idioma" >
+                        <input class='btn btn-info' type="submit" value="Guardar" >
                         <a class='btn btn-secondary' href="{{URL::route('idiomas_funcionario')}}">Regresar</a> 
                     </div>
 
@@ -101,4 +101,8 @@
     </div>
 </div>
 
+@endsection
+
+@section('scripts')
+<script src="{{url('js/funciones_generales.js')}}"></script>
 @endsection

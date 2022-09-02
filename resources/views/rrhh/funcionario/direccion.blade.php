@@ -78,22 +78,22 @@
                             <tr>
                                 <td>
                                     &nbsp;Ciudad / Urbanizaci&oacute;n&nbsp;&nbsp;&nbsp;&nbsp;
-                                    <input type="text" class="form-control" name="urbanizacion" id="urbanizacion" value="{{$item->sector_urbanizacion}}" maxlength="100" required />
+                                    <input type="text" class="form-control" name="urbanizacion" id="urbanizacion" onkeyup="mayusculas(this);"  value="{{$item->sector_urbanizacion}}" maxlength="100" required />
                                 </td>
                                 <td>
                                     &nbsp;Calle/Avenida&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                    <input type="text" class="form-control" name="calleAv" id="calleAv" value="{{$item->calle_avenida}}" maxlength="100" required />
+                                    <input type="text" class="form-control" name="calleAv" id="calleAv" value="{{$item->calle_avenida}}"onkeyup="mayusculas(this);"  maxlength="100" required />
                                 </td>
                                
                             </tr>
                             <tr>
                                  <td>
                                     &nbsp;N° Casa o Apartamento&nbsp;&nbsp;&nbsp;
-                                    <input type="text" class="form-control" name="nroCasaApto" id="nroCasaApto" value="{{$item->nro_casa_apartamento}}"  maxlength="100"  required/>
+                                    <input type="text" class="form-control" name="nroCasaApto" id="nroCasaApto" onkeyup="mayusculas(this);"  value="{{$item->nro_casa_apartamento}}"  maxlength="100"  required/>
                                 </td>
                                 <td>
                                     &nbsp;Nombre de la Casa o Edificio&nbsp;&nbsp;&nbsp;
-                                    <input type="text" class="form-control" name="nombreCasaApto" id="nombreCasaApto" value="{{$item->nombre_casa_edificio_residencia}}"  maxlength="100" required  />
+                                    <input type="text" class="form-control" name="nombreCasaApto" id="nombreCasaApto" onkeyup="mayusculas(this);"  value="{{$item->nombre_casa_edificio_residencia}}"  maxlength="100" required  />
                                 </td>
                             </tr>
                             <!-- FILA 3 -->
@@ -102,7 +102,7 @@
                                 <td>
 
                                     &nbsp;Pto de Referencia:  &nbsp;&nbsp;&nbsp;&nbsp;
-                                    <input type="text" class="form-control"  name="pto_referencia" id="pto_referencia" value="{{$item->piso_nro_casa}}"  maxlength="200" required />
+                                    <input type="text" class="form-control"  name="pto_referencia" id="pto_referencia" onkeyup="mayusculas(this);" value="{{$item->piso_nro_casa}}"  maxlength="200" required />
                                 </td>
                                 <td>
                                 &nbsp;Condicion de la Vivivienda&nbsp;<span style="color:red;">*</span>&nbsp;
@@ -116,7 +116,7 @@
                                 </td>
                                 <td>
                             &nbsp;Codigo Postal:  &nbsp;&nbsp;&nbsp;&nbsp;
-                            <input type="text" class="form-control"  name="cod_postal" id="cod_postal" value="{{$item->codigo_postal}}"  maxlength="200"  />
+                            <input type="text" class="form-control"  name="cod_postal" id="cod_postal" value="{{$item->codigo_postal}}"  maxlength="200" onkeypress="return isNumberKey(event);"  />
                             </td> 
                             </tr>
                             <tr>
@@ -128,7 +128,7 @@
                                         <option value="{{ $cod_habs->descripcion }}" @if(Str::substr($item->telfhabitacion,0,4)==$cod_habs->descripcion)  selected @endif >{{ $cod_habs->descripcion }}</option>
                                     @endforeach
                                 </select>
-                                <input type="text" class="form-control" name="telfhabitacion" id="telfhabitacion" value="{{Str::substr($item->telfhabitacion,4,7)}}"  maxlength="100"/>
+                                <input type="text" class="form-control" name="telfhabitacion" id="telfhabitacion" value="{{Str::substr($item->telfhabitacion,4,7)}}" onkeypress="return isNumberKey(event);" maxlength="100"/>
                                 </div>
                                 
                                
@@ -142,7 +142,7 @@
                                         <option value="{{ $cod_cel->descripcion }}" @if(Str::substr($item->telcelular,0,4)==$cod_cel->descripcion)  selected @endif>{{ $cod_cel->descripcion }}</option>
                                     @endforeach
                                 </select>
-                                <input type="text" class="form-control" name="telefonoCel" id="telefonoCel" value="{{Str::substr($item->telcelular,4,7)}}"  maxlength="11" onKeyPress="return valText(this.value, event, 'int');"  class="campoTexto" required/>
+                                <input type="text" class="form-control" name="telefonoCel" id="telefonoCel" onkeypress="return isNumberKey(event);" value="{{Str::substr($item->telcelular,4,7)}}"  maxlength="11" onKeyPress="return valText(this.value, event, 'int');"  class="campoTexto" required/>
                                 </div>
                                 
                             </td>
@@ -151,7 +151,7 @@
                             <tr>
                             <td>
                             &nbsp;Otra dirección donde se pueda localizar:  &nbsp;&nbsp;&nbsp;&nbsp;
-                            <input type="text" class="form-control"  name="dir_contacto" id="dir_contacto" value="{{$item->direccion_contacto}}"  maxlength="200"  />
+                            <input type="text" class="form-control"  name="dir_contacto" id="dir_contacto" value="{{$item->direccion_contacto}}"  onkeyup="mayusculas(this);" maxlength="200"  />
                             </td>
                             <td>
                                 &nbsp;Telefono Persona Contacto&nbsp;<span style="color:red;">*</span>&nbsp;<br>
@@ -162,12 +162,12 @@
                                     @endforeach
                                     
                                 </select>
-                                <input type="text" class="form-control" name="telf_contacto" id="telf_contacto" value="{{Str::substr($item->telefono_contacto,4,7)}}" maxlength="100" required/>
+                                <input type="text" class="form-control" name="telf_contacto" id="telf_contacto" onkeypress="return isNumberKey(event);" value="{{Str::substr($item->telefono_contacto,4,7)}}" maxlength="100" required/>
                                 </div>
                             </td>
                             <td>
                             &nbsp;Persona Contacto:  &nbsp;&nbsp;&nbsp;&nbsp;
-                            <input type="text" class="form-control"  name="per_contacto" id="per_contacto" value="{{$item->persona_contacto}}"  maxlength="200"  />
+                            <input type="text" class="form-control"  name="per_contacto" id="per_contacto"  onkeyup="mayusculas(this);" value="{{$item->persona_contacto}}"  maxlength="200"  />
                             </td>
                         </tr>                            
                                                 
@@ -237,7 +237,6 @@
 
 @section('scripts')
 <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
-
-
+<script src="{{url('js/funciones_generales.js')}}"></script>
 
 @endsection

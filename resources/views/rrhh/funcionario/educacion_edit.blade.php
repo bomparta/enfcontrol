@@ -50,15 +50,15 @@
                         <td class="table-primary" rowspan="2">&nbsp;<b>PRIMARIA</b> </td>
                         <td>
                             &nbsp;Último Año Cursado&nbsp;
-                            <input type="text" class="form-control"  name="pri_ultimo_anno" id="pri_ultimo_anno" value="{{$item->pri_ult_anio}}" style="width:190px;" maxlength="25"/>
+                            <input type="text" class="form-control"  name="pri_ultimo_anno" id="pri_ultimo_anno" onkeyup="mayusculas(this);" value="{{$item->pri_ult_anio}}" style="width:190px;" maxlength="25"/>
                         </td>
                         <td>
                             &nbsp;Nombre de la Institución&nbsp;
-                            <input type="text"class="form-control"  name="institucion_pri" id="institucion_pri" value="{{$item->institucion_pri}}" style="width:190px;" maxlength="100"/>
+                            <input type="text"class="form-control"  name="institucion_pri" id="institucion_pri" onkeyup="mayusculas(this);" value="{{$item->institucion_pri}}" style="width:190px;" maxlength="100"/>
                         </td>
                         <td>
                             &nbsp;Dirección Referencial&nbsp;
-                            <input type="text" class="form-control"   name="dir_ref_pri" id="dir_ref_pri" maxlength="200" value="{{$item->dir_ref_pri}}"/>
+                            <input type="text" class="form-control"   name="dir_ref_pri" id="dir_ref_pri" maxlength="200" onkeyup="mayusculas(this);" value="{{$item->dir_ref_pri}}"/>
                         </td>
                         </tr>
                     <tr> 
@@ -79,15 +79,15 @@
                     <td class="table-primary" rowspan="2">&nbsp;<b>SECUNDARIA</b> </td>
                         <td>
                             &nbsp;Último Año Cursado&nbsp;
-                            <input type="text" class="form-control"  name="sec_ultimo_anno" id="sec_ultimo_anno" value="{{$item->sec_ult_anio}}" style="width:190px;" maxlength="25"/>
+                            <input type="text" class="form-control"  name="sec_ultimo_anno" id="sec_ultimo_anno" onkeyup="mayusculas(this);" value="{{$item->sec_ult_anio}}" style="width:190px;" maxlength="25"/>
                         </td>
                         <td>
                             &nbsp;Nombre de la Institución&nbsp;
-                            <input type="text" class="form-control"  name="institucion_sec" id="institucion_sec" value="{{$item->institucion_sec}}" style="width:190px;" maxlength="100"/>
+                            <input type="text" class="form-control"  name="institucion_sec" id="institucion_sec" onkeyup="mayusculas(this);"value="{{$item->institucion_sec}}" style="width:190px;" maxlength="100"/>
                         </td>
                         <td>
                             &nbsp;Dirección Referencial&nbsp;
-                            <input type="text" class="form-control" rows="2"  name="dir_ref_sec" id="dir_ref_sec" maxlength="200"value="{{$item->institucion_sec}}"/>
+                            <input type="text" class="form-control" rows="2"  name="dir_ref_sec" id="dir_ref_sec" maxlength="200" onkeyup="mayusculas(this);"value="{{$item->institucion_sec}}"/>
                         </td>
                         </tr>
                         <tr> 
@@ -110,15 +110,15 @@
                     <td class="table-primary" rowspan="2">&nbsp;<b>TÉCNICA SUPERIOR</b> </td>
                         <td>
                             &nbsp;Último Año Cursado&nbsp;
-                            <input type="text" class="form-control"  name="tec_ultimo_anno" id="tec_ultimo_anno" value="{{$item->tec_ult_anio}}" style="width:190px;" maxlength="25"/>
+                            <input type="text" class="form-control"  name="tec_ultimo_anno" id="tec_ultimo_anno" onkeyup="mayusculas(this);" value="{{$item->tec_ult_anio}}" style="width:190px;" maxlength="25"/>
                         </td>
                         <td>
                             &nbsp;Nombre de la Institución&nbsp;
-                            <input type="text" class="form-control" name="institucion_tec"  id="institucion_tec" value="{{$item->institucion_tec}}" style="width:190px;" maxlength="100"/>
+                            <input type="text" class="form-control" name="institucion_tec"  id="institucion_tec" onkeyup="mayusculas(this);" value="{{$item->institucion_tec}}" style="width:190px;" maxlength="100"/>
                         </td>
                         <td>
                             &nbsp;Dirección Referencial&nbsp;
-                            <input type="text" class="form-control"  name="dir_ref_tec" id="dir_ref_tec" value="{{$item->dir_ref_tec}}" maxlength="200"/>
+                            <input type="text" class="form-control"  name="dir_ref_tec" id="dir_ref_tec" onkeyup="mayusculas(this);" value="{{$item->dir_ref_tec}}" maxlength="200"/>
                         </td>
                         </tr>
                         <tr>
@@ -140,15 +140,15 @@
                     <td class="table-primary" rowspan="2">&nbsp;<b>UNIVERSITARIA</b> </td>
                         <td>
                             &nbsp;Último Año Cursado&nbsp;
-                            <input type="text" class="form-control" name="uni_ultimo_anno" id="uni_ultimo_anno" value="{{$item->uni_ult_anio}}" style="width:190px;" maxlength="25"/>
+                            <input type="text" class="form-control" name="uni_ultimo_anno" id="uni_ultimo_anno" onkeyup="mayusculas(this);" value="{{$item->uni_ult_anio}}" style="width:190px;" maxlength="25"/>
                         </td>
                         <td>
                             &nbsp;Nombre de la Institución&nbsp;
-                            <input type="text" class="form-control"  name="institucion_uni" id="institucion_uni" value="{{$item->institucion_uni}}" style="width:190px;" maxlength="100"/>
+                            <input type="text" class="form-control"  name="institucion_uni" id="institucion_uni" onkeyup="mayusculas(this);" value="{{$item->institucion_uni}}" style="width:190px;" maxlength="100"/>
                         </td>
                         <td>
                             &nbsp;Dirección Referencial&nbsp;
-                            <input type="text" class="form-control"  name="dir_ref_uni" id="dir_ref_uni" value="{{$item->dir_ref_uni}}" maxlength="200"/>
+                            <input type="text" class="form-control"  name="dir_ref_uni" id="dir_ref_uni" onkeyup="mayusculas(this);" value="{{$item->dir_ref_uni}}" maxlength="200"/>
                         </td>
                     </tr>
                     <tr>
@@ -171,11 +171,11 @@
                     <tr>
                         <td colspan="4"> 
                             &nbsp;Profesión u Ocupación&nbsp;<span style="color:red;">*</span>&nbsp;
-                            <input type="text" class="form-control"name="profesion" id="profesion" value="{{$item->profesion_ocup}}"  maxlength="200" size="50" class="form-control" required/>
+                            <input type="text" class="form-control"name="profesion" id="profesion" onkeyup="mayusculas(this);" value="{{$item->profesion_ocup}}"  maxlength="200" size="50" class="form-control" required/>
                         </td>
                         <td colspan="4"> 
                             &nbsp;En caso de haber culminado otros estudios de alto nivel técnico o universitario, indique Titulos obtenidos:&nbsp;<span style="color:red;">*</span>&nbsp;
-                            <input type="text" class="form-control"name="otros_estudios" id="otros_estudios" value="{{$item->otros_estudios}}"  maxlength="200" size="50" />
+                            <input type="text" class="form-control"name="otros_estudios" id="otros_estudios" onkeyup="mayusculas(this);"  value="{{$item->otros_estudios}}"  maxlength="200" size="50" />
                         </td>
                         
                     </tr>   
@@ -198,4 +198,8 @@
     </div>
 </div>
 
+@endsection
+
+@section('scripts')
+<script src="{{url('js/funciones_generales.js')}}"></script>
 @endsection

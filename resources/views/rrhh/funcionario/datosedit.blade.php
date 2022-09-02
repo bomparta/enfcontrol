@@ -61,7 +61,7 @@
                             <td>
                                 &nbsp;Primer Nombre&nbsp;<span style="color:red;">*</span>&nbsp;<br>
  
-                                <input id="primernombre" type="text"  maxlength="25" class="form-control @error('primernombre') is-invalid @enderror" name="primernombre" value="{{$item->nombre}}" require  >
+                                <input id="primernombre" type="text"  maxlength="25" onkeyup="mayusculas(this);"  class="form-control @error('primernombre') is-invalid @enderror" name="primernombre" value="{{$item->nombre}}" require  >
                                 @error('primernombre')
                                 <div class="invalid-feedback">
                                     <span style="color:red;"><strong>{{ $message }}</strong></span>
@@ -71,7 +71,7 @@
                         
                             <td>
                                 &nbsp;Segundo Nombre&nbsp;<br>
-                                <input id="segundonombre" type="text"  maxlength="25" class="form-control @error('segundonombre') is-invalid @enderror" name="segundonombre" value="{{$item->nombreseg}}" >
+                                <input id="segundonombre" type="text"  maxlength="25" onkeyup="mayusculas(this);"  class="form-control @error('segundonombre') is-invalid @enderror" name="segundonombre" value="{{$item->nombreseg}}" >
                                 @error('segundonombre')
                                 <div class="invalid-feedback">
                                     <span style="color:red;"><strong>{{ $message }}</strong></span>
@@ -84,7 +84,7 @@
                        <tr>
                             <td>
                                 &nbsp;Primer Apellido&nbsp;<span style="color:red;">*</span>&nbsp;<br>
-                                <input id="primerapellido" type="text"  maxlength="25" class="form-control @error('primerapellido') is-invalid @enderror" name="primerapellido" value="{{$item->apellido}}" required>
+                                <input id="primerapellido" type="text"  maxlength="25" onkeyup="mayusculas(this);"  class="form-control @error('primerapellido') is-invalid @enderror" name="primerapellido" value="{{$item->apellido}}" required>
                                 @error('primerapellido')
                                     <div class="invalid-feedback">
                                     <span style="color:red;"><strong>{{ $message }}</strong></span>
@@ -93,7 +93,7 @@
                             </td>
                             <td>
                                 &nbsp;Segundo Apellido&nbsp;<br>
-                                <input id="segundoapellido" type="text"  maxlength="25" class="form-control @error('segundoapellido') is-invalid @enderror" 
+                                <input id="segundoapellido" type="text"  maxlength="25" onkeyup="mayusculas(this);"  class="form-control @error('segundoapellido') is-invalid @enderror" 
                                 name="segundoapellido" value="{{$item->apellidoseg}}" >
                                 @error('segundoapellido')
                                 <div class="invalid-feedback">
@@ -175,7 +175,7 @@
                             <td>
                             &nbsp;&nbsp;<br>
                                 &nbsp;Ciudad&nbsp;<span style="color:red;">*</span>&nbsp;                             
-                                <input id="ciudad_nac" type="text"  maxlength="10" class="form-control @error('ciudad_nac') is-invalid @enderror" name="ciudad_nac" value="{{$item->ciudad_nac}}" required>
+                                <input id="ciudad_nac" type="text"  maxlength="10" onkeyup="mayusculas(this);" class="form-control @error('ciudad_nac') is-invalid @enderror" name="ciudad_nac" value="{{$item->ciudad_nac}}" required>
                                 @error('ciudad_nac')
                                     <div class="invalid-feedback">
                                     <span style="color:red;"><strong>{{ $message }}</strong></span>
@@ -203,7 +203,7 @@
                             </td>
                             <td>
                                 &nbsp;Cargo&nbsp;<span style="color:red;">*</span>&nbsp;<br>
-                                <input type= "text" id="cargo" name="cargo" value="{{$item->cargo_func}}" class="form-control" required >                              
+                                <input type= "text" id="cargo" name="cargo" onkeyup="mayusculas(this);"  value="{{$item->cargo_func}}" class="form-control" required >                              
                                 @error('cargo')
                                     <div class="invalid-feedback">
                                     <span style="color:red;"><strong>{{ $message }}</strong></span>
@@ -233,7 +233,7 @@
                             </td>
                             <td>
                                 &nbsp;Correo&nbsp;<span style="color:red;">*</span>&nbsp;<br>
-                                <input id="correo" type="email"  maxlength="250" class="form-control @error('correo') is-invalid @enderror" name="correo" value="{{$item->email}}" required>
+                                <input id="correo" type="email"  maxlength="250" onkeyup="mayusculas(this);"  class="form-control @error('correo') is-invalid @enderror" name="correo" value="{{$item->email}}" required>
                                 @error('correo')
                                     <div class="invalid-feedback">
                                     <span style="color:red;"><strong>{{ $message }}</strong></span>
@@ -260,4 +260,7 @@
     </div>
 </div>
 
+@endsection
+@section('scripts')
+<script src="{{url('js/funciones_generales.js')}}"></script>
 @endsection

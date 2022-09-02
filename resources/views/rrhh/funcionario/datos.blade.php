@@ -51,7 +51,7 @@
                             <td>
                                 &nbsp;Primer Nombre&nbsp;<span style="color:red;">*</span>&nbsp;<br>
  
-                                <input id="primernombre" type="text"  maxlength="25" class="form-control @error('primernombre') is-invalid @enderror" name="primernombre" value="{{$datos_funcionario->nombre}}" require  >
+                                <input id="primernombre" type="text"  maxlength="25" onkeyup="mayusculas(this);" class="form-control @error('primernombre') is-invalid @enderror" name="primernombre" value="{{$datos_funcionario->nombre}}" require  >
                                 @error('primernombre')
                                     <div class="invalid-feedback">
                                     <strong><span  style="color:red;">{{ $message }}</span></strong>
@@ -74,7 +74,7 @@
                        <tr>
                             <td>
                                 &nbsp;Primer Apellido&nbsp;<span style="color:red;">*</span>&nbsp;<br>
-                                <input id="primerapellido" type="text"  maxlength="25" class="form-control @error('primerapellido') is-invalid @enderror" name="primerapellido" value="{{$datos_funcionario->apellido}}" required>
+                                <input id="primerapellido" type="text"  maxlength="25" onkeyup="mayusculas(this);" class="form-control @error('primerapellido') is-invalid @enderror" name="primerapellido" value="{{$datos_funcionario->apellido}}" required>
                                 @error('primerapellido')
                                     <div class="invalid-feedback">
                                     <strong>{{ $message }}</strong>
@@ -83,7 +83,7 @@
                             </td>
                             <td>
                                 &nbsp;Segundo Apellido&nbsp;<br>
-                                <input id="segundoapellido" type="text"  maxlength="25" class="form-control @error('segundoapellido') is-invalid @enderror" 
+                                <input id="segundoapellido" type="text"  maxlength="25" onkeyup="mayusculas(this);" class="form-control @error('segundoapellido') is-invalid @enderror" 
                                 name="segundoapellido" value="{{$datos_funcionario->apellidoseg}}" >
                                 @error('segundoapellido')
                                     <div class="invalid-feedback">
@@ -152,7 +152,7 @@
                             <td>
                             &nbsp;&nbsp;<br>
                                 &nbsp;Ciudad&nbsp;<span style="color:red;">*</span>&nbsp;                             
-                                <input id="ciudad_nac" type="text"  maxlength="10" class="form-control @error('ciudad_nac') is-invalid @enderror" name="ciudad_nac" value="{{$datos_funcionario->ciudad_nac}}" required>
+                                <input id="ciudad_nac" type="text"  maxlength="10" onkeyup="mayusculas(this);" class="form-control @error('ciudad_nac') is-invalid @enderror" name="ciudad_nac" value="{{$datos_funcionario->ciudad_nac}}" required>
                                 @error('ciudad_nac')
                                     <div class="invalid-feedback">
                                     <strong>{{ $message }}</strong>
@@ -195,7 +195,7 @@
                             </td>
                             <td>
                                 &nbsp;Correo&nbsp;<span style="color:red;">*</span>&nbsp;<br>
-                                <input id="correo" type="email"  maxlength="250" class="form-control @error('correo') is-invalid @enderror" name="correo" value="" required>
+                                <input id="correo" type="email"  maxlength="250" onkeyup="mayusculas(this);" class="form-control @error('correo') is-invalid @enderror" name="correo" value="" placeholder ="micorreo@dominio.com"required>
                                 @error('correo')
                                     <div class="invalid-feedback">
                                     <strong>{{ $message }}</strong>
@@ -217,4 +217,8 @@
     </div>
 </div>
 
+@endsection
+
+@section('scripts')
+<script src="{{url('js/funciones_generales.js')}}"></script>
 @endsection

@@ -28,17 +28,21 @@
 
                         </tr>
                     </table>
-      
-          <form id="formulario" name="formulario" action="POST" action="#">    
-          @csrf
+            @if(isset($datos_funcionario))
+            @foreach($datos_funcionario as $key=>$funcionario)    
+          <form id="formulario" name="formulario" method="POST" action="#">    
           <div class="frameContenedor" style="margin:5px;" align="right">
-                        <input class='btn btn-info' type="submit" value="Registrar Movimiento RRHH " >
-                    </div>
-                      @if(isset($datos_funcionario))
+        
+        <p align="right"><a class='btn btn-info' href="{{URL::route('registrar_mov_rrhh',$funcionario->numero_identificacion)}}">Registrar Movimiento RRHH</a></p>
+        </div>
+          @csrf
+        
+          
+      
                       <table align="center" border="0" cellpadding="2" cellspacing="2" width="100%">
                      
                      <tbody>
-                     @foreach($datos_funcionario as $key=>$funcionario)
+                    
                      <tr  class="table-secondary">
                      <th   colspan=13 height="22" align="center"   >   DATOS DEL TRABAJADOR    </th>
                      </tr>
@@ -93,18 +97,21 @@
                      <td  colspan=4 rowspan=2 align="center"   >   {{$funcionario->administrativa}}   </td>
                      </tr>
                      </tbody>
+              
                      @endforeach
                     @endif     
                     </table>
-                    <div class="table-responsive mt-3">
-                        <table id="example" class="table table-striped table-bordered" style="width:100%">                        
+                    <div class="card-body">
+                        <table id="example1" class="table table-bordered table-striped" >                        
                             <thead>
                                 <tr>
                                     <th>Tipo de Movimiento</th>
+                                    <th>Tipo de Trabajador(a)</th>
+                                    <th>Cargo</th>
                                     <th>Unidad Administrativa</th>
                                     <th>Fecha de Movimiento</th>                                   
                                     @if(in_array( Auth::user()->id_usuariogrupo, array(9,12,10) ))
-                                        <th>Opcion</th>
+                                        <th>Opciones</th>
                                     @endif
                                 </tr>
                             </thead>   
@@ -112,32 +119,50 @@
                                 @if(isset($movimiento)   )
                                 @foreach($movimiento as $movimiento)                         
                                 <tr>      
-                                <td></td>
-                                <td></td>
-                                <td></td>
+                                <td>{{$movimiento->tipo_mov}}</td>
+                                <td>{{$movimiento->tipo_trabajador}}</td>
+                                <td>{{$movimiento->cargo}}</td>
+                                <td>{{$movimiento->ubic_administrativa}}</td>
+                                <td>{{$movimiento->fechamov}}</td>
                                         @if(in_array( Auth::user()->id_usuariogrupo, array(9,12,10) ))
                                             <td class="text-center">
-                                            <a href= "#" class="btn btn-info" data-tip="Detalle" title="Actualizar" data-toggle="tooltip" data-original-title="Editar">
+                                            <a href= "/rrhh/registrar_rrhhedit/{{$movimiento->id_rrhh_mov}}" class="btn btn-info" data-tip="Detalle" title="Actualizar" data-toggle="tooltip" data-original-title="Editar">
                                             <img src="/img/icon/modify.ico" class="icon-sm" alt="Listado">
-                                            <a href= "#" class="btn btn-info" data-tip="Detalle" title="Contrato" data-toggle="tooltip" data-original-title="Editar">
-                                            <img src="/img/icon/list.ico" class="icon-sm" alt="Listado">
                                             </a>
+                                            &nbsp; &nbsp;
+                                            @if($movimiento->tipo_mov=='EGRESO')
+                                            <a href= "/rrhh/creardocumento_rrhh/{{$tipo_documento='carta_renuncia'}}/{{$movimiento->id_rrhh_mov}}/{{$funcionario->numero_identificacion}}" class="btn btn-info" data-tip="Detalle" title="Contrato" data-toggle="tooltip" data-original-title="Editar">
+                                            <img src="/img/icon/carta_ren.ico" class="icon-sm" alt="Listado">
+                                            </a>
+                                            &nbsp; &nbsp;
+                                            <a href= "/rrhh/creardocumento_rrhh/{{$tipo_documento='aprob_renuncia'}}/{{$movimiento->id_rrhh_mov}}/{{$funcionario->numero_identificacion}}" class="btn btn-info" data-tip="Detalle" title="Carta de Renuncia Voluntaria" data-toggle="tooltip" data-original-title="Editar">
+                                            <img src="/img/icon/carta_aprob.ico" class="icon-sm" alt="Listado">
+                                            </a>
+                                            @else
+                                            
+                                            <a href= "/rrhh/creardocumento_rrhh/{{$tipo_documento='rrhh_mov'}}/{{$movimiento->id_rrhh_mov}}/{{$funcionario->numero_identificacion}}" class="btn btn-info" data-tip="Detalle" title="Aprobación de la Renuncia" data-toggle="tooltip" data-original-title="Editar">
+                                            <img src="/img/icon/list.ico" class="icon-sm" alt="Listado">
+                                            @endif
                                             </td>
                                         @endif                                                            
                                     </tr>
                             @endforeach
+                          
                             </tbody>
                             <tfoot>
                             <tr>
                                     <th>Tipo de Movimiento</th>
+                                    <th>Tipo de Trabajador(a)</th>
+                                    <th>Cargo</th>
                                     <th>Unidad Administrativa</th>
                                     <th>Fecha de Movimiento</th>                                   
                                     @if(in_array( Auth::user()->id_usuariogrupo, array(9,12,10) ))
-                                        <th>Opcion</th>
+                                        <th>Opciones</th>
                                     @endif
                                 </tr>
                             </tfoot>
                         </table>
+                        
                     </div>
                     @endif
                     </form>
@@ -154,3 +179,49 @@
 
 @endsection
 
+@section('scripts')
+<!-- jQuery -->
+<script src="/plugins/jquery/jquery.min.js"></script>
+<!-- Bootstrap 4 -->
+<script src="/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- DataTables  & Plugins -->
+<script src="/plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+<script src="/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+<script src="/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+<script src="/plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
+<script src="/plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
+<script src="/plugins/jszip/jszip.min.js"></script>
+<script src="/plugins/pdfmake/pdfmake.min.js"></script>
+<script src="/plugins/pdfmake/vfs_fonts.js"></script>
+<script src="/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
+<script src="/plugins/datatables-buttons/js/buttons.print.min.js"></script>
+<script src="/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js" defer></script>
+    <script src="https://cdn.datatables.net/1.10.24/js/dataTables.bootstrap4.min.js" defer></script>
+<script
+  src="https://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
+
+<script>
+
+    $(function () {
+      $("#example1").DataTable({
+        "responsive": true, "lengthChange": false, "autoWidth": false,
+        "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+      }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+      $('#example2').DataTable({
+        "paging": true,
+        "lengthChange": false,
+        "searching": false,
+        "ordering": true,
+        "info": true,
+        "autoWidth": false,
+        "responsive": true,
+      });
+    });
+  </script>
+
+
+@endsection  

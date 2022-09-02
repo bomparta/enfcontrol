@@ -1,0 +1,107 @@
+public function up()
+    {
+        Schema::create('status_actividads', function (Blueprint $table) {
+            $table->id();
+            $table->string('descripcion');
+            $table->smallInteger('status')->default(1);
+            $table->timestamps();
+        });
+    }
+public function up()
+    {
+        Schema::create('persona', function (Blueprint $table) {
+            $table->id();
+            $table->smallInteger('id_tipo_identificacion');
+            $table->smallInteger('id_nacionalidad'); 
+            $table->smallInteger('numero_identificacion');
+            $table->string('nombre');
+            $table->string('apellido');
+            $table->smallInteger('edad')->default(0);
+            $table->smallInteger('id_genero');
+            $table->string('email')->default(NULL);;            
+            $table->smallInteger('id_estado_civil');
+            $table->string('telefono_hab')->default(NULL);
+            $table->string('telefono_cel')->default(NULL);
+            $table->smallInteger('id_organismo');
+            $table->smallInteger('id_tipo_funcionario');
+            $table->string('cargo');
+            $table->smallInteger('id_adscripcion');
+            $table->smallInteger('id_dependencia'); 
+            $table->smallInteger('id_pais'); 
+            $table->smallInteger('id_entidad'); 
+            $table->smallInteger('status')->default(1);
+            $table->timestamps();
+        });
+    }
+
+ DB::table('status_actividads')->insert([
+            'descripcion' => 'Planificada',
+        ]);
+        DB::table('status_actividads')->insert([
+            'descripcion' => 'Anulada',
+        ]);
+        DB::table('status_actividads')->insert([
+            'descripcion' => 'Revisada',
+        ]);
+        DB::table('status_actividads')->insert([
+            'descripcion' => 'Entregada',
+        ]);
+        DB::table('status_actividads')->insert([
+            'descripcion' => 'Reprogramar',
+        ]);
+        DB::table('status_actividads')->insert([
+            'descripcion' => 'Devuelta Planificador/Transcriptor',
+        ]);
+        DB::table('status_actividads')->insert([
+            'descripcion' => 'Reportar',
+        ]);
+        DB::table('status_actividads')->insert([
+            'descripcion' => 'Archivada',
+        ]);
+        DB::table('status_actividads')->insert([
+            'descripcion' => 'Reporte POAN Enero',
+        ]);
+        DB::table('status_actividads')->insert([
+            'descripcion' => 'Reporte POAN Febrero',
+        ]);
+        DB::table('status_actividads')->insert([
+            'descripcion' => 'Reporte POAN Marzo',
+        ]);
+        DB::table('status_actividads')->insert([
+            'descripcion' => 'Reporte POAN Abril',
+        ]);
+        DB::table('status_actividads')->insert([
+            'descripcion' => 'Reporte POAN Mayo',
+        ]);
+        DB::table('status_actividads')->insert([
+            'descripcion' => 'Reporte POAN Junio',
+        ]);
+        DB::table('status_actividads')->insert([
+            'descripcion' => 'Reporte POAN Julio',
+        ]);
+        DB::table('status_actividads')->insert([
+            'descripcion' => 'Reporte POAN Agosto',
+        ]);
+        DB::table('status_actividads')->insert([
+            'descripcion' => 'Reporte POAN Septiembre',
+        ]);
+
+        DB::table('status_actividads')->insert([
+            'descripcion' => 'Reporte POAN Octubre',
+        ]);
+        DB::table('status_actividads')->insert([
+            'descripcion' => 'Reporte POAN Noviembre',
+        ]);
+        DB::table('status_actividads')->insert([
+            'descripcion' => 'Reporte POAN Diciembre',
+        ]);
+
+	DB::table('entidads')->insert([
+            'descripcion' => 'Distrito Capital',
+        ]);
+        DB::table('entidads')->insert([
+            'descripcion' => 'Amazonas',
+        ]);
+        DB::table('entidads')->insert([
+            'descripcion' => 'Aragua',
+        ]);

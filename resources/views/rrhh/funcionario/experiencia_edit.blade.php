@@ -32,12 +32,12 @@
                     <tr>
                         <td>
                             &nbsp;Empresa u Organización&nbsp;<span style="color:red;">*</span>&nbsp;
-                            <input type="text" class="form-control" name="empresa" id="empresa" value="{{$item->nombre_empresa}}" maxlength="200" required/>
+                            <input type="text" class="form-control" name="empresa" id="empresa" value="{{$item->nombre_empresa}}" onkeyup="mayusculas(this);"maxlength="200" required/>
                         </td>
                    
                         <td>
                             &nbsp;Cargo de desempeñado&nbsp;<span style="color:red;">*</span>&nbsp;
-                            <input type="text" class="form-control" name="cargo" id="cargo" value="{{$item->cargo}}"  maxlength="150" required/>
+                            <input type="text" class="form-control" name="cargo" id="cargo" value="{{$item->cargo}}"  onkeyup="mayusculas(this);" maxlength="150" required/>
                         </td>
                     </tr>
                     <tr>
@@ -60,7 +60,7 @@
                                     @endforeach
                                     
                                 </select>
-                                <input type="text" class="form-control" name="telefono" id="telefono" value="{{Str::substr($item->telefono_empresa,4,7)}}" maxlength="7" />
+                                <input type="text" class="form-control" name="telefono" id="telefono"  onkeypress="return isNumberKey(event);" value="{{Str::substr($item->telefono_empresa,4,7)}}" maxlength="7" />
                                 </div>
                             </td>
                         <td></td>
@@ -78,4 +78,8 @@
     </div>
 </div>
 
+@endsection
+
+@section('scripts')
+<script src="{{url('js/funciones_generales.js')}}"></script>
 @endsection

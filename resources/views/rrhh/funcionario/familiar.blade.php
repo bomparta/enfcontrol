@@ -41,7 +41,7 @@
                                             <option value="{{ $nacionalidad->id  }}">{{ $nacionalidad->cod }}</option>
                                         @endforeach
                                     </select>
-                                    <input type="text" name="cedula" id="cedula" value=""  maxlength="12"/>
+                                    <input type="text" name="cedula" id="cedula" value="" onkeypress="return isNumberKey(event);" maxlength="12"/>
                                     @error('cedula')
                                         <div class="invalid-feedback">
                                         <strong>{{ $message }}</strong>
@@ -51,7 +51,7 @@
                                 <tr>
                                 <td>
                                     &nbsp;Primer Nombre&nbsp;<span style="color:red;">*</span>&nbsp;<br>
-                                    <input id="primernombre" type="text"  maxlength="25" class="form-control @error('primernombre') is-invalid @enderror" name="primernombre" value="" required>
+                                    <input id="primernombre" type="text"  maxlength="25"onkeyup="mayusculas(this);" class="form-control @error('primernombre') is-invalid @enderror" name="primernombre" value="" required>
                                     @error('primernombre')
                                         <div class="invalid-feedback">
                                         <strong>{{ $message }}</strong>
@@ -60,7 +60,7 @@
                                 </td>
                                 <td>
                                     &nbsp;Segundo Nombre&nbsp;<br>
-                                    <input id="segundonombre" type="text"  maxlength="25" class="form-control @error('segundonombre') is-invalid @enderror" name="segundonombre" value="" >
+                                    <input id="segundonombre" type="text"  maxlength="25" onkeyup="mayusculas(this);" class="form-control @error('segundonombre') is-invalid @enderror" name="segundonombre" value="" >
                                     @error('segundonombre')
                                         <div class="invalid-feedback">
                                         <strong>{{ $message }}</strong>
@@ -72,7 +72,7 @@
                             <tr>
                                 <td>
                                     &nbsp;Primer Apellido&nbsp;<span style="color:red;">*</span>&nbsp;<br>
-                                    <input id="primerapellido" type="text"  maxlength="25" class="form-control @error('primerapellido') is-invalid @enderror" name="primerapellido" value=""  required>
+                                    <input id="primerapellido" type="text"  maxlength="25" onkeyup="mayusculas(this);" class="form-control @error('primerapellido') is-invalid @enderror" name="primerapellido" value=""  required>
                                     @error('primerapellido')
                                         <div class="invalid-feedback">
                                         <strong>{{ $message }}</strong>
@@ -81,7 +81,7 @@
                                 </td>
                                 <td>
                                     &nbsp;Segundo Apellido&nbsp;<br>
-                                    <input id="segundoapellido" type="text"  maxlength="25" class="form-control @error('segundoapellido') is-invalid @enderror" name="segundoapellido" value=""  >
+                                    <input id="segundoapellido" type="text"  maxlength="25" onkeyup="mayusculas(this);" class="form-control @error('segundoapellido') is-invalid @enderror" name="segundoapellido" value=""  >
                                     @error('segundoapellido')
                                         <div class="invalid-feedback">
                                         <strong>{{ $message }}</strong>
@@ -131,13 +131,13 @@
                             <tr>
                                 <td>
                                     &nbsp;Ocupación&nbsp;<span style="color:red;">*</span>&nbsp;<br>
-                                    <input id="ocupacion" type="text"name="ocupacion"  class="form-control" required >
+                                    <input id="ocupacion" type="text"name="ocupacion" onkeyup="mayusculas(this);" class="form-control" required >
                                     
                                     
                                 </td>
                                 <td>
                                 &nbsp;Teléfono&nbsp;<span style="color:red;">*</span>&nbsp;<br>
-                                    <input id="text" type="text"  maxlength="25" class="form-control @error('telefono') is-invalid @enderror" name="telefono" value="" required>
+                                    <input id="text" type="text"  maxlength="25" onkeypress="return isNumberKey(event);" class="form-control @error('telefono') is-invalid @enderror" name="telefono" value="" required>
                                     @error('telefono')
                                         <div class="invalid-feedback">
                                         <strong>{{ $message }}</strong>
@@ -159,7 +159,7 @@
                                 </td>
                                 <td>
                                     &nbsp;Correo&nbsp;<span style="color:red;">*</span>&nbsp;<br>
-                                    <input id="correo" type="email"  maxlength="250" class="form-control @error('correo') is-invalid @enderror" name="correo" value="" required>
+                                    <input id="correo" type="email"  maxlength="250"  onkeyup="mayusculas(this);" class="form-control @error('correo') is-invalid @enderror" name="correo" value="" required>
                                     @error('correo')
                                         <div class="invalid-feedback">
                                         <strong>{{ $message }}</strong>
@@ -172,7 +172,7 @@
                         <input class='btn btn-info' type="submit" value="Registrar Familiar" >
                     </div>                    
                     <div class="table-responsive mt-3">
-                    <table id="example" class="table table-striped table-bordered" style="width:100%">                        
+                    <table id="example1" class="table table-striped table-bordered" style="width:100%">                        
                                             <thead>
                                                 <tr>
                                                     <th>Cedula</th>
@@ -243,4 +243,52 @@
     </div>
 </div>
 
+@endsection
+
+
+@section('scripts')
+<script src="{{url('js/funciones_generales.js')}}"></script>
+
+<!-- jQuery -->
+<script src="/plugins/jquery/jquery.min.js"></script>
+<!-- Bootstrap 4 -->
+<script src="/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- DataTables  & Plugins -->
+<script src="/plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+<script src="/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+<script src="/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+<script src="/plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
+<script src="/plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
+<script src="/plugins/jszip/jszip.min.js"></script>
+<script src="/plugins/pdfmake/pdfmake.min.js"></script>
+<script src="/plugins/pdfmake/vfs_fonts.js"></script>
+<script src="/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
+<script src="/plugins/datatables-buttons/js/buttons.print.min.js"></script>
+<script src="/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js" defer></script>
+    <script src="https://cdn.datatables.net/1.10.24/js/dataTables.bootstrap4.min.js" defer></script>
+<script
+  src="https://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
+
+<script>
+
+    $(function () {
+      $("#example1").DataTable({
+        "responsive": true, "lengthChange": false, "autoWidth": false,
+        "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+      }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+      $('#example2').DataTable({
+        "paging": true,
+        "lengthChange": false,
+        "searching": false,
+        "ordering": true,
+        "info": true,
+        "autoWidth": false,
+        "responsive": true,
+      });
+    });
+  </script>
 @endsection
