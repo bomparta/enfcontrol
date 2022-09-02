@@ -30,6 +30,6 @@ class CreateControlBienesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('control_bienes');
+        Schema::dropIfExists('bienes_nacionales.control_bienes');
     }
 }
