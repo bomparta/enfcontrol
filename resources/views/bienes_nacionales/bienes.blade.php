@@ -47,17 +47,30 @@
                                     &nbsp;Tipo Bien&nbsp;<span style="color:red;">*</span>&nbsp;
                                    
                                     <select name="tipo_bien"  id="tipo_bien" class="form-control" required >
-                                <option value="0">Seleccione...</option>                                 
-                                        <option value="1" > Mueble</option>
-                                        <option value="2" > Tecnológico</option>
-                                        <option value="3" > Otro</option>                                   
+                                <option value="0">Seleccione...</option>            
+                                         @foreach($tipo_bien as $tipo_bien )
+                                                <option value="{{$tipo_bien->id}}"  > {{$tipo_bien->descripcion}}</option>
+                                        @endforeach                             
                                 </select>
+                                 
                                 </td>
+
+                         
+                                <td>
+                                    &nbsp;Descripción del Bien&nbsp;
+                                    <input type="text" class="form-control" name="descripcion" id="descripcion" value=""  maxlength="100"  />
+                                        
+                                </td>
+                        </tr>
+                        <tr>
                                 <td>
                                 &nbsp;Tipo de Movimiento&nbsp;<span style="color:red;">*</span>&nbsp;
                             <select id="tipo_movimiento" name="tipo_movimiento"class="form-control"    required >
-                                            
-                                            <option value="1" selected >Incorporación</option>
+                            <option value="0">Seleccione...</option>   
+                                           
+                                            @foreach($tipo_mov as $tipo_mov )
+                                                <option value="{{$tipo_mov->id}}" @if ($tipo_mov->id=='1') selected @endif> {{$tipo_mov->descripcion}}</option>
+                                        @endforeach    
                                                                        
                                     </select> 
                                 </td>
@@ -69,11 +82,21 @@
                                 &nbsp;Forma de Adquisición&nbsp;<span style="color:red;">*</span>&nbsp;
                             <select id="forma_adquisicion" name="forma_adquisicion"class="form-control"    required >
                                             <option value="0"  >Seleccione...</option>
-                                            <option value="1"  >Compra Directa</option>
-                                            <option value="2"  >Donación</option>                           
+                                            @foreach($adquisicion_bien as $adquisicion_bien )
+                                                <option value="{{$adquisicion_bien->id}}" @if ($adquisicion_bien->id==1) selected @endif> {{$adquisicion_bien->descripcion}}</option>
+                                        @endforeach                        
                                     </select> 
                                 </td>
-                                <td>
+                                <td>                             
+                                &nbsp;Estado del Bien&nbsp;<span style="color:red;">*</span>&nbsp;
+                            <select id="estado_bien" name="estado_bien"class="form-control"    required >
+                                            <option value="0"  >Seleccione...</option>
+                                            @foreach($estado_bien as $estado_bien )
+                                                <option value="{{$estado_bien->id}}" @if ($estado_bien->id==1) selected @endif> {{$estado_bien->descripcion}}</option>
+                                            @endforeach                        
+                                    </select> 
+                                </td>
+                               
                         </tr>
                         <tr>
                                 <td>
@@ -137,10 +160,9 @@
                                     &nbsp;Marca&nbsp;<span style="color:red;">*</span>&nbsp;
                                     <select id="marca" name="marca"class="form-control"   required >
                                     <option value="0">Seleccione...</option>                                 
-                                        <option value="1" > VIT</option>
-                                        <option value="2" > Acer</option>
-                                        <option value="3" > HP</option>     
-                                        <option value="4" > Lenovo</option>                                     
+                                    @foreach($marca as $marca )
+                                                <option value="{{$marca->id}}"> {{$marca->descripcion}}</option>
+                                    @endforeach                                  
                                 </select>
                                         
                                 </td>

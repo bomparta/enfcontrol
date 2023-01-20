@@ -37,16 +37,26 @@
             <img src="/img/icons-lineal/check_list.png" class="icon-lg">
             Planilla de Actualización de Datos
         </a>
+        <hr>
+        <a href="{{route('funcionario_vacaciones')}}" class="list-group-item list-group-item-action border-0">
+            <img src="/img/icons-lineal/check_list.png" class="icon-lg">
+            Solicitud de Vacaciones
+        </a> 
+        
         <div class="card-header text-secondary">RRHH</div>
             <a href="{{route('ver_trabajador')}}" class="list-group-item list-group-item-action border-0">
                 <img src="/img/icons-lineal/check_list.png" class="icon-lg">
                 Movimientos de Personal
             </a>
-        
+            <a href="{{route('funcionario_vacaciones')}}" class="list-group-item list-group-item-action border-0">
+            <img src="/img/icons-lineal/check_list.png" class="icon-lg">
+            Aprobación de Vacaciones
+            </a>     
             <a href="{{route('reportesrrhh')}}" class="list-group-item list-group-item-action border-0">
                 <img src="/img/icons-lineal/check_list.png" class="icon-lg">
                 Reportes
             </a>
+        
         @endif
         @if(in_array( Auth::user()->id_usuariogrupo, array(10,11,13,6,4) ))<!--Funcionarios !-->
         <div class="card-header text-secondary">FUNCIONARIOS</div>
@@ -74,6 +84,11 @@
             <img src="/img/icons-lineal/check_list.png" class="icon-lg">
             Planilla de Actualización de Datos
         </a>
+        <hr>
+        <a href="{{route('funcionario_vacaciones')}}" class="list-group-item list-group-item-action border-0">
+            <img src="/img/icons-lineal/check_list.png" class="icon-lg">
+            Solicitud de Vacaciones
+        </a>     
         @endif
         @if(in_array( Auth::user()->id_usuariogrupo, array(10) )) <!--Personal rrhh !-->
         <div class="card-header text-secondary">RRHH</div>
@@ -81,6 +96,10 @@
                 <img src="/img/icons-lineal/check_list.png" class="icon-lg">
                 Movimientos de Personal
             </a>
+            <a href="{{route('funcionario_vacaciones')}}" class="list-group-item list-group-item-action border-0">
+                <img src="/img/icons-lineal/check_list.png" class="icon-lg">
+                Aprobación de Vacaciones
+             </a>     
         
             <a href="{{route('reportesrrhh')}}" class="list-group-item list-group-item-action border-0">
                 <img src="/img/icons-lineal/check_list.png" class="icon-lg">

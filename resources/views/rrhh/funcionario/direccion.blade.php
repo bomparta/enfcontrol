@@ -47,8 +47,7 @@
           @csrf
           <tr>
                                 <td>
-                                    &nbsp;Estado de Residencia&nbsp;<span style="color:red;">*</span>&nbsp;
-                                   
+                                    &nbsp;Estado de Residencia&nbsp;<span style="color:red;">*</span>&nbsp;                                   
                                     <select name="_estado"  id="_estado" class="form-control" required >
                                 <option value="0">Seleccione...</option>
                                     @foreach ($estados as $estado)
@@ -63,12 +62,30 @@
 
                                 <td>
                                     &nbsp;Municipio de Residencia&nbsp;<span style="color:red;">*</span>&nbsp;
-                                    <select class="form-control"name="_submunicipio" id="_submunicipio" required></select>
-                                        
+                                    <select class="form-control"name="_submunicipio" id="_submunicipio" required>
+                                    <option value="0">Seleccione...</option>
+                                    @foreach ($municipios as $municipios)
+                                    @if($item->estado_domicilio == $municipios->id_entidad)
+                                        <option value="{{ $municipios->id }}"
+                                        @if($item->municipio_domicilio == $municipios->id)selected @endif >
+                                        {{ $municipios->nombre }}</option>
+                                    @endif    
+                                    @endforeach
+                                    </select>
                                 </td>
                                 <td>
                                     &nbsp;Parroquia de Residencia&nbsp;<span style="color:red;">*</span>&nbsp;
-                                    <select class="form-control" name="_subparroquia" id="_subparroquia" required></select>
+                                    <select class="form-control" name="_subparroquia" id="_subparroquia" required>
+                                    <option value="0">Seleccione...</option>
+                                    @foreach ($parroquias as $parroquias  )
+                                        @if($item->municipio_domicilio == $parroquias->id_municipio)
+                                            <option value="{{ $parroquias->id }}"
+                                            @if($item->parroquia_domicilio == $parroquias->id)selected @endif >
+                                            {{ $parroquias->nombre }}</option>
+                                        @endif    
+                                    @endforeach
+                                    </select>
+                                    </select>
 
                                 </td>
                                 

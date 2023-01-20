@@ -45,22 +45,32 @@
                 <td>
                     &nbsp;Tipo Bien&nbsp;<span style="color:red;">*</span>&nbsp;                    
                     <select name="tipo_bien"  id="tipo_bien" class="form-control" readonly required >
-                        <option value="1" @if($item->tipo_bien_id==1)echo selected @endif > Mueble</option>
-                        <option value="2"  @if($item->tipo_bien_id==2)echo selected @endif  > Tecnológico</option>
-                        <option value="3"  @if($item->tipo_bien_id==3)echo selected @endif  > Otros</option>                                      
+                    @foreach($tipo_bien as $tipo_bien )
+                        <option value="{{$tipo_bien->id}}" @if($item->tipo_bien_id==$tipo_bien->id)selected @endif > {{$tipo_bien->descripcion}}</option>
+                    @endforeach                                
                     </select>
                 </td>
                 <td>
                     &nbsp;Tipo de Movimiento&nbsp;<span style="color:red;">*</span>&nbsp;
                     <select id="tipo_movimiento" name="tipo_movimiento"class="form-control"    required >
-                                <option value="0"  >Seleccione...</option>
-                                <option value="2" @if($item->tipo_movimiento_id==2)echo selected @endif  >Asignación</option>
-                                <option value="3"  @if($item->tipo_movimiento_id==3)echo selected @endif >Traslado</option>
-                                <option value="4" @if($item->tipo_movimiento_id==4)echo selected @endif  >Enajenación</option>
-                                <option value="5" @if($item->tipo_movimiento_id==5)echo selected @endif  >Préstamo</option>
+                    @foreach($tipo_mov as $tipo_mov )
+                        <option value="{{$tipo_mov->id}}" @if ($item->tipo_movimiento_id=$tipo_mov->id) selected @endif> {{$tipo_mov->descripcion}}</option>
+                    @endforeach      
                                                                          
                     </select> 
                 </td>
+            </tr>
+            <tr>
+            <td>    
+            &nbsp;Estado del Bien&nbsp;<span style="color:red;">*</span>&nbsp;
+            <select id="estado_bien" name="estado_bien"class="form-control"    required >
+                        <option value="0"  >Seleccione...</option>
+                        @foreach($estado_bien as $estado_bien )
+                            <option value="{{$estado_bien->id}}" @if ($estado_bien->id==$item->estado_bienes_id) selected @endif> {{$estado_bien->descripcion}}</option>
+                        @endforeach                        
+                </select> 
+
+            </td>
             </tr>
             <tr>
                 <td>
@@ -97,10 +107,9 @@
                     &nbsp;Ubicación Administrativa&nbsp;<span style="color:red;">*</span>&nbsp;
                     <select id="ubic_adm" name="ubic_adm"class="form-control"   required >
                         <option value="0">Seleccione...</option>                                 
-                        <option value="1" @if($item->ubic_adm_id == '1')selected @endif > Coordinación de Administración y Servicios</option>
-                        <option value="2" @if($item->ubic_adm_id == '2')selected @endif > Dirección de Gestión Interna</option>
-                        <option value="3" @if($item->ubic_adm_id == '3')selected @endif> Dirección de Promoción y Difusión</option>     
-                        <option value="4" @if($item->ubic_adm_id == '4')selected @endif> Coordinación de Contrataciones </option>                                     
+                        @foreach($ubic_adm as $ubic_adm )
+                           <option value="{{$ubic_adm->id}}" @if ($item->ubic_adm_id ==$ubic_adm->id) selected @endif> {{$ubic_adm->descripcion}}</option>
+                         @endforeach                                        
                     </select>                        
                 </td>
                 <td>

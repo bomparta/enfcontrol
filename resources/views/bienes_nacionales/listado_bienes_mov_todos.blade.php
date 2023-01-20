@@ -55,16 +55,10 @@
                             @foreach($bienes as $bienes)               
                                 <tr>                                                    
                                         <td>{{$bienes->num_bien}}</td>
-                                        <td>{{$bienes->tipo_bien_id}}</td>
-                                        <td>{{$bienes->ubic_adm_id}}</td>
+                                        <td>{{$bienes->tipo_bien}}</td>
+                                        <td>{{$bienes->ubic_adm}}</td>
                                         <td>{{$bienes->responsable_asignado}}</td>
-                                        <td>@if($bienes->tipo_movimiento_id==1) INCORPORACIÖN 
-                                            @elseif($bienes->tipo_movimiento_id==2) ASIGNACIÓN 
-                                            @elseif($bienes->tipo_movimiento_id==3) TRASLADO 
-                                            @elseif($bienes->tipo_movimiento_id==4) ENAJENACIÓN
-                                            @elseif($bienes->tipo_movimiento_id==5) PRÉSTAMO 
-                                            @elseif($bienes->tipo_movimiento_id==6) DESINCORPORACIÖN @endif
-                                        </td>
+                                        <td>{{$bienes->tipo_movimiento}} </td>
                                        
                                         @if(in_array( Auth::user()->id_usuariogrupo, array(13) ))
                                             <td class="text-center">

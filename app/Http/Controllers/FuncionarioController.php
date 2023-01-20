@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 
 use App\Genero;
 use App\Entidad;
-
 use App\Municipio;
 use App\Parroquia;
 use App\Cod_Celular;
@@ -60,6 +59,8 @@ class FuncionarioController extends Controller
         $cod_habs= Cod_Habitacion::All();
         $cod_cels= Cod_Celular::All();
         $entidad = Entidad::orderBy('descripcion')->get();
+        $municipios=  Municipio::All();
+        $parroquias=  Parroquia::All();
         $tipo_trabajador= Tipo_Trabajador::All();
          $cedula_usuario=Auth::user()->cedula;// buscar la manera que este valor de usuario este referenciado en la tabla funcionario y Usuario
          $uni_adscripcion= Ubic_Administrativa::All();
@@ -67,11 +68,13 @@ class FuncionarioController extends Controller
         $datos_funcionario  =   Funcionario::select ('*', 'funcionario.id as id_funcionario','funcionario.id_tipo_funcionario as id_tipo_trabajador',
         'funcionario.cargo as cargo_func')->join ('persona', 'persona.id','=','funcionario.persona_id')
         ->where('persona.numero_identificacion','=',$cedula_usuario)->get();
+       
+      
 //dd($datos_funcionario);
      if(count($datos_funcionario)==0){
          $datos_funcionario  =   Persona::select ('*','persona.id as persona_id')->where('persona.numero_identificacion','=',$cedula_usuario)->get();     
      }
-   return view('rrhh/funcionario/datosedit',compact('uni_adscripcion','datos_funcionario','nacionalidades','generos','estado_civils','cod_habs','cod_cels','entidad','tipo_trabajador'));    
+   return view('rrhh/funcionario/datosedit',compact('uni_adscripcion','datos_funcionario','nacionalidades','generos','estado_civils','cod_habs','cod_cels','entidad','municipios','tipo_trabajador'));    
     }
     public function updatedatospersonales(Request $request)
     {
@@ -252,7 +255,9 @@ class FuncionarioController extends Controller
     public function createdireccion()
     {
         $estados= Entidad::select('*')->whereNotin('id',[25])->orderBy('descripcion')->get();
-        $municipios= Municipio::All(); 
+      
+        $municipios=  Municipio::All();
+        $parroquias=  Parroquia::All();
         $cod_habs= Cod_Habitacion::All();
         $cod_cels= Cod_Celular::All();
         $todos_cod = Arr::collapse([$cod_habs, $cod_cels]);
@@ -264,7 +269,7 @@ class FuncionarioController extends Controller
         //var_dump($funcionario);
        // if (COUNT($funcionario)>0  ) {
           
-            return view('rrhh/funcionario/direccion',compact('funcionario','estados','municipios','cod_habs','cod_cels','todos_cod'));
+            return view('rrhh/funcionario/direccion',compact('funcionario','estados','municipios','parroquias','cod_habs','cod_cels','todos_cod'));
       //  }
     }
     public function createhist_medico()
@@ -596,9 +601,9 @@ class FuncionarioController extends Controller
             
             'id_funcionario' => ['required'],
             'estudia'=>['required'],
-            'nivel_curso'=>['required'],
-            'universidad'=>['required'],
-            'especialidad'=>['required'],
+           //'nivel_curso'=>['required'],
+            //'universidad'=>['required'],
+            //'especialidad'=>['required'],
            
         ]);
       
@@ -1000,7 +1005,7 @@ class FuncionarioController extends Controller
        ->get();
        $constancia = ImagenUpload::select('*')
        ->where('usuario', '=',$id)
-       ->where('nombre', 'matrimonio')
+       ->where('nombre', 'constancia_est')
        ->get();
        $horario = ImagenUpload::select('*')
        ->where('usuario', '=',$id)
@@ -1008,7 +1013,7 @@ class FuncionarioController extends Controller
        ->get();
        $curriculum = ImagenUpload::select('*')
        ->where('usuario', '=',$id)
-       ->where('nombre', 'horario')
+       ->where('nombre', 'curriculum')
        ->get();
        $titulo = ImagenUpload::select('*')
        ->where('usuario', '=',$id)

@@ -254,3 +254,9 @@ Route::get('/bienes/searchredirect', function(){
     return redirect($route);
 });
 Route::get("/bienes_nacionales/bienes_adm/{search}", "BienesController@search");
+
+// VACACIONES
+Route::get('/rrhh/vacaciones', 'VacacionesController@home')->name('vacaciones'); // menu vacaciones
+
+Route::get('/rrhh/vacaciones/homefuncionariosvacaciones', 'VacacionesController@funcionarios')->name('funcionario_vacaciones');
+Route::get('/rrhh/vacaciones/homerrhhvacaciones', 'VacacionesController@rrhh')->name('rrhh_vacaciones');

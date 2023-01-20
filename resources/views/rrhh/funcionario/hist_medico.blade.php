@@ -81,7 +81,16 @@
                         </td>
                         <td colspan="2"> 
                             &nbsp;Grupo Sanguíneo<span style="color:red;">*</span>&nbsp;
-                            <input type="text" class="form-control"name="grupo_sanguineo" id="grupo_sanguineo" value="{{$item->grupo_sanguineo}}" onkeyup="mayusculas(this);"   maxlength="200" size="50" required/>
+                            <select id="grupo_sanguineo" name="grupo_sanguineo"class="form-control"  style="width:190px;" required >
+                                            <option value="0">Seleccione...</option>
+                                            <option value="O RH+" @if($item->grupo_sanguineo=='O RH+')  selected @endif>O RH+</option>
+                                            <option value="O RH-" @if($item->grupo_sanguineo=='O RH-')  selected @endif>O RH-</option>
+                                            <option value="A RH+" @if($item->grupo_sanguineo=='A RH+')  selected @endif>A RH+</option>
+                                            <option value="A RH-" @if($item->grupo_sanguineo=='A RH-')  selected @endif>A RH-</option>
+                                            <option value="AB RH+" @if($item->grupo_sanguineo=='A BRH+')  selected @endif>AB RH+</option>
+                                            <option value="AB RH-" @if($item->grupo_sanguineo=='A BRH-')  selected @endif>AB RH-</option>                                                       
+                                    </select> 
+                            
                         </td>
                     </tr>   
                     <tr> 

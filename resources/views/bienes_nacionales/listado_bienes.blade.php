@@ -56,9 +56,9 @@
                            @foreach($bienes as $bienes)                                                   
                                 <tr>                                                    
                                         <td>{{$bienes->num_bien}}</td>
-                                        <td>{{$bienes->tipo_bien_id}}</td>
-                                        <td>{{$bienes->tipo_bien_id}}</td>
-                                        <td>{{$bienes->marca_id}}</td>
+                                        <td>{{$bienes->tipo_bien}}</td>
+                                        <td>{{$bienes->ubic_adm}}</td>
+                                        <td>{{$bienes->marca}}</td>
                                         <td>{{$bienes->modelo}}</td>
                                         <td>{{$bienes->color}}</td>
                                         @if(in_array( Auth::user()->id_usuariogrupo, array(13) ))

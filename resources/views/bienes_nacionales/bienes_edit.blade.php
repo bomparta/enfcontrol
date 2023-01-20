@@ -49,32 +49,50 @@
                                    
                                     <select name="tipo_bien"  id="tipo_bien" class="form-control" required >
                                 <option value="0">Seleccione...</option>                                 
-                                <option value="1" @if($item->tipo_bien_id==1)echo selected @endif > Mueble</option>
-                        <option value="2"  @if($item->tipo_bien_id==2)echo selected @endif  > Tecnológico</option>
-                        <option value="3"  @if($item->tipo_bien_id==3)echo selected @endif  > Otros</option>                                            
+                                       
+                                         @foreach($tipo_bien as $tipo_bien )
+                                                <option value="{{$tipo_bien->id}}" @if($item->tipo_bien_id==$tipo_bien->id)selected @endif > {{$tipo_bien->descripcion}}</option>
+                                        @endforeach                                        
                                 </select>
                                 </td>
                                 <td>
+                                    &nbsp;Descripción del Bien&nbsp;
+                                    <input type="text" class="form-control" name="descripcion" id="descripcion" value="{{$item->descripcion_bien}}"  maxlength="100"  />
+                                        
+                                </td>
+                                </tr>
+                        <tr>
+                                <td>
                                 &nbsp;Tipo de Movimiento&nbsp;<span style="color:red;">*</span>&nbsp;
-                            <select id="tipo_movimiento" name="tipo_movimiento"class="form-control"   readonly   >
-                                            
-                                            <option value="1" selected >Incorporación</option>
-                                                                       
+                            <select id="tipo_movimiento" name="tipo_movimiento"class="form-control"   readonly   >                                            
+                                        @foreach($tipo_mov as $tipo_mov )
+                                                <option value="{{$tipo_mov->id}}" @if ($item->tipo_movimiento_id=$tipo_mov->id) selected @endif> {{$tipo_mov->descripcion}}</option>
+                                        @endforeach                    
                                     </select> 
                                 </td>
                                 <td>
-
-                        </tr>
+                                </tr>
                         <tr>
+                      
                         <td>
                                 &nbsp;Forma de Adquisición&nbsp;<span style="color:red;">*</span>&nbsp;
                             <select id="forma_adquisicion" name="forma_adquisicion"class="form-control"    required >
                                             <option value="0"  >Seleccione...</option>
-                                            <option value="1" @if($item->forma_adquisicion_id==1)echo selected @endif  >Compra Directa</option>
-                                            <option value="2"  @if($item->forma_adquisicion_id==2)echo selected @endif >Donación</option>                           
+                                            @foreach($adquisicion_bien as $adquisicion_bien )
+                                                <option value="{{$adquisicion_bien->id}}" @if ($item->forma_adquisicion_id==$adquisicion_bien->id) selected @endif> {{$adquisicion_bien->descripcion}}</option>
+                                        @endforeach      
                                     </select> 
                                 </td>
-                                <td>
+                                <td>    
+                                &nbsp;Estado del Bien&nbsp;<span style="color:red;">*</span>&nbsp;
+                            <select id="estado_bien" name="estado_bien"class="form-control"    required >
+                                            <option value="0"  >Seleccione...</option>
+                                            @foreach($estado_bien as $estado_bien )
+                                                <option value="{{$estado_bien->id}}" @if ($estado_bien->id==$item->estado_bienes_id) selected @endif> {{$estado_bien->descripcion}}</option>
+                                            @endforeach                        
+                                    </select> 
+
+                                </td>
                         </tr>
                         <tr>
                                 <td>
@@ -137,11 +155,11 @@
                                 <td>
                                     &nbsp;Marca&nbsp;<span style="color:red;">*</span>&nbsp;
                                     <select id="marca" name="marca"class="form-control"   required >
-                                    <option value="0">Seleccione...</option>                                 
-                                        <option value="1" @if($item->marca_id==1)echo selected @endif > VIT</option>
-                                        <option value="2"@if($item->marca_id==2)echo selected @endif  > Acer</option>
-                                        <option value="3"@if($item->marca_id==3)echo selected @endif  > HP</option>     
-                                        <option value="4"@if($item->marca_id==4)echo selected @endif  > Lenovo</option>                                     
+                                    <option value="0">Seleccione...</option>     
+                                    @foreach($marca as $marca )
+                                                <option value="{{$marca->id}}"@if($item->marca_id==$marca->id)echo selected @endif > {{$marca->descripcion}}</option>
+                                    @endforeach                                
+                                                                       
                                 </select>
                                         
                                 </td>
@@ -195,57 +213,9 @@
             </div>
             
         </div>
-        <script>
-            const csrfToken = document.head.querySelector("[name~=csrf-token][content]").content;
-            document.getElementById('_estado').addEventListener('change',(e)=>{
-                fetch('submunicipio_fun',{
-                    method : 'POST',
-                    body: JSON.stringify({texto : e.target.value}),
-                    headers:{
-                        'Content-Type': 'application/json',
-                        "X-CSRF-Token": csrfToken
-                    }
-                }).then(response =>{
-                    return response.json()
-                }).then( data =>{
-                    var opciones ="<option value=''>Seleccione ...</option>";
-                    for (let i in data.lista) {
-                            opciones+= '<option value="'+data.lista[i].id+'">'+data.lista[i].nombre+'</option>';                        
-                    }
-                    document.getElementById("_submunicipio").innerHTML = opciones;
-                }).catch(error =>console.error(error));
-            })
-        
-            document.getElementById('_submunicipio').addEventListener('change',(e)=>{
-                fetch('subparroquia_fun',{
-                    method : 'POST',
-                    body: JSON.stringify({texto : e.target.value}),
-                    headers:{
-                        'Content-Type': 'application/json',
-                        "X-CSRF-Token": csrfToken
-                    }
-                }).then(response =>{
-                    return response.json()
-                }).then( data =>{
-                    var opciones ="<option value=''>Seleccione ...</option>";
-                    for (let i in data.lista) {
-                       opciones+= '<option value="'+data.lista[i].id+'">'+data.lista[i].nombre+'</option>';
-                    }
-                    document.getElementById("_subparroquia").innerHTML = opciones;
-                }).catch(error =>console.error(error));
-            })
-        
-        </script>
-    </div>
-</div>
-
-
-
-@endsection
-
-@section('scripts')
+        @endsection
+        @section('scripts')
 <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
-
-
+<script src="{{url('js/funciones_generales.js')}}"></script>
 
 @endsection

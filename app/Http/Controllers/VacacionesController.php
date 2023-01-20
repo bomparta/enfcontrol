@@ -37,19 +37,57 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\App;
 use Carbon\Carbon;
-class RrhhController extends Controller
+class VacacionesController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function home()
     {
-        return view('rrhh/homerrhh');
+        return view('/rrhh/vacaciones/homevacaciones');
+    }
+    public function funcionarios()
+    {
+      $vacaciones=NULL;
+      $nacionalidades= Nacionalidad::All();
+        $generos= Genero::All();
+        $estado_civils= Estado_civil::All();
+        $cod_habs= Cod_Habitacion::All();
+        $cod_cels= Cod_Celular::All();
+        $entidad = Entidad::orderBy('descripcion')->get();
+        $tipo_trabajador= Tipo_Trabajador::All();
+         $cedula_usuario=Auth::user()->cedula;// buscar la manera que este valor de usuario este referenciado en la tabla funcionario y Usuario
+         $uni_adscripcion= Ubic_Administrativa::All();
+         
+        $datos_funcionario  =   $datos_funcionario= Funcionario::select('funcionario.id as funcionario_id',
+        'funcionario.*','persona.*','funcionario.cargo as cargo','funcionario.id_oficina_administrativa'     ,
+        'estado_civil.descripcion as est_civil','entidad.descripcion as estado_nac',
+        'tipo_trabajador.descripcion as trabajador','ubic_administrativa.descripcion as administrativa',
+        'ent.descripcion as ent_domi','municipio.nombre as muni_domi','parroquia.nombre as parr_domi','funcionario.id_tipo_funcionario as tipo_trabajador') 
+        ->join ('persona', 'persona.id','=','funcionario.persona_id')    
+        ->join('estado_civil','estado_civil.id','=','persona.id_estado_civil')  
+        ->join('entidad','entidad.id','=','persona.estado_nac') 
+        ->JOIN('tipo_trabajador','tipo_trabajador.id','funcionario.id_tipo_funcionario')      
+        ->JOIN('ubic_administrativa','ubic_administrativa.id','funcionario.id_oficina_administrativa')          
+        ->join('entidad as ent','ent.id','=','funcionario.estado_domicilio') 
+        ->join('municipio','municipio.id','=','funcionario.municipio_domicilio')     
+        ->join('parroquia','parroquia.id','=','funcionario.parroquia_domicilio')             
+        ->where('persona.numero_identificacion','=',$cedula_usuario)->get();     
+//dd($datos_funcionario);
+     if(count($datos_funcionario)==0){
+         $datos_funcionario  =   Persona::select ('*','persona.id as persona_id')->where('persona.numero_identificacion','=',$cedula_usuario)->get();     
+     }
+
+      return view('rrhh.vacaciones.solicitud_vacaciones_edit',compact('vacaciones','datos_funcionario'));
+    }
+    public function rrhh()
+    {
+        return view('vacaciones/vacaciones_rrhh');
     }
 
-    public function reporterrhh()
+   /* public function reporterrhh()
     {
         return view('reportes/rrhh/lista_reporte_rrhh');
     }
@@ -104,7 +142,7 @@ class RrhhController extends Controller
        ->get();
        $constancia = ImagenUpload::select('*')
        ->where('usuario', '=',$id)
-       ->where('nombre', 'constancia_est')
+       ->where('nombre', 'matrimonio')
        ->get();
        $horario = ImagenUpload::select('*')
        ->where('usuario', '=',$id)
@@ -112,7 +150,7 @@ class RrhhController extends Controller
        ->get();
        $curriculum = ImagenUpload::select('*')
        ->where('usuario', '=',$id)
-       ->where('nombre', 'curriculum')
+       ->where('nombre', 'horario')
        ->get();
        $titulo = ImagenUpload::select('*')
        ->where('usuario', '=',$id)
@@ -247,7 +285,7 @@ public function subirArchivo_rrhh(Request $request)
         * se coloco en 'providers' este codigo  Barryvdh\DomPDF\ServiceProvider::class,
         * y en 'aliases' se coloco esto 'PDF' => Barryvdh\DomPDF\Facade::class,
         */
-        $cedula_usuario=Auth::user()->cedula;
+        /*$cedula_usuario=Auth::user()->cedula;
         $funcionario= Funcionario::select('funcionario.id as funcionario_id','funcionario.*','persona.*') 
         ->join ('persona', 'persona.id','=','funcionario.persona_id')        
         ->where('persona.numero_identificacion','=',$cedula_usuario)->get();
@@ -309,7 +347,7 @@ public function subirArchivo_rrhh(Request $request)
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+   /* public function create()
     {
         $nacionalidades= Nacionalidad::All();
         $datos_funcionario=null;
@@ -596,7 +634,7 @@ public function subirArchivo_rrhh(Request $request)
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+   /* public function update(Request $request, $id)
     {
         //
     }
@@ -607,11 +645,11 @@ public function subirArchivo_rrhh(Request $request)
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+   /* public function destroy($id)
     {
         //
     }
 
-    
+    */
 
 }

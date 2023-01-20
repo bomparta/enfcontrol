@@ -4,7 +4,7 @@
     <div class="row justify-content-start">
   
      <div class="col-12 text-center">
-     <h4 class="text-primary" >CONTROL DE EXPEDIENTES RRHH</h6>        
+     <h4 class="text-primary" >VACACIONES</h6>        
 </a>
      <h6 class="text-dark">Bienvenid@, {{Auth::user()->name}}</h6>
 
@@ -17,7 +17,7 @@
                   <div class="card bg-light mb-6" style="max-width: 14rem;">
                       <div class="card-header text-secondary">FUNCIONARIOS</div>
                       <div class="card-body">
-                        <a href="{{route('funcionario')}}" ><h6 class="card-title">Registrar Información</h6>
+                        <a href="{{route('funcionario_vacaciones')}}" ><h6 class="card-title">Solicitud Vacaciones</h6>
                           <img src="{{url('/img/registro.jpeg')}}" class="card-img-bottom" >
                         </a>
                       </div>
@@ -28,11 +28,12 @@
                     <div class="card bg-light mb-6" style="max-width: 14rem;">
                       <div class="card-header text-secondary">RRHH</div>
                       <div class="card-body">
-                      <a href="{{route('ver_trabajador')}}"> <h6 class="card-title">Expedientes</h6>
-                        <img src="{{url('/img/expediente.jpeg')}}" class="card-img-top">
+                      <a href="{{route('rrhh_vacaciones')}}"> <h6 class="card-title">Aprobación Vacaciones  </h6>
+                        <img src="{{url('/img/con_vacacion.jpeg')}}" class="card-img-top">
                       </a>
                       </div>
                     </div>
+                    
                     
                   @endif  
                   </div>

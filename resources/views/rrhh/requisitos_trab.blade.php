@@ -39,7 +39,7 @@
                                         @if( empty($foto[0]) ) 
                                                 <img src="{{url('img/imagen/foto.jpeg')}}" style="max-width: 250px; max-height: 150px"  alt="Image"/><span class='btn-info badge'><font color='red'>Pendiente</font></span> 
                                             @else
-                                                <img src="{{url('img/icon/check.png')}}" style="max-width: 250px; max-height: 150px"  alt="Image"> <a href= "{{ Storage::url( $foto[0]->ruta) }}" target="_new">
+                                                <img src="{{url('img/icon/check.png')}}" style="max-width: 250px; max-height: 150px"  alt="Image"><a href= "{{ Storage::url( $foto[0]->ruta) }}" target="_new">
                                                    Ver Documento   <span class='btn-info badge'><font color=#F2F3F8>Cargado</font></span>                                        
                                             @endif
 

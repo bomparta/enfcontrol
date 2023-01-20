@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class TipoMovimientos extends Migration
+class AddBienes extends Migration
 {
     /**
      * Run the migrations.
@@ -14,12 +14,9 @@ class TipoMovimientos extends Migration
     public function up()
     {
         //
-        Schema::create('tipo_movimientos', function (Blueprint $table) {
-            $table->id();       
-            $table->string('descripcion');           
-            $table->bigInteger('status')->default(1);       
-            $table->timestamps();
-        });
+        Schema::table('bienes_nacionales.bienes', function (Blueprint $table) {
+            $table->string('descripcion_bien')->nullable();                
+            });
     }
 
     /**
@@ -30,6 +27,5 @@ class TipoMovimientos extends Migration
     public function down()
     {
         //
-        Schema::dropIfExists('tipo_movimientos');
     }
 }

@@ -7,6 +7,11 @@ use App\Control_Bienes;
 use App\Mov_Bienes;
 use App\Entidad;
 use App\Ubic_Administrativa;
+use App\Tipo_bienes;
+use App\TipoMovimientos;
+use App\Adquisicion_bienes;
+use App\Estado_bienes;
+use App\Marca;
 use Illuminate\Support\Str;
 use Illuminate\Support\Arr;
 use Illuminate\Http\Request;
@@ -32,8 +37,12 @@ class BienesController extends Controller
     public function index()
     {
         //
-        $bienes=Bienes::select('*','bienes_nacionales.bienes.id as id_bien')
-                        ->join('bienes_nacionales.mov_bienes','bienes_nacionales.mov_bienes.bienes_id','=','bienes_nacionales.bienes.id')  
+        $bienes=Bienes::select('*','bienes_nacionales.bienes.id as id_bien','tipo_bienes.descripcion as tipo_bien',
+        'public.ubic_administrativa.descripcion as ubic_adm','bienes_nacionales.marca.descripcion as marca')
+                        ->join('bienes_nacionales.mov_bienes','bienes_nacionales.mov_bienes.bienes_id','=','bienes_nacionales.bienes.id')                   
+                        ->join('bienes_nacionales.tipo_bienes','bienes_nacionales.bienes.tipo_bien_id','=','bienes_nacionales.tipo_bienes.id')    
+                        ->join('public.ubic_administrativa','public.ubic_administrativa.id','=','bienes_nacionales.mov_bienes.ubic_adm_id')                
+                        ->join('bienes_nacionales.marca','bienes_nacionales.marca.id','=','bienes_nacionales.bienes.marca_id')               
                         ->where('bienes_nacionales.mov_bienes.status','=',1)
                         ->where('bienes_nacionales.bienes.status','=',1)
                         ->where('bienes_nacionales.mov_bienes.tipo_movimiento_id','=',1)->paginate(100);
@@ -42,8 +51,13 @@ class BienesController extends Controller
     public function movimientos()
     {
         //
-        $bienes=Bienes::select('*','bienes_nacionales.bienes.id as id_bien')
-        ->join('bienes_nacionales.mov_bienes','bienes_nacionales.mov_bienes.bienes_id','=','bienes_nacionales.bienes.id')  
+        $bienes=Bienes::select('*','bienes_nacionales.bienes.id as id_bien','tipo_bienes.descripcion as tipo_bien',
+        'public.ubic_administrativa.descripcion as ubic_adm','bienes_nacionales.tipo_movimientos.descripcion as tipo_movimiento')
+                        ->join('bienes_nacionales.mov_bienes','bienes_nacionales.mov_bienes.bienes_id','=','bienes_nacionales.bienes.id')                   
+                        ->join('bienes_nacionales.tipo_bienes','bienes_nacionales.bienes.tipo_bien_id','=','bienes_nacionales.tipo_bienes.id')    
+                        ->join('public.ubic_administrativa','public.ubic_administrativa.id','=','bienes_nacionales.mov_bienes.ubic_adm_id')                
+                        ->join('bienes_nacionales.marca','bienes_nacionales.marca.id','=','bienes_nacionales.bienes.marca_id')   
+                        ->join('bienes_nacionales.tipo_movimientos','bienes_nacionales.tipo_movimientos.id','=','bienes_nacionales.mov_bienes.tipo_movimiento_id')   
         ->where('bienes_nacionales.mov_bienes.status','=',1)
         ->where('bienes_nacionales.bienes.status','=',1)
         ->paginate(100);
@@ -54,8 +68,12 @@ class BienesController extends Controller
     public function list_desincorporar()
     {
         //
-        $bienes=Bienes::select('*','bienes_nacionales.bienes.id as id_bien')
-        ->join('bienes_nacionales.mov_bienes','bienes_nacionales.mov_bienes.bienes_id','=','bienes_nacionales.bienes.id')  
+        $bienes=Bienes::select('*','bienes_nacionales.bienes.id as id_bien','tipo_bienes.descripcion as tipo_bien',
+        'public.ubic_administrativa.descripcion as ubic_adm','bienes_nacionales.marca.descripcion as marca')
+                        ->join('bienes_nacionales.mov_bienes','bienes_nacionales.mov_bienes.bienes_id','=','bienes_nacionales.bienes.id')                   
+                        ->join('bienes_nacionales.tipo_bienes','bienes_nacionales.bienes.tipo_bien_id','=','bienes_nacionales.tipo_bienes.id')    
+                        ->join('public.ubic_administrativa','public.ubic_administrativa.id','=','bienes_nacionales.mov_bienes.ubic_adm_id')                
+                        ->join('bienes_nacionales.marca','bienes_nacionales.marca.id','=','bienes_nacionales.bienes.marca_id')                           
         ->where('bienes_nacionales.mov_bienes.status','=',1)
         ->where('bienes_nacionales.bienes.status','=',1)
         ->whereNotIn('bienes_nacionales.mov_bienes.tipo_movimiento_id',[1,6])
@@ -65,8 +83,13 @@ class BienesController extends Controller
     public function desincorporados_todos()
     {
         //
-        $bienes=Bienes::select('*','bienes_nacionales.bienes.id as id_bien')
-        ->join('bienes_nacionales.mov_bienes','bienes_nacionales.mov_bienes.bienes_id','=','bienes_nacionales.bienes.id')  
+        $bienes=Bienes::select('*','bienes_nacionales.bienes.id as id_bien','tipo_bienes.descripcion as tipo_bien',
+        'public.ubic_administrativa.descripcion as ubic_adm','bienes_nacionales.marca.descripcion as marca','bienes_nacionales.tipo_movimientos.descripcion as tipo_movimiento')
+                        ->join('bienes_nacionales.mov_bienes','bienes_nacionales.mov_bienes.bienes_id','=','bienes_nacionales.bienes.id')                   
+                        ->join('bienes_nacionales.tipo_bienes','bienes_nacionales.bienes.tipo_bien_id','=','bienes_nacionales.tipo_bienes.id')    
+                        ->join('public.ubic_administrativa','public.ubic_administrativa.id','=','bienes_nacionales.mov_bienes.ubic_adm_id')                
+                        ->join('bienes_nacionales.marca','bienes_nacionales.marca.id','=','bienes_nacionales.bienes.marca_id')   
+                        ->join('bienes_nacionales.tipo_movimientos','bienes_nacionales.tipo_movimientos.id','=','bienes_nacionales.mov_bienes.tipo_movimiento_id')   
         ->where('bienes_nacionales.mov_bienes.status','=',1)
         ->where('bienes_nacionales.bienes.status','=',1)
         ->where('bienes_nacionales.mov_bienes.tipo_movimiento_id','=',6)
@@ -83,29 +106,44 @@ class BienesController extends Controller
         //
         $entidad = Entidad::All();
         $bienes=Bienes::where('id',$id_bien)->get();
-      
-        return view('bienes_nacionales/bienesmov',compact('bienes','entidad'));
+        $tipo_bien=Tipo_bienes::where('status',1)->get();
+        $tipo_mov=TipoMovimientos::where('status',1)->get();
+        $adquisicion_bien =Adquisicion_bienes::where('status',1)->get();
+        $estado_bien=Estado_bienes::where('status',1)->get();
+        $ubic_adm=Ubic_Administrativa::where('status',1)->get();  
+        $marca=Marca::where('status',1)->get();
+        return view('bienes_nacionales/bienesmov',compact('bienes','entidad','tipo_bien','tipo_mov','adquisicion_bien','estado_bien','ubic_adm','marca'));
     }
     public function createdesin(Bienes $bienes,$id,$id_bien)
     {
         //
         $entidad = Entidad::All();
-       
+        $tipo_bien=Tipo_bienes::where('status',1)->get();
+        $tipo_mov=TipoMovimientos::where('status',1)->get();
+        $adquisicion_bien =Adquisicion_bienes::where('status',1)->get();
+        $estado_bien=Estado_bienes::where('status',1)->get();     
+        $ubic_adm=Ubic_Administrativa::where('status',1)->get();    
+        $marca=Marca::where('status',1)->get();     
         $bienes=Bienes::select('*','bienes_nacionales.bienes.id as id_bien')
         ->join('bienes_nacionales.mov_bienes','bienes_nacionales.mov_bienes.bienes_id','=','bienes_nacionales.bienes.id')  
         ->where('bienes_nacionales.bienes.id',$id_bien)
         ->where('bienes_nacionales.mov_bienes.status',1)
         ->get();
         //var_dump($entidad);
-        return view('bienes_nacionales/bienes_desin',compact('bienes','entidad'));
+        return view('bienes_nacionales/bienes_desin',compact('bienes','entidad','tipo_bien','tipo_mov','adquisicion_bien','estado_bien','ubic_adm','marca'));
     }
     public function create()
     {
         //
        
         $num_bien=Control_Bienes::where('status',1)->get();
+        $tipo_bien=Tipo_bienes::where('status',1)->get();
+        $tipo_mov=TipoMovimientos::where('status',1)->get();
+        $adquisicion_bien =Adquisicion_bienes::where('status',1)->get();
+        $estado_bien=Estado_bienes::where('status',1)->get();
+        $marca=Marca::where('status',1)->get();
         //  var_dump($num_bien);
-           return view('bienes_nacionales/bienes',compact('num_bien'));
+           return view('bienes_nacionales/bienes',compact('num_bien','tipo_bien','tipo_mov','adquisicion_bien','estado_bien','marca'));
     }
 
     
@@ -130,6 +168,8 @@ class BienesController extends Controller
             'num_bien' => ['required'],
             'tipo_bien'=>['required'],
             'tipo_movimiento'=>['required'],
+            'estado_bien'=>['required'],
+            'descripcion'=>['required'],
             'forma_adquisicion'=>['required'],
             'num_orden'=>['required'],
             'fecha_orden'=>['required'],
@@ -142,6 +182,7 @@ class BienesController extends Controller
       
         $bienes = new Bienes();        
         $bienes->num_bien = $request->num_bien;
+        $bienes->descripcion_bien = $request->descripcion;
         $bienes->num_factura = $request->num_factura;
         $bienes->fecha_factura = $request->fecha_factura;          
         $bienes->fecha_registro = date('Y-m-d');  
@@ -150,6 +191,7 @@ class BienesController extends Controller
         $bienes->nombre_proveedor = $request->nom_proveedor;          
         $bienes->rif_proveedor = $request->rif_proveedor;  
         $bienes->correo_proveedor = $request->correo_proveedor;
+        $bienes->estado_bienes_id = $request->estado_bien;
        // $bienes->rep_legal_proveedor = $request->num_cuenta;
         $bienes->num_cotizacion = $request->num_cotizacion;          
         $bienes->fecha_cotizacion = $request->fecha_cotizacion;          
@@ -192,7 +234,7 @@ class BienesController extends Controller
             'tipo_movimiento'=>['required'],
             'responsable_asignado'=>['required'],
             'ubic_adm'=>['required'],
-            'ubic_adm'=>['required'],
+            'estado_bien'=>['required'],
             
         ]);
       
@@ -203,6 +245,7 @@ class BienesController extends Controller
         $mov_bienes = new Mov_Bienes();        
         $mov_bienes->bienes_id =   $request->id_bien;
         $mov_bienes->tipo_movimiento_id = $request->tipo_movimiento;
+        $mov_bienes->estado_bienes_id = $request->estado_bien;
         $mov_bienes->fecha_registro = date('Y-m-d');          
         $mov_bienes->responsable_asignado =$request->responsable_asignado;
         $mov_bienes->ubic_adm_id = $request->ubic_adm;
@@ -221,10 +264,9 @@ class BienesController extends Controller
                
             'id_bien' => ['required'],        
             'tipo_movimiento'=>['required'],
+            'estado_bien'=>['required'],
             'responsable_asignado'=>['required'],
-            'ubic_adm'=>['required'],
-            'ubic_adm'=>['required'],
-            
+            'ubic_adm'=>['required'],    
         ]);
       
         $bienes=Mov_Bienes:: where ('bienes_id',$request->id_bien)->where ('status',1)
@@ -233,7 +275,8 @@ class BienesController extends Controller
 //Carga tabla movimeitno la incorporacion
         $mov_bienes = new Mov_Bienes();        
         $mov_bienes->bienes_id =   $request->id_bien;
-        $mov_bienes->tipo_movimiento_id = $request->tipo_movimiento;
+        $mov_bienes->tipo_movimiento_id = $request->tipo_movimiento;       
+        $mov_bienes->estado_bienes_id = $request->estado_bien;  
         $mov_bienes->fecha_registro = date('Y-m-d');          
         $mov_bienes->responsable_asignado =$request->responsable_asignado;
         $mov_bienes->ubic_adm_id = $request->ubic_adm;
@@ -253,9 +296,13 @@ class BienesController extends Controller
     public function movimientos_todos()
     {
         //
-        $bienes=Bienes::select('*','bienes_nacionales.bienes.id as id_bien')
-        ->join('bienes_nacionales.mov_bienes','bienes_nacionales.mov_bienes.bienes_id','=','bienes_nacionales.bienes.id')  
-       
+        $bienes=Bienes::select('*','bienes_nacionales.bienes.id as id_bien','tipo_bienes.descripcion as tipo_bien',
+        'public.ubic_administrativa.descripcion as ubic_adm','bienes_nacionales.marca.descripcion as marca','bienes_nacionales.tipo_movimientos.descripcion as tipo_movimiento')
+                        ->join('bienes_nacionales.mov_bienes','bienes_nacionales.mov_bienes.bienes_id','=','bienes_nacionales.bienes.id')                   
+                        ->join('bienes_nacionales.tipo_bienes','bienes_nacionales.bienes.tipo_bien_id','=','bienes_nacionales.tipo_bienes.id')    
+                        ->join('public.ubic_administrativa','public.ubic_administrativa.id','=','bienes_nacionales.mov_bienes.ubic_adm_id')                
+                        ->join('bienes_nacionales.marca','bienes_nacionales.marca.id','=','bienes_nacionales.bienes.marca_id')    
+                        ->join('bienes_nacionales.tipo_movimientos','bienes_nacionales.tipo_movimientos.id','=','bienes_nacionales.mov_bienes.tipo_movimiento_id') 
         ->paginate(100);
         return view('bienes_nacionales/listado_bienes_mov_todos',compact('bienes'));
     }
@@ -270,16 +317,27 @@ class BienesController extends Controller
     {
         //
         $bienes=Bienes::where('id',$id)->get();
-        return view('bienes_nacionales/bienes_edit',compact('bienes'));
+        $tipo_bien=Tipo_bienes::where('status',1)->get();
+        $tipo_mov=TipoMovimientos::where('status',1)->get();
+        $adquisicion_bien =Adquisicion_bienes::where('status',1)->get();
+        $estado_bien=Estado_bienes::where('status',1)->get();
+        $marca=Marca::where('status',1)->get();
+        return view('bienes_nacionales/bienes_edit',compact('bienes','tipo_bien','tipo_mov','adquisicion_bien','estado_bien','marca'));
     }
     public function editmov(Bienes $bienes,$id)
     {
         //
         $entidad = Entidad::All();
+        $tipo_bien=Tipo_bienes::where('status',1)->get();
+        $tipo_mov=TipoMovimientos::where('status',1)->get();
+        $adquisicion_bien =Adquisicion_bienes::where('status',1)->get();
+        $estado_bien=Estado_bienes::where('status',1)->get();
+        $ubic_adm=Ubic_Administrativa::where('status',1)->get();    
+        $marca=Marca::where('status',1)->get();
         $bienes=Bienes::select('*')
         ->join('bienes_nacionales.mov_bienes','bienes_nacionales.mov_bienes.bienes_id','=','bienes_nacionales.bienes.id')  
         ->where('bienes_nacionales.mov_bienes.id',$id)->get();
-        return view('bienes_nacionales/bienes_mov_edit',compact('bienes','entidad'));
+        return view('bienes_nacionales/bienes_mov_edit',compact('bienes','entidad','tipo_bien','tipo_mov','adquisicion_bien','estado_bien','ubic_adm','marca'));
     }
 
     /**
@@ -298,7 +356,9 @@ class BienesController extends Controller
             'num_bien' => ['required'],
             'tipo_bien'=>['required'],
             'tipo_movimiento'=>['required'],
+            'descripcion'=>['required'],
             'forma_adquisicion'=>['required'],
+            'estado_bien'=>['required'],
             'num_orden'=>['required'],
             'fecha_orden'=>['required'],
             'marca'=>['required'],
@@ -306,12 +366,14 @@ class BienesController extends Controller
             'color'=>['required'],
             'serial'=>['required'],
             'recibido_por'=>['required'],
+          
         ]);
       
          $bienes=Bienes:: where ('id',$request->id_bien)
         ->update([ 'num_factura'=>$request->num_factura,
        'fecha_factura' => $request->fecha_factura,
         'num_orden_compra' => $request->num_orden,
+        'descripcion_bien' => $request->descripcion,
         'fecha_compra' => $request->fecha_orden,
         'nombre_proveedor' => $request->nom_proveedor,
         'rif_proveedor' =>$request->rif_proveedor,
@@ -321,6 +383,7 @@ class BienesController extends Controller
         'fecha_cotizacion' => $request->fecha_cotizacion,
         'forma_adquisicion_id' => $request->forma_adquisicion,
         'tipo_bien_id' => $request->tipo_bien,
+        'estado_bienes_id' => $request->estado_bien,
         'marca_id' => $request->marca,          
         'modelo' => $request->modelo,
         'color' => $request->color,          

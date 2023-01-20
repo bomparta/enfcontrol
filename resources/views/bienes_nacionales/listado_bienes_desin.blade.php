@@ -57,8 +57,8 @@
                                                  
                                 <tr>                                                    
                                 <td>{{$bienes->num_bien}}</td>
-                                        <td>{{$bienes->tipo_bien_id}}</td>
-                                        <td>{{$bienes->ubic_adm_id}}</td>
+                                        <td>{{$bienes->tipo_bien}}</td>
+                                        <td>{{$bienes->ubic_adm}}</td>
                                         <td>{{$bienes->responsable_asignado}}</td>
                                         <td>@if($bienes->tipo_movimiento_id==1) INCORPORACIÖN 
                                             @elseif($bienes->tipo_movimiento_id==2) ASIGNACIÓN 
