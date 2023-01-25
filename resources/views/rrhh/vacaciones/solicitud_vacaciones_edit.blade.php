@@ -2,7 +2,7 @@
 @section ('content')
 <div class="container-fluid">
     <div class="row justify-content-start">
-    @include('layouts.apprrhh')
+    @include('layouts.appvacaciones')
         <div class="col-xs-11 col-sm-11 col-md-11 col-lg-10 col-xl-10 col-xxl-10">
             <div class="row pt-2">
             <div align="center" id="divTituloIndex2" class="text-primary">
@@ -37,17 +37,13 @@
                             </td>
                         </tr>
                         </table>
-                       
+                        
                         @foreach($datos_funcionario as $key=>$funcionario)   
-                        <table align="center" border="0" cellpadding="2" cellspacing="2" width="100%"> 
-               <form id="formulario" name="formulario" method="post" action="#">
-               
-           
+                        <p align="right"><a class='btn btn-info' href="{{URL::route('registrar_solicitud',$funcionario->numero_identificacion)}}">Solicitar Vacaciones</a></p>
+            <table align="center" border="0" cellpadding="2" cellspacing="2" width="100%"> 
+               <form id="formulario" name="formulario" method="post" action="#">    
                 <input id="id_solicitud" type="hidden" name="id_solicitud" value="" >
-                @csrf
-
-             
-                     
+                @csrf     
                      <tbody>
                     
                      <tr  class="table-secondary">
@@ -78,17 +74,14 @@
                      <td  colspan=3 align="center"   >   {{$funcionario->apellidoseg}}     </td>
                      </tr>
                      <tr  class="table-primary">
-                     <th  colspan=3  align="center"   >   SEXO    </th>
-                     <th  colspan=4 align="center"   >   ESTADO CIVIL      </th>
-                     <th  colspan=3  align="center"   >   FECHA DE INGRESO ADM. PUB.    </th>
-                     <th  colspan=3  align="center"   >   FECHA DE INGRESO ENF    </th>
+                     <th  colspan=6 align="center"   >   SEXO    </th>
+                     <th  colspan=7    >   ESTADO CIVIL      </th>
+
                      </tr>
                      <tr>
-                     <td  colspan=3  align="center"   >   @if($funcionario->id_genero==2) FEMENINO @else MASCULINO @endif    </td>
-
-                     <td  align="center" colspan="4"  > {{$funcionario->est_civil}}   </td>
-                     <th  colspan=3  align="center"   >      </th>
-                     <th  colspan=3  align="center"   >      </th>
+                     <td  colspan=7  >   @if($funcionario->id_genero==2) FEMENINO @else MASCULINO @endif    </td>
+                     <td  colspan=6   > {{$funcionario->est_civil}}   </td>
+          
                      </tr>
 
                      <tr  class="table-primary">
@@ -98,41 +91,25 @@
                      </tr>
                      <tr>
                      <td  colspan=6 align="center"   >   {{$funcionario->trabajador}}   </td>
-                     <td  colspan=3 rowspan=2 align="center"   >   {{$funcionario->cargo}}   </td>
-                     <td  colspan=4 rowspan=2 align="center"   >   {{$funcionario->administrativa}}   </td>
+                     <td  colspan=3    >   {{$funcionario->cargo}}   </td>
+                     <td  colspan=4    >   {{$funcionario->administrativa}}   </td>
+                     </tr>
+                     <tr  class="table-primary">
+                     <th  colspan=6  align="center"   >   FECHA DE INGRESO ADMINISTRACIÓN PÚBLICA    </th>
+                     <th  colspan=3 align="center"   >   FECHA DE INGRESO FENFMP    </th>
+                     <th  colspan=4 align="center"   >   FECHA DE INGRESO VACACIONES   </th>
+                     </tr>
+                     <tr>
+                     <td  colspan=6 align="center"   >   {{date('d-m-Y',strtotime($funcionario->fecha_ingreso_adm))}}   </td>
+                     <td  colspan=3   >    {{date('d-m-Y',strtotime($funcionario->fecha_ingreso_fund))}}   </td>
+                     <td  colspan=4   >    {{date('d-m-Y',strtotime($funcionario->fecha_ingreso_vac))}}   </td>
                      </tr>
                      </tbody>
               
                      @endforeach
                 </table>
-                <tr>
-                            <td>
-                                &nbsp;Fecha de Solicitud&nbsp;<span style="color:red;">*</span>&nbsp;<br>
-                                <select id="id_tipo_trabajador" name="id_tipo_trabajador"  class="form-control" required >
-                                <option value="0">Seleccione...</option>
-                                 
-                                </select>
-                                @error('id_tipo_trabajador')
-                                    <div class="invalid-feedback">
-                                    <span style="color:red;"><strong>{{ $message }}</strong></span>
-                                    </div>
-                                @enderror
-                            </td>
-                            <td>
-                                &nbsp;Cargo&nbsp;<span style="color:red;">*</span>&nbsp;<br>
-                                <input type= "text" id="cargo" name="cargo" onkeyup="mayusculas(this);"  value="{{$funcionario->cargo}}" class="form-control" required >                              
-                                @error('cargo')
-                                    <div class="invalid-feedback">
-                                    <span style="color:red;"><strong>{{ $message }}</strong></span>
-                                    </div>
-                                @enderror
-                            </td>
-                            
-                        </tr>
-                    <div class="frameContenedor" style="margin:5px;" align="right">
-                        <input class='btn btn-info' type="submit" value="Guardar" >
-                        <a class='btn btn-secondary' href="{{URL::route('cursos_funcionario')}}">Regresar</a> 
-                    </div>
+                <p><hr></p>            
+
                     <div class="card-body">
                     <table id="example1" class="table table-bordered table-striped" >                        
                         <thead>

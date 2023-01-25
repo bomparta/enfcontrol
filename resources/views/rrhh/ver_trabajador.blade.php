@@ -28,14 +28,14 @@
 
                         </tr>
                     </table>
-        <table>
+       
           <form id="formulario" name="formulario" role="search" action="{{url('/rrhh/searchredirect')}}">     
-         
+          <table>
        
           @csrf
                         
-                        <tr>
-                        <td colspan="3">
+                        <tr  aling="center">
+                        <td colspan="13"  >
                                 &nbsp;Cédula de Identidad&nbsp;<span style="color:red;">*</span>&nbsp;<br>
                                 <select id="nacionalidad" name="nacionalidad" style="width:50px;" required>
                                     @foreach ($nacionalidades as $nacionalidad)
@@ -52,18 +52,18 @@
                             </td>
                             
                         </tr>                                  
-                                                
+                        <br>                                                
                       </table>
 
                    
-                        <hr>
+                        <p></p>
                       @if(isset($datos_funcionario))
                      
                       <table align="center" border="0" cellpadding="2" cellspacing="2" width="100%">
                      
                             <tbody>
                             @foreach($datos_funcionario as $key=>$funcionario)
-                            <input type="text" name="cedula" id="cedula" value="{{$funcionario->numero_identificacion}}"  maxlength="12" required/>
+                            <input type="hidden" name="cedula" id="cedula" value="{{$funcionario->numero_identificacion}}"  maxlength="12" required/>
                             <tr  class="table-secondary">
                             <th   colspan=13 height="22" align="center"   >   DATOS DEL TRABAJADOR    </th>
                             </tr>
@@ -126,7 +126,10 @@
                             <td colspan=4 style="margin:5px;" align="center">
                                 <a class='btn btn-primary' href="{{route('requisitos_rrhh',$funcionario->numero_identificacion)}}"><img src="/img/icon/zoom.ico"/>Ver Requisitos</a>  
                             </td>
-                            <td colspan=5 style="margin:5px;" align="center">       
+                            <td colspan=4 style="margin:5px;" align="center">       
+                                 <a class='btn btn-primary' href="#"><img src="/img/icon/list.ico"/>Antiguedad Adm. Púb.</a> 
+                            </td>                       
+                            <td colspan=4 style="margin:5px;" align="center">       
                                  <a class='btn btn-primary' href="{{URL::route('mov_rrhh',$funcionario->numero_identificacion)}}"><img src="/img/icon/list.ico"/>Ver Movimientos RRHH</a> 
                             </td>                       
                             </tr>

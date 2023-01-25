@@ -260,3 +260,4 @@ Route::get('/rrhh/vacaciones', 'VacacionesController@home')->name('vacaciones');
 
 Route::get('/rrhh/vacaciones/homefuncionariosvacaciones', 'VacacionesController@funcionarios')->name('funcionario_vacaciones');
 Route::get('/rrhh/vacaciones/homerrhhvacaciones', 'VacacionesController@rrhh')->name('rrhh_vacaciones');
+Route::get("/rrhh/vacaciones/registrar_solicitud/{cedula}","VacacionesController@create")->name('registrar_solicitud');

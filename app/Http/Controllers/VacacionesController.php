@@ -86,7 +86,41 @@ class VacacionesController extends Controller
     {
         return view('vacaciones/vacaciones_rrhh');
     }
-
+    public function create(Request $request,$cedula)
+    {
+      
+        $nacionalidades= Nacionalidad::All();
+        $tipo_trabajador= Tipo_Trabajador::All();
+        $uni_adscripcion= Ubic_Administrativa::All();
+        $tipo_mov= TipoMovimientos:: All();
+        
+        $funcionario= Funcionario::select('funcionario.id as funcionario_id','funcionario.*','persona.*') 
+        ->join ('persona', 'persona.id','=','funcionario.persona_id')        
+        ->where('persona.numero_identificacion','=',$cedula)->get();
+        $funcionario_id=null;
+       // dd($request);
+        foreach($funcionario as $funcionario){
+            $funcionario_id=$funcionario->funcionario_id;
+            $edad=Carbon::parse($funcionario->edad)->age;
+        }
+        $datos_funcionario= Funcionario::select('funcionario.id as funcionario_id',
+        'funcionario.*','persona.*','funcionario.cargo as cargo','funcionario.id_oficina_administrativa'     ,
+        'estado_civil.descripcion as est_civil','entidad.descripcion as estado_nac',
+        'tipo_trabajador.descripcion as trabajador','ubic_administrativa.descripcion as administrativa',
+        'ent.descripcion as ent_domi','municipio.nombre as muni_domi','parroquia.nombre as parr_domi','funcionario.id_tipo_funcionario as tipo_trabajador') 
+        ->join ('persona', 'persona.id','=','funcionario.persona_id')    
+        ->join('estado_civil','estado_civil.id','=','persona.id_estado_civil')  
+        ->join('entidad','entidad.id','=','persona.estado_nac') 
+        ->JOIN('tipo_trabajador','tipo_trabajador.id','funcionario.id_tipo_funcionario')      
+        ->JOIN('ubic_administrativa','ubic_administrativa.id','funcionario.id_oficina_administrativa')          
+        ->join('entidad as ent','ent.id','=','funcionario.estado_domicilio') 
+        ->join('municipio','municipio.id','=','funcionario.municipio_domicilio')     
+        ->join('parroquia','parroquia.id','=','funcionario.parroquia_domicilio')             
+        ->where('persona.numero_identificacion','=',$cedula)->get();     
+       // var_dump($datos_funcionario) ;
+        
+       return view('rrhh.vacaciones.registrar_solicitud',compact('cedula','nacionalidades','datos_funcionario','edad','tipo_trabajador','uni_adscripcion','tipo_mov'));
+    } 
    /* public function reporterrhh()
     {
         return view('reportes/rrhh/lista_reporte_rrhh');

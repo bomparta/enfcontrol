@@ -1,7 +1,7 @@
 
 <aside class="bg-white" id="sidebar-wrapper-lg">
     <div class="col-12 text-center">
-      <h4 class="text-primary" >CONTROL DE EXPEDIENTES RRHH</h6>   
+      <h4 class="text-primary" >VACACIONES</h6>   
    
       </a>
       <h6 class="text-dark">Bienvenid@, {{Auth::user()->name}}</h6>
@@ -129,7 +129,6 @@
                                                      document.getElementById('logout-form').submit();">
                                         {{ __('Cerrar sesion') }}
         </a>
-
 
         <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
             @csrf
