@@ -328,7 +328,7 @@ class FuncionarioController extends Controller
         foreach($funcionario as $funcionario){
             $funcionario_id=$funcionario->funcionario_id;
         }
-        $cuentas=Cuentas_bancarias::select('*')
+        $cuentas=Cuentas_bancarias::select('banco.id as id_banco', 'banco.nombre','cuentas_bancarias.*')
         ->join ('banco', 'banco.id','=','cuentas_bancarias.nombre_banco')    
         ->where('cuentas_bancarias.funcionario_id','=',$funcionario_id)->paginate(5);
 
@@ -1037,7 +1037,7 @@ class FuncionarioController extends Controller
     {
             //Recibimos el archivo y lo guardamos en la carpeta storage/app/public
            // $request->file('archivo')->store('public/foto_carnet');
-            //dd("subido y guardado");
+            //dd($request->all());
 
             if($request->hasfile('archivo')):
                 $imagen         = $request->file('archivo');
@@ -1059,7 +1059,7 @@ class FuncionarioController extends Controller
                     $datosimagen->save();
                 }else{
                     
-                    ImagenUpload::where('id', Auth::user()->id)
+                    ImagenUpload::where('usuario', Auth::user()->id) ->where('nombre', '=', $request->tipo_documento)
                     ->update([                                  
                         'ruta'=>$ruta
                     ]);

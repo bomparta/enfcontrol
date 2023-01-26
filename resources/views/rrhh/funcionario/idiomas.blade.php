@@ -129,7 +129,7 @@
                                     <th>Habla</th>
                                     <th>Lee</th>
                                     <th>Escribe</th>
-                                    @if(in_array( Auth::user()->id_usuariogrupo, array(9,12,10) ))
+                                    @if(in_array( Auth::user()->id_usuariogrupo, array(9,12,10,11) ))
                                         <th>Opcion</th>
                                     @endif
                                     
