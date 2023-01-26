@@ -99,7 +99,7 @@
                                     <th>Habla</th>
                                     <th>Lee</th>
                                     <th>Escribe</th>
-                                    @if(in_array( Auth::user()->id_usuariogrupo, array(9,12,10) ))
+                                    @if(in_array( Auth::user()->id_usuariogrupo, array(9,12,10,11,13) ))
                                         <th>Opcion</th>
                                     @endif
                                 </tr>
@@ -113,7 +113,7 @@
                                 <td>@if($idiomas->lee==1)REGULAR @elseif($idiomas->lee==2)BIEN @elseif($idiomas->lee==3)MUY BIEN @endif  </td>
                                 <td>@if($idiomas->escribe==1)REGULAR @elseif($idiomas->escribe==2)BIEN @elseif($idiomas->escribe==3)MUY BIEN @endif  </td>
                                       
-                                        @if(in_array( Auth::user()->id_usuariogrupo, array(9,12,10) ))
+                                        @if(in_array( Auth::user()->id_usuariogrupo, array(9,12,10,11,13) ))
                                             <td class="text-center">
                                             <a href= "idiomas_edit/{{$idiomas->id}}" class="btn btn-info" data-tip="Detalle" title="Actualizar Idioma" data-toggle="tooltip" data-original-title="Editar">
                                             <img src="/img/icon/modify.ico" class="icon-sm" alt="Listado">
@@ -129,7 +129,7 @@
                                     <th>Habla</th>
                                     <th>Lee</th>
                                     <th>Escribe</th>
-                                    @if(in_array( Auth::user()->id_usuariogrupo, array(9,12,10,11) ))
+                                    @if(in_array( Auth::user()->id_usuariogrupo, array(9,12,10,11,13) ))
                                         <th>Opcion</th>
                                     @endif
                                     

@@ -22,7 +22,7 @@
                                 <tr>                                   
                                     <th class="text-primary"> Requisitos Cargados del Funcionario  <img src="{{url('/img/datos.png')}}" whith="60px" height="60px"/></th>
                                     <th class="text-primary" ></th>
-                                    @if(in_array( Auth::user()->id_usuariogrupo, array(10,11,12) ))
+                                    @if(in_array( Auth::user()->id_usuariogrupo, array(10,11,12,13) ))
                                         <th class="text-primary" colspan="3">Opción</th>
                                     @endif
                                 </tr>
@@ -43,7 +43,7 @@
                                             @endif
 
                                         </td>                                  
-                                        @if(in_array( Auth::user()->id_usuariogrupo, array(10,11,12) ))
+                                        @if(in_array( Auth::user()->id_usuariogrupo, array(10,11,12,13) ))
                                             @if( empty($foto[0]) ) 
                                             <td class="text-center">
                                             <a href= "{{route('creardocumento',$tipo_documento='foto')}}" class="btn btn-info" data-tip="Detalle" data-toggle="tooltip" data-original-title="Editar">
