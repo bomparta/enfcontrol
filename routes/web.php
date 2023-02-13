@@ -140,6 +140,12 @@ Route::get('/rrhh/searchredirect', function(){
 Route::get("/rrhh/ver_trabajador/{search}", "RrhhController@search");
 Route::get("/rrhh/datos_rrhh/{cedula}", "RrhhController@search_datos")->name('datos_rrhh');
 Route::get("/rrhh/movimientos/{cedula}", "RrhhController@movimientos")->name('mov_rrhh');
+Route::get("/rrhh/registrar_adm_publica_edit/{id}/{cedula}", "RrhhController@antecedentes_edit")->name('antecedentes_rrhh_edit');
+Route::get("/rrhh/registrar_adm_publica/{cedula}", "RrhhController@antecedentes")->name('antecedentes_rrhh');
+Route::post("/rrhh/registrar_adm_publica", "RrhhController@store_antecedentes")->name('store_antecedentes');
+Route::post("/rrhh/registrar_adm_publica_edit", "RrhhController@update_antecedentes")->name('update_antecedentes');
+Route::delete('registrar_adm_publica/{id}', 'RrhhController@destroy')->name('borrar_adm_pub');
+
 Route::get("/rrhh/registrar_rrhh/{cedula}","RrhhController@create_mov")->name('registrar_mov_rrhh');
 Route::post("/rrhh/registrar_rrhh", "RrhhController@store_mov")->name('store_rrhh');
 Route::get("/rrhh/registrar_rrhhedit/{id}","RrhhController@edit_mov")->name('editar_mov_rrhh');
@@ -261,3 +267,8 @@ Route::get('/rrhh/vacaciones', 'VacacionesController@home')->name('vacaciones');
 Route::get('/rrhh/vacaciones/homefuncionariosvacaciones', 'VacacionesController@funcionarios')->name('funcionario_vacaciones');
 Route::get('/rrhh/vacaciones/homerrhhvacaciones', 'VacacionesController@rrhh')->name('rrhh_vacaciones');
 Route::get("/rrhh/vacaciones/registrar_solicitud/{cedula}","VacacionesController@create")->name('registrar_solicitud');
+Route::get("/rrhh/vacaciones/vacaciones_pendientes","VacacionesController@ver_pendientes")->name('vacaciones_pendientes');
+Route::get("/rrhh/vacaciones/vacaciones_disfrutadas","VacacionesController@ver_disfrutadas")->name('vacaciones_disfrutadas');
+Route::get("/rrhh/vacaciones/vacaciones_pend_aprobar","VacacionesController@ver_pendientes_aprobar")->name('vacaciones_pendientes_aprobacion');
+Route::get("/rrhh/vacaciones/vacaciones_aprobadas","VacacionesController@ver_aprobadas")->name('vacaciones_aprobadas');
+Route::get("/rrhh/vacaciones/vacaciones_aprobaciones","VacacionesController@aprobacion")->name('vacaciones_aprobacion');

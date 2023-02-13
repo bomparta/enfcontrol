@@ -8,13 +8,16 @@
             <div class="card">
                 <div class="card-body">
                     <div align="center" id="divTituloIndex2" class="text-primary">
-                                <b> REQUISITOS DIGITALIZADOS MOVIMIENTO DE PERSONAL</b>
+                                <b> @if($tipo_documento!='adm_pub_constancia')REQUISITOS DIGITALIZADOS MOVIMIENTO DE PERSONAL @endif
+                                @if($tipo_documento=='adm_pub_constancia')REQUISITOS DIGITALIZADOS ANTECEDENTES DE SERVICIO EN LA ADMINISTRACIÓN PÚBLICA @endif
+                                </b>
                     </div>
                     <div id="divSubTituloIndex2">
                     <label class="text-primary"><b> 
                                                     @if($tipo_documento=='rrhh_mov')CONTRATO, RESOLUCIÖN Y/U OTRO DOCUMENTO QUE VALIDE EL MOVIMIENTO @endif
                                                     @if($tipo_documento=='carta_renuncia')CARTA DE RENUNCIA VOLUNTARIA DEL TRABAJADOR(A) @endif
                                                     @if($tipo_documento=='aprob_renuncia')APROBACIÓN DE LA RENUNCIA @endif
+                                                    @if($tipo_documento=='adm_pub_constancia')CONSTANCIA O ANTECEDENTE DE SERVICIO @endif
                                                   
                     </b>
                 
@@ -35,8 +38,8 @@
                             <input class="btn btn-info" type="submit" value="Cargar Archivo" >
                         </div>
                         <div class="frameContenedor" style="margin:5px;" align="right">
-                   
-                    <a class='btn btn-secondary' href="/rrhh/movimientos/{{$cedula}}">Regresar</a> 
+                        @if($tipo_documento!='adm_pub_constancia')<a class='btn btn-secondary' href="/rrhh/movimientos/{{$cedula}}">Regresar</a> @endif
+                    @if($tipo_documento=='adm_pub_constancia') <a class='btn btn-secondary' href="/rrhh/registrar_adm_publica_edit/{{$id_rrhh_mov}}/{{$cedula}}">Regresar</a> @endif
                     </div>
                     <div class="frameContenedor" style="margin:5px;" align="center">
                     <label for="datospersonales">
@@ -45,13 +48,23 @@
                     <br>
                     <span style="color:gray;"> Nombre(s) y Apellido(s): </span>{{$rrhh->nombre}}  {{$rrhh->nombreseg}} {{$rrhh->apellido}}   {{$rrhh->apellidoseg}}      
                     <br>
+                    @if($tipo_documento!='adm_pub_constancia') 
                     <span style="color:gray;"> Cargo: </span>{{$rrhh->cargo_mov}} 
                     <br>
                     <span style="color:gray;"> Tipo movimiento: </span>{{$rrhh->tipo_mov}}   
+                    @endif
                     <br>
                     <span style="color:gray;"> Tipo Trabajador: </span>{{$rrhh->tipo_trabajador}}      
+                    @if($tipo_documento!='adm_pub_constancia') 
                     <br>
                     <span style="color:gray;"> Unidad Administrativa: </span>{{$rrhh->ubic_administrativa}}                   
+                    @endif
+                    @if($tipo_documento=='adm_pub_constancia') 
+                    <br>                    
+                    <span style="color:gray;"> Organismo o Institución Pública donde prestó servicios: </span>{{$rrhh->organismo}}                   
+                    <br>
+                    <span style="color:gray;"> Último Cargo Desempeñado: </span>{{$rrhh->ult_cargo}}                   
+                    @endif
                         @endforeach
                    </label><br> 
                    @if (!empty($rrhh_mov[0]) )             

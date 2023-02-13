@@ -28,7 +28,7 @@
                     <div class="card bg-light mb-6" style="max-width: 14rem;">
                       <div class="card-header text-secondary">RRHH</div>
                       <div class="card-body">
-                      <a href="{{route('rrhh_vacaciones')}}"> <h6 class="card-title">Aprobación Vacaciones  </h6>
+                      <a href="{{route('vacaciones_pendientes_aprobacion')}}"> <h6 class="card-title">Aprobación Vacaciones  </h6>
                         <img src="{{url('/img/con_vacacion.jpeg')}}" class="card-img-top">
                       </a>
                       </div>

@@ -138,7 +138,7 @@
   
                     <div class="frameContenedor" style="margin:5px;" align="right">
                         <input class='btn btn-info' type="submit" value="Guardar" >
-                        <a class='btn btn-secondary' href="{{URL::route('mov_rrhh',$funcionario->numero_identificacion)}}">Regresar</a> 
+                        <a class='btn btn-secondary' href="{{URL::route('funcionario_vacaciones')}}">Regresar</a> 
                     </div>
                     @endforeach
                     @endif 

@@ -63,7 +63,7 @@ class FuncionarioController extends Controller
         $parroquias=  Parroquia::All();
         $tipo_trabajador= Tipo_Trabajador::All();
          $cedula_usuario=Auth::user()->cedula;// buscar la manera que este valor de usuario este referenciado en la tabla funcionario y Usuario
-         $uni_adscripcion= Ubic_Administrativa::All();
+         $uni_adscripcion= Ubic_Administrativa::where('status',1)->orderBy('orden_jerarquico')->get();
          
         $datos_funcionario  =   Funcionario::select ('*', 'funcionario.id as id_funcionario','funcionario.id_tipo_funcionario as id_tipo_trabajador',
         'funcionario.cargo as cargo_func')->join ('persona', 'persona.id','=','funcionario.persona_id')
@@ -1107,7 +1107,7 @@ class FuncionarioController extends Controller
     {
             //Recibimos el archivo y lo guardamos en la carpeta storage/app/public
            // $request->file('archivo')->store('public/foto_carnet');
-            //dd("subido y guardado");
+          // dd($request->all());
 
             if($request->hasfile('archivo')):
                 $imagen         = $request->file('archivo');

@@ -75,7 +75,7 @@
                             <tr>
 
                             <td   colspan="7" ><div align="center">  @if($funcionario->id_nacionalidad==1) V 
-                            @else E @endif -  </div></td>
+                            @else E @endif -  {{$funcionario->numero_identificacion}} </div></td>
 
                             </tr>
 
@@ -127,7 +127,7 @@
                                 <a class='btn btn-primary' href="{{route('requisitos_rrhh',$funcionario->numero_identificacion)}}"><img src="/img/icon/zoom.ico"/>Ver Requisitos</a>  
                             </td>
                             <td colspan=4 style="margin:5px;" align="center">       
-                                 <a class='btn btn-primary' href="#"><img src="/img/icon/list.ico"/>Antiguedad Adm. Púb.</a> 
+                                 <a class='btn btn-primary' href="{{URL::route('antecedentes_rrhh',$funcionario->numero_identificacion)}}"><img src="/img/icon/list.ico"/>Antiguedad Adm. Púb.</a> 
                             </td>                       
                             <td colspan=4 style="margin:5px;" align="center">       
                                  <a class='btn btn-primary' href="{{URL::route('mov_rrhh',$funcionario->numero_identificacion)}}"><img src="/img/icon/list.ico"/>Ver Movimientos RRHH</a> 

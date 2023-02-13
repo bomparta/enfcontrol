@@ -34,8 +34,8 @@
           @if(isset($datos_funcionario))
           @foreach($datos_funcionario as $key=>$funcionario)
           <div class="frameContenedor" style="margin:5px;" align="right">
-          <input type= "text" id="funcionario_id" name="funcionario_id" value="{{$funcionario->funcionario_id}}" class="form-control"  >    
-          <input type= "text" id="cedula" name="cedula" value="{{$cedula}}" class="form-control"  >                                                        
+          <input type= "hidden" id="funcionario_id" name="funcionario_id" value="{{$funcionario->funcionario_id}}" class="form-control"  >    
+          <input type= "hidden" id="cedula" name="cedula" value="{{$cedula}}" class="form-control"  >                                                        
                 
             
                    

@@ -30,6 +30,7 @@ use App\Ubic_Administrativa;
 use App\User;
 use App\RrhhMovimientos;
 use App\TipoMovimientos;
+use App\Administracion_publica;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -186,7 +187,7 @@ public function requisito_rrhh(Request $request,$tipo_documento,$id_rrhh_mov,$ce
     ->where('nombre', $tipo_documento)
     ->get();
           
-
+if($tipo_documento!='adm_pub_constancia'){
 
     $rrhh=RrhhMovimientos::Select('*','rrhh_movimientos.id as id_rrhh_mov','tipo_trabajador.descripcion as tipo_trabajador','ubic_administrativa.descripcion as ubic_administrativa','tipo_movimientos.descripcion as tipo_mov','rrhh_movimientos.cargo as cargo_mov') 
     ->JOIN('tipo_trabajador','tipo_trabajador.id','rrhh_movimientos.id_tipo_funcionario')      
@@ -195,7 +196,16 @@ public function requisito_rrhh(Request $request,$tipo_documento,$id_rrhh_mov,$ce
     ->JOIN('funcionario','funcionario.id','rrhh_movimientos.funcionario_id') 
     ->JOIN('persona','persona.id','funcionario.persona_id') 
     ->where('rrhh_movimientos.id', '=',$id_rrhh_mov)
-    ->get();   
+    ->get();
+   }else{
+    $rrhh=Administracion_publica::Select('*','administracion_publica.id as adm_id','tipo_trabajador.descripcion as tipo_trabajador') 
+    ->JOIN('tipo_trabajador','tipo_trabajador.id','administracion_publica.id_tipo_funcionario')        
+    ->JOIN('funcionario','funcionario.id','administracion_publica.funcionario_id')  
+    ->JOIN('persona','persona.id','funcionario.persona_id')     
+    ->where('administracion_publica.id','=',$id_rrhh_mov)
+    ->get();      ;
+    return view('rrhh.creardocumento_rrhh',compact('tipo_documento','id_rrhh_mov','rrhh','rrhh_mov','cedula'));
+    }
 
 return view('rrhh.creardocumento_rrhh',compact('tipo_documento','id_rrhh_mov','rrhh','rrhh_mov','cedula'));
 }
@@ -204,41 +214,62 @@ public function subirArchivo_rrhh(Request $request)
         //Recibimos el archivo y lo guardamos en la carpeta storage/app/public
        // $request->file('archivo')->store('public/foto_carnet');
        // dd($request);
-
-        if($request->hasfile('archivo')):
-            $imagen         = $request->file('archivo');
-            $nombreimagen   = $imagen.".".$imagen->guessExtension();
-            $ruta           = $request->file('archivo')->store('public/documentos_rrhh/'.$request->tipo_documento);
-            $imagen->move($ruta,$nombreimagen);  
-            
+       if ($request->tipo_documento!='adm_pub_constancia'){
+            if($request->hasfile('archivo')){
+                $imagen         = $request->file('archivo');
+                $nombreimagen   = $imagen.".".$imagen->guessExtension();
+                $ruta           = $request->file('archivo')->store('public/documentos_rrhh/'.$request->tipo_documento);
+                $imagen->move($ruta,$nombreimagen);              
             $id= Auth::user()->id;
-            $requisitos =  Imagen_uploads_mov_rrhh::select('*')
-            ->where('rrhh_mov_id', '=', $request->rrhh_mov_id)
-            ->where('nombre', '=', $request->tipo_documento)
-            ->get();
-            if(count($requisitos)==0 ){                        
-                $datosimagen = new Imagen_uploads_mov_rrhh();
-                $datosimagen->rrhh_mov_id = $request->rrhh_mov_id;
-                $datosimagen->nombre = $request->tipo_documento;
-                $datosimagen->cedula = $request->cedula;
-                $datosimagen->ruta = $ruta;
-                $datosimagen->registrado_por = Auth::user()->cedula;   
-                $datosimagen->actualizado_por = 0;  
-                $datosimagen->save();
-            }else{
-                
-                Imagen_uploads_mov_rrhh::where('rrhh_mov_id', $request->rrhh_mov_id)
-                ->where('nombre', $request->tipo_documento)
-                ->update([                                  
-                    'ruta'=>$ruta,
-                   'actualizado_por' => Auth::user()->cedula   
-                ]);
-            }
-            
+           
+                    $requisitos =  Imagen_uploads_mov_rrhh::select('*')
+                    ->where('rrhh_mov_id', '=', $request->rrhh_mov_id)
+                    ->where('nombre', '=', $request->tipo_documento)
+                    ->get();
+                    if(count($requisitos)==0 ){                        
+                        $datosimagen = new Imagen_uploads_mov_rrhh();
+                        $datosimagen->rrhh_mov_id = $request->rrhh_mov_id;
+                        $datosimagen->nombre = $request->tipo_documento;
+                        $datosimagen->cedula = $request->cedula;
+                        $datosimagen->ruta = $ruta;
+                        $datosimagen->registrado_por = Auth::user()->cedula;   
+                        $datosimagen->actualizado_por = 0;  
+                        $datosimagen->save();
+                    }else{
+                        
+                        Imagen_uploads_mov_rrhh::where('rrhh_mov_id', $request->rrhh_mov_id)
+                        ->where('nombre', $request->tipo_documento)
+                        ->update([                                  
+                            'ruta'=>$ruta,
+                        'actualizado_por' => Auth::user()->cedula   
+                        ]);
+                    }
+        
             return  redirect()->back()->with('message', 'Se adjunto el documento con exito!! .');
+            }
+        }else{
+            if($request->tipo_documento=='adm_pub_constancia'){ //documento de antecedente de servicio
+                if($request->hasfile('archivo')){
+                    $imagen         = $request->file('archivo');
+                    $nombreimagen   = $imagen.".".$imagen->guessExtension();
+                    $ruta           = $request->file('archivo')->store('public/documentos_rrhh/'.$request->tipo_documento);
+                    $imagen->move($ruta,$nombreimagen);  
+                    //dd($request);
 
-        endif;
-        return  redirect()->back()->with('error', 'No se adjunto el documento correctamente.');
+                    $id= Auth::user()->id;
+                    Administracion_publica::where ('id',$request->rrhh_mov_id)
+                    ->update([                                  
+                    'ruta_documento'=>  $ruta,
+                    'nombre_documento'=>$request->tipo_documento,
+                    'actualizado_por' => Auth::user()->cedula   
+                    ]);
+                    return  redirect()->back()->with('message', 'Se adjunto la constancia o antecedente de servicio con exito!! .');
+                }          
+            }
+            return  redirect()->back()->with('error', 'No se adjunto el documento correctamente.');
+     
+        }
+      
      
 }
     public function planillarrhh()
@@ -367,8 +398,7 @@ public function subirArchivo_rrhh(Request $request)
     public function store_mov(Request $request)
     {
        // dd($request);
-        $request->validate([
-            
+        $request->validate([            
             'funcionario_id' => ['required'],
             'cedula' => ['required'],
             'id_tipo_trabajador'=>['required'],
@@ -376,24 +406,23 @@ public function subirArchivo_rrhh(Request $request)
             'id_oficina_administrativa'=>['required'],
             'fechamov'=>['required'],
             'tipo_mov'=>['required'],
-            'institucion'=>['required', 'string', 'max:155'],
-            
+            'institucion'=>['required', 'string', 'max:155'],            
         ]);
         $consulta= RrhhMovimientos::Select('*')->where('id_tipo_mov','=',$request->tipo_mov)
         ->where('id_oficina_administrativa','=',$request->id_oficina_administrativa)->get() ;
         if($consulta->count()==0){
-        $rrhh = new RrhhMovimientos();        
-        $rrhh->funcionario_id = $request->funcionario_id;
-        $rrhh->cedula = $request->cedula;
-        $rrhh->id_tipo_funcionario = $request->id_tipo_trabajador;          
-        $rrhh->cargo = $request->cargo;    
-        $rrhh->id_oficina_administrativa = $request->id_oficina_administrativa;  
-        $rrhh->fechamov = $request->fechamov;  
-        $rrhh->id_tipo_mov = $request->tipo_mov;  
-        $rrhh->institucion = $request->institucion;        
-        $rrhh->registrado_por = Auth::user()->cedula;   
-        $rrhh->usuario_id_create = Auth::user()->id;   
-        $rrhh->save();
+            $rrhh = new RrhhMovimientos();        
+            $rrhh->funcionario_id = $request->funcionario_id;
+            $rrhh->cedula = $request->cedula;
+            $rrhh->id_tipo_funcionario = $request->id_tipo_trabajador;          
+            $rrhh->cargo = $request->cargo;    
+            $rrhh->id_oficina_administrativa = $request->id_oficina_administrativa;  
+            $rrhh->fechamov = $request->fechamov;  
+            $rrhh->id_tipo_mov = $request->tipo_mov;  
+            $rrhh->institucion = $request->institucion;        
+            $rrhh->registrado_por = Auth::user()->cedula;   
+            $rrhh->usuario_id_create = Auth::user()->id;   
+            $rrhh->save();
 
         $funcionario=Funcionario::where('id', $request->funcionario_id)
         ->update([            
@@ -478,6 +507,225 @@ public function subirArchivo_rrhh(Request $request)
        ->orderBy('rrhh_movimientos.created_at','desc')->get();      
        if($datos_funcionario->count()>0){      
            return view('rrhh/movimientos', compact('datos_funcionario','nacionalidades','edad', 'movimiento','cedula_usuario'));
+        }else {
+            return redirect('rrhh/ver_trabajador') 
+             ->with('advertencia', 'No hay resultados que mostrar.');             
+        }
+    }
+    public function antecedentes(Request $request,$cedula)
+    {       
+        //  dd($cedula);
+       $cedula_usuario= $cedula;
+    
+        $funcionario= Funcionario::select('funcionario.id as funcionario_id','funcionario.*','persona.*') 
+        ->join ('persona', 'persona.id','=','funcionario.persona_id')        
+        ->where('persona.numero_identificacion','=',$cedula_usuario)->get();
+        $funcionario_id=null;
+       
+        $tipo_trabajador= Tipo_Trabajador::All();
+        foreach($funcionario as $funcionario){
+            $funcionario_id=$funcionario->funcionario_id;
+            $edad=Carbon::parse($funcionario->edad)->age;
+        }
+        $datos_funcionario= Funcionario::select('funcionario.id as funcionario_id',
+        'funcionario.*','persona.*','funcionario.cargo as cargo','funcionario.id_oficina_administrativa'     ,
+        'estado_civil.descripcion as est_civil','entidad.descripcion as estado_nac',
+        'tipo_trabajador.descripcion as trabajador','ubic_administrativa.descripcion as administrativa',
+        'ent.descripcion as ent_domi','municipio.nombre as muni_domi','parroquia.nombre as parr_domi') 
+        ->join ('persona', 'persona.id','=','funcionario.persona_id')    
+        ->join('estado_civil','estado_civil.id','=','persona.id_estado_civil')  
+        ->join('entidad','entidad.id','=','persona.estado_nac') 
+        ->JOIN('tipo_trabajador','tipo_trabajador.id','funcionario.id_tipo_funcionario')      
+        ->JOIN('ubic_administrativa','ubic_administrativa.id','funcionario.id_oficina_administrativa')          
+        ->join('entidad as ent','ent.id','=','funcionario.estado_domicilio') 
+        ->join('municipio','municipio.id','=','funcionario.municipio_domicilio')     
+        ->join('parroquia','parroquia.id','=','funcionario.parroquia_domicilio')             
+        ->where('persona.numero_identificacion','=',$cedula_usuario)->get();      
+       $nacionalidades= Nacionalidad::All();
+       $adm_pub=Administracion_publica::Select('*','administracion_publica.id as adm_id','tipo_trabajador.descripcion as tipo_trabajador') 
+       ->JOIN('tipo_trabajador','tipo_trabajador.id','administracion_publica.id_tipo_funcionario')             
+       ->where('administracion_publica.funcionario_id','=',$funcionario_id)
+       ->orderBy('administracion_publica.fecha_ingreso','asc')->get();      
+       if($datos_funcionario->count()>0){      
+           return view('rrhh/registrar_adm_publica', compact('datos_funcionario','adm_pub','nacionalidades','tipo_trabajador','edad','cedula'));
+        }else {
+            return redirect('rrhh/ver_trabajador') 
+             ->with('advertencia', 'No hay resultados que mostrar.');             
+        }
+    }
+    public function store_antecedentes(Request $request)
+    {
+       // dd($request);
+        $request->validate([
+            
+            'funcionario_id' => ['required'],
+            'institucion' => ['required','string', 'max:155'],
+            'id_tipo_trabajador'=>['required'],
+            'ult_cargo'=>['required', 'string', 'max:100'],            
+            'fechaingreso'=>['required'],
+            'fechaegreso'=>['required'],
+            'tipo_documento'=>['required'],
+          //  'archivo'=>['required'],    
+            
+        ]);
+    //     dd($request->all());
+    
+       
+        $inicio=$request->fechaingreso;
+        $fin=$request->fechaegreso;
+        $error=$this->validar($inicio,$fin,$request->funcionario_id,$request->adm_pub_id);   
+      
+ 
+        $inicio = Carbon::parse($request->fechaingreso);
+        $fin = Carbon::parse($request->fechaegreso);
+        
+        $dias = $inicio->diffInDays($fin);
+        $dias=$dias%30;
+        $meses = $inicio->diffInMonths($fin);
+        $meses = $meses%12;
+        $annos = $inicio->diffInYears($fin);
+       
+        $dias=$dias%30;
+        //dd($dias,$meses,$annos);
+        if($error==''){
+            $antecedentes = new Administracion_publica();        
+            $antecedentes->funcionario_id = $request->funcionario_id;
+            $antecedentes->organismo = $request->institucion;
+            $antecedentes->id_tipo_funcionario = $request->id_tipo_trabajador;          
+            $antecedentes->ult_cargo = $request->ult_cargo;    
+            $antecedentes->fecha_ingreso = $request->fechaingreso;              
+            $antecedentes->fecha_egreso = $request->fechaegreso;      
+            $antecedentes->dias_servicios = $dias;    
+            $antecedentes->meses_servicios = $meses;   
+            $antecedentes->anno_servicios = $annos;                         
+            $antecedentes->registrado_por = Auth::user()->cedula;   
+            $antecedentes->usuario_id_create = Auth::user()->id;    
+            $antecedentes->observaciones = $request->observaciones;           
+         
+            $antecedentes->save();
+
+            $funcionario=Funcionario::where('id', $request->funcionario_id)
+            ->update([            
+                'fecha_ingreso_adm'=> $request->fecha_ingreso_adm,
+                'fecha_ingreso_fund' => $request->fecha_ingreso_fund,
+                'fecha_ingreso_vac' =>$request->fecha_ingreso_vac ,                            
+                
+            ]);
+
+            return    redirect()->back()->with('message', ' El Antecedente de servicio del Trabajador(a) en la administración pública fue agregado con éxito!!.');
+            
+            //}else{
+           //     return    redirect()->back()->with('message', ' Problemas para subir el archivo.');
+        
+       
+          
+        }else{
+            return    redirect()->back()->with('error',$error);
+        }
+        
+        
+    }
+    public function update_antecedentes(Request $request)
+    {
+       // dd($request);
+        $request->validate([
+            
+          
+            'institucion' => ['required','string', 'max:155'],
+            'id_tipo_trabajador'=>['required'],
+            'ult_cargo'=>['required', 'string', 'max:100'],            
+            'fechaingreso'=>['required'],
+            'fechaegreso'=>['required'],
+          
+        
+        ]);
+    //     dd($request->all());
+
+        $inicio=$request->fechaingreso;
+        $fin=$request->fechaegreso;
+        $error=$this->validar($inicio,$fin,$request->funcionario_id,$request->adm_pub_id);    
+        $inicio = Carbon::parse($request->fechaingreso);
+        $fin = Carbon::parse($request->fechaegreso);
+        
+        $dias = $inicio->diffInDays($fin);
+        $dias=$dias%30;
+        $meses = $inicio->diffInMonths($fin);
+        $meses = $meses%12;
+        $annos = $inicio->diffInYears($fin);
+    
+        if( $error==''){
+            $antecedentes = Administracion_publica::where('id',$request->adm_pub_id)
+            ->update([            
+                'id_tipo_funcionario'=> $request->id_tipo_trabajador,
+                'organismo' => $request->institucion,
+                'ult_cargo' => $request->ult_cargo,   
+                'fecha_ingreso' => $request->fechaingreso,   
+                'fecha_egreso' => $request->fechaegreso,   
+               'dias_servicios' => $dias,
+                'meses_servicios' => $meses,
+                'anno_servicios' => $annos,   
+                'observaciones' => $request->observaciones,
+                'actualizado_por'=>Auth::user()->cedula,
+                'usuario_id_update'=> Auth::user()->id, 
+            ]);
+           
+            return    redirect()->back()->with('message', ' El Antecedente de servicio del Trabajador(a) en la administración pública fue actualizado con éxito!!.');
+       
+        }else{
+            return    redirect()->back()->with('advertencia',$error);
+        }
+        
+        
+    }
+    public function validar($inicio,$fin,$id_funcionario,$id_adm_pub)
+    {
+        $error='';
+           
+       $consulta1= Administracion_publica::Select('*')->where('fecha_ingreso','=', $inicio)
+                                                    ->where('administracion_publica.funcionario_id','=',$id_funcionario)
+                                                    ->where('administracion_publica.id','<>',$id_adm_pub)
+                                                    ->get();
+                                                   
+        if($consulta1->count()>0){
+            $error.= '*-La Fecha de Ingreso ('.$inicio.') que desea cargar ya se encuentra registrada para este trabajador';
+        }
+        $consulta2= Administracion_publica::Select('*')->where('fecha_egreso','<', $fin)
+                                                        ->where('fecha_ingreso','>', $inicio)
+                                                    ->where('administracion_publica.funcionario_id','=',$id_funcionario)
+                                                    ->where('administracion_publica.id','<>',$id_adm_pub)
+                                                    ->get();
+        
+                                                   
+        if($consulta2->count()>0){
+            $error.= '*-La Fecha de Ingreso ('.$inicio.')  y la Fecha de Egreso ('.$fin.') ya esta cargada en otro periodo';
+        }
+
+        if($fin >=now()){
+            $error.='*- Fecha de Egreso ('.$inicio.') es mayor a la fecha actual.';           
+          }
+        if($inicio==$fin){
+          $error.='*- Fecha de Ingreso ('.$inicio.') es Igual a la Fecha de Egreso ('.$fin.').';           
+        }
+        if($inicio>$fin){
+            $error.='*- Fecha de Ingreso ('.$inicio.') es mayor a la Fecha de Egreso ('.$fin.'). ';
+        }
+        if($fin < $inicio){
+            $error.='*- Fecha de Egreso ('.$fin.') es menor a la Fecha de Ingreso ('.$inicio.').';
+        }
+        return $error;
+    }
+    public function antecedentes_edit(Request $request,$id,$cedula)
+    {       
+        //  dd($cedula);
+       $cedula_usuario= $cedula;
+       $tipo_trabajador= Tipo_Trabajador::All();
+       
+       $adm_pub=Administracion_publica::Select('*','administracion_publica.id as adm_id','tipo_trabajador.descripcion as tipo_trabajador') 
+       ->JOIN('tipo_trabajador','tipo_trabajador.id','administracion_publica.id_tipo_funcionario')             
+       ->where('administracion_publica.id','=',$id)
+       ->get();      
+       if($adm_pub->count()>0){      
+           return view('rrhh/registrar_adm_publica_edit', compact('adm_pub','tipo_trabajador','cedula'));
         }else {
             return redirect('rrhh/ver_trabajador') 
              ->with('advertencia', 'No hay resultados que mostrar.');             
@@ -607,10 +855,18 @@ public function subirArchivo_rrhh(Request $request)
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
-        //
-    }
+  
+
+  
+        public function destroy($id)
+        {
+            //dd($id);
+            $adm_pub = Administracion_publica::findOrFail($id);
+            
+            $adm_pub->delete();
+    
+            return    redirect()->back()->with('message', ' El Antecedente de servicio del Trabajador(a) en la administración pública fue eliminado con éxito!!.');
+        }
 
     
 

@@ -25,7 +25,7 @@
                        
                     <table>
                   
-                        <form id="formulario" name="formulario" method="POST" action="{{route('registrarfamiliar')}}">
+                        <form id="formulario" name="formulario" method="POST" autocomplete="off" action="{{route('registrarfamiliar')}}">
                             @csrf
                             @if (isset($funcionario_id))
                             <tr>

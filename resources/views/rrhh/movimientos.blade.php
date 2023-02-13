@@ -33,7 +33,9 @@
           <form id="formulario" name="formulario" method="POST" action="#">    
           <div class="frameContenedor" style="margin:5px;" align="right">
         
-        <p align="right"><a class='btn btn-info' href="{{URL::route('registrar_mov_rrhh',$funcionario->numero_identificacion)}}">Registrar Movimiento RRHH</a></p>
+        <p align="right"><a class='btn btn-info' href="{{URL::route('registrar_mov_rrhh',$funcionario->numero_identificacion)}}">Registrar Movimiento RRHH</a>
+        <a class='btn btn-secondary' href="{{ URL::route('ver_trabajador',$funcionario->numero_identificacion) }}">Regresar</a> 
+    </p>
         </div>
           @csrf
         

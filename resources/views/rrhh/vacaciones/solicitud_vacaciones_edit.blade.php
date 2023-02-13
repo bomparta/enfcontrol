@@ -15,15 +15,15 @@
                             <td colspan="4">
                             <div class="col-12 text-center">
                 
-                                <ul class="nav nav-tabs">
+                            <ul class="nav nav-tabs">
                                 <li class="nav-item">
                                     <a class="nav-link active" href="{{route('funcionario_vacaciones')}}">Solicitudes Realizadas</a>
                                 </li>
                                 <li class="nav-item">
-                                <a class="nav-link "  href="#">Lapsos Pendientes de Disfrute</a>
+                                <a class="nav-link "  href="{{route('vacaciones_pendientes')}}">Lapsos Pendientes de Disfrute</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link " href="#">Lapsos Disfrutados</a>
+                                    <a class="nav-link" href="{{route('vacaciones_pendientes')}}">Lapsos Disfrutados</a>
                                 </li>                                
                                 </ul>
                                      
