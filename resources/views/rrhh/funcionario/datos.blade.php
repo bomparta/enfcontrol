@@ -49,7 +49,7 @@
                         @foreach($datos_funcionario as $datos_funcionario)
                 <tr> 
                             <td>
-                                &nbsp;Primer Nombre&nbsp;<span style="color:red;">*</span>&nbsp;<br>
+                            <span data-tooltip="Permite sólo caracteres alfanuméricos" sdata-flow="top">&nbsp;Primer Nombre&nbsp;</span>&nbsp;<span style="color:red;">* </span>
  
                                 <input id="primernombre" type="text"  maxlength="25" onkeyup="mayusculas(this);" class="form-control @error('primernombre') is-invalid @enderror" name="primernombre" value="{{$datos_funcionario->nombre}}" require  >
                                 @error('primernombre')
@@ -60,7 +60,7 @@
                             </td>
                         
                             <td>
-                                &nbsp;Segundo Nombre&nbsp;<br>
+                            <span data-tooltip="Permite sólo caracteres alfanuméricos" sdata-flow="top"> &nbsp;Segundo Nombre&nbsp;</span><br>
                                 <input id="segundonombre" type="text"  maxlength="25" class="form-control @error('segundonombre') is-invalid @enderror" name="segundonombre" value="{{$datos_funcionario->nombreseg}}" >
                                 @error('segundonombre')
                                     <div class="invalid-feedback">
@@ -73,7 +73,7 @@
                       <!--  FILA 2 -->
                        <tr>
                             <td>
-                                &nbsp;Primer Apellido&nbsp;<span style="color:red;">*</span>&nbsp;<br>
+                            <span data-tooltip="Permite sólo caracteres alfanuméricos" sdata-flow="top">&nbsp;Primer Apellido&nbsp;</span>&nbsp;<span style="color:red;">* </span>
                                 <input id="primerapellido" type="text"  maxlength="25" onkeyup="mayusculas(this);" class="form-control @error('primerapellido') is-invalid @enderror" name="primerapellido" value="{{$datos_funcionario->apellido}}" required>
                                 @error('primerapellido')
                                     <div class="invalid-feedback">
@@ -82,7 +82,7 @@
                                 @enderror
                             </td>
                             <td>
-                                &nbsp;Segundo Apellido&nbsp;<br>
+                            <span data-tooltip="Permite sólo caracteres alfanuméricos" sdata-flow="top"> &nbsp;Segundo Apellido&nbsp;</span><br>
                                 <input id="segundoapellido" type="text"  maxlength="25" onkeyup="mayusculas(this);" class="form-control @error('segundoapellido') is-invalid @enderror" 
                                 name="segundoapellido" value="{{$datos_funcionario->apellidoseg}}" >
                                 @error('segundoapellido')
@@ -96,7 +96,7 @@
                         <tr>
                             
                             <td>
-                                &nbsp;Sexo&nbsp;<span style="color:red;">*</span>&nbsp;<br>
+                            <span data-tooltip="Seleccione un valor de la lista" sdata-flow="top"> &nbsp;Sexo&nbsp;</span><span style="color:red;">*</span>&nbsp;<br>
                                 <select class="form-control"  type="text" name="genero" id="genero" required>
                                     <option value="0">Seleccione...</option>
                                     @foreach ($generos as $generos)
@@ -114,7 +114,7 @@
                                 @enderror
                             </td>
                             <td>
-                                &nbsp;Fecha Nacimiento&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:red;">*</span><br>
+                            <span data-tooltip="Indique una fecha del calendario" sdata-flow="top">&nbsp;Fecha Nacimiento&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:red;">*</span><br>
                                 <input type="date" name="fechanac" id="fechanac" value="{{$datos_funcionario->edad}}"  maxlength="25" required/>
                             </td>
                                         
@@ -122,7 +122,7 @@
                         <tr>
                              <!-- FILA 4 -->
                         <td>
-                                &nbsp;Estado Civil&nbsp;<span style="color:red;">*</span>&nbsp;<br>
+                        <span data-tooltip="Seleccione un valor de la lista" sdata-flow="top">&nbsp;Estado Civil&nbsp;</span><span style="color:red;">*</span>&nbsp;<br>
                                 <select name="estadocivil"  class="form-control" required >
                                 <option value="0">Seleccione...</option>
                                     @foreach ($estado_civils as $estado_civil)
@@ -138,7 +138,7 @@
                         <tr>
                             <td>
                                 &nbsp;Lugar de Nacimiento&nbsp;<br>
-                                &nbsp;Estado&nbsp;<span style="color:red;">*</span>&nbsp;                           
+                                <span data-tooltip="Seleccione un valor de la lista" sdata-flow="top">&nbsp;Estado&nbsp;</span><span style="color:red;">*</span>&nbsp;                           
                                 <select name="estado_nac"  id="estado_nac" class="form-control" required >
                                 <option value="0">Seleccione...</option>
                                     @foreach ($entidad as $entidad)
@@ -151,7 +151,7 @@
                             </td>
                             <td>
                             &nbsp;&nbsp;<br>
-                                &nbsp;Ciudad&nbsp;<span style="color:red;">*</span>&nbsp;                             
+                            <span data-tooltip="Permite sólo caracteres alfanuméricos" sdata-flow="top">&nbsp;Ciudad&nbsp;</span><span style="color:red;">*</span>&nbsp;                             
                                 <input id="ciudad_nac" type="text"  maxlength="10" onkeyup="mayusculas(this);" class="form-control @error('ciudad_nac') is-invalid @enderror" name="ciudad_nac" value="{{$datos_funcionario->ciudad_nac}}" required>
                                 @error('ciudad_nac')
                                     <div class="invalid-feedback">
@@ -163,7 +163,7 @@
                         <!-- FILA 5 -->
                         <tr>
                             <td>
-                                &nbsp;Tipo de Trabajador&nbsp;<span style="color:red;">*</span>&nbsp;<br>
+                            <span data-tooltip="Seleccione un valor de la lista" sdata-flow="top">&nbsp;Tipo de Trabajador&nbsp;</span><span style="color:red;">*</span>&nbsp;<br>
                                 <select id="id_tipo_funcionario" name="id_tipo_funcionario"  class="form-control" required >
                                 <option value="0">Seleccione...</option>
                                     @foreach ($tipo_trabajador as $tipo_trabajador)
@@ -175,7 +175,7 @@
                                 
                             </td>
                             <td>
-                                &nbsp;Cargo&nbsp;<span style="color:red;">*</span>&nbsp;<br>
+                            <span data-tooltip="Permite sólo caracteres alfanuméricos" sdata-flow="top"> &nbsp;Cargo&nbsp;</span><span style="color:red;">*</span>&nbsp;<br>
                                 <input type= "text" id="cargo" name="cargo" value="" class="form-control" required >                              
                                 
                             </td>
@@ -184,7 +184,7 @@
                         <!-- FILA 6 -->
                         <tr>
                             <td>
-                                &nbsp;Unidad de Adscripción&nbsp;<span style="color:red;">*</span>&nbsp;<br>
+                            <span data-tooltip="Seleccione un valor de la lista" sdata-flow="top"> &nbsp;Unidad de Adscripción&nbsp;</span><span style="color:red;">*</span>&nbsp;<br>
                                 <select id="id_oficina_administrativa" name="id_oficina_administrativa"class="form-control" required >
                                 <option value="0">Seleccione...</option>
                                     @foreach ($uni_adscripcion as $uni_adscripcion)
@@ -194,8 +194,8 @@
                                
                             </td>
                             <td>
-                                &nbsp;Correo&nbsp;<span style="color:red;">*</span>&nbsp;<br>
-                                <input id="correo" type="email"  maxlength="250" onkeyup="mayusculas(this);" class="form-control @error('correo') is-invalid @enderror" name="correo" value="" placeholder ="micorreo@dominio.com"required>
+                            <span data-tooltip="Debe registar un correo electrónico." sdata-flow="top">&nbsp;Correo&nbsp;<span style="color:red;">*</span>&nbsp;<br>
+                                <input id="correo" type="email"  placeholder="Ej. micorreo@dominio.com" maxlength="250" onkeyup="mayusculas(this);" class="form-control @error('correo') is-invalid @enderror" name="correo" value="" placeholder ="micorreo@dominio.com"required>
                                 @error('correo')
                                     <div class="invalid-feedback">
                                     <strong>{{ $message }}</strong>

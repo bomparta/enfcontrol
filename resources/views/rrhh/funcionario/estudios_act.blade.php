@@ -49,7 +49,7 @@
                     @csrf
                     <tr>
                         <td colspan="2"> 
-                            &nbsp;¿Estudia actualmente?&nbsp;<span style="color:red;">*</span>&nbsp;
+                        <span data-tooltip="Seleccione un valor de la lista" sdata-flow="top"> &nbsp;¿Estudia actualmente?&nbsp;</span><span style="color:red;">*</span>&nbsp;
                             <select id="estudia" name="estudia"class="form-control"  style="width:190px;" required >
                                             <option value="0">Seleccione...</option>
                                            
@@ -58,17 +58,17 @@
                                     </select>                       
                         </td>
                         <td colspan="2"> 
-                            &nbsp;Nivel que cursa&nbsp;
+                        <span data-tooltip="Permite sólo caracteres alfanuméricos" sdata-flow="top">&nbsp;Nivel que cursa&nbsp;</span>
                             <input type="text" class="form-control"name="nivel_curso" id="nivel_curso" onkeyup="mayusculas(this);" value="{{$item->nivel_cursa}}"  maxlength="200" size="50" />
                         </td>
                     </tr>
                     <tr>
                         <td colspan="2"> 
-                            &nbsp;Especialidad&nbsp;&nbsp;
+                        <span data-tooltip="Permite sólo caracteres alfanuméricos" sdata-flow="top"> &nbsp;Especialidad&nbsp;&nbsp;</span>
                             <input type="text" class="form-control" name="especialidad" id="especialidad" onkeyup="mayusculas(this);" value="{{$item->especialidad}}"  maxlength="200" size="50"  />
                         </td>
                         <td colspan="2"> 
-                            &nbsp;Nombre de la institución donde estudia&nbsp;
+                        <span data-tooltip="Permite sólo caracteres alfanuméricos" sdata-flow="top">&nbsp;Nombre de la institución donde estudia&nbsp;</span>
                             <input type="text" class="form-control"name="universidad" id="universidad" onkeyup="mayusculas(this);" value="{{$item->institucion_estudia}}"  maxlength="200" size="50" />
                         </td>
                     </tr>   

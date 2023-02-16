@@ -49,25 +49,25 @@
                             <tr> 
                         <td class="table-primary" rowspan="2">&nbsp;<b>PRIMARIA</b> </td>
                         <td>
-                            &nbsp;Último Año Cursado&nbsp;
-                            <input type="text" class="form-control"  name="pri_ultimo_anno" id="pri_ultimo_anno" onkeyup="mayusculas(this);" value="{{$item->pri_ult_anio}}" style="width:190px;" maxlength="25"/>
+                        <span data-tooltip="Permite sólo caracteres alfanuméricos" sdata-flow="top">&nbsp;Último Año Cursado&nbsp;</span>
+                            <input type="text" class="form-control"  name="pri_ultimo_anno" id="pri_ultimo_anno"style="width:100%;"  onkeyup="mayusculas(this);" value="{{$item->pri_ult_anio}}" style="width:190px;" maxlength="25"/>
                         </td>
                         <td>
-                            &nbsp;Nombre de la Institución&nbsp;
-                            <input type="text"class="form-control"  name="institucion_pri" id="institucion_pri" onkeyup="mayusculas(this);" value="{{$item->institucion_pri}}" style="width:190px;" maxlength="100"/>
+                        <span data-tooltip="Permite sólo caracteres alfanuméricos" sdata-flow="top">  &nbsp;Nombre de la Institución&nbsp;</span>
+                            <input type="text"class="form-control"  name="institucion_pri" id="institucion_pri" style="width:100%;"onkeyup="mayusculas(this);" value="{{$item->institucion_pri}}" style="width:190px;" maxlength="100"/>
                         </td>
                         <td>
-                            &nbsp;Dirección Referencial&nbsp;
-                            <input type="text" class="form-control"   name="dir_ref_pri" id="dir_ref_pri" maxlength="200" onkeyup="mayusculas(this);" value="{{$item->dir_ref_pri}}"/>
+                        <span data-tooltip="Permite sólo caracteres alfanuméricos" sdata-flow="top"> &nbsp;Dirección Referencial&nbsp;</span>
+                            <input type="text" class="form-control"   name="dir_ref_pri" id="dir_ref_pri" maxlength="200" style="width:100%;" onkeyup="mayusculas(this);" value="{{$item->dir_ref_pri}}"/>
                         </td>
                         </tr>
                     <tr> 
                         <td>
-                            &nbsp;Fecha de Inicio&nbsp;
+                        <span data-tooltip="Indique una fecha del calendario" sdata-flow="top"> &nbsp;Fecha de Inicio&nbsp;</span>
                             <input type="date" class="form-control"  name="fechainicio_pri" id="fechainicio_pri" value="{{$item->fecha_ini_pri}}" style="width:190px;"/>
                         </td>
                         <td>
-                            &nbsp;Fecha de Culminación&nbsp;
+                        <span data-tooltip="Indique una fecha del calendario" sdata-flow="top">   &nbsp;Fecha de Culminación&nbsp;</span>
                             <input type="date" class="form-control"  name="fechaculminacion_pri" id="fechaculminacion_pri" value="{{$item->fecha_fin_pri}}" style="width:190px;" />
                         </td>
                     </tr>
@@ -78,25 +78,25 @@
                     </tr>
                     <td class="table-primary" rowspan="2">&nbsp;<b>SECUNDARIA</b> </td>
                         <td>
-                            &nbsp;Último Año Cursado&nbsp;
-                            <input type="text" class="form-control"  name="sec_ultimo_anno" id="sec_ultimo_anno" onkeyup="mayusculas(this);" value="{{$item->sec_ult_anio}}" style="width:190px;" maxlength="25"/>
+                        <span data-tooltip="Permite sólo caracteres alfanuméricos" sdata-flow="top"> &nbsp;Último Año Cursado&nbsp;</span>
+                            <input type="text" class="form-control"  name="sec_ultimo_anno" id="sec_ultimo_anno" style="width:100%;"onkeyup="mayusculas(this);" value="{{$item->sec_ult_anio}}" style="width:190px;" maxlength="25"/>
                         </td>
                         <td>
-                            &nbsp;Nombre de la Institución&nbsp;
-                            <input type="text" class="form-control"  name="institucion_sec" id="institucion_sec" onkeyup="mayusculas(this);"value="{{$item->institucion_sec}}" style="width:190px;" maxlength="100"/>
+                        <span data-tooltip="Permite sólo caracteres alfanuméricos" sdata-flow="top"> &nbsp;Nombre de la Institución&nbsp;</span>
+                            <input type="text" class="form-control"  name="institucion_sec" id="institucion_sec" style="width:100%;"onkeyup="mayusculas(this);"value="{{$item->institucion_sec}}" style="width:190px;" maxlength="100"/>
                         </td>
                         <td>
-                            &nbsp;Dirección Referencial&nbsp;
-                            <input type="text" class="form-control" rows="2"  name="dir_ref_sec" id="dir_ref_sec" maxlength="200" onkeyup="mayusculas(this);"value="{{$item->institucion_sec}}"/>
+                        <span data-tooltip="Permite sólo caracteres alfanuméricos" sdata-flow="top">    &nbsp;Dirección Referencial&nbsp;</span>
+                            <input type="text" class="form-control" rows="2"  name="dir_ref_sec" id="dir_ref_sec" style="width:100%;"maxlength="200" onkeyup="mayusculas(this);"value="{{$item->institucion_sec}}"/>
                         </td>
                         </tr>
                         <tr> 
                         <td>
-                            &nbsp;Fecha de Inicio&nbsp;
+                        <span data-tooltip="Indique una fecha del calendario" sdata-flow="top">   &nbsp;Fecha de Inicio&nbsp;</span>
                             <input type="date" class="form-control"  name="fechainicio_sec" id="fechainicio_sec" value="{{$item->fecha_ini_sec}}" style="width:190px;" />
                         </td>
                         <td>
-                            &nbsp;Fecha de Culminación&nbsp;
+                        <span data-tooltip="Indique una fecha del calendario" sdata-flow="top"> &nbsp;Fecha de Culminación&nbsp;</span>
                             <input type="date" class="form-control"  name="fechaculminacion_sec" id="fechaculminacion_sec" value="{{$item->fecha_fin_sec}}" style="width:190px;" />
                         </td>
                     </tr>                    
@@ -109,25 +109,25 @@
                     <tr>
                     <td class="table-primary" rowspan="2">&nbsp;<b>TÉCNICA SUPERIOR</b> </td>
                         <td>
-                            &nbsp;Último Año Cursado&nbsp;
-                            <input type="text" class="form-control"  name="tec_ultimo_anno" id="tec_ultimo_anno" onkeyup="mayusculas(this);" value="{{$item->tec_ult_anio}}" style="width:190px;" maxlength="25"/>
+                        <span data-tooltip="Permite sólo caracteres alfanuméricos" sdata-flow="top">&nbsp;Último Año Cursado&nbsp;</span>
+                            <input type="text" class="form-control"  name="tec_ultimo_anno" id="tec_ultimo_anno" style="width:100%;" onkeyup="mayusculas(this);" value="{{$item->tec_ult_anio}}" style="width:190px;" maxlength="25"/>
                         </td>
                         <td>
-                            &nbsp;Nombre de la Institución&nbsp;
-                            <input type="text" class="form-control" name="institucion_tec"  id="institucion_tec" onkeyup="mayusculas(this);" value="{{$item->institucion_tec}}" style="width:190px;" maxlength="100"/>
+                        <span data-tooltip="Permite sólo caracteres alfanuméricos" sdata-flow="top">&nbsp;Nombre de la Institución&nbsp;</span>
+                            <input type="text" class="form-control" name="institucion_tec"  id="institucion_tec" style="width:100%;" onkeyup="mayusculas(this);" value="{{$item->institucion_tec}}" style="width:190px;" maxlength="100"/>
                         </td>
                         <td>
-                            &nbsp;Dirección Referencial&nbsp;
-                            <input type="text" class="form-control"  name="dir_ref_tec" id="dir_ref_tec" onkeyup="mayusculas(this);" value="{{$item->dir_ref_tec}}" maxlength="200"/>
+                        <span data-tooltip="Permite sólo caracteres alfanuméricos" sdata-flow="top"> &nbsp;Dirección Referencial&nbsp;</span>
+                            <input type="text" class="form-control"  name="dir_ref_tec" id="dir_ref_tec" style="width:100%;" onkeyup="mayusculas(this);" value="{{$item->dir_ref_tec}}" maxlength="200"/>
                         </td>
                         </tr>
                         <tr>
                         <td>
-                            &nbsp;Fecha de Inicio&nbsp; 
+                        <span data-tooltip="Indique una fecha del calendario" sdata-flow="top">  &nbsp;Fecha de Inicio&nbsp; </span>
                             <input type="date" class="form-control"  name="fechainicio_tec" id="fechainicio_tec" value="{{$item->fecha_ini_tec}}" style="width:190px;" />
                         </td>
                         <td>
-                            &nbsp;Fecha de Culminación&nbsp;
+                        <span data-tooltip="Indique una fecha del calendario" sdata-flow="top">  &nbsp;Fecha de Culminación&nbsp;</span>
                             <input type="date" class="form-control"  name="fechaculminacion_tec" id="fechaculminacion_tec" value="{{$item->fecha_fin_tec}}" style="width:190px;" />
                         </td>
                     </tr>
@@ -139,27 +139,27 @@
                     <tr> 
                     <td class="table-primary" rowspan="2">&nbsp;<b>UNIVERSITARIA</b> </td>
                         <td>
-                            &nbsp;Último Año Cursado&nbsp;
-                            <input type="text" class="form-control" name="uni_ultimo_anno" id="uni_ultimo_anno" onkeyup="mayusculas(this);" value="{{$item->uni_ult_anio}}" style="width:190px;" maxlength="25"/>
+                        <span data-tooltip="Permite sólo caracteres alfanuméricos" sdata-flow="top"> &nbsp;Último Año Cursado&nbsp;</span>
+                            <input type="text" class="form-control" name="uni_ultimo_anno" id="uni_ultimo_anno" style="width:100%;" onkeyup="mayusculas(this);" value="{{$item->uni_ult_anio}}" style="width:190px;" maxlength="25"/>
                         </td>
                         <td>
-                            &nbsp;Nombre de la Institución&nbsp;
-                            <input type="text" class="form-control"  name="institucion_uni" id="institucion_uni" onkeyup="mayusculas(this);" value="{{$item->institucion_uni}}" style="width:190px;" maxlength="100"/>
+                        <span data-tooltip="Permite sólo caracteres alfanuméricos" sdata-flow="top"> &nbsp;Nombre de la Institución&nbsp;</span>
+                            <input type="text" class="form-control"  name="institucion_uni" id="institucion_uni" style="width:100%;" onkeyup="mayusculas(this);" value="{{$item->institucion_uni}}" style="width:190px;" maxlength="100"/>
                         </td>
                         <td>
-                            &nbsp;Dirección Referencial&nbsp;
-                            <input type="text" class="form-control"  name="dir_ref_uni" id="dir_ref_uni" onkeyup="mayusculas(this);" value="{{$item->dir_ref_uni}}" maxlength="200"/>
+                        <span data-tooltip="Permite sólo caracteres alfanuméricos" sdata-flow="top">&nbsp;Dirección Referencial&nbsp;</span>
+                            <input type="text" class="form-control"  name="dir_ref_uni" id="dir_ref_uni" style="width:100%;" onkeyup="mayusculas(this);" value="{{$item->dir_ref_uni}}" maxlength="200"/>
                         </td>
                     </tr>
                     <tr>
                    
                         <td>
-                            &nbsp;Fecha de Inicio&nbsp;
+                        <span data-tooltip="Indique una fecha del calendario" sdata-flow="top">   &nbsp;Fecha de Inicio&nbsp;</span>
                             <input type="date" class="form-control"   name="fechainicio_uni" id="fechainicio_uni" value="{{$item->fecha_ini_uni}}" style="width:190px;"/>
                           
                         </td>
                         <td>
-                            &nbsp;Fecha de Culminación&nbsp;
+                        <span data-tooltip="Indique una fecha del calendario" sdata-flow="top">  &nbsp;Fecha de Culminación&nbsp;</span>
                             <input type="date" class="form-control"   name="fechaculminacion_uni" id="fechaculminacion_uni" value="{{$item->fecha_fin_uni}}" style="width:190px;"/>
                         </td>
                     </tr>
@@ -170,12 +170,12 @@
                    
                     <tr>
                         <td colspan="4"> 
-                            &nbsp;Profesión u Ocupación&nbsp;<span style="color:red;">*</span>&nbsp;
-                            <input type="text" class="form-control"name="profesion" id="profesion" onkeyup="mayusculas(this);" value="{{$item->profesion_ocup}}"  maxlength="200" size="50" class="form-control" required/>
+                        <span data-tooltip="Permite sólo caracteres alfanuméricos" sdata-flow="top"> &nbsp;Profesión u Ocupación&nbsp;</span><span style="color:red;">*</span>&nbsp;
+                            <input type="text" class="form-control"name="profesion" id="profesion" style="width:100%;" onkeyup="mayusculas(this);" value="{{$item->profesion_ocup}}"  maxlength="200" size="50" class="form-control" required/>
                         </td>
                         <td colspan="4"> 
-                            &nbsp;En caso de haber culminado otros estudios de alto nivel técnico o universitario, indique Titulos obtenidos:&nbsp;<span style="color:red;">*</span>&nbsp;
-                            <input type="text" class="form-control"name="otros_estudios" id="otros_estudios" onkeyup="mayusculas(this);"  value="{{$item->otros_estudios}}"  maxlength="200" size="50" />
+                        <span data-tooltip="Permite sólo caracteres alfanuméricos" sdata-flow="top"> &nbsp;En caso de haber culminado otros estudios de alto nivel técnico o universitario, indique Titulos obtenidos:&nbsp;</span><span style="color:red;">*</span>&nbsp;
+                            <input type="text" class="form-control"name="otros_estudios" id="otros_estudios" style="width:100%;" onkeyup="mayusculas(this);"  value="{{$item->otros_estudios}}"  maxlength="200" size="50" />
                         </td>
                         
                     </tr>   

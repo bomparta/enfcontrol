@@ -34,23 +34,28 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td colspan="2">
-                                    &nbsp;Cédula de Identidad&nbsp;<span style="color:red;">*</span>&nbsp;<br>
-                                    <select id="nacionalidad" name="nacionalidad" style="width:70px;" required>
+                                <td >
+
+                               &nbsp;Cédula de Identidad&nbsp;<span style="color:red;">*</span>&nbsp;<br>
+                                <span data-tooltip="Seleccione un valor de la lista" sdata-flow="top">  
+                                     <select id="nacionalidad" name="nacionalidad" style="width:70px;" required>
                                         @foreach ($nacionalidades as $nacionalidad)
                                             <option value="{{ $nacionalidad->id  }}">{{ $nacionalidad->cod }}</option>
                                         @endforeach
-                                    </select>
-                                    <input type="text" name="cedula" id="cedula" value="" onkeypress="return isNumberKey(event);" maxlength="12"/>
+                                    </select></span>
+                                    <span data-tooltip="Permite sólo numéros" sdata-flow="top">
+                                        <input type="text" name="cedula" id="cedula" style="width:200px;"  value="" onkeypress="return isNumberKey(event);" maxlength="12"/></span>
                                     @error('cedula')
                                         <div class="invalid-feedback">
                                         <strong>{{ $message }}</strong>
                                         </div>
                                     @enderror
-                                </td></tr>
+
+                                </td>
+                            </tr>
                                 <tr>
                                 <td>
-                                    &nbsp;Primer Nombre&nbsp;<span style="color:red;">*</span>&nbsp;<br>
+                                <span data-tooltip="Permite sólo caracteres alfanuméricos" sdata-flow="top">&nbsp;Primer Nombre&nbsp;</span><span style="color:red;">*</span>&nbsp;<br>
                                     <input id="primernombre" type="text"  maxlength="25"onkeyup="mayusculas(this);" class="form-control @error('primernombre') is-invalid @enderror" name="primernombre" value="" required>
                                     @error('primernombre')
                                         <div class="invalid-feedback">
@@ -59,7 +64,7 @@
                                     @enderror
                                 </td>
                                 <td>
-                                    &nbsp;Segundo Nombre&nbsp;<br>
+                                <span data-tooltip="Permite sólo caracteres alfanuméricos" sdata-flow="top">&nbsp;Segundo Nombre&nbsp;<br></span>
                                     <input id="segundonombre" type="text"  maxlength="25" onkeyup="mayusculas(this);" class="form-control @error('segundonombre') is-invalid @enderror" name="segundonombre" value="" >
                                     @error('segundonombre')
                                         <div class="invalid-feedback">
@@ -71,7 +76,7 @@
                             <!-- FILA 2 -->
                             <tr>
                                 <td>
-                                    &nbsp;Primer Apellido&nbsp;<span style="color:red;">*</span>&nbsp;<br>
+                                <span data-tooltip="Permite sólo caracteres alfanuméricos" sdata-flow="top">&nbsp;Primer Apellido&nbsp;</span><span style="color:red;">*</span>&nbsp;<br>
                                     <input id="primerapellido" type="text"  maxlength="25" onkeyup="mayusculas(this);" class="form-control @error('primerapellido') is-invalid @enderror" name="primerapellido" value=""  required>
                                     @error('primerapellido')
                                         <div class="invalid-feedback">
@@ -80,7 +85,7 @@
                                     @enderror
                                 </td>
                                 <td>
-                                    &nbsp;Segundo Apellido&nbsp;<br>
+                                <span data-tooltip="Permite sólo caracteres alfanuméricos" sdata-flow="top"> &nbsp;Segundo Apellido&nbsp;<br></span>
                                     <input id="segundoapellido" type="text"  maxlength="25" onkeyup="mayusculas(this);" class="form-control @error('segundoapellido') is-invalid @enderror" name="segundoapellido" value=""  >
                                     @error('segundoapellido')
                                         <div class="invalid-feedback">
@@ -93,7 +98,7 @@
                             <tr>
                                 
                                 <td>
-                                    &nbsp;Sexo&nbsp;<span style="color:red;">*</span>&nbsp;<br>
+                                <span data-tooltip="Seleccione un valor de la lista" sdata-flow="top">  &nbsp;Sexo&nbsp;<span style="color:red;">*</span>&nbsp;<br></span>
                                     <select class="form-control"  type="text" name="genero" required>
                                         <option value="0">Seleccione...</option>
                                         @foreach ($generos as $generos)
@@ -108,7 +113,7 @@
                                     @enderror
                                 </td>
                                 <td>
-                                    &nbsp;Fecha Nacimiento&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:red;">*</span><br>
+                                <span data-tooltip="Indique una fecha del calendario" sdata-flow="top"> &nbsp;Fecha Nacimiento&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:red;">*</span><br></span>
                                     <input type="date" name="fechanac" id="fechanac"  value=""  maxlength="25" required/>
                                 </td>
                                             
@@ -116,7 +121,7 @@
                             <tr>
                                 <!-- FILA 4 -->
                             <td>
-                                    &nbsp;Parentesco&nbsp;<span style="color:red;">*</span>&nbsp;<br>
+                            <span data-tooltip="Seleccione un valor de la lista" sdata-flow="top">&nbsp;Parentesco&nbsp;<span style="color:red;">*</span>&nbsp;<br></span>
                                     <select name="parentezco" id="parentezco"   class="form-control" required >
                                     <option value="0">Seleccione...</option>
                                         @foreach ($parentezco as $parentezco)
@@ -130,14 +135,14 @@
                             <!-- FILA 5 -->
                             <tr>
                                 <td>
-                                    &nbsp;Ocupación&nbsp;<span style="color:red;">*</span>&nbsp;<br>
+                                <span data-tooltip="Permite sólo caracteres alfanuméricos" sdata-flow="top">   &nbsp;Ocupación&nbsp;</span><span style="color:red;">*</span>&nbsp;<br>
                                     <input id="ocupacion" type="text"name="ocupacion" onkeyup="mayusculas(this);" class="form-control" required >
                                     
                                     
                                 </td>
                                 <td>
-                                &nbsp;Teléfono&nbsp;<span style="color:red;">*</span>&nbsp;<br>
-                                    <input id="text" type="text"  maxlength="25" onkeypress="return isNumberKey(event);" class="form-control @error('telefono') is-invalid @enderror" name="telefono" value="" required>
+                                <span data-tooltip="Permite sólo núméros" sdata-flow="top">  &nbsp;Teléfono&nbsp;</span><span style="color:red;">*</span>&nbsp;<br>
+                                    <input id="text" type="text"  placeholder="Ej. 04121234578 ó 02121234567"maxlength="25" onkeypress="return isNumberKey(event);" class="form-control @error('telefono') is-invalid @enderror" name="telefono" value="" required>
                                     @error('telefono')
                                         <div class="invalid-feedback">
                                         <strong>{{ $message }}</strong>
@@ -150,7 +155,7 @@
                             <!-- FILA 6 -->
                             <tr>
                                 <td>
-                                    &nbsp;Vive con Usted?&nbsp;<span style="color:red;">*</span>&nbsp;<br>
+                                <span data-tooltip="Seleccione un valor de la lista" sdata-flow="top"> &nbsp;Vive con Usted?&nbsp;</span><span style="color:red;">*</span>&nbsp;<br>
                                     <select id="vive" name="vive"class="form-control" required >
                                             <option value="0">Seleccione...</option>
                                             <option value="1">SI</option>
@@ -158,8 +163,8 @@
                                     </select>                                
                                 </td>
                                 <td>
-                                    &nbsp;Correo&nbsp;<span style="color:red;">*</span>&nbsp;<br>
-                                    <input id="correo" type="email"  maxlength="250"  onkeyup="mayusculas(this);" class="form-control @error('correo') is-invalid @enderror" name="correo" value="" required>
+                                <span data-tooltip="Debe registar un correo electrónico." sdata-flow="top"> &nbsp;Correo&nbsp;</span><span style="color:red;">*</span>&nbsp;<br>
+                                    <input id="correo" type="email"  maxlength="250"  placeholder="Ej. micorreo@dominio.com" onkeyup="mayusculas(this);" class="form-control @error('correo') is-invalid @enderror" name="correo" value="" required>
                                     @error('correo')
                                         <div class="invalid-feedback">
                                         <strong>{{ $message }}</strong>
@@ -203,11 +208,13 @@
                                                             </td>
                                                             <td>
                                                             @if($familiar->parentezco_id==2)
-                                                            <a href= "creardocumento_familiar/{{$tipo_documento='partida_nac_familiar'}}/{{$familiar->id_familiar}}/{{$ir='familiarfuncionario'}}" class="btn btn-success" data-tip="Detalle" title="Cargar Partida de Nacimiento" data-toggle="tooltip" data-original-title="documento">
+                                                            <a href= "creardocumento_familiar/{{$tipo_documento='partida_nac_familiar'}}/{{$familiar->id_familiar}}/{{$ir='familiarfuncionario'}}" 
+                                                            class="btn btn-success" data-tip="Detalle" title="Cargar Partida de Nacimiento" data-toggle="tooltip" data-original-title="documento">
                                                             <img src="/img/icon/constancia.png" class="icon-sm" alt="Listado">
                                                             </a>
                                                             @endif
-                                                            <a href= "creardocumento_familiar/{{$tipo_documento='cedula_familiar'}}/{{$familiar->id_familiar}}/{{$ir='familiarfuncionario'}}" class="btn btn-warning" data-tip="Detalle" title="Cargar Cédula de Identidad" data-toggle="tooltip" data-original-title="documento">
+                                                            <a href= "creardocumento_familiar/{{$tipo_documento='cedula_familiar'}}/{{$familiar->id_familiar}}/{{$ir='familiarfuncionario'}}"
+                                                             class="btn btn-warning" data-tip="Detalle" title="Cargar Cédula de Identidad" data-toggle="tooltip" data-original-title="documento">
                                                             <img src="/img/icon/cedula.png" class="icon-sm" alt="Listado">
                                                             
                                                             </a>
@@ -218,7 +225,7 @@
                                             </tbody>
                                             <tfoot>
                                                 <tr>
-                                                    <th>Cedula</th>
+                                                    <th>Cédula de Identidad</th>
                                                     <th>Nombre y Apellidos</th>
                                                     <th>Parentesco</th>
                                                     <th>Correo</th>

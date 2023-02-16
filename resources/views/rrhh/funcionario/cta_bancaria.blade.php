@@ -45,11 +45,11 @@
           @csrf
           <tr>
                         <td>
-                            &nbsp;Cuenta Bancaria N°&nbsp;<span style="color:red;">*</span>&nbsp;
+                        <span data-tooltip="Permite sólo numéros" sdata-flow="top">&nbsp;Cuenta Bancaria N°&nbsp;</span><span style="color:red;">*</span>&nbsp;
                             <input type="text" class="form-control" required name="num_cuenta" id="num_cuenta" value="" onkeypress="return isNumberKey(event);" style="width:190px;" maxlength="20"/>
                         </td>
                         <td>
-                            &nbsp;Tipo de Cuenta&nbsp;<span style="color:red;">*</span>&nbsp;                           
+                        <span data-tooltip="Seleccione un valor de la lista" sdata-flow="top">&nbsp;Tipo de Cuenta&nbsp;</span><span style="color:red;">*</span>&nbsp;                           
                             <select id="tipo_cuenta" name="tipo_cuenta"class="form-control" required >
                                             <option value="0">Seleccione...</option>
                                             <option value="1">CORRIENTE</option>
@@ -57,7 +57,7 @@
                                     </select>  
                         </td>
                         <td>
-                            &nbsp;Nombre del Banco&nbsp;<span style="color:red;">*</span>&nbsp;
+                        <span data-tooltip="Seleccione un valor de la lista" sdata-flow="top"> &nbsp;Nombre del Banco&nbsp;</span><span style="color:red;">*</span>&nbsp;
                             <select id="nom_banco" name="nom_banco"class="form-control" required >
                             <option value="0">Seleccione...</option>
                             @foreach ($banco as $banco)

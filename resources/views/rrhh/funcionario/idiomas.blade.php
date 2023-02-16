@@ -49,13 +49,13 @@
                     <tr> 
                         
                         <td>
-                            &nbsp;Idioma&nbsp;<span style="color:red;">*</span>&nbsp;
+                        <span data-tooltip="Permite sólo caracteres alfanuméricos" sdata-flow="top"> &nbsp;Idioma&nbsp;</span><span style="color:red;">*</span>&nbsp;
                             <input type="text" class="form-control" required name="nommbre_idioma" id="nommbre_idioma" onkeyup="mayusculas(this);" value="" maxlength="25"/>
                         </td>
                     </tr>
                     <tr>
                         <td>
-                        &nbsp;Habla&nbsp;<span style="color:red;">*</span>&nbsp;
+                        <span data-tooltip="Seleccione un valor de la lista" sdata-flow="top">  &nbsp;Habla&nbsp;</span><span style="color:red;">*</span>&nbsp;
                             <select id="habla" name="habla"class="form-control"  style="width:190px;" required >
                                             <option value="0">Seleccione...</option>
                                             <option value="1">REGULAR</option>
@@ -64,7 +64,7 @@
                                     </select>   
                         </td>
                         <td>
-                        &nbsp;Lee&nbsp;<span style="color:red;">*</span>&nbsp;
+                        <span data-tooltip="Seleccione un valor de la lista" sdata-flow="top"> &nbsp;Lee&nbsp;</span><span style="color:red;">*</span>&nbsp;
                             <select id="lee" name="lee"class="form-control"  style="width:190px;" required >
                                             <option value="0">Seleccione...</option>
                                             <option value="1">REGULAR</option>
@@ -74,7 +74,7 @@
                         </td>
                      
                         <td>
-                        &nbsp;Escribe&nbsp;<span style="color:red;">*</span>&nbsp;
+                        <span data-tooltip="Seleccione un valor de la lista" sdata-flow="top"> &nbsp;Escribe&nbsp;</span><span style="color:red;">*</span>&nbsp;
                             <select id="escribe" name="escribe"class="form-control"  style="width:190px;" required >
                                             <option value="0">Seleccione...</option>
                                             <option value="1">REGULAR</option>

@@ -47,7 +47,7 @@
           @csrf
           <tr>
                                 <td>
-                                    &nbsp;Estado de Residencia&nbsp;<span style="color:red;">*</span>&nbsp;                                   
+                                <span data-tooltip="Seleccione un valor de la lista" sdata-flow="top"> &nbsp;Estado de Residencia&nbsp;</span><span style="color:red;">*</span>&nbsp;                                   
                                     <select name="_estado"  id="_estado" class="form-control" required >
                                 <option value="0">Seleccione...</option>
                                     @foreach ($estados as $estado)
@@ -61,7 +61,7 @@
 
 
                                 <td>
-                                    &nbsp;Municipio de Residencia&nbsp;<span style="color:red;">*</span>&nbsp;
+                                <span data-tooltip="Seleccione un valor de la lista" sdata-flow="top">&nbsp;Municipio de Residencia&nbsp;</span><span style="color:red;">*</span>&nbsp;
                                     <select class="form-control"name="_submunicipio" id="_submunicipio" required>
                                     <option value="0">Seleccione...</option>
                                     @foreach ($municipios as $municipios)
@@ -74,7 +74,7 @@
                                     </select>
                                 </td>
                                 <td>
-                                    &nbsp;Parroquia de Residencia&nbsp;<span style="color:red;">*</span>&nbsp;
+                                <span data-tooltip="Seleccione un valor de la lista" sdata-flow="top"> &nbsp;Parroquia de Residencia&nbsp;</span><span style="color:red;">*</span>&nbsp;
                                     <select class="form-control" name="_subparroquia" id="_subparroquia" required>
                                     <option value="0">Seleccione...</option>
                                     @foreach ($parroquias as $parroquias  )
@@ -94,22 +94,22 @@
                             <!-- FILA 2 -->
                             <tr>
                                 <td>
-                                    &nbsp;Ciudad / Urbanizaci&oacute;n&nbsp;&nbsp;&nbsp;&nbsp;
+                                <span data-tooltip="Permite sólo caracteres alfanuméricos" sdata-flow="top">  &nbsp;Ciudad / Urbanizaci&oacute;n &nbsp;&nbsp;<span style="color:red;">*</span>&nbsp;<br>
                                     <input type="text" class="form-control" name="urbanizacion" id="urbanizacion" onkeyup="mayusculas(this);"  value="{{$item->sector_urbanizacion}}" maxlength="100" required />
                                 </td>
                                 <td>
-                                    &nbsp;Calle/Avenida&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <span data-tooltip="Permite sólo caracteres alfanuméricos" sdata-flow="top"> &nbsp;Calle/Avenida&nbsp;&nbsp;<span style="color:red;">*</span>&nbsp;<br>
                                     <input type="text" class="form-control" name="calleAv" id="calleAv" value="{{$item->calle_avenida}}"onkeyup="mayusculas(this);"  maxlength="100" required />
                                 </td>
                                
                             </tr>
                             <tr>
                                  <td>
-                                    &nbsp;N° Casa o Apartamento&nbsp;&nbsp;&nbsp;
+                                 <span data-tooltip="Permite sólo caracteres alfanuméricos" sdata-flow="top">&nbsp;N° Casa o Apartamento&nbsp;&nbsp;&nbsp;<span style="color:red;">*</span>&nbsp;<br>
                                     <input type="text" class="form-control" name="nroCasaApto" id="nroCasaApto" onkeyup="mayusculas(this);"  value="{{$item->nro_casa_apartamento}}"  maxlength="100"  required/>
                                 </td>
                                 <td>
-                                    &nbsp;Nombre de la Casa o Edificio&nbsp;&nbsp;&nbsp;
+                                <span data-tooltip="Permite sólo caracteres alfanuméricos" sdata-flow="top">&nbsp;Nombre de la Casa o Edificio&nbsp;&nbsp;&nbsp;<span style="color:red;">*</span>&nbsp;<br>
                                     <input type="text" class="form-control" name="nombreCasaApto" id="nombreCasaApto" onkeyup="mayusculas(this);"  value="{{$item->nombre_casa_edificio_residencia}}"  maxlength="100" required  />
                                 </td>
                             </tr>
@@ -118,11 +118,11 @@
                                 
                                 <td>
 
-                                    &nbsp;Pto de Referencia:  &nbsp;&nbsp;&nbsp;&nbsp;
+                                <span data-tooltip="Permite sólo caracteres alfanuméricos" sdata-flow="top">&nbsp;Punto de Referencia:  &nbsp;&nbsp;&nbsp;&nbsp;<span style="color:red;">*</span>&nbsp;<br>
                                     <input type="text" class="form-control"  name="pto_referencia" id="pto_referencia" onkeyup="mayusculas(this);" value="{{$item->piso_nro_casa}}"  maxlength="200" required />
                                 </td>
                                 <td>
-                                &nbsp;Condicion de la Vivivienda&nbsp;<span style="color:red;">*</span>&nbsp;
+                                <span data-tooltip="Seleccione un valor de la lista" sdata-flow="top"> &nbsp;Condición de la Vivivienda&nbsp;</span><span style="color:red;">*</span>&nbsp;
                             <select id="condicon_viv" name="condicon_viv"class="form-control"  style="width:190px;" required >
                                             <option value="0">Seleccione...</option>
                                             <option value="1" @if($item->condicion_casa_id=='1')  selected @endif>Propia</option>
@@ -132,34 +132,37 @@
                                     </select> 
                                 </td>
                                 <td>
-                            &nbsp;Codigo Postal:  &nbsp;&nbsp;&nbsp;&nbsp;
+                                <span data-tooltip="Permite sólo caracteres alfanuméricos" sdata-flow="top">&nbsp;Código Postal:  &nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color:red;">*</span>&nbsp;<br>
                             <input type="text" class="form-control"  name="cod_postal" id="cod_postal" value="{{$item->codigo_postal}}"  maxlength="200" onkeypress="return isNumberKey(event);"  />
                             </td> 
                             </tr>
                             <tr>
                             <td>
-                                &nbsp;Telefono de Habitacion&nbsp;<span style="color:red;">*</span>&nbsp;<br>
-                                <div class="input-group">
-                                <select id="codhab" name="codhab" style="width:70px;" required>
-                                    @foreach ($cod_habs as $cod_habs) var_dump($cod_habs)
-                                        <option value="{{ $cod_habs->descripcion }}" @if(Str::substr($item->telfhabitacion,0,4)==$cod_habs->descripcion)  selected @endif >{{ $cod_habs->descripcion }}</option>
-                                    @endforeach
-                                </select>
-                                <input type="text" class="form-control" name="telfhabitacion" id="telfhabitacion" value="{{Str::substr($item->telfhabitacion,4,7)}}" onkeypress="return isNumberKey(event);" maxlength="100"/>
-                                </div>
-                                
-                               
+                            <span data-tooltip="Seleccione un valor de la lista" sdata-flow="top">  &nbsp;Teléfono de Habitacion&nbsp;</span><span style="color:red;">*</span>&nbsp;<br> 
+                           <div class="input-group">                              
+                                    <select id="codhab" name="codhab" style="width:70px;" required>
+                                        @foreach ($cod_habs as $cod_habs) var_dump($cod_habs)
+                                            <option value="{{ $cod_habs->descripcion }}" @if(Str::substr($item->telfhabitacion,0,4)==$cod_habs->descripcion)  selected @endif >{{ $cod_habs->descripcion }}</option>
+                                        @endforeach
+                                    </select>                                    
+                                <span data-tooltip="Permite sólo números" sdata-flow="top">
+                                    <input type="text" class="form-control" name="telfhabitacion" id="telfhabitacion" 
+                                    value="{{Str::substr($item->telfhabitacion,4,7)}}" 
+                                    onkeypress="return isNumberKey(event);" maxlength="100"/>
+                                </span>   
+                          </div>    
+                              
                             </td>
                             
                             <td>
-                                &nbsp;Telefono Móvil(Celular)&nbsp;<span style="color:red;">*</span>&nbsp;<br>
+                            <span data-tooltip="Seleccione un valor de la lista" sdata-flow="top">  &nbsp;Teléfono Móvil(Celular)&nbsp;</span><span style="color:red;">*</span>&nbsp;<br>
                                 <div class="input-group">
                                 <select id="codtelecel" name="codtelecel" style="width:70px;" required>
                                     @foreach ($cod_cels as $cod_cel)
                                         <option value="{{ $cod_cel->descripcion }}" @if(Str::substr($item->telcelular,0,4)==$cod_cel->descripcion)  selected @endif>{{ $cod_cel->descripcion }}</option>
                                     @endforeach
                                 </select>
-                                <input type="text" class="form-control" name="telefonoCel" id="telefonoCel" onkeypress="return isNumberKey(event);" value="{{Str::substr($item->telcelular,4,7)}}"  maxlength="11" onKeyPress="return valText(this.value, event, 'int');"  class="campoTexto" required/>
+                                <span data-tooltip="Permite sólo numéros" sdata-flow="top">   <input type="text" class="form-control" name="telefonoCel" id="telefonoCel" onkeypress="return isNumberKey(event);" value="{{Str::substr($item->telcelular,4,7)}}"  maxlength="11" onKeyPress="return valText(this.value, event, 'int');"  class="campoTexto" required/></span>
                                 </div>
                                 
                             </td>
@@ -167,11 +170,11 @@
                             </tr>
                             <tr>
                             <td>
-                            &nbsp;Otra dirección donde se pueda localizar:  &nbsp;&nbsp;&nbsp;&nbsp;
+                            <span data-tooltip="Permite sólo caracteres alfanuméricos" sdata-flow="top">&nbsp;Otra dirección donde se pueda localizar:  &nbsp;&nbsp;&nbsp;&nbsp;</span>
                             <input type="text" class="form-control"  name="dir_contacto" id="dir_contacto" value="{{$item->direccion_contacto}}"  onkeyup="mayusculas(this);" maxlength="200"  />
                             </td>
                             <td>
-                                &nbsp;Telefono Persona Contacto&nbsp;<span style="color:red;">*</span>&nbsp;<br>
+                            <span data-tooltip="Seleccione un valor de la lista" sdata-flow="top">  &nbsp;Teléfono Persona Contacto&nbsp;</span><span style="color:red;">*</span>&nbsp;<br>
                                 <div class="input-group">
                                 <select id="cod_contacto" name="cod_contacto" style="width:70px;" required>
                                     @foreach ($todos_cod as $todos_cod)
@@ -179,11 +182,11 @@
                                     @endforeach
                                     
                                 </select>
-                                <input type="text" class="form-control" name="telf_contacto" id="telf_contacto" onkeypress="return isNumberKey(event);" value="{{Str::substr($item->telefono_contacto,4,7)}}" maxlength="100" required/>
+                                <span data-tooltip="Permite sólo caracteres alfanuméricos" sdata-flow="top"><input type="text" class="form-control" name="telf_contacto" id="telf_contacto" onkeypress="return isNumberKey(event);" value="{{Str::substr($item->telefono_contacto,4,7)}}" maxlength="100" required/></span>
                                 </div>
                             </td>
                             <td>
-                            &nbsp;Persona Contacto:  &nbsp;&nbsp;&nbsp;&nbsp;
+                            <span data-tooltip="Permite sólo caracteres alfanuméricos" sdata-flow="top"> &nbsp;Persona Contacto:  &nbsp;&nbsp;&nbsp;&nbsp;</span>
                             <input type="text" class="form-control"  name="per_contacto" id="per_contacto"  onkeyup="mayusculas(this);" value="{{$item->persona_contacto}}"  maxlength="200"  />
                             </td>
                         </tr>                            

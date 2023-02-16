@@ -49,25 +49,25 @@
                     <tr> 
                         
                         <td>
-                            &nbsp;Nombre del Curso&nbsp;<span style="color:red;">*</span>&nbsp;
+                        <span data-tooltip="Permite sólo caracteres alfanuméricos" sdata-flow="top">&nbsp;Nombre del Curso&nbsp;</span><span style="color:red;">*</span>&nbsp;
                             <input type="text" class="form-control" required name="nommbre_curso" id="nommbre_curso" value="" onkeyup="mayusculas(this);" maxlength="255"/>
                         </td>
                         <td>
-                            &nbsp;Nombre de la Institución&nbsp;<span style="color:red;">*</span>&nbsp;
+                        <span data-tooltip="Permite sólo caracteres alfanuméricos" sdata-flow="top">&nbsp;Nombre de la Institución&nbsp;</span><span style="color:red;">*</span>&nbsp;
                             <input type="text"class="form-control" required name="institucion_curso" id="institucion_curso" onkeyup="mayusculas(this);" value=""  maxlength="100"/>
                         </td>
                         <td>
-                            &nbsp;Dirección Referencial&nbsp;<span style="color:red;">*</span>&nbsp;
+                        <span data-tooltip="Permite sólo caracteres alfanuméricos" sdata-flow="top">&nbsp;Dirección Referencial&nbsp;</span><span style="color:red;">*</span>&nbsp;
                             <input type="text" class="form-control"  required name="dir_ref_curso" id="dir_ref_curso" onkeyup="mayusculas(this);" maxlength="200" value=""/>
                         </td>
                         </tr>
                     <tr> 
                         <td>
-                            &nbsp;Fecha de Inicio&nbsp;<span style="color:red;">*</span>&nbsp;
+                        <span data-tooltip="Indique una fecha del calendario" sdata-flow="top">&nbsp;Fecha de Inicio&nbsp;</span><span style="color:red;">*</span>&nbsp;
                             <input type="date" class="form-control" required name="fechainicio_curso" id="fechainicio_curso" value="" style="width:190px;"/>
                         </td>
                         <td>
-                            &nbsp;Fecha de Culmincación&nbsp;<span style="color:red;">*</span>&nbsp;
+                        <span data-tooltip="Indique una fecha del calendario" sdata-flow="top"> &nbsp;Fecha de Culmincación&nbsp;</span><span style="color:red;">*</span>&nbsp;
                             <input type="date" class="form-control" required name="fechaculminacion_curso" id="fechaculminacion_curso" value="" style="width:190px;" />
                         </td>
                     </tr>

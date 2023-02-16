@@ -44,7 +44,7 @@
           @csrf
           <tr>
                         <td colspan="2"> 
-                            &nbsp;Presenta algún tipo de enfermedad crónica o padecimiento:&nbsp;<span style="color:red;">*</span>&nbsp;
+                        <span data-tooltip="Seleccione un valor de la lista" sdata-flow="top"> &nbsp;Presenta algún tipo de enfermedad crónica o padecimiento:&nbsp;</span><span style="color:red;">*</span>&nbsp;
                             <select id="posee_enfermedad" name="posee_enfermedad"class="form-control"  style="width:190px;" required >
                                             <option value="0">Seleccione...</option>
                                             <option value="1" @if($item->posee_enfermedad=='1')  selected @endif>SI</option>
@@ -53,7 +53,7 @@
                                    
                         </td>
                         <td colspan="2"> 
-                        &nbsp; Especifíque:&nbsp;               
+                        <span data-tooltip="Permite sólo caracteres alfanuméricos" sdata-flow="top">&nbsp; Especifíque:&nbsp;</span>               
                            <input type="text" class="form-control"name="tipo_enfermedad" id="tipo_enfermedad" onkeyup="mayusculas(this);" value="{{$item->tipo_enfermedad}}"  maxlength="200" size="50" />        
                               
                         </td>
@@ -61,7 +61,7 @@
                     </tr>
                     <tr>
                         <td colspan="2">
-                    &nbsp;Presenta algún tipo de alergia:&nbsp;<span style="color:red;">*</span>&nbsp;
+                        <span data-tooltip="Seleccione un valor de la lista" sdata-flow="top"> &nbsp;Presenta algún tipo de alergia:&nbsp;</span><span style="color:red;">*</span>&nbsp;
                             <select id="es_alergico" name="es_alergico"class="form-control"  style="width:190px;" required >
                                             <option value="0">Seleccione...</option>
                                             <option value="1" @if($item->es_alergico=='1')  selected @endif>SI</option>
@@ -69,18 +69,18 @@
                                     </select> 
                         </td>
                          <td colspan="2">
-                            &nbsp; Especifíque:&nbsp;               
+                         <span data-tooltip="Permite sólo caracteres alfanuméricos" sdata-flow="top"> &nbsp; Especifíque:&nbsp;  </span>             
                            <input type="text" class="form-control"name="tipo_alergia" id="tipo_alergia" onkeyup="mayusculas(this);" value="{{$item->tipo_alergia}}"  maxlength="200" size="50" />              
                         </td>
                     </tr>
 
                     <tr>
                         <td colspan="2"> 
-                            &nbsp;Si está bajo algún tratamiento médico especifíque:&nbsp;&nbsp;
+                        <span data-tooltip="Permite sólo caracteres alfanuméricos" sdata-flow="top">  &nbsp;Si está bajo algún tratamiento médico especifíque:&nbsp;&nbsp;</span>
                             <input type="text" class="form-control" name="tratamiento" id="tratamiento" onkeyup="mayusculas(this);" value="{{$item->tratamiento}}"  maxlength="200" size="50" />
                         </td>
                         <td colspan="2"> 
-                            &nbsp;Grupo Sanguíneo<span style="color:red;">*</span>&nbsp;
+                        <span data-tooltip="Seleccione un valor de la lista" sdata-flow="top"> &nbsp;Grupo Sanguíneo</span><span style="color:red;">*</span>&nbsp;
                             <select id="grupo_sanguineo" name="grupo_sanguineo"class="form-control"  style="width:190px;" required >
                                             <option value="0">Seleccione...</option>
                                             <option value="O RH+" @if($item->grupo_sanguineo=='O RH+')  selected @endif>O RH+</option>
@@ -97,28 +97,28 @@
                     <td class="table-primary"rowspan="4">&nbsp;<b>TALLAS</b> </td>
                     
                         <td>
-                            &nbsp;Estatura&nbsp;<span style="color:red;">*</span>&nbsp;
-                            <input type="text" class="form-control" required name="estatura" id="estatura" value="{{$item->estatura}}"  maxlength="25" required/>
+                        <span data-tooltip="Permite sólo caracteres alfanuméricos" sdata-flow="top">&nbsp;Estatura&nbsp;</span><span style="color:red;">*</span>&nbsp;
+                            <input type="text" class="form-control" required name="estatura" id="estatura" value="{{$item->estatura}}"  onkeyup="mayusculas(this);" maxlength="25" required/>
                         </td>
                         <td>
-                            &nbsp;Peso&nbsp;<span style="color:red;">*</span>&nbsp;
+                        <span data-tooltip="Permite sólo numéros" sdata-flow="top">&nbsp;Peso&nbsp;</span><span style="color:red;">*</span>&nbsp;
                             <input type="text"class="form-control" required name="peso" id="peso" value="{{$item->peso}}" onkeypress="return isNumberKey(event);" maxlength="100" required/>
                         </td>
                         </tr>
                     <tr>
                         <td>
-                            &nbsp;Pantalón&nbsp;<span style="color:red;">*</span>&nbsp;
+                        <span data-tooltip="Permite sólo caracteres alfanuméricos" sdata-flow="top">&nbsp;Pantalón&nbsp;</span><span style="color:red;">*</span>&nbsp;
                             <input type="text" class="form-control"  required name="pantalon" id="pantalon"  maxlength="200" onkeyup="mayusculas(this);" value="{{$item->pantalon}}" required/>
                         </td>                     
                         <td>
-                            &nbsp;Camisa&nbsp;<span style="color:red;">*</span>&nbsp;
+                        <span data-tooltip="Permite sólo caracteres alfanuméricos" sdata-flow="top">&nbsp;Camisa&nbsp;</span><span style="color:red;">*</span>&nbsp;
                             <input type="text" class="form-control"  required name="camisa" id="camisa"  maxlength="200" onkeyup="mayusculas(this);" value="{{$item->camisa}}" required/>
                         </td> 
                         </tr>
                     <tr>
                         <td>
-                            &nbsp;Calzado&nbsp;<span style="color:red;">*</span>&nbsp;
-                            <input type="text" class="form-control"  required name="calzado" id="calzado"  maxlength="200" value="{{$item->calzado}}" required/>
+                        <span data-tooltip="Permite sólo caracteres alfanuméricos" sdata-flow="top">&nbsp;Calzado&nbsp;</span><span style="color:red;">*</span>&nbsp;
+                            <input type="text" class="form-control"  required name="calzado" id="calzado"  maxlength="200" value="{{$item->calzado}}" onkeyup="mayusculas(this);" required/>
                         </td>
                         </tr>
                     <tr> 

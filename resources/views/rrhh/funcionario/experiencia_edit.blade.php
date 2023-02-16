@@ -31,36 +31,40 @@
                     
                     <tr>
                         <td>
-                            &nbsp;Empresa u Organización&nbsp;<span style="color:red;">*</span>&nbsp;
+                        <span data-tooltip="Permite sólo caracteres alfanuméricos" sdata-flow="top">    &nbsp;Empresa u Organización&nbsp;</span><span style="color:red;">*</span>&nbsp;
                             <input type="text" class="form-control" name="empresa" id="empresa" value="{{$item->nombre_empresa}}" onkeyup="mayusculas(this);"maxlength="200" required/>
                         </td>
                    
                         <td>
-                            &nbsp;Cargo de desempeñado&nbsp;<span style="color:red;">*</span>&nbsp;
+                        <span data-tooltip="Permite sólo caracteres alfanuméricos" sdata-flow="top">     &nbsp;Cargo de desempeñado&nbsp;</span><span style="color:red;">*</span>&nbsp;
                             <input type="text" class="form-control" name="cargo" id="cargo" value="{{$item->cargo}}"  onkeyup="mayusculas(this);" maxlength="150" required/>
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            &nbsp;Fecha Ingreso&nbsp;<span style="color:red;">*</span>&nbsp;
+                        <span data-tooltip="Indique una fecha del calendario" sdata-flow="top">  &nbsp;Fecha Ingreso&nbsp;</span><span style="color:red;">*</span>&nbsp;
                             <input type="date" class="form-control" name="fechaingreso" id="fechaingreso" value="{{$item->fecha_ingreso}}" style="width:190px;" maxlength="25" required/>
                         </td>
                    
                         <td>
-                            &nbsp;Fecha de Egreso&nbsp;<span style="color:red;">*</span>&nbsp;
+                        <span data-tooltip="Indique una fecha del calendario" sdata-flow="top">  &nbsp;Fecha de Egreso&nbsp;</span><span style="color:red;">*</span>&nbsp;
                             <input type="date" class="form-control" name="fechaegreso" id="fechaegreso" value="{{$item->fecha_egreso}}" style="width:190px;" maxlength="25" required/>
                         </td>
           
                         <td>
                                 &nbsp;Telefono Empresa u Organización&nbsp;<br>
                                 <div class="input-group">
-                                <select id="cod_telefono" name="cod_telefono" style="width:70px;" required>
+                                <span data-tooltip="Seleccione un valor de la lista" sdata-flow="top"> 
+                                    <select id="cod_telefono" name="cod_telefono" style="width:70px;" required>
                                     @foreach ($todos_cod as $todos_cod)
                                         <option value="{{ $todos_cod->descripcion }}" @if(Str::substr($item->telefono_empresa,0,4)==$todos_cod->descripcion)  selected @endif>{{ $todos_cod->descripcion }}</option>
                                     @endforeach
                                     
                                 </select>
-                                <input type="text" class="form-control" name="telefono" id="telefono"  onkeypress="return isNumberKey(event);" value="{{Str::substr($item->telefono_empresa,4,7)}}" maxlength="7" />
+                                </span>
+                                <span data-tooltip="Permite sólo caracteres alfanuméricos" sdata-flow="top">
+                                     <input type="text" class="form-control" name="telefono" id="telefono"  onkeypress="return isNumberKey(event);" value="{{Str::substr($item->telefono_empresa,4,7)}}" maxlength="7" />
+                                </span>
                                 </div>
                             </td>
                         <td></td>
