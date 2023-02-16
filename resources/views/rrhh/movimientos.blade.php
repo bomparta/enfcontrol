@@ -142,7 +142,7 @@
                                             </a>
                                             @else
                                             
-                                            <a href= "/rrhh/creardocumento_rrhh/{{$tipo_documento='rrhh_mov'}}/{{$movimiento->id_rrhh_mov}}/{{$funcionario->numero_identificacion}}" class="btn btn-info" data-tip="Detalle" title="Aprobación de la Renuncia" data-toggle="tooltip" data-original-title="Editar">
+                                            <a href= "/rrhh/creardocumento_rrhh/{{$tipo_documento='rrhh_mov'}}/{{$movimiento->id_rrhh_mov}}/{{$funcionario->numero_identificacion}}" class="btn btn-info" data-tip="Detalle" title="Contrato, Resolución y/u Otro documento" data-toggle="tooltip" data-original-title="Editar">
                                             <img src="/img/icon/list.ico" class="icon-sm" alt="Listado">
                                             @endif
                                             </td>

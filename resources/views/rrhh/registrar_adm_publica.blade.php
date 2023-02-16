@@ -98,7 +98,8 @@
                     <table align="center" border="0" cellpadding="2" cellspacing="2" width="100%">
                     <tr>                            
                     <td>
-                                &nbsp;Nombre de la Institución u Organismo <span style="color:red;">*</span>&nbsp;<br>
+                    <span data-tooltip="Permite sólo caracteres alfanuméricos" sdata-flow="top">&nbsp;Nombre de la Institución u Organismo </span>
+                    <span style="color:red;">*</span>&nbsp;<br>
                                 <input type= "text" id="institucion" rows="2" name="institucion" onkeyup="mayusculas(this);"  value="" class="form-control"  required>                              
                                 @error('institucion')
                                     <div class="invalid-feedback">
@@ -107,7 +108,7 @@
                                 @enderror
                             </td>        
                             <td>
-                                &nbsp;Último Cargo Desempeñado <span style="color:red;">*</span>&nbsp;<br>
+                            <span data-tooltip="Permite sólo caracteres alfanuméricos" sdata-flow="top">&nbsp;Último Cargo Desempeñado </span><span style="color:red;">*</span>&nbsp;<br>
                                 <input type= "text" id="ult_cargo" rows="2" name="ult_cargo" onkeyup="mayusculas(this);"  value="" class="form-control" required >                              
                                 @error('observaciones')
                                     <div class="invalid-feedback">
@@ -116,7 +117,8 @@
                                 @enderror
                             </td>
                             <td>
-                                &nbsp;Tipo de Trabajador&nbsp;<span style="color:red;">*</span>&nbsp;<br>
+                            <span data-tooltip="Seleccione un valor de la lista" sdata-flow="top">&nbsp;Tipo de Trabajador&nbsp;</span>
+                            <span style="color:red;">*</span>&nbsp;<br>
                                 <select id="id_tipo_trabajador" name="id_tipo_trabajador"  class="form-control" required >
                                 <option value="0">Seleccione...</option>
                                     @foreach ($tipo_trabajador as $tipo_trabajador)
@@ -135,7 +137,7 @@
 
                    <tr>
                    <td>
-                        &nbsp;Fecha de Ingreso al Organismo&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:red;">*</span><br>
+                   <span data-tooltip="Indique una fecha del calendario" sdata-flow="top">&nbsp;Fecha de Ingreso al Organismo&nbsp;</span><span style="color:red;">*</span><br>
                                 <input type="date" name="fechaingreso" id="fechaingreso" value="{{ old('fechaingreso') }}"  required/>
                            
                             @error('fechaingreso')
@@ -146,7 +148,7 @@
                        
                                 </td>
                             <td>
-                                &nbsp;Fecha de Egreso del Organismo&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:red;">*</span><br>
+                            <span data-tooltip="Indique una fecha del calendario" sdata-flow="top">&nbsp;Fecha de Egreso del Organismo&nbsp;</span><span style="color:red;">*</span><br>
                                 <input type="date" name="fechaegreso" id="fechaegreso" value="{{ old('fechaegreso') }}"  required/>
                            
                             @error('fechaegreso')
@@ -162,7 +164,7 @@
                        
                         <tr>                            
                             <td>
-                                &nbsp;Observaciones <br>
+                            <span data-tooltip="Permite sólo caracteres alfanuméricos" sdata-flow="top">&nbsp;Observaciones <br></span>
                                 <input type= "text" id="observaciones" rows="2" name="observaciones" onkeyup="mayusculas(this);"  value="" class="form-control"  >                              
                                 @error('observaciones')
                                     <div class="invalid-feedback">

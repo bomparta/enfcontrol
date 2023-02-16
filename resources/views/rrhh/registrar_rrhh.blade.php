@@ -89,7 +89,7 @@
                    <tr>
                    <tr>
                             <td>
-                                &nbsp;Tipo de Trabajador&nbsp;<span style="color:red;">*</span>&nbsp;<br>
+                            <span data-tooltip="Seleccione un valor de la lista" sdata-flow="top">  &nbsp;Tipo de Trabajador&nbsp;</span><span style="color:red;">*</span>&nbsp;<br>
                                 <select id="id_tipo_trabajador" name="id_tipo_trabajador"  class="form-control" required >
                                 <option value="0">Seleccione...</option>
                                     @foreach ($tipo_trabajador as $tipo_trabajador)
@@ -105,7 +105,7 @@
                                 @enderror
                             </td>
                             <td>
-                                &nbsp;Cargo&nbsp;<span style="color:red;">*</span>&nbsp;<br>
+                            <span data-tooltip="Permite sólo caracteres alfanuméricos" sdata-flow="top"> &nbsp;Cargo&nbsp;</span><span style="color:red;">*</span>&nbsp;<br>
                                 <input type= "text" id="cargo" name="cargo" onkeyup="mayusculas(this);"  value="{{$funcionario->cargo}}" class="form-control" required >                              
                                 @error('cargo')
                                     <div class="invalid-feedback">
@@ -118,7 +118,7 @@
                         <!-- FILA 6 -->
                         <tr>
                             <td>
-                                &nbsp;Unidad de Adscripción&nbsp;<span style="color:red;">*</span>&nbsp;<br>
+                            <span data-tooltip="Seleccione un valor de la lista" sdata-flow="top">  &nbsp;Unidad de Adscripción&nbsp;</span><span style="color:red;">*</span>&nbsp;<br>
                                 <select id="id_oficina_administrativa" name="id_oficina_administrativa"class="form-control" required >
                                 <option value="0">Seleccione...</option>
                                     @foreach ($uni_adscripcion as $uni_adscripcion)
@@ -138,7 +138,7 @@
                            
                         </tr>
                             <td>
-                                &nbsp;Fecha Movimiento&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:red;">*</span><br>
+                            <span data-tooltip="Indique una fecha del calendario" sdata-flow="top"> &nbsp;Fecha Movimiento&nbsp;</span><span style="color:red;">*</span><br>
                                 <input type="date" name="fechamov" id="fechamov" value=""  maxlength="25" required/>
                             </td>
                             @error('fechamov')
@@ -148,7 +148,7 @@
                                 @enderror  
                        
                             <td>
-                            &nbsp;Tipo Movimiento de Personal&nbsp;<span style="color:red;">*</span>&nbsp;
+                            <span data-tooltip="Seleccione un valor de la lista" sdata-flow="top"> &nbsp;Tipo Movimiento de Personal&nbsp;</span><span style="color:red;">*</span>&nbsp;
                             <select id="tipo_mov" name="tipo_mov"class="form-control" required >
                                 <option value="0">Seleccione...</option>
                             @foreach ($tipo_mov as $tipo_mov)
@@ -165,7 +165,7 @@
                         </tr>
                         <tr>
                             <td>
-                                &nbsp;Nombre de la Institución &nbsp;<span style="color:red;">*</span>&nbsp;<br>
+                            <span data-tooltip="Permite sólo caracteres alfanuméricos" sdata-flow="top"> &nbsp;Nombre de la Institución &nbsp;</span><span style="color:red;">*</span>&nbsp;<br>
                                 <input type= "text" id="institucion" name="institucion" onkeyup="mayusculas(this);"  value="" class="form-control" required >                              
                                 @error('institucion')
                                     <div class="invalid-feedback">
@@ -174,7 +174,7 @@
                                 @enderror
                             </td>
                             <td>
-                                &nbsp;Observaciones &nbsp;<span style="color:red;">*</span>&nbsp;<br>
+                            <span data-tooltip="Permite sólo caracteres alfanuméricos" sdata-flow="top">&nbsp;Observaciones &nbsp;</span><br>
                                 <input type= "text" id="observaciones" name="observaciones" onkeyup="mayusculas(this);"  value="" class="form-control"  >                              
                                 @error('observaciones')
                                     <div class="invalid-feedback">
