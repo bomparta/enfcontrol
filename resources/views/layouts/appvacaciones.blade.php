@@ -11,7 +11,7 @@
     <div class="d-flex flex-column align-items-center align-items-sm-start ">
     <div class="list-group list-group-flush">
         <!-- Menu Administrador RRHH-->
-        @if(in_array( Auth::user()->id_usuariogrupo, array(12) ))
+        @if(in_array( Auth::user()->id_usuariogrupo, array(9) ))
         <div class="card-header text-secondary">FUNCIONARIOS</div>
         <div class="card-header text-primary" align="center">Control de Expedientes</div>
         <a href="{{route('buscarfuncionario')}}" class="list-group-item list-group-item-action border-0">
@@ -44,7 +44,20 @@
             <img src="/img/icons-lineal/check_list.png" class="icon-lg">
             Solicitud de Vacaciones
         </a> 
-        <hr>
+        <div class="card-header text-primary" aling="center">Vacaciones</div>
+            <a href="{{route('vacaciones_pendientes_aprobacion')}}" class="list-group-item list-group-item-action border-0">
+            <img src="/img/icons-lineal/check_list.png" class="icon-lg">
+            Aprobación de Vacaciones Jefe(a) inmediato o Coordinador(a)
+            </a>   
+            <a href="{{route('vacaciones_pendientes_aprobacion_director')}}" class="list-group-item list-group-item-action border-0">
+            <img src="/img/icons-lineal/check_list.png" class="icon-lg">
+            Aprobación de Vacaciones Director(a)
+            </a>   
+            <a href="{{route('vacaciones_pendientes_aprobacion_presidencia')}}" class="list-group-item list-group-item-action border-0">
+            <img src="/img/icons-lineal/check_list.png" class="icon-lg">
+            Aprobación de Vacaciones Presidente(a)
+            </a>   
+       <hr>      
         <div class="card-header text-secondary">RRHH</div>
         <div class="card-header text-primary" aling="center">Control de Expedientes</div>
             <a href="{{route('ver_trabajador')}}" class="list-group-item list-group-item-action border-0">
@@ -52,19 +65,27 @@
                 Movimientos de Personal
             </a>
            
-            <div class="card-header text-primary" aling="center">Vacaciones</div>
-            <a href="{{route('vacaciones_pendientes_aprobacion')}}" class="list-group-item list-group-item-action border-0">
-            <img src="/img/icons-lineal/check_list.png" class="icon-lg">
-            Aprobación de Vacaciones
-            </a>   
-            <hr>  
+          
             <a href="{{route('reportesrrhh')}}" class="list-group-item list-group-item-action border-0">
                 <img src="/img/icons-lineal/check_list.png" class="icon-lg">
                 Reportes
             </a>
-        
+            <hr>
+        <div class="card-header text-secondary">BIENES NACIONALES</div>
+                <a href="{{route('bienes')}}" class="list-group-item list-group-item-action border-0">
+                <img src="/img/icons-lineal/check_list.png" class="icon-lg">
+                Incorporación 
+                </a>  
+                <a href="{{route('mov_bienes')}}" class="list-group-item list-group-item-action border-0">
+                <img src="/img/icons-lineal/check_list.png" class="icon-lg">
+                Movimientos
+                </a>    
+                <a href="{{route('desin_bienes')}}" class="list-group-item list-group-item-action border-0">
+                <img src="/img/icons-lineal/check_list.png" class="icon-lg">
+                Desincorporación
+                </a>  
         @endif
-        @if(in_array( Auth::user()->id_usuariogrupo, array(10,11,13,6,4) ))<!--Funcionarios !-->
+        @if(in_array( Auth::user()->id_usuariogrupo, array(10,11,12,13,14,6,4) ))<!--Funcionarios !-->
         <div class="card-header text-secondary">FUNCIONARIOS</div>
         <div class="card-header text-primary" aling="center">Control de Expedientes</div>
         <a href="{{route('buscarfuncionario')}}" class="list-group-item list-group-item-action border-0">
@@ -96,9 +117,28 @@
         <a href="{{route('funcionario_vacaciones')}}" class="list-group-item list-group-item-action border-0">
             <img src="/img/icons-lineal/check_list.png" class="icon-lg">
             Solicitud de Vacaciones
-        </a>     
-        @endif
-        @if(in_array( Auth::user()->id_usuariogrupo, array(10) )) <!--Personal rrhh !-->
+        </a> 
+        @if(in_array( Auth::user()->id_usuariogrupo, array(14 )))
+       
+            <a href="{{route('vacaciones_pendientes_aprobacion')}}" class="list-group-item list-group-item-action border-0">
+            <img src="/img/icons-lineal/check_list.png" class="icon-lg">
+            Aprobación de Vacaciones Jefe(a) inmediato o Coordinador(a)
+            </a>   
+        @endif  
+        @if(in_array( Auth::user()->id_usuariogrupo, array(15 )))
+            <a href="{{route('vacaciones_pendientes_aprobacion_director')}}" class="list-group-item list-group-item-action border-0">
+            <img src="/img/icons-lineal/check_list.png" class="icon-lg">
+            Aprobación de Vacaciones Director(a)
+            </a>   
+            @endif  
+        @if(in_array( Auth::user()->id_usuariogrupo, array(16 )))
+            <a href="{{route('vacaciones_pendientes_aprobacion_presidencia')}}" class="list-group-item list-group-item-action border-0">
+            <img src="/img/icons-lineal/check_list.png" class="icon-lg">
+            Aprobación de Vacaciones Presidente(a)
+            </a>       
+            @endif
+       
+        @if(in_array( Auth::user()->id_usuariogrupo, array(10,12 ))) <!--Personal rrhh !-->
         <div class="card-header text-secondary">RRHH</div>
         <div class="card-header text-primary" aling="center">Control de Expedientes</div>
             <a href="{{route('ver_trabajador')}}" class="list-group-item list-group-item-action border-0">
@@ -116,6 +156,23 @@
                 <img src="/img/icons-lineal/check_list.png" class="icon-lg">
                 Reportes
             </a>
+        @endif
+        @if(in_array( Auth::user()->id_usuariogrupo, array(13 ))) <!--Personal bienes nacionales !-->
+        <hr>
+        <div class="card-header text-secondary">BIENES NACIONALES</div>
+                <a href="{{route('bienes')}}" class="list-group-item list-group-item-action border-0">
+                <img src="/img/icons-lineal/check_list.png" class="icon-lg">
+                Incorporación 
+                </a>  
+                <a href="{{route('mov_bienes')}}" class="list-group-item list-group-item-action border-0">
+                <img src="/img/icons-lineal/check_list.png" class="icon-lg">
+                Movimientos
+                </a>    
+                <a href="{{route('desin_bienes')}}" class="list-group-item list-group-item-action border-0">
+                <img src="/img/icons-lineal/check_list.png" class="icon-lg">
+                Desincorporación
+                </a>  
+        @endif
         @endif
         <!-- Menu Comun -->
 

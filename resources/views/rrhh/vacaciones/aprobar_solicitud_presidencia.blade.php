@@ -29,7 +29,7 @@
                         </tr>
                     </table>
       
-          <form id="formulario" name="formulario" method="POST" action="{{route('store_aprobacion')}}">    
+          <form id="formulario" name="formulario" method="POST" action="{{route('store_aprobacion_presidencia')}}">    
           @csrf
           @if(isset($solicitudes))
         
@@ -147,7 +147,7 @@
   
                     <div class="frameContenedor" style="margin:5px;" align="right">
                         <input class='btn btn-info' type="submit" value="Guardar" >
-                        <a class='btn btn-secondary' href="{{URL::route('vacaciones_pendientes_aprobacion_director')}}">Regresar</a> 
+                        <a class='btn btn-secondary' href="{{URL::route('vacaciones_pendientes_aprobacion_presidencia')}}">Regresar</a> 
                     </div>
                  
                     @endif 

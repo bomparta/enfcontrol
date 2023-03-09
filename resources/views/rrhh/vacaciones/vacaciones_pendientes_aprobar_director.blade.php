@@ -8,7 +8,7 @@
             <div class="card">
                 <div class="card-body">
                     <div align="center" id="divTituloIndex2" class="text-primary">
-                                <b>JEFE(A) INMEDIATO O COORDINADOR(A)</b>                              
+                                <b>DIRECTOR(A)</b>
                     </div>
                     <div align="center" id="divTituloIndex2" class="text-primary">
                                 <b>VACACIONES PENDIENTES POR APROBAR </b>
@@ -20,10 +20,10 @@
                 
                             <ul class="nav nav-tabs">
                                 <li class="nav-item">
-                                    <a class="nav-link active" href="{{route('vacaciones_pendientes_aprobacion')}}">Vacaciones Pendientes por Aprobar</a>
+                                    <a class="nav-link active" href="{{route('vacaciones_pendientes_aprobacion_director')}}">Vacaciones Pendientes por Aprobar</a>
                                 </li>
                                 <li class="nav-item">
-                                <a class="nav-link "  href="{{route('vacaciones_aprobadas')}}">Vacaciones Aprobadas</a>
+                                <a class="nav-link "  href="{{route('vacaciones_aprobadas_director')}}">Vacaciones Aprobadas</a>
                                 </li>
                               
                                 </ul>
@@ -65,7 +65,7 @@
                                        <td>{{$vacaciones_solicitudes->fecha_reintegro}}</td>
                                         <td colspan="2">
                                        
-                                                <img src="{{url('img/imagen/documento.jpg')}}" style="max-width: 50px; max-height: 50px"  alt="Image"> <a href="{{route('store_revision',$vacaciones_solicitudes->id)}}" target="_new">
+                                                <img src="{{url('img/imagen/documento.jpg')}}" style="max-width: 50px; max-height: 50px"  alt="Image"> <a href="{{route('vacaciones_aprobacion',$vacaciones_solicitudes->id)}}" target="_new">
                                                  <span class='btn-info badge'><font color=#F2F3F8>Aprobar Vacaciones</font></span>                                        
                                           
 

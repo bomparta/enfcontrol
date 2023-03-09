@@ -371,8 +371,8 @@ public function subirArchivo_rrhh(Request $request)
         ->join ('persona', 'persona.id','=','funcionario.persona_id')    
         ->join('estado_civil','estado_civil.id','=','persona.id_estado_civil')  
         ->join('entidad','entidad.id','=','persona.estado_nac') 
-        ->JOIN('tipo_trabajador','tipo_trabajador.id','funcionario.id_tipo_funcionario')      
-        ->JOIN('ubic_administrativa','ubic_administrativa.id','funcionario.id_oficina_administrativa')          
+        ->join('tipo_trabajador','tipo_trabajador.id','funcionario.id_tipo_funcionario')      
+        ->join('ubic_administrativa','ubic_administrativa.id','funcionario.id_oficina_administrativa')          
         ->join('entidad as ent','ent.id','=','funcionario.estado_domicilio') 
         ->join('municipio','municipio.id','=','funcionario.municipio_domicilio')     
         ->join('parroquia','parroquia.id','=','funcionario.parroquia_domicilio')             
@@ -574,7 +574,7 @@ public function subirArchivo_rrhh(Request $request)
         $inicio=$request->fechaingreso;
         $fin=$request->fechaegreso;
         $error=$this->validar($inicio,$fin,$request->funcionario_id,$request->adm_pub_id);   
-      
+      $dias=0;$meses=0;$annos=0;
  
         $inicio = Carbon::parse($request->fechaingreso);
         $fin = Carbon::parse($request->fechaegreso);
@@ -646,7 +646,7 @@ public function subirArchivo_rrhh(Request $request)
         $error=$this->validar($inicio,$fin,$request->funcionario_id,$request->adm_pub_id);    
         $inicio = Carbon::parse($request->fechaingreso);
         $fin = Carbon::parse($request->fechaegreso);
-        
+        $dias=0;$meses=0;$annos=0;
         $dias = $inicio->diffInDays($fin);
         $dias=$dias%30;
         $meses = $inicio->diffInMonths($fin);

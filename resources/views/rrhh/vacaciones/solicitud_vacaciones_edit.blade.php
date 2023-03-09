@@ -111,53 +111,120 @@
                 <p><hr></p>            
 
                     <div class="card-body">
-                    <table id="example1" class="table table-bordered table-striped" >                        
+                    <div class="table-responsive mt-3">
+                        <table id="example1" class="table table-striped table-bordered" style="width:100%">                     
                         <thead>
                             <tr>
-                                <th>Fecha de Solicitud</th>
-                                <th>Lapso Disfrute</th>
-                                <th>Cargo</th>
-                                <th>Unidad Administrativa</th>
-                                <th>Fecha de Movimiento</th>                                   
-                                @if(in_array( Auth::user()->id_usuariogrupo, array(9,12,10) ))
+                                <th >Fecha de Solicitud</th>
+                                <th>Dias de  Disfrute</th>
+                                <th>Fecha de Inicio </th>
+                                <th>Fecha de Reintegro </th>
+                                <th>Lapsos a Disfrutar</th>     
+                                <th>Estatus de la Solicitud</th>                                    
+                                <th colspan=3>Niveles de Aprobación</th>      
+                                 
+                                @if(in_array( Auth::user()->id_usuariogrupo, array(9,12,10,11) ))
                                     <th>Opciones</th>
                                 @endif
                             </tr>
                         </thead>   
                         <tbody>   
-                            @if(isset($movimiento)   )
-                                @foreach($movimiento as $movimiento)                         
+                            @if(isset( $vacaciones_solicitudes)   )
+                                @foreach($vacaciones_solicitudes as $vacaciones)                         
                                     <tr>      
-                                    <td>{{$movimiento->tipo_mov}}</td>
-                                    <td>{{$movimiento->tipo_trabajador}}</td>
-                                    <td>{{$movimiento->cargo}}</td>
-                                    <td>{{$movimiento->ubic_administrativa}}</td>
-                                    <td>{{$movimiento->fechamov}}</td>
-                                        @if(in_array( Auth::user()->id_usuariogrupo, array(9,12,10) ))
-                                            <td class="text-center">
-                                            <a href= "/rrhh/registrar_rrhhedit/{{$movimiento->id_rrhh_mov}}" class="btn btn-info" data-tip="Detalle" title="Actualizar" data-toggle="tooltip" data-original-title="Editar">
-                                            <img src="/img/icon/modify.ico" class="icon-sm" alt="Listado">
-                                            </a>
-                                            &nbsp; &nbsp;
-                                            @if($movimiento->tipo_mov=='EGRESO')
-                                            <a href= "/rrhh/creardocumento_rrhh/{{$tipo_documento='carta_renuncia'}}/{{$movimiento->id_rrhh_mov}}/{{$funcionario->numero_identificacion}}" class="btn btn-info" data-tip="Detalle" title="Contrato" data-toggle="tooltip" data-original-title="Editar">
-                                            <img src="/img/icon/carta_ren.ico" class="icon-sm" alt="Listado">
-                                            </a>
-                                            &nbsp; &nbsp;
-                                            <a href= "/rrhh/creardocumento_rrhh/{{$tipo_documento='aprob_renuncia'}}/{{$movimiento->id_rrhh_mov}}/{{$funcionario->numero_identificacion}}" class="btn btn-info" data-tip="Detalle" title="Carta de Renuncia Voluntaria" data-toggle="tooltip" data-original-title="Editar">
-                                            <img src="/img/icon/carta_aprob.ico" class="icon-sm" alt="Listado">
-                                            </a>
+                                    <td>{{$vacaciones->fecha_solicitud}}</td>
+                                    <td>{{$vacaciones->dias_disfrute}} días</td>
+                                    <td>{{$vacaciones->fecha_inicio}}</td> 
+                                    <td>{{$vacaciones->fecha_reintegro}}</td> 
+                                    <td><a href="{{$vacaciones->lapsos_solicitados}}" class="btn btn-info" >Ver lapsos </a></td>
+                                  <div align="center">  <td>
+                                            @if($vacaciones->revisado==1)   
+                                            <img src="{{url('img/icon/check.png')}}" style="max-width: 40px; max-height: 40px"  alt="Image">  Revisada
+                                                @if($vacaciones->tipo_aprobacion_director==1)   
+                                                <img src="{{url('img/icon/check.png')}}" style="max-width: 40px; max-height: 40px"  alt="Image">  Aprobada
+                                                 @endif
+                                                @if($vacaciones->tipo_aprobacion_director==2)
+                                                <img src="{{url('img/icon/reloj.png')}}" style="max-width: 40px; max-height: 40px"  alt="Image">  Diferido
+                                                @endif
+                                                @if($vacaciones->tipo_aprobacion_director==3)
+                                                <img src="{{url('img/icon/erase.ico')}}" style="max-width: 40px; max-height: 40px"  alt="Image">  Denegado
+                                                @endif
+
                                             @else
-                                            
-                                            <a href= "/rrhh/creardocumento_rrhh/{{$tipo_documento='rrhh_mov'}}/{{$movimiento->id_rrhh_mov}}/{{$funcionario->numero_identificacion}}" class="btn btn-info" data-tip="Detalle" title="Aprobación de la Renuncia" data-toggle="tooltip" data-original-title="Editar">
-                                            <img src="/img/icon/list.ico" class="icon-sm" alt="Listado">
+                                            <img src="{{url('img/icon/erase.ico')}}" style="max-width: 40px; max-height: 40px"  alt="Image">  Sin Revisar</td>
                                             @endif
+                                        </td>    
+                                        </div>   
+                                       @if($vacaciones->aprobado_coordinador==1)
+                                            <td>   
+                                                                                 
+                                                <div align="center"><img src="{{url('img/icon/check.png')}}" style="max-width: 40px; max-height: 40px"  alt="Image"> 
+                                                    <span class='btn-info badge'><font color=#F2F3F8>Jefe(a) Inmediato o Coordinador(a)</font></span> 
+                                                </div>
                                             </td>
+                                        @else
+                                        <td >                                       
+                                                <div align="center"><img src="{{url('img/icon/erase.ico')}}" style="max-width: 40px; max-height: 40px"  alt="Image"> 
+                                                    <span class='btn-info badge'><font color=#F2F3F8>Jefe(a) Inmediato o Coordinador(a)</font></span> 
+                                                </div>
+                                        </td>
+                                        @endif
+                                        @if($vacaciones->aprobado_director==1)
+                                            <td>   
+                                                                                 
+                                                <div align="center"><img src="{{url('img/icon/check.png')}}" style="max-width: 40px; max-height: 40px"  alt="Image"> 
+                                                    <span class='btn-info badge'><font color=#F2F3F8>Director</font></span> 
+                                                </div>
+                                            </td>
+                                        @else
+                                        <td >                                       
+                                                <div align="center"><img src="{{url('img/icon/erase.ico')}}" style="max-width: 40px; max-height: 40px"  alt="Image"> 
+                                                    <span class='btn-info badge'><font color=#F2F3F8>Director(a)</font></span> 
+                                                </div>
+                                        </td>
+                                        @endif
+                                        @if($vacaciones->aprobado_presidencia==1)
+                                            <td>                                                                                    
+                                                <div align="center"><img src="{{url('img/icon/check.png')}}" style="max-width: 40px; max-height: 40px"  alt="Image"> 
+                                                    <span class='btn-info badge'><font color=#F2F3F8>Presidente(a)</font></span> 
+                                                </div>
+                                            </td>
+                                        @else
+                                        <td >                                       
+                                                <div align="center"><img src="{{url('img/icon/erase.ico')}}" style="max-width: 40px; max-height: 40px"  alt="Image"> 
+                                                    <span class='btn-info badge'><font color=#F2F3F8>Presidente(a)</font></span> 
+                                                </div>
+                                        </td>
+                                        @endif  
+                                        @if(in_array( Auth::user()->id_usuariogrupo, array(9,12,10,11) ))
+                                        @if($vacaciones->revisado==0)      
+                                        <td class="text-center">
+                                            <a href= "#" class="btn btn-info" data-tip="Detalle" title="Actualizar" data-toggle="tooltip" data-original-title="Editar">
+                                            <img src="/img/icon/modify.ico" class="icon-sm" alt="Listado">
+                                            </a>                                          
+                                            </td>
+                                        @else
+                                            <td></td>
+                                        @endif
                                         @endif                                                            
                                     </tr>
                                 @endforeach
                             @endif
                         </tbody>
+                        <tfoot>
+                            <tr>
+                                <th>Fecha de Solicitud</th>
+                                <th>Dias de  Disfrute</th>
+                                <th>Fecha de Inicio </th>
+                                <th>Fecha de Reintegro </th>
+                                <th>Lapsos a Disfrutar</th>    
+                                <th>Estatus de la Solicitud</th>                                    
+                                <th colspan=3>Niveles de Aprobación</th>    
+                                @if(in_array( Auth::user()->id_usuariogrupo, array(9,12,10,11) ))
+                                    <th>Opciones</th>
+                                @endif
+                            </tr>
+                        </tfoot>   
                        
                     </table>
 
@@ -176,5 +243,41 @@
 
 
 @section('scripts')
-<script src="{{url('js/funciones_generales.js')}}"></script>
+<script src="{{url('js/funciones_generales.js')}}"></script><!-- jQuery -->
+
+<script src="/plugins/jquery/jquery.min.js"></script>
+<!-- Bootstrap 4 -->
+<script src="/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- DataTables  & Plugins -->
+<script src="/plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+<script src="/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+<script src="/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+<script src="/plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
+<script src="/plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
+<script src="/plugins/jszip/jszip.min.js"></script>
+<script src="/plugins/pdfmake/pdfmake.min.js"></script>
+<script src="/plugins/pdfmake/vfs_fonts.js"></script>
+<script src="/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
+<script src="/plugins/datatables-buttons/js/buttons.print.min.js"></script>
+<script src="/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js" defer></script>
+    <script src="https://cdn.datatables.net/1.10.24/js/dataTables.bootstrap4.min.js" defer></script>
+<script
+  src="https://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
+
+<script>
+
+    $(function () {
+        $('#example1').DataTable({
+"language": {
+"url": "//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json",
+"responsive": true, "lengthChange": false, "autoWidth": false,
+"buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+}
+});
+});
+  </script>
 @endsection

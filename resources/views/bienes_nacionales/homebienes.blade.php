@@ -11,7 +11,7 @@
     <div class="col-xs-11 col-sm-11 col-md-11 col-lg-10 col-xl-10 col-xxl-10">
       <div class="card-columns">
         <div class="col ps-6">                
-          @if(in_array( Auth::user()->id_usuariogrupo, array(13) ))
+          @if(in_array( Auth::user()->id_usuariogrupo, array(13,9) ))
             <div class="card bg-light mb-6" style="max-width: 14rem;">
                 <div class="card-header text-secondary">INCORPORACIÓN BIENES</div>
                 <div class="card-body">
@@ -22,7 +22,7 @@
               </div>                       
             @endif              
           
-          @if(in_array( Auth::user()->id_usuariogrupo, array(13) ))
+          @if(in_array( Auth::user()->id_usuariogrupo, array(13,9) ))
             <div class="card bg-light mb-6" style="max-width: 14rem;">
                 <div class="card-header text-secondary">MOVIMIENTOS BIENES</div>
                 <div class="card-body">
@@ -32,7 +32,7 @@
                 </div>
               </div>                       
             @endif  
-            @if(in_array( Auth::user()->id_usuariogrupo, array(13) ))
+            @if(in_array( Auth::user()->id_usuariogrupo, array(13,9) ))
             <div class="card bg-light mb-6" style="max-width: 14rem;">
                 <div class="card-header text-secondary">DESINCORPORACIÖN BIENES</div>
                 <div class="card-body">
@@ -43,7 +43,7 @@
               </div>                       
             @endif  
             
-            @if(in_array( Auth::user()->id_usuariogrupo, array(13) ))
+            @if(in_array( Auth::user()->id_usuariogrupo, array(13,9) ))
             <div class="card bg-light mb-6" style="max-width: 14rem;">
                 <div class="card-header text-secondary">REPORTES</div>
                 <div class="card-body">

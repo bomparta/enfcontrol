@@ -267,8 +267,21 @@ Route::get('/rrhh/vacaciones', 'VacacionesController@home')->name('vacaciones');
 Route::get('/rrhh/vacaciones/homefuncionariosvacaciones', 'VacacionesController@funcionarios')->name('funcionario_vacaciones');
 Route::get('/rrhh/vacaciones/homerrhhvacaciones', 'VacacionesController@rrhh')->name('rrhh_vacaciones');
 Route::get("/rrhh/vacaciones/registrar_solicitud/{cedula}","VacacionesController@create")->name('registrar_solicitud');
+Route::post("/rrhh/vacaciones/registrar_solicitud", "VacacionesController@store_vacaciones")->name('store_vacaciones');
 Route::get("/rrhh/vacaciones/vacaciones_pendientes","VacacionesController@ver_pendientes")->name('vacaciones_pendientes');
 Route::get("/rrhh/vacaciones/vacaciones_disfrutadas","VacacionesController@ver_disfrutadas")->name('vacaciones_disfrutadas');
+
+//niveles aprobacion jefe inmediato o coordinador//
 Route::get("/rrhh/vacaciones/vacaciones_pend_aprobar","VacacionesController@ver_pendientes_aprobar")->name('vacaciones_pendientes_aprobacion');
 Route::get("/rrhh/vacaciones/vacaciones_aprobadas","VacacionesController@ver_aprobadas")->name('vacaciones_aprobadas');
-Route::get("/rrhh/vacaciones/vacaciones_aprobaciones","VacacionesController@aprobacion")->name('vacaciones_aprobacion');
+Route::get("/rrhh/vacaciones/vacaciones_pend_aprobar/{id}", "VacacionesController@store_revision")->name('store_revision');
+//niveles aprobacion director//
+Route::get("/rrhh/vacaciones/vacaciones_pend_aprobar_director","VacacionesController@ver_pendientes_aprobar_director")->name('vacaciones_pendientes_aprobacion_director');
+Route::get("/rrhh/vacaciones/vacaciones_aprobadas_director","VacacionesController@ver_aprobadas_director")->name('vacaciones_aprobadas_director');
+Route::get("/rrhh/vacaciones/aprobar_solicitud/{id}","VacacionesController@aprobacion")->name('vacaciones_aprobacion');
+Route::post("/rrhh/vacaciones/aprobar_solicitud", "VacacionesController@store_aprobacion")->name('store_aprobacion');
+//niveles aprobacion presidencia//
+Route::get("/rrhh/vacaciones/vacaciones_pend_aprobar_presidencia","VacacionesController@ver_pendientes_aprobar_presidencia")->name('vacaciones_pendientes_aprobacion_presidencia');
+Route::get("/rrhh/vacaciones/vacaciones_aprobadas_presidencia","VacacionesController@ver_aprobadas_presidencia")->name('vacaciones_aprobadas_presidencia');
+Route::get("/rrhh/vacaciones/aprobar_solicitud_presidencia/{id}","VacacionesController@aprobacion_presidencia")->name('vacaciones_aprobacion_presidencia');
+Route::post("/rrhh/vacaciones/aprobar_solicitud_presidencia", "VacacionesController@store_aprobacion_presidencia")->name('store_aprobacion_presidencia');

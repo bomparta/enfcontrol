@@ -45,23 +45,23 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                    
+                            @if(isset($pendientes))
                         
-                                    
+                            @foreach($pendientes as $pendientes) 
                                     <tr>                                    
                                       
-                                       <td>2023</td>
-                                       <td>27 días</td>
+                                       <td>{{$pendientes->lapso_disfrute}}</td>
+                                       <td>{{$pendientes->dias_adisfrutar}} días</td>
                                         <td colspan="2">
                                        
-                                                <img src="{{url('img/imagen/documento.jpg')}}" style="max-width: 50px; max-height: 50px"  alt="Image"> <a href="{{route('funcionario_vacaciones')}}" target="_new">
+                                                <img src="{{url('img/imagen/documento.jpg')}}" style="max-width: 50px; max-height: 50px"  alt="Image"> <a href="{{route('registrar_solicitud',$cedula)}}" target="_new">
                                                  <span class='btn-info badge'><font color=#F2F3F8>Solicitar</font></span>                                        
                                           
 
                                         </td>                                                                             
                                     </tr>                     
-                               
-                         
+                               @endforeach
+                         @endif
                                 
                             </tbody>
                         </table>

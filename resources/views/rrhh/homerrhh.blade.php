@@ -13,7 +13,7 @@
         <div class="card-columns">
                 <div class="col ps-6">
                 
-                @if(in_array( Auth::user()->id_usuariogrupo, array(12,10,11,13,6,4) ))
+                @if(in_array( Auth::user()->id_usuariogrupo, array(12,10,11,13,14,15,16,6,4,9) ))
                   <div class="card bg-light mb-6" style="max-width: 14rem;">
                       <div class="card-header text-secondary">FUNCIONARIOS</div>
                       <div class="card-body">
@@ -21,10 +21,10 @@
                           <img src="{{url('/img/registro.jpeg')}}" class="card-img-bottom" >
                         </a>
                       </div>
-                    </div>    
+                    </div>                   
                                    
                   @endif  
-                    @if(in_array( Auth::user()->id_usuariogrupo, array(12,10) ))
+                    @if(in_array( Auth::user()->id_usuariogrupo, array(12,10,9) ))
                     <div class="card bg-light mb-6" style="max-width: 14rem;">
                       <div class="card-header text-secondary">RRHH</div>
                       <div class="card-body">

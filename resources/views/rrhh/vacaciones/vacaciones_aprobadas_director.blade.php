@@ -8,7 +8,7 @@
             <div class="card">
                 <div class="card-body">
                 <div align="center" id="divTituloIndex2" class="text-primary">
-                                <b>JEFE(A) INMEDIATO O COORDINADOR(A)</b>                              
+                                <b>DIRECTOR(A)</b>                              
                     </div>
                     <div align="center" id="divTituloIndex2" class="text-primary">
                                 <b>VACACIONES APROBADAS</b>
@@ -20,10 +20,10 @@
                 
                             <ul class="nav nav-tabs">
                                 <li class="nav-item">
-                                    <a class="nav-link " href="{{route('vacaciones_pendientes_aprobacion')}}">Vacaciones Pendientes por Aprobar</a>
+                                    <a class="nav-link " href="{{route('vacaciones_pendientes_aprobacion_director')}}">Vacaciones Pendientes por Aprobar</a>
                                 </li>
                                 <li class="nav-item">
-                                <a class="nav-link active"  href="{{route('vacaciones_aprobadas')}}">Vacaciones Aprobadas</a>
+                                <a class="nav-link active"  href="{{route('vacaciones_aprobadas_director')}}">Vacaciones Aprobadas</a>
                                 </li>
                               
                                 </ul>
@@ -63,22 +63,15 @@
                                        <td>{{$vacaciones_solicitudes->fecha_reintegro}}</td>
                                        <td>
                                         <div align="center">
-                                            @if($vacaciones_solicitudes->revisado==1)   
-                                            <img src="{{url('img/icon/check.png')}}" style="max-width: 40px; max-height: 40px"  alt="Image">  Revisada
-                                                @if($vacaciones_solicitudes->tipo_aprobacion_director==1)   
-                                                <img src="{{url('img/icon/check.png')}}" style="max-width: 40px; max-height: 40px"  alt="Image">  Aprobada
-                                                 @endif
-                                                @if($vacaciones_solicitudes->tipo_aprobacion_director==2)
-                                                <img src="{{url('img/icon/reloj.png')}}" style="max-width: 40px; max-height: 40px"  alt="Image">  Diferido
-                                                @endif
-                                                @if($vacaciones_solicitudes->tipo_aprobacion_director==3)
-                                                <img src="{{url('img/icon/erase.ico')}}" style="max-width: 40px; max-height: 40px"  alt="Image">  Denegado
-                                                @endif
-
-                                            @else
-                                            <img src="{{url('img/icon/check.png')}}" style="max-width: 40px; max-height: 40px"  alt="Image">  Sin Revisar</td>
+                                            @if($vacaciones_solicitudes->tipo_aprobacion_director==1)   
+                                            <img src="{{url('img/icon/check.png')}}" style="max-width: 40px; max-height: 40px"  alt="Image">  Aprobada</td>
+                                           @endif
+                                            @if($vacaciones_solicitudes->tipo_aprobacion_director==2)
+                                            <img src="{{url('img/icon/reloj.png')}}" style="max-width: 40px; max-height: 40px"  alt="Image">  Diferido</td>
                                             @endif
-                                        </td>    
+                                            @if($vacaciones_solicitudes->tipo_aprobacion_director==3)
+                                            <img src="{{url('img/icon/erase.ico')}}" style="max-width: 40px; max-height: 40px"  alt="Image">  Denegado</td>
+                                            @endif
                                         </div>   
                                     </td>  
                                        @if($vacaciones_solicitudes->aprobado_coordinador==1)

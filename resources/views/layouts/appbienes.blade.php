@@ -11,7 +11,7 @@
     <div class="d-flex flex-column align-items-center align-items-sm-start ">
     <div class="list-group list-group-flush">
         <!-- Menu Administrador RRHH-->
-        @if(in_array( Auth::user()->id_usuariogrupo, array(13) ))
+        @if(in_array( Auth::user()->id_usuariogrupo, array(13,9) ))
         <div class="card-header text-secondary">BIENES NACIONALES</div>
         <a href="{{route('bienes')}}" class="list-group-item list-group-item-action border-0">
             <img src="/img/icons-lineal/check_list.png" class="icon-lg">

@@ -13,9 +13,9 @@
         <div class="card-columns">
                 <div class="col ps-6">
                 
-                @if(in_array( Auth::user()->id_usuariogrupo, array(12,10,11,13,6,4) ))
+                @if(in_array( Auth::user()->id_usuariogrupo, array(12,10,11,13,14,15,16,6,4,9) ))
                   <div class="card bg-light mb-6" style="max-width: 14rem;">
-                      <div class="card-header text-secondary">FUNCIONARIOS</div>
+                   
                       <div class="card-body">
                         <a href="{{route('funcionario_vacaciones')}}" ><h6 class="card-title">Solicitud Vacaciones</h6>
                           <img src="{{url('/img/registro.jpeg')}}" class="card-img-bottom" >
@@ -23,18 +23,38 @@
                       </div>
                     </div>    
                                    
-                  @endif  
-                    @if(in_array( Auth::user()->id_usuariogrupo, array(12,10) ))
+                 
+                    @if(in_array( Auth::user()->id_usuariogrupo, array(14,9)))
                     <div class="card bg-light mb-6" style="max-width: 14rem;">
-                      <div class="card-header text-secondary">RRHH</div>
+                    
                       <div class="card-body">
-                      <a href="{{route('vacaciones_pendientes_aprobacion')}}"> <h6 class="card-title">Aprobación Vacaciones  </h6>
+                      <a href="{{route('vacaciones_pendientes_aprobacion')}}"> <h6 class="card-title">Aprobación Vacaciones Jefe(a) Inmediato o Coordinador(a) </h6>
+                        <img src="{{url('/img/con_vacacion.jpeg')}}" class="card-img-top">
+                      </a>
+                      </div>
+                    </div>
+                    @endif
+                    @if(in_array( Auth::user()->id_usuariogrupo, array(15,9)))
+                    <div class="card bg-light mb-6" style="max-width: 14rem;">
+                     
+                      <div class="card-body">
+                      <a href="{{route('vacaciones_pendientes_aprobacion_director')}}"> <h6 class="card-title">Aprobación Vacaciones Director(a) </h6>
+                        <img src="{{url('/img/con_vacacion.jpeg')}}" class="card-img-top">
+                      </a>
+                      </div>
+                    </div>
+                    @endif
+                    @if(in_array( Auth::user()->id_usuariogrupo, array(16,9)))
+                    <div class="card bg-light mb-6" style="max-width: 14rem;">
+                    
+                      <div class="card-body">
+                      <a href="{{route('vacaciones_pendientes_aprobacion_presidencia')}}"> <h6 class="card-title">Aprobación Vacaciones Presidente(a) </h6>
                         <img src="{{url('/img/con_vacacion.jpeg')}}" class="card-img-top">
                       </a>
                       </div>
                     </div>
                     
-                    
+                  @endif  
                   @endif  
                   </div>
                 </div>

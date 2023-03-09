@@ -19,7 +19,7 @@
         <div class="card-columns">
                 <div class="col ps-6">
                 
-                @if(in_array( Auth::user()->id_usuariogrupo, array(13) ))
+                @if(in_array( Auth::user()->id_usuariogrupo, array(13,9) ))
                   <div class="card bg-light mb-6" style="max-width: 14rem;">
                       
                       <div class="card-body">
@@ -29,7 +29,7 @@
                       </div>
                     </div>                       
                   @endif  
-                  @if(in_array( Auth::user()->id_usuariogrupo, array(13) ))
+                  @if(in_array( Auth::user()->id_usuariogrupo, array(13,9) ))
                   <div class="card bg-light mb-6" style="max-width: 14rem;">
                      
                       <div class="card-body">
@@ -41,7 +41,7 @@
                   @endif 
                 
                 
-                  @if(in_array( Auth::user()->id_usuariogrupo, array(13) ))
+                  @if(in_array( Auth::user()->id_usuariogrupo, array(13,9) ))
                   <div class="card bg-light mb-6" style="max-width: 14rem;">
                      
                       <div class="card-body">
@@ -51,7 +51,7 @@
                       </div>
                     </div>                       
                   @endif 
-                  @if(in_array( Auth::user()->id_usuariogrupo, array(13) ))
+                  @if(in_array( Auth::user()->id_usuariogrupo, array(13,9) ))
                   <div class="card bg-light mb-6" style="max-width: 14rem;">
                      
                       <div class="card-body">

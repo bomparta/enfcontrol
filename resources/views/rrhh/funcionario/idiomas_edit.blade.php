@@ -33,7 +33,7 @@
                                 </div>
                                 <div id="divSubTituloIndex2">
                                     <hr>
-                                    <b>Suministre sus datos de los <span style="color:gray;">Idiomas</span> que domina, haga clic en "Registrar Idioma" para registrar su información <b>
+                                    <b>Suministre sus datos de los <span style="color:gray;">Idiomas</span> que domina, haga clic en "Guardar" para registrar su información <b>
                                     <hr>   
                                 </div>
                             </td>

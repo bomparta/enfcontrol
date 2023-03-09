@@ -19,7 +19,7 @@
                                 <div id="divSubTituloIndex2">
                                    
                                     <hr>
-                                    <b> Sumistrar los datos correspondientes a la <span style="color:gray; ">Antecedentes de la Administración Pública </span> del funcionario.
+                                    <b> Sumistrar los datos correspondientes a la <span style="color:gray; ">Antecedentes de la Administración Pública </span> del funcionario, haga clic en "Guardar" para actualizar su información
                                     <hr>   
                                     @include('rrhh.funcionario.mensaje')  
                            
@@ -34,14 +34,14 @@
           @csrf   
           <input type= "hidden" id="cedula" name="cedula" value="{{$cedula}}" class="form-control"  >    
           <input type="hidden" name="tipo_documento" id="tipo_documento" value="adm_pub_constancia" required>   
-          <input type= "text" id="funcionario_id" name="funcionario_id" value="{{$adm_pub->funcionario_id}}" class="form-control"  >       
+          <input type= "hidden" id="funcionario_id" name="funcionario_id" value="{{$adm_pub->funcionario_id}}" class="form-control"  >       
         
                 
                     <input type="hidden" name="adm_pub_id" id="adm_pub_id" value="{{$adm_pub->adm_id}}" required>   
                     <table align="center" border="0" cellpadding="2" cellspacing="2" width="100%">
                     <tr>                            
                     <td>
-                                &nbsp;Nombre de la Institución u Organismo <span style="color:red;">*</span>&nbsp;<br>
+                    <span data-tooltip="Permite sólo caracteres alfanuméricos" sdata-flow="top">&nbsp;Nombre de la Institución u Organismo </span><span style="color:red;">*</span>&nbsp;<br>
                                 <input type= "text" id="institucion" rows="2" name="institucion" onkeyup="mayusculas(this);"  value="{{$adm_pub->organismo}}" class="form-control"  required>                              
                                 @error('institucion')
                                     <div class="invalid-feedback">
@@ -50,7 +50,7 @@
                                 @enderror
                             </td>        
                             <td>
-                                &nbsp;Último Cargo Desempeñado <span style="color:red;">*</span>&nbsp;<br>
+                            <span data-tooltip="Permite sólo caracteres alfanuméricos" sdata-flow="top">&nbsp;Último Cargo Desempeñado</span> <span style="color:red;">*</span>&nbsp;<br>
                                 <input type= "text" id="ult_cargo" rows="2" name="ult_cargo" onkeyup="mayusculas(this);"  value="{{$adm_pub->ult_cargo}}" class="form-control" required >                              
                                 @error('observaciones')
                                     <div class="invalid-feedback">
@@ -59,7 +59,7 @@
                                 @enderror
                             </td>
                             <td>
-                                &nbsp;Tipo de Trabajador&nbsp;<span style="color:red;">*</span>&nbsp;<br>
+                            <span data-tooltip="Seleccione un valor de la lista" sdata-flow="top">&nbsp;Tipo de Trabajador&nbsp;</span><span style="color:red;">*</span>&nbsp;<br>
                                 <select id="id_tipo_trabajador" name="id_tipo_trabajador"  class="form-control" required >
                                 <option value="0">Seleccione...</option>
                                     @foreach ($tipo_trabajador as $tipo_trabajador)
@@ -78,7 +78,7 @@
 
                    <tr>
                    <td>
-                        &nbsp;Fecha de Ingreso al Organismo&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:red;">*</span><br>
+                   <span data-tooltip="Indique una fecha del calendario" sdata-flow="top">&nbsp;Fecha de Ingreso al Organismo&nbsp;</span><span style="color:red;">*</span><br>
                                 <input type="date" name="fechaingreso" id="fechaingreso" value="{{$adm_pub->fecha_ingreso}}"  required/>
                            
                             @error('fechaingreso')
@@ -89,7 +89,7 @@
                        
                                 </td>
                             <td>
-                                &nbsp;Fecha de Egreso del Organismo&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:red;">*</span><br>
+                            <span data-tooltip="Indique una fecha del calendario" sdata-flow="top">&nbsp;Fecha de Egreso del Organismo&nbsp;</span><span style="color:red;">*</span><br>
                                 <input type="date" name="fechaegreso" id="fechaegreso" value="{{$adm_pub->fecha_egreso}}"  required/>
                            
                             @error('fechaegreso')
@@ -105,7 +105,7 @@
                        
                         <tr>                            
                             <td>
-                                &nbsp;Observaciones <br>
+                            <span data-tooltip="Permite sólo caracteres alfanuméricos" sdata-flow="top">&nbsp;Observaciones <br></span>
                                 <input type= "text" id="observaciones" rows="2" name="observaciones" onkeyup="mayusculas(this);"  value="{{$adm_pub->observaciones}}" class="form-control"  >                              
                                 @error('observaciones')
                                     <div class="invalid-feedback">

@@ -19,7 +19,7 @@
                                 <div id="divSubTituloIndex2">
                                    
                                     <hr>
-                                    <b> Sumistrar los datos correspondientes a la <span style="color:gray; ">Antecedentes de la Administración Pública </span> del funcionario.
+                                    <b> Sumistrar los datos correspondientes a la <span style="color:gray; ">Antecedentes de la Administración Pública </span> del funcionario, haga clic en "Guardar" para registrar su información.
                                     <hr>   
                                     @include('rrhh.funcionario.mensaje')  
                            
@@ -188,7 +188,7 @@
                     @endif 
                     <hr>
                     <div class="table-responsive mt-3">
-                        <table id="example1" class="table table-striped table-bordered" style="width:100%">                        
+                    <table id="example1" class="table table-striped table-bordered" style="width:100%">                                
                             <thead>
                                 <tr>
                                     <th>Nombre Institución u Organismo Público</th>
@@ -196,7 +196,7 @@
                                     <th>Fecha de Egreso</th>
                                     <th>Tiempo de Servicio</th>
                                     @if(in_array( Auth::user()->id_usuariogrupo, array(9,12,10) ))
-                                        <th colspan="2">Opcion</th>
+                                        <th colspan="2">Opción</th>
                                     @endif
                                     <th>Requisitos</th>
                                 </tr>
@@ -209,11 +209,12 @@
                                         <td>{{$adm->fecha_egreso}}</td>
                                         <td>{{$adm->anno_servicios}} años {{$adm->meses_servicios}} meses {{$adm->dias_servicios}} días </td>
                                         
-                                        @if(in_array( Auth::user()->id_usuariogrupo, array(9,12,10) ))
-                                            <td class="text-center" colspan="2">
+                                       @if(in_array( Auth::user()->id_usuariogrupo, array(9,12,10) ))
+                                        <td class="text-center" >
                                             <a href= "/rrhh/registrar_adm_publica_edit/{{$adm->adm_id}}/{{$funcionario->numero_identificacion}}" class="btn btn-info" data-tip="Detalle" title="Actualizar Antecedente" data-toggle="tooltip" data-original-title="Editar">
                                             <img src="/img/icon/modify.ico" class="icon-sm" alt="Listado">
-                                            
+                                        </td>
+                                        <td>
                                         <form method="POST" action="{{URL::route('borrar_adm_pub',$adm->adm_id)}}">
                                         @csrf
                                             <input type="hidden" name="_method" value="delete">
@@ -221,10 +222,9 @@
                                             <img src="/img/icon/erase.ico" class="icon-sm" alt="Listado"></button>
                                            
                                         </form>
-                                            </td>                                      
+                                         </td>                                      
                                         <td>
-                                        <a href= "{{ Storage::url( $adm->ruta_documento) }}" target="_new"class="btn btn-info" data-tip="Detalle" title="Constancia o Antecedente de Servicio" data-toggle="tooltip" data-original-title="Editar"> 
-                                        
+                                        <a href= "{{ Storage::url( $adm->ruta_documento) }}" target="_new"class="btn btn-info" data-tip="Detalle" title="Constancia o Antecedente de Servicio" data-toggle="tooltip" data-original-title="Editar">                                         
                                         <img src="/img/icon/constancia.png" class="icon-sm" alt="Listado">
                                         </a>
                                         </td>     
@@ -284,24 +284,14 @@
   src="https://code.jquery.com/jquery-3.3.1.min.js"
   integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
   crossorigin="anonymous"></script>
+  <script>
 
-<script>
-
-    $(function () {
-      $("#example1").DataTable({
-        "responsive": true, "lengthChange": false, "autoWidth": false,
-        "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
-      }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-      $('#example2').DataTable({
-        "paging": true,
-        "lengthChange": false,
-        "searching": false,
-        "ordering": true,
-        "info": true,
-        "autoWidth": false,
-        "responsive": true,
-      });
-    });
-  </script>
+$(function () {
+    $('#example1').DataTable({
+"language": {
+"url": "//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json"
+}
+});
+});
+</script>
 @endsection
-
