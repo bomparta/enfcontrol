@@ -11,7 +11,7 @@
                                 <b>JEFE(A) INMEDIATO O COORDINADOR(A)</b>                              
                     </div>
                     <div align="center" id="divTituloIndex2" class="text-primary">
-                                <b>VACACIONES APROBADAS</b>
+                                <b>VACACIONES REVISADAS</b>
                     </div>
                     <table  align="center" border="0" cellpadding="5" cellspacing="2" width="100%" >
                     <tr>
@@ -20,10 +20,10 @@
                 
                             <ul class="nav nav-tabs">
                                 <li class="nav-item">
-                                    <a class="nav-link " href="{{route('vacaciones_pendientes_aprobacion')}}">Vacaciones Pendientes por Aprobar</a>
+                                    <a class="nav-link " href="{{route('vacaciones_pendientes_aprobacion')}}">Vacaciones Pendientes por Revisar</a>
                                 </li>
                                 <li class="nav-item">
-                                <a class="nav-link active"  href="{{route('vacaciones_aprobadas')}}">Vacaciones Aprobadas</a>
+                                <a class="nav-link active"  href="{{route('vacaciones_aprobadas')}}">Vacaciones Revisadas</a>
                                 </li>
                               
                                 </ul>

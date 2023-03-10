@@ -164,4 +164,16 @@
 
 
 @endsection
+@section('scripts')
+<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+<script src="{{url('js/funciones_vacaciones.js')}}"></script>
+<script src="{{url('js/funciones_generales.js')}}"></script>
+
+<!-- jQuery -->
+<script src="/plugins/jquery/jquery.min.js"></script>
+<!-- Bootstrap 4 -->
+<script src="/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+
+@endsection
 

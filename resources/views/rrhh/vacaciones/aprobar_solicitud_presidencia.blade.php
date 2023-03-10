@@ -115,7 +115,7 @@
                         <td>
                                 &nbsp;Tipo de Aprobación&nbsp;<span style="color:red;">*</span>&nbsp;<br>
                                 <select id="tipo_aprobacion" name="tipo_aprobacion"  class="form-control" required >
-                                <option value="0">Seleccione...</option>
+                                <option value="">Seleccione...</option>
                                 <option value="1">Aprobado</option>
                                 <option value="2">Diferido</option>  
                                 <option value="3">Negado</option>
@@ -161,6 +161,17 @@
     </div>
 </div>
 
+
+
+@section('scripts')
+<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+<script src="{{url('js/funciones_vacaciones.js')}}"></script>
+<script src="{{url('js/funciones_generales.js')}}"></script>
+
+<!-- jQuery -->
+<script src="/plugins/jquery/jquery.min.js"></script>
+<!-- Bootstrap 4 -->
+<script src="/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 
 
 @endsection

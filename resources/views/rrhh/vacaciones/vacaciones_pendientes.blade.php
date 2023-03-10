@@ -33,15 +33,14 @@
                         </tr>
                         </table>
                         
-                    <div class="table-responsive mt-3">
-                        <table class="table datatable">
+                    <div class="table-responsive mt-6">
+                        <table class="table datatable" width="60%">
                             <thead>
                                 <tr>                                   
                                     <th class="text-primary"> Vacaciones pendientes de disfrutar  del Funcionario  <img src="{{url('/img/vacacion.png')}}" whith="60px" height="60px"/></th>
                                     <th class="text-primary"> Días de Disfrute  <img src="{{url('/img/icon/calendario.png')}}" whith="60px" height="60px"/></th>
-                                    @if(in_array( Auth::user()->id_usuariogrupo, array(10,11,12,13) ))
-                                        <th class="text-primary" colspan="2">Opción</th>
-                                    @endif
+                                    <th class="text-primary"> Días de Pendoentes por disfrutar  <img src="{{url('/img/icon/adv.jpg')}}" whith="60px" height="60px"/></th>
+                                    
                                 </tr>
                             </thead>
                             <tbody>
@@ -51,14 +50,8 @@
                                     <tr>                                    
                                       
                                        <td>{{$pendientes->lapso_disfrute}}</td>
-                                       <td>{{$pendientes->dias_adisfrutar}} días</td>
-                                        <td colspan="2">
-                                       
-                                                <img src="{{url('img/imagen/documento.jpg')}}" style="max-width: 50px; max-height: 50px"  alt="Image"> <a href="{{route('registrar_solicitud',$cedula)}}" target="_new">
-                                                 <span class='btn-info badge'><font color=#F2F3F8>Solicitar</font></span>                                        
-                                          
-
-                                        </td>                                                                             
+                                       <td>{{$pendientes->dias_adisfrutar}} días</td> 
+                                       <td>{{$pendientes->dias_pendientes}} días</td>                                                                                                                 
                                     </tr>                     
                                @endforeach
                          @endif

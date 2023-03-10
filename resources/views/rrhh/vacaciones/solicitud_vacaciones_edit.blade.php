@@ -119,7 +119,7 @@
                                 <th>Dias de  Disfrute</th>
                                 <th>Fecha de Inicio </th>
                                 <th>Fecha de Reintegro </th>
-                                <th>Lapsos a Disfrutar</th>     
+                                 
                                 <th>Estatus de la Solicitud</th>                                    
                                 <th colspan=3>Niveles de Aprobación</th>      
                                  
@@ -135,8 +135,7 @@
                                     <td>{{$vacaciones->fecha_solicitud}}</td>
                                     <td>{{$vacaciones->dias_disfrute}} días</td>
                                     <td>{{$vacaciones->fecha_inicio}}</td> 
-                                    <td>{{$vacaciones->fecha_reintegro}}</td> 
-                                    <td><a href="{{$vacaciones->lapsos_solicitados}}" class="btn btn-info" >Ver lapsos </a></td>
+                                    <td>{{$vacaciones->fecha_reintegro}}</td>                                  
                                   <div align="center">  <td>
                                             @if($vacaciones->revisado==1)   
                                             <img src="{{url('img/icon/check.png')}}" style="max-width: 40px; max-height: 40px"  alt="Image">  Revisada
@@ -173,7 +172,7 @@
                                             <td>   
                                                                                  
                                                 <div align="center"><img src="{{url('img/icon/check.png')}}" style="max-width: 40px; max-height: 40px"  alt="Image"> 
-                                                    <span class='btn-info badge'><font color=#F2F3F8>Director</font></span> 
+                                                    <span class='btn-info badge'><font color=#F2F3F8>Director(a)</font></span> 
                                                 </div>
                                             </td>
                                         @else
@@ -197,16 +196,24 @@
                                         </td>
                                         @endif  
                                         @if(in_array( Auth::user()->id_usuariogrupo, array(9,12,10,11) ))
-                                        @if($vacaciones->revisado==0)      
-                                        <td class="text-center">
-                                            <a href= "#" class="btn btn-info" data-tip="Detalle" title="Actualizar" data-toggle="tooltip" data-original-title="Editar">
-                                            <img src="/img/icon/modify.ico" class="icon-sm" alt="Listado">
-                                            </a>                                          
-                                            </td>
-                                        @else
-                                            <td></td>
-                                        @endif
-                                        @endif                                                            
+                                            @if($vacaciones->revisado==0)      
+                                            <td class="text-center">
+                                                <a href= "#" class="btn btn-info" data-tip="Detalle" title="Actualizar" data-toggle="tooltip" data-original-title="Editar">
+                                                <img src="/img/icon/modify.ico" class="icon-sm" alt="Listado">
+                                                </a>                                          
+                                                </td>
+                                            @else
+                                                @if($vacaciones->aprobado_presidencia=="" && $vacaciones->aprobado_director=="" )
+                                                <td><b>Pendiente por Abrobación<b>  <img src="/img/icon/adv.jpg" class="icon-sm" alt="Listado"></td>
+                                                @else
+                                                    @if($vacaciones->aprobado_presidencia=="" && $vacaciones->aprobado_director==1 && $vacaciones->tipo_aprobacion_director !=1 )
+                                                    <td><b>Rezada por la Dirección<b>  <img src="/img/icon/no.ico" class="icon-sm" alt="Listado"></td>                                          
+                                                    @else
+                                                        <td></td>
+                                                    @endif
+                                                @endif
+                                            @endif  
+                                        @endif                                                          
                                     </tr>
                                 @endforeach
                             @endif
@@ -216,8 +223,7 @@
                                 <th>Fecha de Solicitud</th>
                                 <th>Dias de  Disfrute</th>
                                 <th>Fecha de Inicio </th>
-                                <th>Fecha de Reintegro </th>
-                                <th>Lapsos a Disfrutar</th>    
+                                <th>Fecha de Reintegro </th>                                
                                 <th>Estatus de la Solicitud</th>                                    
                                 <th colspan=3>Niveles de Aprobación</th>    
                                 @if(in_array( Auth::user()->id_usuariogrupo, array(9,12,10,11) ))

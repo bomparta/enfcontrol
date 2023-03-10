@@ -65,7 +65,7 @@
                                        <td>{{$vacaciones_solicitudes->fecha_reintegro}}</td>
                                         <td colspan="2">
                                        
-                                                <img src="{{url('img/imagen/documento.jpg')}}" style="max-width: 50px; max-height: 50px"  alt="Image"> <a href="{{route('vacaciones_aprobacion_presidencia',$vacaciones_solicitudes->id)}}" target="_new">
+                                                <img src="{{url('img/imagen/documento.jpg')}}" style="max-width: 50px; max-height: 50px"  alt="Image"> <a href="{{route('vacaciones_aprobacion_presidencia',$vacaciones_solicitudes->id_solicitud)}}" target="_new">
                                                  <span class='btn-info badge'><font color=#F2F3F8>Aprobar Vacaciones</font></span>                                        
                                           
 

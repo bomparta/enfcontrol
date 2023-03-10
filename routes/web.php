@@ -278,7 +278,7 @@ Route::get("/rrhh/vacaciones/vacaciones_pend_aprobar/{id}", "VacacionesControlle
 //niveles aprobacion director//
 Route::get("/rrhh/vacaciones/vacaciones_pend_aprobar_director","VacacionesController@ver_pendientes_aprobar_director")->name('vacaciones_pendientes_aprobacion_director');
 Route::get("/rrhh/vacaciones/vacaciones_aprobadas_director","VacacionesController@ver_aprobadas_director")->name('vacaciones_aprobadas_director');
-Route::get("/rrhh/vacaciones/aprobar_solicitud/{id}","VacacionesController@aprobacion")->name('vacaciones_aprobacion');
+Route::get("/rrhh/vacaciones/aprobar_solicitud/{id}","VacacionesController@aprobacion")->name('vacaciones_aprobacion_director');
 Route::post("/rrhh/vacaciones/aprobar_solicitud", "VacacionesController@store_aprobacion")->name('store_aprobacion');
 //niveles aprobacion presidencia//
 Route::get("/rrhh/vacaciones/vacaciones_pend_aprobar_presidencia","VacacionesController@ver_pendientes_aprobar_presidencia")->name('vacaciones_pendientes_aprobacion_presidencia');

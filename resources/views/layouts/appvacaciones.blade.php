@@ -144,14 +144,8 @@
             <a href="{{route('ver_trabajador')}}" class="list-group-item list-group-item-action border-0">
                 <img src="/img/icons-lineal/check_list.png" class="icon-lg">
                 Movimientos de Personal
-            </a>
-            <hr>
-            <div class="card-header text-primary" aling="center">Control de Expedientes</div>
-            <a href="{{route('vacaciones_pendientes_aprobacion')}}" class="list-group-item list-group-item-action border-0">
-                <img src="/img/icons-lineal/check_list.png" class="icon-lg">
-                Aprobación de Vacaciones
-             </a>     
-            <hr>
+            </a>                       
+            
             <a href="{{route('reportesrrhh')}}" class="list-group-item list-group-item-action border-0">
                 <img src="/img/icons-lineal/check_list.png" class="icon-lg">
                 Reportes

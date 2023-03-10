@@ -23,7 +23,7 @@
                                 <a class="nav-link "  href="{{route('vacaciones_pendientes')}}">Lapsos Pendientes de Disfrute</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link active" href="{{route('vacaciones_pendientes')}}">Lapsos Disfrutados</a>
+                                    <a class="nav-link active" href="{{route('vacaciones_disfrutadas')}}">Lapsos Disfrutados</a>
                                 </li>                                
                                 </ul>
                                      
@@ -37,29 +37,34 @@
                         <table class="table datatable">
                             <thead>
                                 <tr>                                   
-                                    <th class="text-primary"> Vacaciones pendientes de disfrutar  del Funcionario  <img src="{{url('/img/vacacion.png')}}" whith="60px" height="60px"/></th>
+                                    <th class="text-primary"> Vacaciones Disfrutadas del Funcionario  <img src="{{url('/img/vacacion.png')}}" whith="60px" height="60px"/></th>
                                     <th class="text-primary"> Días de Disfrute  <img src="{{url('/img/icon/calendario.png')}}" whith="60px" height="60px"/></th>
-                                    @if(in_array( Auth::user()->id_usuariogrupo, array(10,11,12,13) ))
+                                    <th class="text-primary"> Fecha de Solicitud<img src="{{url('/img/icon/calendario.png')}}" whith="60px" height="60px"/></th>
+                                    <th class="text-primary"> Fecha de Inicio del Disfrute  <img src="{{url('/img/icon/calendario.png')}}" whith="60px" height="60px"/></th>
+                                    <th class="text-primary"> Fecha de Reintegro  <img src="{{url('/img/icon/calendario.png')}}" whith="60px" height="60px"/></th>
+                                    @if(in_array( Auth::user()->id_usuariogrupo, array(9,10,11,12,13) ))
                                         <th class="text-primary" colspan="2">Opción</th>
                                     @endif
                                 </tr>
                             </thead>
                             <tbody>
                                     
-                        
+                        @foreach($disfrutadas as $disfrutadas)
                                     
                                     <tr>                                    
                                       
-                                       <td>2023</td>
-                                       <td>27 días</td>
-                                        <td colspan="2">
-                                        
-                                               <a href src="{{url('img/imagen/documento.png')}}" style="max-width: 50px; max-height: 50px"  alt="Image"/><span class='btn-info badge'><font color='red'>Ver Solicitud</font></span> </a>
+                                       <td>{{$disfrutadas->lapso_disfrute}}</td>
+                                       <td>{{$disfrutadas->dias_disfrutados}} días disfrutados</td>
+                                       <td>{{$disfrutadas->fecha_solicitud}}</td>
+                                       <td>{{$disfrutadas->fecha_inicio}}</td>
+                                       <td>{{$disfrutadas->fecha_reintegro}}</td>
+                                        <td colspan="2">                                        
+                                               <a href src="#" style="max-width: 50px; max-height: 50px"  alt="Image"/><span class='btn-info badge'><font color='red'>Ver Solicitud {{$disfrutadas->solicitud_vacaciones_id}}</font></span> </a>
                                            
 
                                         </td>                                                                             
                                     </tr>                     
-                               
+                        @endforeach
                          
                                 
                             </tbody>
