@@ -95,9 +95,9 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{{route('rrhh')}}">Control de Expedientes&nbsp;<i class="fa fa-box"></i></a>
                     </li>
-                    <li class="nav-item">
+                  <!--  <li class="nav-item">
                         <a class="nav-link" href="{{route('vacaciones')}}">Vacaciones&nbsp;<i class="fa fa-box"></i></a>
-                    </li>
+                    </li>-->
                     @endif
                     @if(in_array( Auth::user()->id_usuariogrupo, array(13) ))
                     <li class="nav-item">
@@ -153,7 +153,7 @@
                 </div>
             </div>
         </nav>
-        <script type="text/javascript">
+<script type="text/javascript">
     // Tomado de https://parzibyte.me/blog/2019/06/26/menu-responsivo-bootstrap-4-sin-dependencias/
     document.addEventListener("DOMContentLoaded", () => {
         const menu = document.querySelector("#menu"),
@@ -163,20 +163,19 @@
         }
     });
 </script>
-
         <main>
             @yield('scripts')
             @yield('content')
             
         </main>
-        <footer class="px-2 py-2 fixed-bottom bg-dark">
-     <span class="text-muted">Sistema de Gestión de la Escuela Nacional de Fiscales del Ministerio Público. 
-        <i class="fa fa-code text-white">Bompart</i>
-        con
-        <i class="fa fa-code text-white">Colmenares</i>
-        por
-        <a target="_blank" class="text-white" href="http://www.enf.edu.ve">Coordinación de Tecnología</a>
-        &nbsp;
+<footer class="px-2 py-2 fixed-bottom bg-dark">
+    <span class="text-muted">Sistema de Gestión de la Escuela Nacional de Fiscales del Ministerio Público. 
+         <i class="fa fa-code text-white">Bompart</i>
+    con
+         <i class="fa fa-code text-white">Colmenares</i>
+    por
+    <a target="_blank" class="text-white" href="http://www.enf.edu.ve">Coordinación de Tecnología</a>
+    &nbsp;
     </span>
 </footer>
  

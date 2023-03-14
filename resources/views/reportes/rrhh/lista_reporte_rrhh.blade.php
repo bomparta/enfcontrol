@@ -1,38 +1,43 @@
-
-
-@section('content')
 @extends('layouts.app')
+@section('styles')
+@endsection
+@section('content')
+    <div class="d-flex" id="wrapper">
+        @include('layouts.apprrhh')      
+        <div id="page-content-wrapper">
+            <div class="sidebar-heading text-center">
+                <h4 class="text-primary" >CONTROL DE EXPEDIENTES RRHH</h6>    
+                <h6 class="text-dark">Bienvenid@, {{Auth::user()->name}}</h6>
+            </div> 
 
-<div class="container-fluid">
-    <div class="row justify-content-start">
-        @include('layouts.apprrhh')
-        <div class="col-xs-11 col-sm-11 col-md-11 col-lg-10 col-xl-10 col-xxl-10">
-            <div class="row pt-2">
 
-        <div class="col-12">
-            <div class="card">
-                <div class="card-body">
-                    <div class="col-12 text-center">
-                        <h1>Listado de Reportes Control de Expedientes RRHH</h1>
-                    </div>
+            <div class="container pb-4">
+                <div class="row align-items-stretch">
+
+                        <div class="col-12">
+
+                            <div class="card mb-4">
+                              <div align="center" id="divTituloIndex2" class="text-primary">
+                                <b>LISTADO DE REPORTES</b>
+                              </div>
                     <table width="1023" border="1" cellspacing="1" cellpadding="1" aling="center">
                         <tr>
-                        <td width="250">Oficina Recursos Humanos</td>
-                        <td width="250">&nbsp;</td>
+                        <td width="300">Control de Expedientes de Recursos Humanos</td>
+                        <td width="200">&nbsp;</td>
                         <td width="250">&nbsp;</td>
                         <td width="250">&nbsp;</td>
                       </tr>
                       <tr>
-                          <td>&nbsp;</td>
-                        <td><a href="" title="">Total de Trabajadores Activos</a> </td>
+                      
+                        <td><a href="" title="">Total de Funcionarios Activos</a> </td>
                         <td><a href="" title="">Trabajadores Egresados</a> </td>
                         <td><a href="" title="">Ver requisitos por Trabajador</a> </td>
                       </tr>
                       <tr>
-                        <td><a href="" title="">Reporte Planificacion</a></td>
-                        <td><a href="" title="">Total de Trabajadores Activos</a> </td>
-                        <td><a href="" title="">Trabajadores Egresados</a> </td>
-                        <td><a href="" title="">Ver requisitos por Trabajador</a> </td>
+                       
+                        <td><a href="" title="">Trabajadores Contratados Activos </a></td>
+                        <td><a href="" title="">Trabajadores Obreros Activos</a> </td>
+                        <td><a href="" title="">Ver Antecendentes de Servicio Trabajador</a> </td>
                       </tr>
                       
                       <tr>
@@ -42,9 +47,15 @@
                         <td>&nbsp;</td>
                         </tr>
                       <tr>
+                        <td>Vacaciones</td>
+                        <td></td>
+                        <td></td>
                         <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
+                      </tr>  
+                      <tr>
+                        <td><a href="" title="">Listado de Vacaciones Pendientes</a></td>
+                        <td><a href="" title="">Listado de Vacaciones Disfrutadas</a></td>
+                        <td><a href="" title="">Vacaciones Colectivas</a></td>
                         <td>&nbsp;</td>
                       </tr>
                       
@@ -52,12 +63,12 @@
                         <td>&nbsp;</td>
                         <td>&nbsp;</td>
                         <td>&nbsp;</td>
-                        <td>&nbsp;</td>
+                        <td><a class='btn btn-info' href="{{URL::route('rrhh')}}" >Regresar</a></td>
                       </tr>
                     </table>
                     <br>
-                    <a class='btn btn-info' href="{{URL::route('rrhh')}}" >Regresar</a>
-                </div>
+                    
+               
             </div> <!-- card -->
           </div>
           </div> <!-- card -->

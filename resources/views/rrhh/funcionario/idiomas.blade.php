@@ -1,10 +1,21 @@
 @extends('layouts.app')
-@section ('content')
-<div class="container-fluid">
-    <div class="row justify-content-start">
-    @include('layouts.apprrhh')
-        <div class="col-xs-11 col-sm-11 col-md-11 col-lg-10 col-xl-10 col-xxl-10">
-            <div class="row pt-2">
+@section('styles')
+
+@endsection
+
+@section('content')
+    <div class="d-flex" id="wrapper">
+        @include('layouts.apprrhh')
+      
+        <div id="page-content-wrapper">
+        <div class="sidebar-heading text-center">
+      <h4 class="text-primary" >CONTROL DE EXPEDIENTES RRHH</h6>   
+   
+      </a>
+      <h6 class="text-dark">Bienvenid@, {{Auth::user()->name}}</h6>
+    </div> 
+
+            <div class="container pb-4">
             <div align="center" id="divTituloIndex2" class="text-primary">
                
                 <b>INSTRUCCIÓN FORMAL Y COMPLEMENTARIA</b>
@@ -90,35 +101,47 @@
                     <div class="frameContenedor" style="margin:5px;" align="right">
                         <input class='btn btn-info' type="submit" value="Registrar Idioma" >
                     </div>
-
+                    @endif
+                </form>
+                    <hr>
                     <div class="table-responsive mt-3">
-                        <table id="example1" class="table table-striped table-bordered" style="width:100%">                        
+                    <table id="example1" class="table table-striped table-bordered" style="width:100%">                                
                             <thead>
+                             
                                 <tr>
                                     <th>Idioma</th>
                                     <th>Habla</th>
                                     <th>Lee</th>
                                     <th>Escribe</th>
                                     @if(in_array( Auth::user()->id_usuariogrupo, array(9,12,10,11,13) ))
-                                        <th>Opcion</th>
+                                    <th >Opción</th>
+                                    <th >Opción</th>
                                     @endif
                                 </tr>
                             </thead>   
                             <tbody>      
                                 @foreach($idiomas as $idiomas)                         
                                 <tr>      
-                                <td>{{$idiomas->nommbre_idioma}}</td>                                              
-                                <td>@if($idiomas->habla==1)REGULAR @elseif($idiomas->habla==2)BIEN @elseif($idiomas->habla==3)MUY BIEN @endif  </td>
-                      
-                                <td>@if($idiomas->lee==1)REGULAR @elseif($idiomas->lee==2)BIEN @elseif($idiomas->lee==3)MUY BIEN @endif  </td>
-                                <td>@if($idiomas->escribe==1)REGULAR @elseif($idiomas->escribe==2)BIEN @elseif($idiomas->escribe==3)MUY BIEN @endif  </td>
+                                <td>{{$idiomas->nommbre_idioma}}</td>   
+                                <td>@if($idiomas->habla==1)REGULAR @endif @if($idiomas->habla==2)BIEN @endif @if($idiomas->habla==3)MUY BIEN @endif  </td>
+                                <td>@if($idiomas->lee==1)REGULAR @endif @if($idiomas->lee==2)BIEN @endif @if($idiomas->lee==3)MUY BIEN @endif  </td>
+                                <td>@if($idiomas->escribe==1)REGULAR @endif @if($idiomas->escribe==2)BIEN @endif @if($idiomas->escribe==3)MUY BIEN @endif  </td>
                                       
                                         @if(in_array( Auth::user()->id_usuariogrupo, array(9,12,10,11,13) ))
                                             <td class="text-center">
                                             <a href= "idiomas_edit/{{$idiomas->id}}" class="btn btn-info" data-tip="Detalle" title="Actualizar Idioma" data-toggle="tooltip" data-original-title="Editar">
                                             <img src="/img/icon/modify.ico" class="icon-sm" alt="Listado">
                                             </a>
-                                            </td>
+</td>
+                                            <td>
+                                        <form method="POST" action="{{URL::route('borraridiomas',$idiomas->id)}}">
+                                        @csrf
+                                            <input type="hidden" name="_method" value="delete">
+                                            <button type="submit" class="btn btn-info" data-tip="Detalle" title="Eliminar registro" data-toggle="tooltip" data-original-title="Eliminar"> 
+                                            <img src="/img/icon/erase.ico" class="icon-sm" alt="Listado"></button>
+                                           
+                                        </form>
+                                         
                                         @endif                                                            
                                     </tr>
                             @endforeach
@@ -130,17 +153,18 @@
                                     <th>Lee</th>
                                     <th>Escribe</th>
                                     @if(in_array( Auth::user()->id_usuariogrupo, array(9,12,10,11,13) ))
-                                        <th>Opcion</th>
+                                        <th >Opción</th>
+                                  
                                     @endif
                                     
                                 </tr>
                             </tfoot>
                         </table>
                     </div>
-                    @endif
-                </form>
+            
 
-            </div>
+                    </div>
+    </div>
         </div>
     </div>
 </div>
@@ -173,14 +197,15 @@
   src="https://code.jquery.com/jquery-3.3.1.min.js"
   integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
   crossorigin="anonymous"></script>
-  <script>
 
-$(function () {
-    $('#example1').DataTable({
+<script>
+
+    $(function () {
+        $('#example1').DataTable({
 "language": {
 "url": "//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json"
 }
 });
 });
-</script>
+  </script>
 @endsection

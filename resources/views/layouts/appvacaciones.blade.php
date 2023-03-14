@@ -1,14 +1,5 @@
 
 <aside class="bg-white" id="sidebar-wrapper-lg">
-    <div class="col-12 text-center">
-      <h4 class="text-primary" >VACACIONES</h6>   
-   
-      </a>
-      <h6 class="text-dark">Bienvenid@, {{Auth::user()->name}}</h6>
-    </div>
-</aside>
-<div class="col-xs-1 col-sm-1 col-md-1 col-lg-2 col-xl-2 col-xxl-2 border-rt-e6 px-0">
-    <div class="d-flex flex-column align-items-center align-items-sm-start ">
     <div class="list-group list-group-flush">
         <!-- Menu Administrador RRHH-->
         @if(in_array( Auth::user()->id_usuariogrupo, array(9) ))
@@ -47,15 +38,15 @@
         <div class="card-header text-primary" aling="center">Vacaciones</div>
             <a href="{{route('vacaciones_pendientes_aprobacion')}}" class="list-group-item list-group-item-action border-0">
             <img src="/img/icons-lineal/check_list.png" class="icon-lg">
-            Aprobación de Vacaciones Jefe(a) inmediato o Coordinador(a)
+            Aprobación de Jefe(a) inmediato o Coordinador(a)
             </a>   
             <a href="{{route('vacaciones_pendientes_aprobacion_director')}}" class="list-group-item list-group-item-action border-0">
             <img src="/img/icons-lineal/check_list.png" class="icon-lg">
-            Aprobación de Vacaciones Director(a)
+            Aprobación de Director(a)
             </a>   
             <a href="{{route('vacaciones_pendientes_aprobacion_presidencia')}}" class="list-group-item list-group-item-action border-0">
             <img src="/img/icons-lineal/check_list.png" class="icon-lg">
-            Aprobación de Vacaciones Presidente(a)
+            Aprobación de Presidente(a)
             </a>   
        <hr>      
         <div class="card-header text-secondary">RRHH</div>
@@ -113,11 +104,11 @@
             Planilla de Actualización de Datos
         </a>
       
-        <div class="card-header text-primary" aling="center">Vacaciones</div>
+       <!-- <div class="card-header text-primary" aling="center">Vacaciones</div>
         <a href="{{route('funcionario_vacaciones')}}" class="list-group-item list-group-item-action border-0">
             <img src="/img/icons-lineal/check_list.png" class="icon-lg">
             Solicitud de Vacaciones
-        </a> 
+        </a> -->
         @if(in_array( Auth::user()->id_usuariogrupo, array(14 )))
        
             <a href="{{route('vacaciones_pendientes_aprobacion')}}" class="list-group-item list-group-item-action border-0">
@@ -167,14 +158,7 @@
                 Desincorporación
                 </a>  
         @endif
-        @endif
-        <!-- Menu Comun -->
-
-       <!-- <a href="/password/reset" class="list-group-item list-group-item-action border-0">
-            <img src="/img/icons-lineal/check_list.png" class="icon-lg">
-            Cambio de clave
-        </a>-->
-
+    @endif
         <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
@@ -183,7 +167,6 @@
 
         <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
             @csrf
-        </form>
+            </form>
     </div>
-</div>
-</div>
+</aside>

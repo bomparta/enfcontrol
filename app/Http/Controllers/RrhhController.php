@@ -29,8 +29,9 @@ use App\Imagen_uploads_mov_rrhh;
 use App\Ubic_Administrativa;
 use App\User;
 use App\RrhhMovimientos;
-use App\TipoMovimientos;
+use App\TipoMovimientosRRHH;
 use App\Administracion_publica;
+use App\Vacaciones_pendientes;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -81,7 +82,7 @@ class RrhhController extends Controller
       
         ->where('familiares.funcionario_id','=',$funcionario_id)->paginate(10);
         $usuario= User::where('cedula','=',$cedula_usuario)
-        ->whereIn('id_usuariogrupo',[11,12])->get();
+        ->whereIn('id_usuariogrupo',[11,12,10,9])->get();
        
         foreach($usuario as  $usuario){
             $id= $usuario->id;
@@ -352,7 +353,7 @@ public function subirArchivo_rrhh(Request $request)
         $nacionalidades= Nacionalidad::All();
         $tipo_trabajador= Tipo_Trabajador::All();
         $uni_adscripcion= Ubic_Administrativa::All();
-        $tipo_mov= TipoMovimientos:: All();
+        $tipo_mov= TipoMovimientosRRHH:: All();
         
         $funcionario= Funcionario::select('funcionario.id as funcionario_id','funcionario.*','persona.*') 
         ->join ('persona', 'persona.id','=','funcionario.persona_id')        
@@ -387,7 +388,7 @@ public function subirArchivo_rrhh(Request $request)
         $nacionalidades= Nacionalidad::All();
         $tipo_trabajador= Tipo_Trabajador::All();
         $uni_adscripcion= Ubic_Administrativa::All();
-        $tipo_mov= TipoMovimientos:: All();
+        $tipo_mov=  TipoMovimientosRRHH:: All();
         
        
         $rrhh= RrhhMovimientos::Select('*')->where('id','=',$id)->get() ;
@@ -816,7 +817,7 @@ public function subirArchivo_rrhh(Request $request)
       $idiomas=Idiomas::select('*')->where('idiomas.funcionario_id','=',$funcionario_id)->paginate(5);
       $cuentas=Cuentas_bancarias::select('*')->where('cuentas_bancarias.funcionario_id','=',$funcionario_id)->paginate(5);
       $usuario= User::where('cedula','=',$cedula_usuario)
-      ->whereIn('id_usuariogrupo',[11,12])->get();
+      ->whereIn('id_usuariogrupo',[11,12,9,10])->get();
      
       foreach($usuario as  $usuario){
       $foto = ImagenUpload::select('*')      
@@ -836,26 +837,151 @@ public function subirArchivo_rrhh(Request $request)
    }
      
     }
+    public function vac_pendientes_rrhh(Request $request,$cedula)
+    {       
+        //  dd($cedula);
+       $cedula_usuario= $cedula;
     
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
+        $funcionario= Funcionario::select('funcionario.id as funcionario_id','funcionario.*','persona.*') 
+        ->join ('persona', 'persona.id','=','funcionario.persona_id')        
+        ->where('persona.numero_identificacion','=',$cedula_usuario)->get();
+        $funcionario_id=null;
+       
+        $tipo_trabajador= Tipo_Trabajador::All();
+        foreach($funcionario as $funcionario){
+            $funcionario_id=$funcionario->funcionario_id;
+            $edad=Carbon::parse($funcionario->edad)->age;
+            $fecha_ingreso_vac=$funcionario->fecha_ingreso_vac;
+           if($fecha_ingreso_vac!=null){
+            $annos_servicio=Carbon::parse($funcionario->fecha_ingreso_vac)->age;
+           }else{
+            $annos_servicio=-1;
+           }
+        }
+        $datos_funcionario= Funcionario::select('funcionario.id as funcionario_id',
+        'funcionario.*','persona.*','funcionario.cargo as cargo','funcionario.id_oficina_administrativa'     ,
+        'estado_civil.descripcion as est_civil','entidad.descripcion as estado_nac',
+        'tipo_trabajador.descripcion as trabajador','ubic_administrativa.descripcion as administrativa',
+        'ent.descripcion as ent_domi','municipio.nombre as muni_domi','parroquia.nombre as parr_domi') 
+        ->join ('persona', 'persona.id','=','funcionario.persona_id')    
+        ->join('estado_civil','estado_civil.id','=','persona.id_estado_civil')  
+        ->join('entidad','entidad.id','=','persona.estado_nac') 
+        ->JOIN('tipo_trabajador','tipo_trabajador.id','funcionario.id_tipo_funcionario')      
+        ->JOIN('ubic_administrativa','ubic_administrativa.id','funcionario.id_oficina_administrativa')          
+        ->join('entidad as ent','ent.id','=','funcionario.estado_domicilio') 
+        ->join('municipio','municipio.id','=','funcionario.municipio_domicilio')     
+        ->join('parroquia','parroquia.id','=','funcionario.parroquia_domicilio')             
+        ->where('persona.numero_identificacion','=',$cedula_usuario)->get();   
+       // dd($datos_funcionario);   
+       $nacionalidades= Nacionalidad::All();
+       $vacaciones=  Vacaciones_pendientes::select('vacaciones.vacaciones_pendientes.*')      
+      ->where('vacaciones.vacaciones_pendientes.funcionario_id','=',$funcionario_id)
+      ->orderby('vacaciones.vacaciones_pendientes.lapso_disfrute','ASC')->get();        
+       if($datos_funcionario->count()>0){    
+          
+           return view('rrhh/registrar_vac_pendientes', compact('datos_funcionario','annos_servicio','vacaciones','nacionalidades','tipo_trabajador','edad','cedula'));
+        }else {
+            return redirect('rrhh/ver_trabajador') 
+             ->with('advertencia', 'No hay resultados que mostrar.');             
+        }
     }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    public function vac_pendientes_rrhh_edit(Request $request,$id,$cedula)
+    {       
+        //  dd($cedula);
   
+    
+        $funcionario= Funcionario::select('funcionario.id as funcionario_id','funcionario.*','persona.*') 
+        ->join ('persona', 'persona.id','=','funcionario.persona_id')        
+        ->where('persona.numero_identificacion','=',$cedula)->get();
+      //  dd($funcionario);
+        $funcionario_id=null;
+
+        foreach($funcionario as $funcionario){
+            $funcionario_id=$funcionario->funcionario_id;
+            $edad=Carbon::parse($funcionario->edad)->age;
+            $fecha_ingreso_vac=$funcionario->fecha_ingreso_vac;
+            $annos_servicio=Carbon::parse($funcionario->fecha_ingreso_vac)->age;
+        }
+       $vacaciones=  Vacaciones_pendientes::select('vacaciones.vacaciones_pendientes.*')      
+      ->where('vacaciones.vacaciones_pendientes.funcionario_id','=',$funcionario_id)
+      ->where('vacaciones.vacaciones_pendientes.id','=',$id)
+      ->orderby('vacaciones.vacaciones_pendientes.lapso_disfrute','ASC')->get();        
+       if($funcionario->count()>0){    
+          
+           return view('rrhh/registrar_vac_pendientesedit', compact('funcionario','annos_servicio','vacaciones','cedula'));
+        }else {
+            return redirect('rrhh/ver_trabajador') 
+             ->with('advertencia', 'No hay resultados que mostrar.');             
+        }
+    }
+    public function store_vac_pendientes(Request $request)
+    {
+       // dd($request);
+        $request->validate([
+            
+            'funcionario_id' => ['required'],         
+            'lapso_disfrute'=>['required'],
+            'dias_adisfrutar'=>['required'],            
+            'dias_pendientes'=>['required'],       
+            
+        ]);
+        
+        $existe_lapso=Vacaciones_pendientes::where('lapso_disfrute',$request->lapso_disfrute)->get();
+    
+       
+   
+        if(count($existe_lapso)>0){
+            return    redirect()->back()->with('error', ' El Lapso de Disfrute del Trabajador(a) que desea cargar  se encuentra registrado!!.');     
+        }else{
+            
+            $pendientes = new Vacaciones_pendientes();        
+            $pendientes->funcionario_id = $request->funcionario_id;
+            $pendientes->lapso_disfrute = $request->lapso_disfrute;
+            $pendientes->dias_adisfrutar = $request->dias_adisfrutar;          
+            $pendientes->dias_pendientes = $request->dias_pendientes;    
+            $pendientes->observaciones_rrhh = $request->observaciones;  
+            $pendientes->registrado_por = Auth::user()->cedula; 
+            $pendientes->save();
+         return    redirect()->back()->with('message', ' El Antecedente de servicio del Trabajador(a) en la administración pública fue agregado con éxito!!.');
+         
+        }
+        
+        
+    }
+    public function update_vac_pendientes(Request $request)
+    {
+       // dd($request);
+        $request->validate([
+            'funcionario_id' => ['required'],  
+            'id_vacaciones' => ['required'],        
+            'lapso_disfrute'=>['required'],
+            'dias_adisfrutar'=>['required'],            
+            'dias_pendientes'=>['required'], 
+        ]);
+        $existe_lapso=Vacaciones_pendientes::where('lapso_disfrute','!=',$request->lapso_disfrute)
+                                            ->where('id',$request->id_vacaciones)->get();
+  
+        if(count($existe_lapso)>0){
+            return    redirect()->back()->with('error', ' El Lapso de Disfrute del Trabajador(a) que desea cargar  se encuentra registrado!!.');     
+        }else{
+            $pendientes =  Vacaciones_pendientes::where('id',$request->id_vacaciones)
+            ->update([     
+
+                'funcionario_id'=> $request->funcionario_id,
+                'lapso_disfrute' => $request->lapso_disfrute,
+                'dias_adisfrutar' => $request->dias_adisfrutar,   
+                'dias_pendientes' => $request->dias_pendientes,   
+                'observaciones_rrhh' => $request->observaciones,                 
+                'actualizado_por'=>Auth::user()->cedula,
+               
+            ]);
+           
+            return    redirect()->back()->with('message', ' El Antecedente de servicio del Trabajador(a) en la administración pública fue actualizado con éxito!!.');
+       
+        }
+        
+        
+    } 
 
   
         public function destroy($id)
@@ -867,7 +993,15 @@ public function subirArchivo_rrhh(Request $request)
     
             return    redirect()->back()->with('message', ' El Antecedente de servicio del Trabajador(a) en la administración pública fue eliminado con éxito!!.');
         }
-
+        public function destroy_vac_pendientes($id)
+        {
+            //dd($id);
+            $pendientes = Vacaciones_pendientes::findOrFail($id);
+            
+            $pendientes->delete();
+    
+            return    redirect()->back()->with('message', ' El Lapso pendiente de vacaciones del Trabajador(a) fue eliminado con éxito!!.');
+        }
     
 
 }

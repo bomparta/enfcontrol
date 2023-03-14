@@ -145,6 +145,12 @@ Route::get("/rrhh/registrar_adm_publica/{cedula}", "RrhhController@antecedentes"
 Route::post("/rrhh/registrar_adm_publica", "RrhhController@store_antecedentes")->name('store_antecedentes');
 Route::post("/rrhh/registrar_adm_publica_edit", "RrhhController@update_antecedentes")->name('update_antecedentes');
 Route::delete('registrar_adm_publica/{id}', 'RrhhController@destroy')->name('borrar_adm_pub');
+Route::get("/rrhh/registrar_vac_pendientes/{cedula}", "RrhhController@vac_pendientes_rrhh")->name('vac_pendientes_rrhh');
+Route::get("/rrhh/registrar_vac_pendientesedit/{id}/{cedula}", "RrhhController@vac_pendientes_rrhh_edit")->name('vac_pendientes_rrhh_edit');
+Route::post("/rrhh/registrar_vac_pendientes", "RrhhController@store_vac_pendientes")->name('store_vac_pendientes');
+Route::post("/rrhh/registrar_vac_pendientesedit", "RrhhController@update_vac_pendientes")->name('update_vac_pendientes');
+Route::delete('registrar_vac_pendientes/{id}', 'RrhhController@destroy_vac_pendientes')->name('borrar_vac_pendientes');
+
 
 Route::get("/rrhh/registrar_rrhh/{cedula}","RrhhController@create_mov")->name('registrar_mov_rrhh');
 Route::post("/rrhh/registrar_rrhh", "RrhhController@store_mov")->name('store_rrhh');
@@ -176,6 +182,7 @@ Route::get('/rrhh/funcionario/cta_bancaria', 'FuncionarioController@createbanco'
 Route::post('/rrhh/funcionario/cta_bancaria', 'FuncionarioController@storebanco')->name('storecuentas');
 Route::get('/rrhh/funcionario/cta_bancariaedit/{id}', 'FuncionarioController@editbanco')->name('editarcuentas');
 Route::post('/rrhh/funcionario/cta_bancariaedit', 'FuncionarioController@updatebanco')->name('actualizarcuentas');
+Route::delete('cta_bancariaedit/{id}', 'FuncionarioController@destroycuenta')->name('borrarcuenta');
 
 Route::get('/rrhh/funcionario/experiencia', 'FuncionarioController@createxperiencia')->name('laboralfuncionario');
 Route::post('/rrhh/funcionario/experiencia', 'FuncionarioController@storexperiencia')->name('laboralregistrar');
@@ -183,6 +190,7 @@ Route::get('/rrhh/funcionario/experiencia_edit/{id}', 'FuncionarioController@edi
 Route::post('/rrhh/funcionario/experiencia_edit', 'FuncionarioController@updatexperiencia')->name('actualizarlaboral');
 Route::get('/rrhh/funcionario/creardocumento_laboral/{tipo_documento}/{id_laboral}/{ir}', 'FuncionarioController@requisito_laboral')->name('requisitoslaboral');
 Route::post('/rrhh/funcionario/creardocumeto_laboral', 'FuncionarioController@subirArchivo_laboral')->name('subirarchivo_laboral');
+Route::delete('experiencia/{id}', 'FuncionarioController@destroylaboral')->name('borrarlaboral');
 
 Route::get('/rrhh/funcionario/educacion', 'FuncionarioController@createducacion')->name('educacionfuncionario');
 Route::post('/rrhh/funcionario/educacion', 'FuncionarioController@storeducacion')->name('registrareducacion');
@@ -199,11 +207,13 @@ Route::get('/rrhh/funcionario/cursos_edit/{id}', 'FuncionarioController@editcurs
 Route::post('/rrhh/funcionario/cursos_edit', 'FuncionarioController@updatecursos')->name('actualizarcursos');
 Route::get('/rrhh/funcionario/creardocumento_curso/{tipo_documento}/{id_curso}/{ir}', 'FuncionarioController@requisito_cursos')->name('requisitoscurso');
 Route::post('/rrhh/funcionario/creardocumeto_curso', 'FuncionarioController@subirArchivo_cursos')->name('subirarchivo_curso');
+Route::delete('cursos/{id}', 'FuncionarioController@destroycursos')->name('borrarcursos');
 
 Route::get('/rrhh/funcionario/idiomas', 'FuncionarioController@createidiomas')->name('idiomas_funcionario');
 Route::post('/rrhh/funcionario/idiomas', 'FuncionarioController@storeidiomas')->name('idiomasregistrar');
 Route::get('/rrhh/funcionario/idiomas_edit/{id}', 'FuncionarioController@editidiomas')->name('editaridiomas');
 Route::post('/rrhh/funcionario/idiomas_edit', 'FuncionarioController@updateidiomas')->name('actualizaridiomas');
+Route::delete('idiomas/{id}', 'FuncionarioController@destroyidiomas')->name('borraridiomas');
 
 Route::get('/rrhh/funcionario/familiar', 'FuncionarioController@createfamiliar')->name('familiarfuncionario');
 Route::post('/rrhh/funcionario/familiar', 'FuncionarioController@storefamiliar')->name('registrarfamiliar');
@@ -211,7 +221,7 @@ Route::get('/rrhh/funcionario/familiar_edit/{id}', 'FuncionarioController@editfa
 Route::post('/rrhh/funcionario/familiar_edit', 'FuncionarioController@updatefamiliar')->name('actualizarfamiliar');
 Route::get('/rrhh/funcionario/creardocumento_familiar/{tipo_documento}/{id_familiar}/{ir}', 'FuncionarioController@requisito_familiar')->name('requisitosfamiliar');
 Route::post('/rrhh/funcionario/creardocumeto_familiar', 'FuncionarioController@subirArchivo_familiar')->name('subirarchivo_familiar');
-
+Route::delete('familiar/{id}', 'FuncionarioController@destroyfamiliar')->name('borrarfamiliar');
 
 Route::get('/rrhh/funcionario/requisitos', 'FuncionarioController@datosadjunto')->name('requisitos');
 Route::get('/rrhh/funcionario/creardocumeto/{tipo_documento}', 'FuncionarioController@creardocumento')->name('creardocumento');

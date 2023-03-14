@@ -1,10 +1,26 @@
 @extends('layouts.app')
-@section ('content')
-<div class="container-fluid">
-    <div class="row justify-content-start">
-    @include('layouts.apprrhh')
-        <div class="col-xs-11 col-sm-11 col-md-11 col-lg-10 col-xl-10 col-xxl-10">
-            <div class="row pt-2">
+@section('styles')
+
+@endsection
+
+@section('content')
+    <div class="d-flex" id="wrapper">
+        @include('layouts.apprrhh')
+      
+        <div id="page-content-wrapper">
+        <div class="sidebar-heading text-center">
+      <h4 class="text-primary" >CONTROL DE EXPEDIENTES RRHH</h6>   
+   
+      </a>
+      <h6 class="text-dark">Bienvenid@, {{Auth::user()->name}}</h6>
+    </div> 
+
+            <div class="container pb-4">
+                <div class="row align-items-stretch">
+
+                        <div class="col-12">
+
+                            <div class="card mb-4">
             <div align="center" id="divTituloIndex2" class="text-primary">
                
                 <b>INSTRUCCIÓN FORMAL Y COMPLEMENTARIA</b>
@@ -81,7 +97,8 @@
                     <div class="frameContenedor" style="margin:5px;" align="right">
                         <input class='btn btn-info' type="submit" value="Registrar Curso" >
                     </div>
-
+                    </form>
+                    <hr>
                     <div class="table-responsive mt-3">
                         <table id="example1" class="table table-striped table-bordered" style="width:100%">                        
                             <thead>
@@ -92,7 +109,7 @@
                                     <th>Fecha de Inicio</th>
                                     <th>Fecha de Culminación</th>
                                     @if(in_array( Auth::user()->id_usuariogrupo, array(9,12,10) ))
-                                        <th>Opcion</th>
+                                        <th colspan=2>Opcion</th>
                                     @endif
                                     <th>Requisitos</th>
                                 </tr>
@@ -111,12 +128,21 @@
                                             <img src="/img/icon/modify.ico" class="icon-sm" alt="Listado">
                                             </a>
                                             </td>
+                                            <td class="text-center">
+                                            <form method="POST" action="{{URL::route('borrarcursos',$cursos->id)}}">
+                                             @csrf
+                                                <input type="hidden" name="_method" value="delete">
+                                                <button type="submit" class="btn btn-info" data-tip="Detalle" title="Eliminar registro" data-toggle="tooltip" data-original-title="Eliminar"> 
+                                                <img src="/img/icon/erase.ico" class="icon-sm" alt="Listado"></button>                                            
+                                             </form>
+                                            </td>  
                                         @endif   
                                         <td>
                                         <a href= "creardocumento_curso/{{$tipo_documento='curso'}}/{{$cursos->id}}/{{$ir='cursos_funcionario'}}" class="btn btn-success" data-tip="Detalle" title="Cargar Curso" data-toggle="tooltip" data-original-title="documento">
                                                             <img src="/img/icon/constancia.png" class="icon-sm" alt="Listado">
                                         </a>
-                                        </td>                                                             
+                                        </td> 
+                                                                                                 
                                     </tr>
                             @endforeach
                             </tbody>
@@ -140,8 +166,9 @@
                         </div>
                  @endif  
                     </div>
-                </form>
-
+            
+                    </div>
+</div>
             </div>
         </div>
     </div>

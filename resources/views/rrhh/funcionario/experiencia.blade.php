@@ -1,10 +1,26 @@
 @extends('layouts.app')
-@section ('content')
-<div class="container-fluid">
-    <div class="row justify-content-start">
-    @include('layouts.apprrhh')
-        <div class="col-xs-11 col-sm-11 col-md-11 col-lg-10 col-xl-10 col-xxl-10">
-            <div class="row pt-2">
+@section('styles')
+
+@endsection
+
+@section('content')
+    <div class="d-flex" id="wrapper">
+        @include('layouts.apprrhh')
+      
+        <div id="page-content-wrapper">
+        <div class="sidebar-heading text-center">
+      <h4 class="text-primary" >CONTROL DE EXPEDIENTES RRHH</h6>   
+   
+      </a>
+      <h6 class="text-dark">Bienvenid@, {{Auth::user()->name}}</h6>
+    </div> 
+
+            <div class="container pb-4">
+                <div class="row align-items-stretch">
+
+                        <div class="col-12">
+
+                            <div class="card mb-4">
             <div align="center" id="divTituloIndex2" class="text-primary">
               
                 <b>EXPERIENCIA LABORAL</b>
@@ -83,6 +99,8 @@
                     <input class='btn btn-info' type="submit" value="Registrar Exp. Laboral" >
                        
                     </div>
+                    </form>
+                    <hr>
                     <div class="table-responsive mt-3">
                     <table id="example1" class="table table-striped table-bordered" style="width:100%">                        
                                                          
@@ -94,7 +112,7 @@
                                     <th>Fecha de Ingreso</th>
                                     <th>Fecha de Egreso</th>
                                     @if(in_array( Auth::user()->id_usuariogrupo, array(9,12,10,11,13,4,6) ))
-                                        <th>Opcion</th>
+                                        <th colspan=2>Opcion</th>
                                     @endif
                                     <th>Requisitos</th>
                                 </tr>
@@ -113,10 +131,18 @@
                                             <img src="/img/icon/modify.ico" class="icon-sm" alt="Listado">
                                             </a>
                                             </td>
+                                            <td class="text-center">
+                                            <form method="POST" action="{{URL::route('borrarlaboral',$laboral->id)}}">
+                                             @csrf
+                                                <input type="hidden" name="_method" value="delete">
+                                                <button type="submit" class="btn btn-info" data-tip="Detalle" title="Eliminar registro" data-toggle="tooltip" data-original-title="Eliminar"> 
+                                                <img src="/img/icon/erase.ico" class="icon-sm" alt="Listado"></button>                                            
+                                             </form>
+                                            </td>  
                                         @endif  
                                         <td>
                                         <a href= "creardocumento_laboral/{{$tipo_documento='carta_trab'}}/{{$laboral->id}}/{{$ir='laboralfuncionario'}}" class="btn btn-success" data-tip="Detalle" title="Cargar Carta de Trabajo o Antecedentes de Servicios" data-toggle="tooltip" data-original-title="documento">
-                                                            <img src="/img/icon/constancia.png" class="icon-sm" alt="Listado">
+                                        <img src="/img/icon/constancia.png" class="icon-sm" alt="Listado">
                                         </a>
                                         </td>                                                           
                                     </tr>
@@ -131,7 +157,7 @@
                                     <th>Fecha de Ingreso</th>
                                     <th>Fecha de Egreso</th>
                                     @if(in_array( Auth::user()->id_usuariogrupo, array(9,12,10,11,13,4,6) ))
-                                        <th>Opcion</th>
+                                        <th colspan=2>Opcion</th>
                                     @endif
                                     <th>Requisitos</th>
                                 </tr>
@@ -143,10 +169,11 @@
                            <h2 aling="center"><b>DEBE COMPLETAR LOS DATOS BÁSICOS</b></h2>
                         </div>
                  @endif  
-                </form>
+      
 
             </div>
-
+            </div>
+        </div>
         </div>
     </div>
 </div>

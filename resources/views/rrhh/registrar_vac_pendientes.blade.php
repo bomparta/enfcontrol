@@ -18,7 +18,7 @@
 
                             <div class="card mb-4">
                 <div align="center" id="divTituloIndex2" class="text-primary">              
-                <b>REGISTRAR ANTECEDENTES DE SERVICIO EN LA ADMINISTRACIÓN PÚBLICA</b>
+                <b>REGISTRAR VACACIONES PENDIENTES DEL TRABAJADOR(A)</b>
                 </div>           
                     <table align="center" border="0" cellpadding="2" cellspacing="2" width="100%" >
                          <tr>
@@ -26,7 +26,7 @@
                                 <div id="divSubTituloIndex2">
                                    
                                     <hr>
-                                    <b> Sumistrar los datos correspondientes a la <span style="color:gray; ">Antecedentes de la Administración Pública </span> del funcionario, haga clic en "Guardar" para registrar su información.
+                                    <b> Sumistrar los datos correspondientes a las <span style="color:gray; ">Vacaciones Pendientes del trabajador(a) </span>, haga clic en "Guardar" para registrar su información.
                                     <hr>   
                                     @include('rrhh.funcionario.mensaje')  
                            
@@ -36,14 +36,14 @@
                         </tr>
                     </table>
       
-                <form id="formulario" name="formulario" method="POST" action="{{route('store_antecedentes')}}">    
+                <form id="formulario" name="formulario" method="POST" action="{{route('store_vac_pendientes')}}">    
                 @csrf
-                @if(isset($datos_funcionario))
+                @if(isset($datos_funcionario) &&  $annos_servicio>=1)
                 @foreach($datos_funcionario as $key=>$funcionario)
              
                     <input type= "hidden" id="funcionario_id" name="funcionario_id" value="{{$funcionario->funcionario_id}}" class="form-control"  >    
                     <input type= "hidden" id="cedula" name="cedula" value="{{$cedula}}" class="form-control"  >    
-                    <input type="hidden" name="tipo_documento" id="tipo_documento" value="adm_pub_constancia" required>                                                    
+                                                                    
                             <table align="center" border="1" cellpadding="2" cellspacing="2" width="100%">                            
                             <tbody>                            
                             <tr  class="table-secondary">
@@ -87,9 +87,9 @@
                             </tr>
                             
                             <tr  >
-                            <td  align="center"   > <input type="date" id ="fecha_ingreso_adm" name="fecha_ingreso_adm" value="{{$funcionario->fecha_ingreso_adm}}" class="form-control"  required>   </td>
-                            <td    >  <input type="date" id ="fecha_ingreso_fund" name="fecha_ingreso_fund" value="{{$funcionario->fecha_ingreso_fund}}"  class="form-control"  required>    </td>
-                            <td   >   <input type="date" id ="fecha_ingreso_vac" name="fecha_ingreso_vac" value="{{$funcionario->fecha_ingreso_vac}}" class="form-control"  required>  </td>
+                            <td  align="center"   > {{$funcionario->fecha_ingreso_adm}}</td>
+                            <td    > {{$funcionario->fecha_ingreso_fund}}</td>
+                            <td   > {{$funcionario->fecha_ingreso_vac}}</td>
                             </tr>
 
                         
@@ -100,36 +100,28 @@
                             <table align="center" border="0" cellpadding="2" cellspacing="2" width="100%">
                             <tr>                            
                             <td>
-                            <span data-tooltip="Permite sólo caracteres alfanuméricos" sdata-flow="top">&nbsp;Nombre de la Institución u Organismo </span>
+                            <span data-tooltip="Permite sólo números" sdata-flow="top">&nbsp;Lapso de Disfrute </span>
                             <span style="color:red;">*</span>&nbsp;<br>
-                                        <input type= "text" id="institucion" rows="2" name="institucion" onkeyup="mayusculas(this);"  value="" class="form-control"  required>                              
-                                        @error('institucion')
+                                        <input type= "text" id="lapso_disfrute"  name="lapso_disfrute" onkeypress="return isNumberKey(event);"  value="" class="form-control"  required>                              
+                                        @error('lapso_disfrute')
                                             <div class="invalid-feedback">
                                             <span style="color:red;"><strong>{{ $message }}</strong></span>
                                             </div>
                                         @enderror
                                     </td>        
                                     <td>
-                                    <span data-tooltip="Permite sólo caracteres alfanuméricos" sdata-flow="top">&nbsp;Último Cargo Desempeñado </span><span style="color:red;">*</span>&nbsp;<br>
-                                        <input type= "text" id="ult_cargo" rows="2" name="ult_cargo" onkeyup="mayusculas(this);"  value="" class="form-control" required >                              
-                                        @error('observaciones')
+                                    <span data-tooltip="Permite sólo números"  sdata-flow="top">&nbsp;Días a Disfrute </span><span style="color:red;">*</span>&nbsp;<br>
+                                        <input type= "text" id="dias_adisfrutar"  name="dias_adisfrutar" onkeypress="return isNumberKey(event);"  value="" class="form-control" required >                              
+                                        @error('dias_adisfrutar')
                                             <div class="invalid-feedback">
                                             <span style="color:red;"><strong>{{ $message }}</strong></span>
                                             </div>
                                         @enderror
                                     </td>
                                     <td>
-                                    <span data-tooltip="Seleccione un valor de la lista" sdata-flow="top">&nbsp;Tipo de Trabajador&nbsp;</span>
-                                    <span style="color:red;">*</span>&nbsp;<br>
-                                        <select id="id_tipo_trabajador" name="id_tipo_trabajador"  class="form-control" required >
-                                        <option value="0">Seleccione...</option>
-                                            @foreach ($tipo_trabajador as $tipo_trabajador)
-                                            <option value="{{ $tipo_trabajador->id }}"
-                                            @if($funcionario->tipo_trabajador == $tipo_trabajador->id) selected @endif >
-                                            {{ $tipo_trabajador->descripcion }} </option>
-                                            @endforeach
-                                        </select>
-                                        @error('id_tipo_trabajador')
+                                    <span data-tooltip="Permite sólo números" sdata-flow="top">&nbsp;Días Pendientes por disfrutar&nbsp;</span><span style="color:red;">*</span>&nbsp;<br>
+                                    <input type= "text" id="dias_pendientes" name="dias_pendientes" onkeypress="return isNumberKey(event);"  value="0" class="form-control" required >                              
+                                        @error('dias_pendientes')
                                             <div class="invalid-feedback">
                                             <span style="color:red;"><strong>{{ $message }}</strong></span>
                                             </div>
@@ -137,34 +129,7 @@
                                     </td>
                             </tr>
                         <tr>
-                        <td>
-                        <span data-tooltip="Indique una fecha del calendario" sdata-flow="top">&nbsp;Fecha de Ingreso al Organismo&nbsp;</span><span style="color:red;">*</span><br>
-                                        <input type="date" name="fechaingreso" id="fechaingreso" value="{{ old('fechaingreso') }}"  required/>
-                                
-                                    @error('fechaingreso')
-                                        <div class="invalid-feedback">
-                                            <span style="color:red;"><strong>{{ $message }}</strong></span>
-                                            </div>
-                                        @enderror  
-                            
-                                        </td>
-                                    <td>
-                                    <span data-tooltip="Indique una fecha del calendario" sdata-flow="top">&nbsp;Fecha de Egreso del Organismo&nbsp;</span><span style="color:red;">*</span><br>
-                                        <input type="date" name="fechaegreso" id="fechaegreso" value="{{ old('fechaegreso') }}"  required/>
-                                
-                                    @error('fechaegreso')
-                                        <div class="invalid-feedback">
-                                            <span style="color:red;"><strong>{{ $message }}</strong></span>
-                                            </div>
-                                        @enderror  
-                            
-                                        </td>
-                                    
-                                </tr>
-                            <!--   <tr><td colspan="2">Años Servicio  en el cargo:     años   meses  dias</td></tr>-->
-                            
-                                <tr>                            
-                                    <td>
+                            <td>
                                     <span data-tooltip="Permite sólo caracteres alfanuméricos" sdata-flow="top">&nbsp;Observaciones <br></span>
                                         <input type= "text" id="observaciones" rows="2" name="observaciones" onkeyup="mayusculas(this);"  value="" class="form-control"  >                              
                                         @error('observaciones')
@@ -172,80 +137,108 @@
                                             <span style="color:red;"><strong>{{ $message }}</strong></span>
                                             </div>
                                         @enderror
-                                    </td>
-                                </tr>
+                            </td>
+                        </tr>
                             
-                            <tr> 
                         
                         
                             </table>
-                            </form>
+                          
+                 
   
-                    <div class="frameContenedor" style="margin:5px;" align="right">
-                        <input class='btn btn-info' type="submit" value="Guardar" >
-                        <a class='btn btn-secondary' href="{{ URL::route('ver_trabajador',$cedula) }}">Regresar</a> 
-                    </div>
-                    @endforeach
-                    @endif 
+                        <div class="frameContenedor" style="margin:5px;" align="right">
+                            <input class='btn btn-info' type="submit" value="Guardar" >
+                            <a class='btn btn-secondary' href="{{ URL::route('ver_trabajador',$cedula) }}">Regresar</a> 
+                        </div>
+                        </form>
+                            @endforeach
                     <hr>
                 <div class="table-responsive mt-3">
                     <table id="example1" class="table table-striped table-bordered" style="width:100%">                                
                     <thead>
                         <tr>
-                            <th>Nombre Institución u Organismo Público</th>
-                            <th>Fecha de Ingreso</th>
-                            <th>Fecha de Egreso</th>
-                            <th>Tiempo de Servicio</th>
+                            <th>Lapso de Disfrute</th>
+                            <th>Dias a Disfrutar</th>
+                            <th>Dias Pendientes por disfrutar</th>
+                            <th>Estatus del Lapso </th>
                             @if(in_array( Auth::user()->id_usuariogrupo, array(9,12,10) ))
-                                <th colspan="2">Opción</th>
+                                <th >Opciones</th>
                             @endif
-                            <th>Requisitos</th>
+                         
                         </tr>
                     </thead>    
                     <tbody>   
-                    @foreach($adm_pub as $adm)                           
-                        <tr>                                                    
-                                <td>{{$adm->organismo}}</td>
-                                <td>{{$adm->fecha_ingreso}}</td>
-                                <td>{{$adm->fecha_egreso}}</td>
-                                <td>{{$adm->anno_servicios}} años {{$adm->meses_servicios}} meses {{$adm->dias_servicios}} días </td>
-                                
-                                @if(in_array( Auth::user()->id_usuariogrupo, array(9,12,10) ))
-                                <td class="text-center" >
-                                    <a href= "/rrhh/registrar_adm_publica_edit/{{$adm->adm_id}}/{{$funcionario->numero_identificacion}}" class="btn btn-info" data-tip="Detalle" title="Actualizar Antecedente" data-toggle="tooltip" data-original-title="Editar">
-                                    <img src="/img/icon/modify.ico" class="icon-sm" alt="Listado">
-                                </td>
-                                <td>
-                                <form method="POST" action="{{URL::route('borrar_adm_pub',$adm->adm_id)}}">
-                                @csrf
-                                    <input type="hidden" name="_method" value="delete">
-                                    <button type="submit" class="btn btn-info" data-tip="Detalle" title="Eliminar registro" data-toggle="tooltip" data-original-title="Eliminar"> 
-                                    <img src="/img/icon/erase.ico" class="icon-sm" alt="Listado"></button>
+                    @if(isset($vacaciones))      
+                        @foreach($vacaciones as $vac)                           
+                            <tr>                                                    
+                                    <td>{{$vac->lapso_disfrute}}</td>
+                                    <td>{{$vac->dias_adisfrutar}}</td>
+                                    <td>{{$vac->dias_pendientes}}</td>
+                                    <td>@if($vac->status== 1) ACTIVO @else INACTIVO @endif</td>
                                     
-                                </form>
-                                    </td>                                      
-                                <td>
-                                <a href= "{{ Storage::url( $adm->ruta_documento) }}" target="_new"class="btn btn-info" data-tip="Detalle" title="Constancia o Antecedente de Servicio" data-toggle="tooltip" data-original-title="Editar">                                         
-                                <img src="/img/icon/constancia.png" class="icon-sm" alt="Listado">
-                                </a>
-                                </td>     
-                                @endif                                                           
-                            </tr>
-                    @endforeach
+                                    @if(in_array( Auth::user()->id_usuariogrupo, array(9,12,10) ))
+                                    <td  >
+                                        <a href= "/rrhh/registrar_vac_pendientesedit/{{$vac->id}}/{{$funcionario->numero_identificacion}}" class="btn btn-info" data-tip="Detalle" title="Actualizar Antecedente" data-toggle="tooltip" data-original-title="Editar">
+                                        <img src="/img/icon/modify.ico" class="icon-sm" alt="Listado">
+                                        </a>
+                                      
+                                        <form method="POST" action="{{URL::route('borrar_vac_pendientes',$vac->id)}}">
+                                        @csrf
+                                            <input type="hidden" name="_method" value="delete">
+                                            <button type="submit" class="btn btn-info" data-tip="Detalle" title="Eliminar registro" data-toggle="tooltip" data-original-title="Eliminar"> 
+                                            <img src="/img/icon/erase.ico" class="icon-sm" alt="Listado"></button>
+                                            
+                                        </form>
+                                        </td>                                      
+                                    
+                                    @endif                                                           
+                                </tr>
+                        @endforeach
+                        @endif 
                     </tbody>
                     <tfoot>
                     <tr>
-                            <th>Nombre Institución u Organismo Público</th>
-                            <th>Fecha de Ingreso</th>
-                            <th>Fecha de Egreso</th>
-                            <th>Tiempo de Servicio</th>
+                    <th>Lapso de Disfrute</th>
+                            <th>Dias a Disfrutar</th>
+                            <th>Dias Pendientes por disfrutar</th>
+                            <th>Estatus del Lapso </th>
                             @if(in_array( Auth::user()->id_usuariogrupo, array(9,12,10) ))
-                                <th>Opcion</th>
+                                <th >Opciones</th>
                             @endif
-                            <th>Requisitos</th>
                         </tr>
                     </tfoot>
-                </table>            
+                </table>   
+                @else
+                <table>    
+                @if($annos_servicio == 0)
+                <tr>
+                    <td  >
+                    <div class="alert alert-danger" role="alert">
+                    <h4 class="alert-heading">Vacaciones Pendientes</h4>
+                    <p>El trabajador(a),no tiene un (1) año o más de servicio para realizar solicitud de vacaciones.</p>
+                    <hr>
+                    <p class="mb-0">Por lo que la Coordinación de Recursos Humanos de la ENFMP no podrá cargarle vacaciones pendientes.</p>
+                    </div>
+                    </td>
+                </tr>
+                @elseif($annos_servicio==-1)
+                <tr>
+                    <td  >
+                    <div class="alert alert-warning" role="alert">
+                    <h4 class="alert-heading">Vacaciones Pendientes</h4>
+                    <p>El trabajador(a),no tiene cargado su fecha de ingreso para efectos de vacaciones .</p>
+                    <hr>
+                    <p class="mb-0">Por lo que la Coordinación de Recursos Humanos de la ENFMP debe cargarle dicha información en <b> Antiguedad Administraciń Pública</b> .</p>
+                    </div>
+                    </td>
+                </tr>
+                @endif
+                </table>
+                    <div class="frameContenedor" style="margin:5px;" align="right">                      
+                    <a class='btn btn-secondary' href="{{ URL::route('ver_trabajador',$cedula) }}">Regresar</a> 
+                    </div>
+
+                        @endif          
                 </div>
                  
          

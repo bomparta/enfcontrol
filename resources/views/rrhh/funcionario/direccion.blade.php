@@ -1,17 +1,29 @@
 @extends('layouts.app')
-@section ('content')
+@section('styles')
 
-<div class="container-fluid">
-<div class="row justify-content-start">
-@include('layouts.apprrhh')  
-       
-        
-        <div class="col-xs-11 col-sm-11 col-md-11 col-lg-10 col-xl-10 col-xxl-10">
-            <div class="row pt-2">
-            <div align="center" id="divTituloIndex2" class="text-primary">
-              
-                <b>DATOS PERSONALES</b>
-                </div>
+@endsection
+
+@section('content')
+    <div class="d-flex" id="wrapper">
+        @include('layouts.apprrhh')
+      
+        <div id="page-content-wrapper">
+        <div class="sidebar-heading text-center">
+      <h4 class="text-primary" >CONTROL DE EXPEDIENTES RRHH</h6>   
+   
+      </a>
+      <h6 class="text-dark">Bienvenid@, {{Auth::user()->name}}</h6>
+    </div> 
+
+            <div class="container pb-4">
+                <div class="row align-items-stretch">
+
+                        <div class="col-12">
+
+                            <div class="card mb-4">
+                                <div align="center" id="divTituloIndex2" class="text-primary">
+                                <b>DATOS PERSONALES</b>
+                                </div>
            
                     <table align="center" border="0" cellpadding="2" cellspacing="2" width="100%" >
                    
@@ -204,9 +216,7 @@
                          
                     </form>
 
-            </div>
-            
-        </div>
+   
         <script>
             const csrfToken = document.head.querySelector("[name~=csrf-token][content]").content;
             document.getElementById('_estado').addEventListener('change',(e)=>{
@@ -248,11 +258,13 @@
             })
         
         </script>
-    </div>
-</div>
-
-
-
+                          </div> <!-- /.card -->
+                        </div>
+                
+                </div>
+            </div>
+        </div> <!-- page-content-wrapper -->
+    </div> <!-- wrapper -->
 @endsection
 
 @section('scripts')

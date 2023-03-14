@@ -1,29 +1,21 @@
 @extends('layouts.app')
-@section('styles')
+@section ('content')
 
-@endsection
-
-@section('content')
-    <div class="d-flex" id="wrapper">
-        @include('layouts.apprrhh')
-      
-        <div id="page-content-wrapper">
-        <div class="sidebar-heading text-center">
-      <h4 class="text-primary" >CONTROL DE EXPEDIENTES RRHH</h6>   
-   
-      </a>
-      <h6 class="text-dark">Bienvenid@, {{Auth::user()->name}}</h6>
-    </div> 
+<div class="container-fluid">
+<div class="row justify-content-start">
+@include('layouts.apprrhh')  
+<div id="page-content-wrapper">
+            
 
             <div class="container pb-4">
                 <div class="row align-items-stretch">
 
                         <div class="col-12">
-
                             <div class="card mb-4">
-                                <div align="center" id="divTituloIndex2" class="text-primary">
-                                <b>DATOS PERSONALES</b>
-                                </div>
+            <div align="center" id="divTituloIndex2" class="text-primary">
+              
+              <b>DATOS PERSONALES</b>
+              </div>
            
                     <table align="center" border="0" cellpadding="2" cellspacing="2" width="100%" >
                         <tr>
@@ -269,12 +261,16 @@
                   @endif
                     </div>
                 </form>
-                               
-                            </div> <!-- /.card -->
-                        </div>
+            </div>
+        </div>
+
                 
                 </div>
             </div>
         </div> <!-- page-content-wrapper -->
     </div> <!-- wrapper -->
+@endsection
+@section('scripts')
+<script src="{{url('js/funciones_generales.js')}}"></script>
+
 @endsection

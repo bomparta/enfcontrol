@@ -1,12 +1,18 @@
 @extends('layouts.app')
-@section ('content')
-<div class="container-fluid">
-    <div class="row justify-content-start">
-        @include('layouts.appvacaciones')
-        <div class="col-xs-11 col-sm-11 col-md-11 col-lg-10 col-xl-10 col-xxl-10">
-            <div class="row pt-2">
-            <div class="card">
-                <div class="card-body">
+@section('styles')
+@endsection
+@section('content')
+<div class="d-flex" id="wrapper">
+        @include('layouts.appvacaciones')      
+    <div id="page-content-wrapper">
+        <div class="sidebar-heading text-center">
+            <h4 class="text-primary" >VACACIONES</h6>      
+            <h6 class="text-dark">Bienvenid@, {{Auth::user()->name}}</h6>
+        </div>   
+            <div class="container pb-4">
+                 <div class="row align-items-stretch">
+                        <div class="col-12">
+                            <div class="card mb-4">
                 <div align="center" id="divTituloIndex2" class="text-primary">
                                 <b>DIRECTOR(A)</b>                              
                     </div>
@@ -46,7 +52,7 @@
                                     <th class="text-primary"><div> <img src="{{url('/img/icon/calendario.png')}}" whith="60px" height="60px"/>Fecha de Inicio</div></th>
                                     <th class="text-primary"> <div><img src="{{url('/img/icon/regreso.png')}}" whith="80px" height="60px"/>Fecha de Reintegro</div></th>
                                     <th class="text-primary"> Revisada/Aprobada/Diferida/Negada </th>
-                                   @if(in_array( Auth::user()->id_usuariogrupo, array(10,11,12,13) ))
+                                   @if(in_array( Auth::user()->id_usuariogrupo, array(9,10,11,12,13) ))
                                         <th class="text-primary" colspan="3" > <div aling="center">Verificaciones de Aprobación</div></th>
                                     @endif
                                 </tr>
@@ -122,7 +128,7 @@
                         </table>
                        
                                     
-                    </div>
+         
                    
                     
             </div> <!-- card -->

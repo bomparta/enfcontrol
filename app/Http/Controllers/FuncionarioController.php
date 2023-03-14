@@ -954,13 +954,57 @@ class FuncionarioController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroycuenta($id)
     {
-        //
+        //dd($id);
+        $cuenta = Cuentas_bancarias::findOrFail($id);
+        
+        $cuenta->delete();
+
+        return    redirect()->back()->with('message', ' La cuenta bancaria  del Trabajador(a)  fue eliminado con éxito!!.');
     }
-    
+public function destroyfamiliar($id)
+    {
+        //dd($id);
+        $familiar = Familiares::findOrFail($id);
+        
+        $familiar->delete();
+
+        return    redirect()->back()->with('message', ' El familiar del Trabajador(a)  fue eliminado con éxito!!.');
+    }
+    public function destroylaboral($id)
+    {
+        //dd($id);
+        $Laboral = Laboral::findOrFail($id);
+        
+        $Laboral->delete();
+
+        return    redirect()->back()->with('message', ' El registro  del Trabajador(a)  fue eliminado con éxito!!.');
+    }
+    public function destroycursos($id)
+    {
+        //dd($id);
+        $Cursos = Cursos::findOrFail($id);
+        
+        $Cursos->delete();
+
+        return    redirect()->back()->with('message', ' El curso registrado del Trabajador(a)  fue eliminado con éxito!!.');
+    }
  
-  
+    public function destroyidiomas($id)
+    {
+       // dd($id);
+        $Idiomas = Idiomas::findOrFail($id);
+        
+        $Idiomas->delete();
+
+        return    redirect()->back()->with('message', 'El idioma registrado del Trabajador(a)  fue eliminado con éxito!!.');
+    }
+   /* use App\Familiares;
+    use App\Cuentas_bancarias;
+    use App\Laboral;
+    use App\Cursos;
+    use App\Idiomas;*/
     
 
    // public function datosadjunto($id)

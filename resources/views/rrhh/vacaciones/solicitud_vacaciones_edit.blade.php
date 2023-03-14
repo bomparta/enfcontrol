@@ -1,10 +1,19 @@
+
 @extends('layouts.app')
-@section ('content')
-<div class="container-fluid">
-    <div class="row justify-content-start">
-    @include('layouts.appvacaciones')
-        <div class="col-xs-11 col-sm-11 col-md-11 col-lg-10 col-xl-10 col-xxl-10">
-            <div class="row pt-2">
+@section('styles')
+@endsection
+@section('content')
+<div class="d-flex" id="wrapper">
+        @include('layouts.appvacaciones')      
+    <div id="page-content-wrapper">
+        <div class="sidebar-heading text-center">
+            <h4 class="text-primary" >VACACIONES</h6>      
+            <h6 class="text-dark">Bienvenid@, {{Auth::user()->name}}</h6>
+        </div>   
+            <div class="container pb-4">
+                 <div class="row align-items-stretch">
+                        <div class="col-12">
+                            <div class="card mb-4">
             <div align="center" id="divTituloIndex2" class="text-primary">
                
                 <b>FUNCIONARIOS</b>
@@ -121,8 +130,7 @@
                                 <th>Fecha de Reintegro </th>
                                  
                                 <th>Estatus de la Solicitud</th>                                    
-                                <th colspan=3>Niveles de Aprobación</th>      
-                                 
+                                <th>Niveles de Aprobación</th>      
                                 @if(in_array( Auth::user()->id_usuariogrupo, array(9,12,10,11) ))
                                     <th>Opciones</th>
                                 @endif
@@ -136,9 +144,10 @@
                                     <td>{{$vacaciones->dias_disfrute}} días</td>
                                     <td>{{$vacaciones->fecha_inicio}}</td> 
                                     <td>{{$vacaciones->fecha_reintegro}}</td>                                  
-                                  <div align="center">  <td>
+                                 <td>
+                                    <div align="center">
                                             @if($vacaciones->revisado==1)   
-                                            <img src="{{url('img/icon/check.png')}}" style="max-width: 40px; max-height: 40px"  alt="Image">  Revisada
+                                            <img src="{{url('img/icon/check.png')}}" style="max-width: 40px; max-height: 40px"  alt="Image">  Revisada <br>
                                                 @if($vacaciones->tipo_aprobacion_director==1)   
                                                 <img src="{{url('img/icon/check.png')}}" style="max-width: 40px; max-height: 40px"  alt="Image">  Aprobada
                                                  @endif
@@ -152,68 +161,62 @@
                                             @else
                                             <img src="{{url('img/icon/erase.ico')}}" style="max-width: 40px; max-height: 40px"  alt="Image">  Sin Revisar</td>
                                             @endif
-                                        </td>    
-                                        </div>   
-                                       @if($vacaciones->aprobado_coordinador==1)
-                                            <td>   
-                                                                                 
+                                    </div>
+                                </td>    
+                                        <td> 
+                                       @if($vacaciones->aprobado_coordinador==1)   
                                                 <div align="center"><img src="{{url('img/icon/check.png')}}" style="max-width: 40px; max-height: 40px"  alt="Image"> 
                                                     <span class='btn-info badge'><font color=#F2F3F8>Jefe(a) Inmediato o Coordinador(a)</font></span> 
-                                                </div>
-                                            </td>
+                                                </div>                                           
                                         @else
-                                        <td >                                       
+                                                                           
                                                 <div align="center"><img src="{{url('img/icon/erase.ico')}}" style="max-width: 40px; max-height: 40px"  alt="Image"> 
                                                     <span class='btn-info badge'><font color=#F2F3F8>Jefe(a) Inmediato o Coordinador(a)</font></span> 
                                                 </div>
-                                        </td>
+                                       
                                         @endif
                                         @if($vacaciones->aprobado_director==1)
-                                            <td>   
+                                           
                                                                                  
                                                 <div align="center"><img src="{{url('img/icon/check.png')}}" style="max-width: 40px; max-height: 40px"  alt="Image"> 
                                                     <span class='btn-info badge'><font color=#F2F3F8>Director(a)</font></span> 
                                                 </div>
-                                            </td>
+                                           
                                         @else
-                                        <td >                                       
+                                                                            
                                                 <div align="center"><img src="{{url('img/icon/erase.ico')}}" style="max-width: 40px; max-height: 40px"  alt="Image"> 
                                                     <span class='btn-info badge'><font color=#F2F3F8>Director(a)</font></span> 
                                                 </div>
-                                        </td>
+                                       
                                         @endif
                                         @if($vacaciones->aprobado_presidencia==1)
-                                            <td>                                                                                    
+                                                                                                                             
                                                 <div align="center"><img src="{{url('img/icon/check.png')}}" style="max-width: 40px; max-height: 40px"  alt="Image"> 
                                                     <span class='btn-info badge'><font color=#F2F3F8>Presidente(a)</font></span> 
                                                 </div>
-                                            </td>
+                                          
                                         @else
-                                        <td >                                       
+                                                                           
                                                 <div align="center"><img src="{{url('img/icon/erase.ico')}}" style="max-width: 40px; max-height: 40px"  alt="Image"> 
                                                     <span class='btn-info badge'><font color=#F2F3F8>Presidente(a)</font></span> 
                                                 </div>
-                                        </td>
+                                       
                                         @endif  
-                                        @if(in_array( Auth::user()->id_usuariogrupo, array(9,12,10,11) ))
-                                            @if($vacaciones->revisado==0)      
-                                            <td class="text-center">
+                                        </td>
+                                        <td>
+                                        @if($vacaciones->revisado==0)                                             
                                                 <a href= "#" class="btn btn-info" data-tip="Detalle" title="Actualizar" data-toggle="tooltip" data-original-title="Editar">
                                                 <img src="/img/icon/modify.ico" class="icon-sm" alt="Listado">
-                                                </a>                                          
-                                                </td>
-                                            @else
-                                                @if($vacaciones->aprobado_presidencia=="" && $vacaciones->aprobado_director=="" )
-                                                <td><b>Pendiente por Abrobación<b>  <img src="/img/icon/adv.jpg" class="icon-sm" alt="Listado"></td>
+                                                </a>  
                                                 @else
-                                                    @if($vacaciones->aprobado_presidencia=="" && $vacaciones->aprobado_director==1 && $vacaciones->tipo_aprobacion_director !=1 )
-                                                    <td><b>Rezada por la Dirección<b>  <img src="/img/icon/no.ico" class="icon-sm" alt="Listado"></td>                                          
-                                                    @else
-                                                        <td></td>
-                                                    @endif
-                                                @endif
-                                            @endif  
-                                        @endif                                                          
+                                                @if($vacaciones->aprobado_presidencia=="" && $vacaciones->aprobado_director=="" )
+                                                    <b>Pendiente por Abrobación<b>  <img src="/img/icon/adv.jpg" class="icon-sm" alt="Listado">
+                                                    @elseif($vacaciones->aprobado_presidencia=="" && $vacaciones->aprobado_director==1 && $vacaciones->tipo_aprobacion_director !=1 )
+                                                    <b>Rechazada por la Dirección<b>  <img src="/img/icon/no.ico" class="icon-sm" alt="Listado">                                                                                           
+                                                 @endif
+                                            @endif      
+                                        </td>
+                                                                                        
                                     </tr>
                                 @endforeach
                             @endif
@@ -225,7 +228,7 @@
                                 <th>Fecha de Inicio </th>
                                 <th>Fecha de Reintegro </th>                                
                                 <th>Estatus de la Solicitud</th>                                    
-                                <th colspan=3>Niveles de Aprobación</th>    
+                                <th >Niveles de Aprobación</th>    
                                 @if(in_array( Auth::user()->id_usuariogrupo, array(9,12,10,11) ))
                                     <th>Opciones</th>
                                 @endif
@@ -239,7 +242,8 @@
                    
                    </div>
                 </form>
-
+                </div>
+                </div>
             </div>
         </div>
     </div>
@@ -274,16 +278,14 @@
   integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
   crossorigin="anonymous"></script>
 
-<script>
+  <script>
 
-    $(function () {
-        $('#example1').DataTable({
+$(function () {
+    $('#example1').DataTable({
 "language": {
-"url": "//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json",
-"responsive": true, "lengthChange": false, "autoWidth": false,
-"buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+"url": "//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json"
 }
 });
 });
-  </script>
+</script>
 @endsection

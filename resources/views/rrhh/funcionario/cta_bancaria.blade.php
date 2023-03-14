@@ -1,14 +1,29 @@
 @extends('layouts.app')
-@section ('content')
-<div class="container-fluid">
-    <div class="row justify-content-start">
-    @include('layouts.apprrhh')
-    <div class="col-xs-11 col-sm-11 col-md-11 col-lg-10 col-xl-10 col-xxl-10">
-            <div class="row pt-2">
-            <div align="center" id="divTituloIndex2" class="text-primary">
-              
-                <b>DATOS PERSONALES</b>
-                </div>
+@section('styles')
+
+@endsection
+
+@section('content')
+    <div class="d-flex" id="wrapper">
+        @include('layouts.apprrhh')
+      
+        <div id="page-content-wrapper">
+        <div class="sidebar-heading text-center">
+      <h4 class="text-primary" >CONTROL DE EXPEDIENTES RRHH</h6>   
+   
+      </a>
+      <h6 class="text-dark">Bienvenid@, {{Auth::user()->name}}</h6>
+    </div> 
+
+            <div class="container pb-4">
+                <div class="row align-items-stretch">
+
+                        <div class="col-12">
+
+                            <div class="card mb-4">
+                                <div align="center" id="divTituloIndex2" class="text-primary">
+                                <b>DATOS PERSONALES</b>
+                                </div>
            
                     <table align="center" border="0" cellpadding="2" cellspacing="2" width="100%" >
                    
@@ -86,7 +101,7 @@
                                     <th>Nombre del Banco</th>
                                                                
                                     @if(in_array( Auth::user()->id_usuariogrupo, array(9,12,10,11,13,4,6) ))
-                                        <th>Opcion</th>
+                                        <th colspan=2>Opcion</th>
                                     @endif
                                 </tr>
                             </thead>    
@@ -105,6 +120,14 @@
                                             <img src="/img/icon/modify.ico" class="icon-sm" alt="Listado">
                                             </a>
                                             </td>
+                                            <td class="text-center">
+                                            <form method="POST" action="{{URL::route('borrarcuenta',$cuentas->id)}}">
+                                             @csrf
+                                                <input type="hidden" name="_method" value="delete">
+                                                <button type="submit" class="btn btn-info" data-tip="Detalle" title="Eliminar registro" data-toggle="tooltip" data-original-title="Eliminar"> 
+                                                <img src="/img/icon/erase.ico" class="icon-sm" alt="Listado"></button>                                            
+                                             </form>
+                                            </td>
                                         @endif                                                            
                                     </tr>
                            @endforeach
@@ -118,7 +141,7 @@
                                     <th>Nombre del Banco</th>
                                                                    
                                     @if(in_array( Auth::user()->id_usuariogrupo, array(9,12,10,11,13,4,6) ))
-                                        <th>Opcion</th>
+                                        <th colspan=2>Opcion</th>
                                     @endif
                                     
                                 </tr>
@@ -134,7 +157,8 @@
                  @endif  
                    
                 </form>
-
+                </div>
+                </div>
                 </div>
         </div>
     </div>
