@@ -5,6 +5,7 @@
 
     <div class="list-group list-group-flush">
         <!-- Menu Administrador RRHH-->
+  
         @if(in_array( Auth::user()->id_usuariogrupo, array(9) ))
             <div class="card-header text-secondary">FUNCIONARIOS</div>
             <div class="card-header text-primary" align="center">Control de Expedientes</div>

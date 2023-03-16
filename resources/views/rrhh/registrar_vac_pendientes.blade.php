@@ -70,7 +70,7 @@
                             <tr  >
                             <td   >   {{$funcionario->nombre.' '.$funcionario->nombreseg}}   </td>                   
                             <td  >   {{$funcionario->apellido.' '. $funcionario->apellidoseg}}   </td>                    
-                            <td  >   {{$funcionario->trabajador}}   </td>
+                            <td  >   {{$funcionario->trabajador}} <input type="hidden" id="tipo_trabajador" name="tipo_trabajador" value="{{$funcionario->id_tipo_funcionario}}"/>  </td>
                             <td     >   {{$funcionario->cargo}}   </td>
                             </tr  >
                             <tr class="table-primary">                     
@@ -89,7 +89,7 @@
                             <tr  >
                             <td  align="center"   > {{$funcionario->fecha_ingreso_adm}}</td>
                             <td    > {{$funcionario->fecha_ingreso_fund}}</td>
-                            <td   > {{$funcionario->fecha_ingreso_vac}}</td>
+                            <td   > {{$funcionario->fecha_ingreso_vac}} <input type="hidden" id="fecha_ingreso_vac" name="fecha_ingreso_vac" value="{{$funcionario->fecha_ingreso_vac}}"/></td>
                             </tr>
 
                         
@@ -102,7 +102,9 @@
                             <td>
                             <span data-tooltip="Permite sólo números" sdata-flow="top">&nbsp;Lapso de Disfrute </span>
                             <span style="color:red;">*</span>&nbsp;<br>
-                                        <input type= "text" id="lapso_disfrute"  name="lapso_disfrute" onkeypress="return isNumberKey(event);"  value="" class="form-control"  required>                              
+                                        <input type= "text" id="lapso_disfrute"  name="lapso_disfrute" onkeypress="return isNumberKey(event);" 
+                                        onkeydown="return dias_disfrute_lapso(this,document.getElementById('fecha_ingreso_vac'),document.getElementById('tipo_trabajador'))"  
+                                        value="" class="form-control"  required>                              
                                         @error('lapso_disfrute')
                                             <div class="invalid-feedback">
                                             <span style="color:red;"><strong>{{ $message }}</strong></span>
@@ -111,7 +113,7 @@
                                     </td>        
                                     <td>
                                     <span data-tooltip="Permite sólo números"  sdata-flow="top">&nbsp;Días a Disfrute </span><span style="color:red;">*</span>&nbsp;<br>
-                                        <input type= "text" id="dias_adisfrutar"  name="dias_adisfrutar" onkeypress="return isNumberKey(event);"  value="" class="form-control" required >                              
+                                        <input type= "text" id="dias_adisfrutar"  name="dias_adisfrutar" onkeypress="return isNumberKey(event);"  value="" class="form-control" readonly required >                              
                                         @error('dias_adisfrutar')
                                             <div class="invalid-feedback">
                                             <span style="color:red;"><strong>{{ $message }}</strong></span>
@@ -170,27 +172,30 @@
                     <tbody>   
                     @if(isset($vacaciones))      
                         @foreach($vacaciones as $vac)                           
-                            <tr>                                                    
+                            <tr> 
+                                                                                 
                                     <td>{{$vac->lapso_disfrute}}</td>
                                     <td>{{$vac->dias_adisfrutar}}</td>
                                     <td>{{$vac->dias_pendientes}}</td>
-                                    <td>@if($vac->status== 1) ACTIVO @else INACTIVO @endif</td>
+                                    <td>  @if($vac->status== 1) ACTIVO @else INACTIVO @endif    </td>
                                     
-                                    @if(in_array( Auth::user()->id_usuariogrupo, array(9,12,10) ))
+                                    @if(in_array( Auth::user()->id_usuariogrupo, array(9,12,10)  )&& $vac->status!=0)
                                     <td  >
                                         <a href= "/rrhh/registrar_vac_pendientesedit/{{$vac->id}}/{{$funcionario->numero_identificacion}}" class="btn btn-info" data-tip="Detalle" title="Actualizar Antecedente" data-toggle="tooltip" data-original-title="Editar">
                                         <img src="/img/icon/modify.ico" class="icon-sm" alt="Listado">
                                         </a>
-                                      
+                                     
                                         <form method="POST" action="{{URL::route('borrar_vac_pendientes',$vac->id)}}">
                                         @csrf
                                             <input type="hidden" name="_method" value="delete">
-                                            <button type="submit" class="btn btn-info" data-tip="Detalle" title="Eliminar registro" data-toggle="tooltip" data-original-title="Eliminar"> 
+                                            <button type="submit" class="btn btn-primary" data-tip="Detalle" title="Eliminar registro" data-toggle="tooltip" data-original-title="Eliminar"> 
                                             <img src="/img/icon/erase.ico" class="icon-sm" alt="Listado"></button>
                                             
                                         </form>
-                                        </td>                                      
-                                    
+                                        </td>  
+                                                                
+                                    @else
+                                    <td></td>
                                     @endif                                                           
                                 </tr>
                         @endforeach
@@ -256,6 +261,7 @@
 
 @section('scripts')
 <script src="{{url('js/funciones_generales.js')}}"></script>
+<script src="{{url('js/funciones_vacaciones.js')}}"></script>
 
 <!-- jQuery -->
 <script src="/plugins/jquery/jquery.min.js"></script>

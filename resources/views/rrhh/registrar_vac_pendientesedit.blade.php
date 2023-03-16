@@ -42,13 +42,18 @@
                     @foreach($vacaciones as $key=>$vac)
                     <input type= "hidden" id="cedula" name="cedula" value="{{$cedula}}" class="form-control"  >    
                     <input type= "hidden" id="funcionario_id" name="funcionario_id" value="{{$funcionario->funcionario_id}}" class="form-control"  >    
-                        <input type= "hidden" id="id_vacaciones" name="id_vacaciones" value="{{$vac->id}}" class="form-control"  >    
+                    <input type= "hidden" id="id_vacaciones" name="id_vacaciones" value="{{$vac->id}}" class="form-control"  >   
+                    <input type="hidden" id="fecha_ingreso_vac" name="fecha_ingreso_vac" value="{{$funcionario->fecha_ingreso_vac}}"/> 
+                    <input type="hidden" id="tipo_trabajador" name="tipo_trabajador" value="{{$funcionario->tipo_funcionario_id}}"/> 
+
                     <table align="center" border="0" cellpadding="2" cellspacing="2" width="100%">
                     <tr>                            
                         <td>
                          <span data-tooltip="Permite sólo números" sdata-flow="top">&nbsp;Lapso de Disfrute </span>
                          <span style="color:red;">*</span>&nbsp;<br>
-                                <input type= "text" id="lapso_disfrute" rows="2" name="lapso_disfrute" onkeypress="return isNumberKey(event);"  value="{{$vac->lapso_disfrute}}" class="form-control"  required>                              
+                                <input type= "text" id="lapso_disfrute" name="lapso_disfrute" onkeypress="return isNumberKey(event);"
+                                 onkeydown="return dias_disfrute_lapso(this,document.getElementById('fecha_ingreso_vac'),document.getElementById('tipo_trabajador'))"
+                                 value="{{$vac->lapso_disfrute}}" class="form-control"  readonly required>                              
                                 @error('lapso_disfrute')
                                     <div class="invalid-feedback">
                                     <span style="color:red;"><strong>{{ $message }}</strong></span>
@@ -57,7 +62,7 @@
                         </td>        
                         <td>
                             <span data-tooltip="Permite sólo números"  sdata-flow="top">&nbsp;Días a Disfrute </span><span style="color:red;">*</span>&nbsp;<br>
-                                <input type= "text" id="dias_adisfrutar"  name="dias_adisfrutar" onkeypress="return isNumberKey(event);"  value="{{$vac->dias_adisfrutar}}" class="form-control" required >                              
+                                <input type= "text" id="dias_adisfrutar"  name="dias_adisfrutar" onkeypress="return isNumberKey(event);"  value="{{$vac->dias_adisfrutar}}" class="form-control" readonly required >                              
                                 @error('dias_adisfrutar')
                                     <div class="invalid-feedback">
                                     <span style="color:red;"><strong>{{ $message }}</strong></span>
@@ -115,7 +120,7 @@
 
 @section('scripts')
 <script src="{{url('js/funciones_generales.js')}}"></script>
-
+<script src="{{url('js/funciones_vacaciones.js')}}"></script>
 <!-- jQuery -->
 <script src="/plugins/jquery/jquery.min.js"></script>
 <!-- Bootstrap 4 -->

@@ -15,7 +15,7 @@
                             <div class="card mb-4">
             <div align="center" id="divTituloIndex2" class="text-primary">
               
-                <b>APROBAR SOLICITUD DE VACACIONES</b>
+                <b>APROBAR SOLICITUD DE VACACIONES DIRECTOR(A)</b>
                 </div>
            
                     <table align="center" border="0" cellpadding="2" cellspacing="2" width="100%" >
@@ -24,7 +24,7 @@
                                 <div id="divSubTituloIndex2">
                                    
                                     <hr>
-                                    <b> Sumistrar los datos correspondientes a la <span style="color:gray; ">Aprobación de Solicitud de Vacaciones </span>.
+                                    <b> Sumistrar los datos correspondientes a la <span style="color:gray; ">Aprobación de Solicitud de Vacaciones </span>,haga clic en "Guardar" para registrar su información.
                                     <hr>   
                                     @include('rrhh.funcionario.mensaje')  
                            
@@ -39,7 +39,7 @@
           @if(isset($solicitudes))
         
           <div class="frameContenedor" style="margin:5px;" align="right">
-          <input type= "text" id="funcionario_id" name="funcionario_id" value="{{$solicitudes->funcionario_id}}" class="form-control"  >    
+          <input type= "hidden" id="funcionario_id" name="funcionario_id" value="{{$solicitudes->funcionario_id}}" class="form-control"  >    
           <input type= "hidden" id="cedula" name="cedula" value="{{$cedula}}" class="form-control"  >                                                        
                 
             
@@ -71,7 +71,7 @@
                     
                      <tr  >
                      <td   >   {{$solicitudes->nombre.' '.$solicitudes->nombreseg}}   </td>                   
-                     <td  >   {{$solicitudes->apellido.' '. $solicitudes->apellidoseg}}   </td>                     <
+                     <td  >   {{$solicitudes->apellido.' '. $solicitudes->apellidoseg}}   </td>                    
                      <td  >   {{$solicitudes->trabajador}}   </td>
                      <td     >   {{$solicitudes->cargo}}   </td>
                     </tr  >
@@ -97,7 +97,7 @@
                     <p><p>
               
         
-          <input type= "text" id="id_solicitud" name="id_solicitud" value="{{$solicitudes->id_solicitud}}" class="form-control"  >   
+          <input type= "hidden" id="id_solicitud" name="id_solicitud" value="{{$solicitudes->id_solicitud}}" class="form-control"  >   
                     <table align="center" border="0" cellpadding="2" cellspacing="2" width="100%">
                    <tr>
                         <td>

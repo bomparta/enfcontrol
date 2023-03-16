@@ -890,22 +890,28 @@ public function subirArchivo_rrhh(Request $request)
         //  dd($cedula);
   
     
-        $funcionario= Funcionario::select('funcionario.id as funcionario_id','funcionario.*','persona.*') 
+        $datos_funcionario= Funcionario::select('funcionario.id as funcionario_id','funcionario.*','persona.*') 
         ->join ('persona', 'persona.id','=','funcionario.persona_id')        
         ->where('persona.numero_identificacion','=',$cedula)->get();
       //  dd($funcionario);
         $funcionario_id=null;
 
-        foreach($funcionario as $funcionario){
-            $funcionario_id=$funcionario->funcionario_id;
-            $edad=Carbon::parse($funcionario->edad)->age;
-            $fecha_ingreso_vac=$funcionario->fecha_ingreso_vac;
-            $annos_servicio=Carbon::parse($funcionario->fecha_ingreso_vac)->age;
+        foreach($datos_funcionario as $datos_funcionario){
+            $funcionario_id=$datos_funcionario->funcionario_id;
+            $edad=Carbon::parse($datos_funcionario->edad)->age;
+            $fecha_ingreso_vac=$datos_funcionario->fecha_ingreso_vac;
+            $annos_servicio=Carbon::parse($datos_funcionario->fecha_ingreso_vac)->age;
         }
+
+        $funcionario= Funcionario::select('funcionario.id as funcionario_id','funcionario.id_tipo_funcionario as tipo_funcionario_id','funcionario.*','persona.*') 
+        ->join ('persona', 'persona.id','=','funcionario.persona_id')        
+        ->where('funcionario.id','=',$funcionario_id)->first();
+       // dd($funcionario);
        $vacaciones=  Vacaciones_pendientes::select('vacaciones.vacaciones_pendientes.*')      
       ->where('vacaciones.vacaciones_pendientes.funcionario_id','=',$funcionario_id)
       ->where('vacaciones.vacaciones_pendientes.id','=',$id)
-      ->orderby('vacaciones.vacaciones_pendientes.lapso_disfrute','ASC')->get();        
+      ->orderby('vacaciones.vacaciones_pendientes.lapso_disfrute','ASC')->get();  
+
        if($funcionario->count()>0){    
           
            return view('rrhh/registrar_vac_pendientesedit', compact('funcionario','annos_servicio','vacaciones','cedula'));
@@ -919,21 +925,31 @@ public function subirArchivo_rrhh(Request $request)
        // dd($request);
         $request->validate([
             
-            'funcionario_id' => ['required'],         
+            'funcionario_id' => ['required'],    
+            'fecha_ingreso_vac' => ['required'], 
+            'tipo_trabajador' => ['required'],      
             'lapso_disfrute'=>['required'],
             'dias_adisfrutar'=>['required'],            
             'dias_pendientes'=>['required'],       
             
         ]);
         
-        $existe_lapso=Vacaciones_pendientes::where('lapso_disfrute',$request->lapso_disfrute)->get();
-    
-       
-   
+        $existe_lapso=Vacaciones_pendientes::where('lapso_disfrute','=',$request->lapso_disfrute)
+        ->where('funcionario_id',$request->funcionario_id)->get();  
+       // dd($existe_lapso);
         if(count($existe_lapso)>0){
             return    redirect()->back()->with('error', ' El Lapso de Disfrute del Trabajador(a) que desea cargar  se encuentra registrado!!.');     
         }else{
-            
+            $ingreso= date("Y-d-m",strtotime($request->fecha_ingreso_vac));
+            $actual=date("Y-d-m");
+            $anno_ingreso=date("Y",strtotime($request->fecha_ingreso_vac));
+            $mes_ingreso=date("m",strtotime($request->fecha_ingreso_vac));
+            $dia_ingreso=date("d",strtotime($request->fecha_ingreso_vac));
+            $anno_actual=date("Y");
+         // dd($ingreso,$actual);
+        //    dd($ingreso,$actual,$anno_ingreso,$request->lapso_disfrute);
+
+            if( ($actual>=$ingreso && $actual<=$ingreso) || (($request->lapso_disfrute >= $anno_ingreso) && ($anno_ingreso <= $request->lapso_disfrute) && $request->lapso_disfrute<=$anno_actual) ){
             $pendientes = new Vacaciones_pendientes();        
             $pendientes->funcionario_id = $request->funcionario_id;
             $pendientes->lapso_disfrute = $request->lapso_disfrute;
@@ -942,8 +958,10 @@ public function subirArchivo_rrhh(Request $request)
             $pendientes->observaciones_rrhh = $request->observaciones;  
             $pendientes->registrado_por = Auth::user()->cedula; 
             $pendientes->save();
-         return    redirect()->back()->with('message', ' El Antecedente de servicio del Trabajador(a) en la administración pública fue agregado con éxito!!.');
-         
+            return    redirect()->back()->with('message', 'El Lapso de Disfrute del Trabajador(a) fue agregado con éxito!!.');
+            } else{
+                return    redirect()->back()->with('error', 'El Lapso de Disfrute del Trabajador(a)  que desea registrar no corresponde al intervalo vigente de vacaciones. Su fecha para el disfrute de vacaciones es apartir del día , mes y año de aniversario');
+            }
         }
         
         
@@ -976,7 +994,7 @@ public function subirArchivo_rrhh(Request $request)
                
             ]);
            
-            return    redirect()->back()->with('message', ' El Antecedente de servicio del Trabajador(a) en la administración pública fue actualizado con éxito!!.');
+            return    redirect()->back()->with('message', ' El Lapso de Disfrute del Trabajador(a) fue actualizado con éxito!!.');
        
         }
         

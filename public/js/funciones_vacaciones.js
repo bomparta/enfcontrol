@@ -47,3 +47,32 @@ function sumar_dias(e,valor){
         document.getElementById('total_dias_disfrute').value=resta;
     }
  } 
+ 	
+function dias_disfrute_lapso(e,fecha_ingreso,tipo_trabajador){
+    //if ((event.keyCode === 165 || event.keyCode === 9)  && !event.shiftKey){
+        
+         var anno_ingreso=  new Date(fecha_ingreso.value).getFullYear() ; 
+      
+        var lapso_disfrute = parseInt(e.value) - parseInt(anno_ingreso);
+       // alert(lapso_disfrute);
+       if(tipo_trabajador!=3){
+
+       
+        if(lapso_disfrute<=5){          
+         //   alert("tiene menos 5 años");  
+            document.getElementById('dias_adisfrutar').value=30;      
+        }
+        if(lapso_disfrute>=6 && lapso_disfrute<=10){          
+           // alert("tiene entre 6 y 10 años");  
+            document.getElementById('dias_adisfrutar').value=40;       
+        }
+        if(lapso_disfrute>=11){
+           // alert("tiene mas de  11 años");
+            document.getElementById('dias_adisfrutar').value=45; 
+        }
+    }else{
+        document.getElementById('dias_adisfrutar').value=30; 
+    }
+   // } 
+    return  document.getElementById('dias_adisfrutar').value;
+}

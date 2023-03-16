@@ -15,7 +15,7 @@
                             <div class="card mb-4">
             <div align="center" id="divTituloIndex2" class="text-primary">
               
-                <b>APROBAR SOLICITUD DE VACACIONES</b>
+                <b>APROBAR SOLICITUD DE VACACIONES PRESIDENTE(A)</b>
                 </div>
            
                     <table align="center" border="0" cellpadding="2" cellspacing="2" width="100%" >
@@ -24,7 +24,7 @@
                                 <div id="divSubTituloIndex2">
                                    
                                     <hr>
-                                    <b> Sumistrar los datos correspondientes a la <span style="color:gray; ">Aprobación de Solicitud de Vacaciones </span>.
+                                    <b> Sumistrar los datos correspondientes a la <span style="color:gray; ">Aprobación de Solicitud de Vacaciones </span>haga clic en "Guardar" para registrar su información.
                                     <hr>   
                                     @include('rrhh.funcionario.mensaje')  
                            
@@ -39,7 +39,7 @@
           @if(isset($solicitudes))
         
           <div class="frameContenedor" style="margin:5px;" align="right">
-          <input type= "text" id="funcionario_id" name="funcionario_id" value="{{$solicitudes->funcionario_id}}" class="form-control"  >    
+          <input type= "hidden" id="funcionario_id" name="funcionario_id" value="{{$solicitudes->funcionario_id}}" class="form-control"  >    
           <input type= "hidden" id="cedula" name="cedula" value="{{$cedula}}" class="form-control"  >                                                        
                 
             
@@ -71,7 +71,7 @@
                     
                      <tr  >
                      <td   >   {{$solicitudes->nombre.' '.$solicitudes->nombreseg}}   </td>                   
-                     <td  >   {{$solicitudes->apellido.' '. $solicitudes->apellidoseg}}   </td>                     <
+                     <td  >   {{$solicitudes->apellido.' '. $solicitudes->apellidoseg}}   </td>                    
                      <td  >   {{$solicitudes->trabajador}}   </td>
                      <td     >   {{$solicitudes->cargo}}   </td>
                     </tr  >
@@ -97,7 +97,7 @@
                     <p><p>
               
         
-          <input type= "text" id="id_solicitud" name="id_solicitud" value="{{$solicitudes->id_solicitud}}" class="form-control"  >   
+          <input type= "hidden" id="id_solicitud" name="id_solicitud" value="{{$solicitudes->id_solicitud}}" class="form-control"  >   
                     <table align="center" border="0" cellpadding="2" cellspacing="2" width="100%">
                    <tr>
                         <td>
@@ -120,7 +120,7 @@
                         <td>
                                 &nbsp;Tipo de Aprobación&nbsp;<span style="color:red;">*</span>&nbsp;<br>
                                 <select id="tipo_aprobacion" name="tipo_aprobacion"  class="form-control" required >
-                                <option value="">Seleccione...</option>
+                                <option value="0">Seleccione...</option>
                                 <option value="1">Aprobado</option>
                                 <option value="2">Diferido</option>  
                                 <option value="3">Negado</option>
@@ -152,7 +152,7 @@
   
                     <div class="frameContenedor" style="margin:5px;" align="right">
                         <input class='btn btn-info' type="submit" value="Guardar" >
-                        <a class='btn btn-secondary' href="{{URL::route('vacaciones_pendientes_aprobacion_presidencia')}}">Regresar</a> 
+                        <a class='btn btn-secondary' href="{{URL::route('vacaciones_pendientes_aprobacion_director')}}">Regresar</a> 
                     </div>
                  
                     @endif 
@@ -163,12 +163,13 @@
             
         </div>
         </div>
-</div> 
+</div>
     </div>
 </div>
 
 
 
+@endsection
 @section('scripts')
 <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
 <script src="{{url('js/funciones_vacaciones.js')}}"></script>
