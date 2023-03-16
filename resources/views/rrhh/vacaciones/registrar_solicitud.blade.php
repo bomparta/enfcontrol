@@ -113,7 +113,7 @@
                             <a class='btn btn-secondary' href="{{URL::route('funcionario_vacaciones')}}">Regresar</a> 
                         </div>                      
                     @else
-                        @if ($annos_solicitud =='sin_adm'&& count($lapso)>=0)
+                        @if ($annos_solicitud =='sin_adm'&& count($lapso)==0)
                                 <tr>
                                 <td  >
                                 <div class="alert alert-warning" role="alert">
