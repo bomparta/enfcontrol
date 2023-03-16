@@ -179,12 +179,13 @@
                         
                         
                             </table>
-                            </form>
+                          
   
-                    <div class="frameContenedor" style="margin:5px;" align="right">
-                        <input class='btn btn-info' type="submit" value="Guardar" >
-                        <a class='btn btn-secondary' href="{{ URL::route('ver_trabajador',$cedula) }}">Regresar</a> 
-                    </div>
+                        <div class="frameContenedor" style="margin:5px;" align="right">
+                            <input class='btn btn-info' type="submit" value="Guardar" >
+                            <a class='btn btn-secondary' href="{{ URL::route('ver_trabajador',$cedula) }}">Regresar</a> 
+                        </div>
+                    </form>
                     @endforeach
                     @endif 
                     <hr>
