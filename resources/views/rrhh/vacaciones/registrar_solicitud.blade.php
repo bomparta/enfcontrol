@@ -97,111 +97,131 @@
                    
 
                     <table align="center" border="0" cellpadding="2" cellspacing="2" width="100%">
-                    @if ($annos_solicitud ==0)
-                    <tr>
-                    <td  >
-                    <div class="alert alert-danger" role="alert">
-                    <h4 class="alert-heading">Solicitud de Vacaciones</h4>
-                    <p>Mi estimado(a),usted no tiene más de un (1) año de servicio para realizar solicitud de vacaciones.</p>
-                    <hr>
-                    <p class="mb-0">En caso de tener dudas en relación a sus vacaciones dirijase a la Coordinación de Recursos Humanos de la ENFMP.</p>
-                    </div>
-                    </td>
-                    </tr>
-                    </table>
-                    <div class="frameContenedor" style="margin:5px;" align="right">                      
-                        <a class='btn btn-secondary' href="{{URL::route('funcionario_vacaciones')}}">Regresar</a> 
-                    </div>
-                    @else
-                    @if(count($lapso)==0)
-                    <tr>
-                    <td  >
-                    <div class="alert alert-success" role="alert">
-                    <h4 class="alert-heading">Solicitud de Vacaciones</h4>
-                    <p>Mi estimado(a),usted no tiene solicitudes de vacaciones pendientes por disfrutar.</p>
-                    <hr>
-                    <p class="mb-0">En caso de tener dudas en relación a sus vacaciones dirijase a la Coordinación de Recursos Humanos de la ENFMP.</p>
-                    </div>
-                    </td>
-                    </tr>
-                    </table>
-                    <div class="frameContenedor" style="margin:5px;" align="right">                      
-                        <a class='btn btn-secondary' href="{{URL::route('funcionario_vacaciones')}}">Regresar</a> 
-                    </div>
-
-                    @else
-                   <tr>
-                            <td>
-                                &nbsp;Lapso de Vacaciones a Solicitar&nbsp;<span style="color:red;">*</span>&nbsp;<br>
-                                <div class="form-group">
-                                @foreach($lapso as $lapso)
-                                @if($lapso->dias_pendientes==0)
-                                <label><input type="checkbox" name="lapso_pendientes[]" value=" {{ $lapso->id }}" onclick="sumar_dias(this,document.getElementById('dias_pendientes[]').value);">  {{ $lapso->lapso_disfrute }}</label>
-                                <input type="text" id="dias_pendientes[]" name="dias_pendientes[]" readonly size=4 value ="{{$lapso->dias_adisfrutar}}"> días
-                                @else
-                                <label><input type="checkbox" name="lapso_pendientes[]" value=" {{ $lapso->id }}" onclick="sumar_dias(this,document.getElementById('dias_pendientes1[]').value);">  {{ $lapso->lapso_disfrute }}</label>
-                                <input type="text" id="dias_pendientes1[]" name="dias_pendientes1[]" readonly size=4 value ="{{$lapso->dias_pendientes}}"> días
-                                @endif
-                                <br>
-                                @endforeach
-                               
-                                @error('lapso_pendientes')
-                                    <div class="invalid-feedback">
-                                    <span style="color:red;"><strong>{{ $message }}</strong></span>
-                                    </div>
-                                @enderror
-                                <input type="text" id="total_dias_disfrute" name="total_dias_disfrute" value ="" size=4 readonly> <label><b>Total días a Disfrutar</b></label>
-                                </div>
-                            </td>  
-                            <td>
-                                <div class="form-group">
-                                    <label class="radio-inline">¿Desea solicitar los días completos de disfrute? &nbsp;&nbsp;&nbsp;&nbsp;<span style="color:red;">*</span>
-                                    <input type="radio"  id="completos" name="completos" value="1"  onclick="validar_dias(this);" cheked>Si</label>
-                                    <input type="radio" id="completos" name="completos" value="2" checked onclick="validar_dias(this);">No</label>
-                                    &nbsp;Dias a Disfrutar:&nbsp;&nbsp;&nbsp;&nbsp;
-                                    <input type="number" name="diasadisfrutar" id="diasadisfrutar" value="" size=4 onkeypress='validar_dias_completos(this,event);' />
-                                </div>
-                            </td>
-                            <td>
-                                &nbsp;Fecha de Inicio del Disfrute de Vacaciones&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:red;">*</span><br>
-                                <input type="date" name="fechadisfrute" id="fechadisfrute" value=""  required/>
-                            </td>
-                            @error('fechadisfrute')
-                                <div class="invalid-feedback">
-                                    <span style="color:red;"><strong>{{ $message }}</strong></span>
-                                    </div>
-                                @enderror  
-                       
-                            <td>                            
-                        </tr>                       
-                        <tr>                            
-                            <td colspan=3>
-                                &nbsp;Observaciones <br>
-                                <input type= "text" id="observaciones" rows="2" name="observaciones" size =100 onkeyup="mayusculas(this);"  value="" class="form-control"  >                              
-                                @error('observaciones')
-                                    <div class="invalid-feedback">
-                                    <span style="color:red;"><strong>{{ $message }}</strong></span>
-                                    </div>
-                                @enderror
-                            </td>
+                    @if ($annos_solicitud == '0')
+                        <tr>
+                        <td  >
+                        <div class="alert alert-danger" role="alert">
+                        <h4 class="alert-heading">Solicitud de Vacaciones</h4>
+                        <p>Mi estimado(a),usted no tiene más de un (1) año de servicio para realizar solicitud de vacaciones.</p>
+                        <hr>
+                        <p class="mb-0">En caso de tener dudas en relación a sus vacaciones dirijase a la Coordinación de Recursos Humanos de la ENFMP.</p>
+                        </div>
+                        </td>
                         </tr>
+                        </table>
+                        <div class="frameContenedor" style="margin:5px;" align="right">                      
+                            <a class='btn btn-secondary' href="{{URL::route('funcionario_vacaciones')}}">Regresar</a> 
+                        </div>
+                      
+                    @else
+                        @if ($annos_solicitud =='sin_adm')
+                                <tr>
+                                <td  >
+                                <div class="alert alert-warning" role="alert">
+                                <h4 class="alert-heading">Solicitud de Vacaciones</h4>
+                                <p>Mi estimado(a),usted no realizar solicitud de vacaciones, ya su registro de ingreso RRHH no se encuentra incorporado.</p>
+                                <hr>
+                                <p class="mb-0">Debe dirijirse a la Coordinación de Recursos Humanos de la ENFMP.</p>
+                                </div>
+                                </td>
+                                </tr>
+                                </table>
+                                <div class="frameContenedor" style="margin:5px;" align="right">                      
+                                    <a class='btn btn-secondary' href="{{URL::route('funcionario_vacaciones')}}">Regresar</a> 
+                                </div>
+                               
+                    @endif
+                   @endif
+                   @if (count($lapso)==0 && $annos_solicitud > 0 )
+                                    <tr>
+                                    <td  >
+                                    <div class="alert alert-success" role="alert">
+                                    <h4 class="alert-heading">Solicitud de Vacaciones</h4>
+                                    <p>Mi estimado(a),usted no tiene solicitudes de vacaciones pendientes por disfrutar.</p>
+                                    <hr>
+                                    <p class="mb-0">En caso de tener dudas en relación a sus vacaciones dirijase a la Coordinación de Recursos Humanos de la ENFMP.</p>
+                                    </div>
+                                    </td>
+                                    </tr>
+                                  
+                                    <div class="frameContenedor" style="margin:5px;" align="right">                      
+                                        <a class='btn btn-secondary' href="{{URL::route('funcionario_vacaciones')}}">Regresar</a> 
+                                    </div>
+                                    </table>
+                   @endif
+                   @if (count($lapso)>0 && $annos_solicitud > 0 )
+                                     <tr>
+                                            <td>
+                                                &nbsp;Lapso de Vacaciones a Solicitar&nbsp;<span style="color:red;">*</span>&nbsp;<br>
+                                                <div class="form-group">
+                                                @foreach($lapso as $lapso)
+                                                    @if($lapso->dias_pendientes==0)
+                                                    <label><input type="checkbox" name="lapso_pendientes[]" value=" {{ $lapso->id }}" onclick="sumar_dias(this,document.getElementById('dias_pendientes[]').value);">  {{ $lapso->lapso_disfrute }}</label>
+                                                    <input type="text" id="dias_pendientes[]" name="dias_pendientes[]" readonly size=4 value ="{{$lapso->dias_adisfrutar}}"> días
+                                                    @else
+                                                    <label><input type="checkbox" name="lapso_pendientes[]" value=" {{ $lapso->id }}" onclick="sumar_dias(this,document.getElementById('dias_pendientes1[]').value);">  {{ $lapso->lapso_disfrute }}</label>
+                                                    <input type="text" id="dias_pendientes1[]" name="dias_pendientes1[]" readonly size=4 value ="{{$lapso->dias_pendientes}}"> días
+                                                    @endif
+                                                    <br>
+                                                @endforeach
+                                            
+                                                @error('lapso_pendientes')
+                                                    <div class="invalid-feedback">
+                                                    <span style="color:red;"><strong>{{ $message }}</strong></span>
+                                                    </div>
+                                                @enderror
+                                                <input type="text" id="total_dias_disfrute" name="total_dias_disfrute" value ="" size=4 readonly> <label><b>Total días a Disfrutar</b></label>
+                                                </div>
+                                            </td>  
+                                            <td>
+                                                <div class="form-group">
+                                                    <label class="radio-inline">¿Desea solicitar los días completos de disfrute? &nbsp;&nbsp;&nbsp;&nbsp;<span style="color:red;">*</span>
+                                                    <input type="radio"  id="completos" name="completos" value="1"  onclick="validar_dias(this);" cheked>Si</label>
+                                                    <input type="radio" id="completos" name="completos" value="2" checked onclick="validar_dias(this);">No</label>
+                                                    &nbsp;Dias a Disfrutar:&nbsp;&nbsp;&nbsp;&nbsp;
+                                                    <input type="number" name="diasadisfrutar" id="diasadisfrutar" value="" size=4 onkeypress='validar_dias_completos(this,event);' />
+                                                </div>
+                                            </td>
+                                            <td>
+                                                &nbsp;Fecha de Inicio del Disfrute de Vacaciones&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:red;">*</span><br>
+                                                <input type="date" name="fechadisfrute" id="fechadisfrute" value=""  required/>
+                                            </td>
+                                            @error('fechadisfrute')
+                                                <div class="invalid-feedback">
+                                                    <span style="color:red;"><strong>{{ $message }}</strong></span>
+                                                    </div>
+                                                @enderror  
+                                    
+                                            <td>                            
+                                        </tr>                       
+                                        <tr>                            
+                                            <td colspan=3>
+                                                &nbsp;Observaciones <br>
+                                                <input type= "text" id="observaciones" rows="2" name="observaciones" size =100 onkeyup="mayusculas(this);"  value="" class="form-control"  >                              
+                                                @error('observaciones')
+                                                    <div class="invalid-feedback">
+                                                    <span style="color:red;"><strong>{{ $message }}</strong></span>
+                                                    </div>
+                                                @enderror
+                                            </td>
+                                        </tr>
+                                    
+                                    <tr> 
+                                    <td >
+                                
+                                    </td>
+                                
+                                    </table>
+                
+                                    <div class="frameContenedor" style="margin:5px;" align="right">
+                                        <input class='btn btn-info' type="submit" value="Guardar" >
+                                        <a class='btn btn-secondary' href="{{URL::route('funcionario_vacaciones')}}">Regresar</a> 
+                        @endif            </div>
+                  
+                            
+                           
                     
-                    <tr> 
-                    <td >
                    
-                    </td>
-                   
-                    </table>
-  
-                    <div class="frameContenedor" style="margin:5px;" align="right">
-                        <input class='btn btn-info' type="submit" value="Guardar" >
-                        <a class='btn btn-secondary' href="{{URL::route('funcionario_vacaciones')}}">Regresar</a> 
-                    </div>
-                @endif
-
-
-                    
-                    @endif 
                     @endforeach
                    @endif 
          

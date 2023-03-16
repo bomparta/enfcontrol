@@ -111,9 +111,14 @@ class VacacionesController extends Controller
             $funcionario_id=$funcionario->funcionario_id;
             $edad=Carbon::parse($funcionario->edad)->age;
             $fecha_ingreso_vac=$funcionario->fecha_ingreso_vac;
-            $annos_solicitud=Carbon::parse($funcionario->fecha_ingreso_vac)->age;
+            if(is_null($funcionario->fecha_ingreso_vac)){
+                $annos_solicitud='sin_adm';
+            }else{
+                $annos_solicitud=Carbon::parse($funcionario->fecha_ingreso_vac)->age;
+             
+            }
         }
-        //dd($fecha_ingreso_vac);
+      //  dd($fecha_ingreso_vac,  $annos_solicitud);
         $lapso= Vacaciones_pendientes::select('vacaciones.vacaciones_pendientes.*') ->where('vacaciones.vacaciones_pendientes.funcionario_id','=',$funcionario_id)
                                         ->where('vacaciones.vacaciones_pendientes.status','=',1)
                                         ->orderby('lapso_disfrute','asc')->get();     

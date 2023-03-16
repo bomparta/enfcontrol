@@ -95,9 +95,9 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{{route('rrhh')}}">Control de Expedientes&nbsp;<i class="fa fa-box"></i></a>
                     </li>
-                  <!--  <li class="nav-item">
+                   <li class="nav-item">
                         <a class="nav-link" href="{{route('vacaciones')}}">Vacaciones&nbsp;<i class="fa fa-box"></i></a>
-                    </li>-->
+                    </li>
                     @endif
                     @if(in_array( Auth::user()->id_usuariogrupo, array(13) ))
                     <li class="nav-item">
