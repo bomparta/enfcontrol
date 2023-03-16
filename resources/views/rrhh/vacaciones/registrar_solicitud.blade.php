@@ -111,15 +111,14 @@
                         </table>
                         <div class="frameContenedor" style="margin:5px;" align="right">                      
                             <a class='btn btn-secondary' href="{{URL::route('funcionario_vacaciones')}}">Regresar</a> 
-                        </div>
-                      
+                        </div>                      
                     @else
-                        @if ($annos_solicitud =='sin_adm')
+                        @if ($annos_solicitud =='sin_adm'&& count($lapso)>=0)
                                 <tr>
                                 <td  >
                                 <div class="alert alert-warning" role="alert">
                                 <h4 class="alert-heading">Solicitud de Vacaciones</h4>
-                                <p>Mi estimado(a),usted no realizar solicitud de vacaciones, ya su registro de ingreso RRHH no se encuentra incorporado.</p>
+                                <p>Mi estimado(a),usted no puede realizar solicitud de vacaciones, ya su registro de ingreso RRHH no se encuentra incorporado.</p>
                                 <hr>
                                 <p class="mb-0">Debe dirijirse a la Coordinación de Recursos Humanos de la ENFMP.</p>
                                 </div>
