@@ -104,11 +104,11 @@
             Planilla de Actualización de Datos
         </a>
       
-       <!-- <div class="card-header text-primary" aling="center">Vacaciones</div>
+        <div class="card-header text-primary" aling="center">Vacaciones</div>
         <a href="{{route('funcionario_vacaciones')}}" class="list-group-item list-group-item-action border-0">
             <img src="/img/icons-lineal/check_list.png" class="icon-lg">
             Solicitud de Vacaciones
-        </a> -->
+        </a> 
         @if(in_array( Auth::user()->id_usuariogrupo, array(14 )))
        
             <a href="{{route('vacaciones_pendientes_aprobacion')}}" class="list-group-item list-group-item-action border-0">
@@ -135,8 +135,14 @@
             <a href="{{route('ver_trabajador')}}" class="list-group-item list-group-item-action border-0">
                 <img src="/img/icons-lineal/check_list.png" class="icon-lg">
                 Movimientos de Personal
-            </a>                       
-            
+            </a>          
+            <hr> 
+        <div class="card-header text-primary" aling="center">Vacaciones</div>
+            <a href="#" class="list-group-item list-group-item-action border-0">
+                <img src="/img/icons-lineal/check_list.png" class="icon-lg">
+                Vacaciones Colectivas
+            </a>   
+            <hr> 
             <a href="{{route('reportesrrhh')}}" class="list-group-item list-group-item-action border-0">
                 <img src="/img/icons-lineal/check_list.png" class="icon-lg">
                 Reportes
