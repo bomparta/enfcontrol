@@ -101,13 +101,13 @@
                     Solicitud de Vacaciones
                 </a>  
               
-                @if(in_array( Auth::user()->id_usuariogrupo, array(14) ))<!--Funcionarios !--> 
+                @if(in_array( Auth::user()->id_usuariogrupo, array(14,12) ))<!--Funcionarios !--> 
                 <a href="{{route('vacaciones_pendientes_aprobacion')}}" class="list-group-item list-group-item-action border-0">
                 <img src="/img/icons-lineal/check_list.png" class="icon-lg">
                 Aprobación de Vacaciones Jefe(a) inmediato o Coordinador(a)
                 </a> 
                 @endif  
-                @if(in_array( Auth::user()->id_usuariogrupo, array(15) ))<!--Funcionarios !--> 
+                @if(in_array( Auth::user()->id_usuariogrupo, array(15,12) ))<!--Funcionarios !--> 
                 <a href="{{route('vacaciones_pendientes_aprobacion_director')}}" class="list-group-item list-group-item-action border-0">
                 <img src="/img/icons-lineal/check_list.png" class="icon-lg">
                 Aprobación de Vacaciones Director(a)
