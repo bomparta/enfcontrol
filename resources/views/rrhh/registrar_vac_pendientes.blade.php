@@ -140,7 +140,8 @@
                                     <div class="frameContenedor" style="margin:5px;" align="right">
                                         <input class='btn btn-info' type="submit" value="Guardar" >
                                         <a class='btn btn-secondary' href="{{ URL::route('ver_trabajador',$cedula) }}">Regresar</a> 
-                                    </div>    
+                                    </div>  
+                </form>  
                                     <hr>
                                     <div class="table-responsive mt-3">
                                         <table id="example1" class="table table-striped table-bordered" style="width:100%">                                
@@ -166,16 +167,15 @@
 
                                                             @if(in_array( Auth::user()->id_usuariogrupo, array(9,12,10)  )&& $vac->status!=0)
                                                                 <td  >
-                                                                <a href= "/rrhh/registrar_vac_pendientesedit/{{$vac->id}}/{{$funcionario->numero_identificacion}}" class="btn btn-info" data-tip="Detalle" title="Actualizar Antecedente" data-toggle="tooltip" data-original-title="Editar">
-                                                                <img src="/img/icon/modify.ico" class="icon-sm" alt="Listado">
-                                                                </a>
-
+                                                                    <a href= "/rrhh/registrar_vac_pendientesedit/{{$vac->id}}/{{$funcionario->numero_identificacion}}" class="btn btn-info" data-tip="Detalle" title="Actualizar Antecedente" data-toggle="tooltip" data-original-title="Editar">
+                                                                    <img src="/img/icon/modify.ico" class="icon-sm" alt="Listado">
+                                                                    </a>
+                                                               
                                                                 <form method="POST" action="{{URL::route('borrar_vac_pendientes',$vac->id)}}">
-                                                                    @csrf
+                                                                 @csrf
                                                                     <input type="hidden" name="_method" value="delete">
                                                                     <button type="submit" class="btn btn-primary" data-tip="Detalle" title="Eliminar registro" data-toggle="tooltip" data-original-title="Eliminar"> 
-                                                                    <img src="/img/icon/erase.ico" class="icon-sm" alt="Listado"></button>                                            
-                                                                </form>
+                                                                    <img src="/img/icon/erase.ico" class="icon-sm" alt="Listado"></button>                                                                                                            
                                                                 </td>                                                          
                                                             @else
                                                                 <td></td>
@@ -200,7 +200,7 @@
                                 @endif                      
                             @endforeach
                         @endif 
-                    </form>
+                   
                                 
                                 @if($annos_servicio == 0)
                                             <table>                   
