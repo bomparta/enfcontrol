@@ -70,24 +70,25 @@
                                        <td>
                                         <div align="center">
                                             @if($vacaciones_solicitudes->tipo_aprobacion_director==1)   
-                                            <img src="{{url('img/icon/check.png')}}" style="max-width: 40px; max-height: 40px"  alt="Image">  Aprobada</td>
+                                            <img src="{{url('img/icon/check.png')}}" style="max-width: 40px; max-height: 40px"  alt="Image">  Aprobada
                                            @endif
                                             @if($vacaciones_solicitudes->tipo_aprobacion_director==2)
-                                            <img src="{{url('img/icon/reloj.png')}}" style="max-width: 40px; max-height: 40px"  alt="Image">  Diferido</td>
+                                            <img src="{{url('img/icon/reloj.png')}}" style="max-width: 40px; max-height: 40px"  alt="Image">  Diferido
                                             @endif
                                             @if($vacaciones_solicitudes->tipo_aprobacion_director==3)
-                                            <img src="{{url('img/icon/erase.ico')}}" style="max-width: 40px; max-height: 40px"  alt="Image">  Denegado</td>
+                                            <img src="{{url('img/icon/erase.ico')}}" style="max-width: 40px; max-height: 40px"  alt="Image">  Denegado
                                             @endif
                                             <br>
                                             @if($vacaciones_solicitudes->tipo_aprobacion_presidencia==1)   
-                                            <img src="{{url('img/icon/check.png')}}" style="max-width: 40px; max-height: 40px"  alt="Image">  Aprobada </td>
+                                            <img src="{{url('img/icon/check.png')}}" style="max-width: 40px; max-height: 40px"  alt="Image">  Aprobada 
                                                 @endif
                                             @if($vacaciones_solicitudes->tipo_aprobacion_presidencia==2)
-                                            <img src="{{url('img/icon/reloj.png')}}" style="max-width: 40px; max-height: 40px"  alt="Image">  Diferido</td>
+                                            <img src="{{url('img/icon/reloj.png')}}" style="max-width: 40px; max-height: 40px"  alt="Image">  Diferido
                                             @endif
                                             @if($vacaciones_solicitudes->tipo_aprobacion_presidencia==3)
-                                            <img src="{{url('img/icon/erase.ico')}}" style="max-width: 40px; max-height: 40px"  alt="Image">  Denegado </td>
+                                            <img src="{{url('img/icon/erase.ico')}}" style="max-width: 40px; max-height: 40px"  alt="Image">  Denegado 
                                             @endif
+
                                         </div>   
                                     </td>  
                                     <td>
