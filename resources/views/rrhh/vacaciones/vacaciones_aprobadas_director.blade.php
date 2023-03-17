@@ -80,13 +80,13 @@
                                             @endif
                                             <br>
                                             @if($vacaciones_solicitudes->tipo_aprobacion_presidencia==1)   
-                                            <img src="{{url('img/icon/check.png')}}" style="max-width: 40px; max-height: 40px"  alt="Image">  Aprobada
+                                            <img src="{{url('img/icon/check.png')}}" style="max-width: 40px; max-height: 40px"  alt="Image">  Aprobada </td>
                                                 @endif
                                             @if($vacaciones_solicitudes->tipo_aprobacion_presidencia==2)
-                                            <img src="{{url('img/icon/reloj.png')}}" style="max-width: 40px; max-height: 40px"  alt="Image">  Diferido
+                                            <img src="{{url('img/icon/reloj.png')}}" style="max-width: 40px; max-height: 40px"  alt="Image">  Diferido</td>
                                             @endif
                                             @if($vacaciones_solicitudes->tipo_aprobacion_presidencia==3)
-                                            <img src="{{url('img/icon/erase.ico')}}" style="max-width: 40px; max-height: 40px"  alt="Image">  Denegado
+                                            <img src="{{url('img/icon/erase.ico')}}" style="max-width: 40px; max-height: 40px"  alt="Image">  Denegado </td>
                                             @endif
                                         </div>   
                                     </td>  
