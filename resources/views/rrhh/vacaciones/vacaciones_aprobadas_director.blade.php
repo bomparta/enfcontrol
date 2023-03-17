@@ -69,6 +69,9 @@
                                        <td>{{$vacaciones_solicitudes->fecha_reintegro}}</td>
                                        <td>
                                         <div align="center">
+                                            @if($vacaciones_solicitudes->revisado==1)   
+                                            <img src="{{url('img/icon/check.png')}}" style="max-width: 40px; max-height: 40px"  alt="Image">  Revisada <br>
+                                            @endif
                                             @if($vacaciones_solicitudes->tipo_aprobacion_director==1)   
                                             <img src="{{url('img/icon/check.png')}}" style="max-width: 40px; max-height: 40px"  alt="Image">  Aprobada
                                            @endif
