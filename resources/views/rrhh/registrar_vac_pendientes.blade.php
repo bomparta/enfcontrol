@@ -197,7 +197,11 @@
                                             </tfoot>
                                     </table>   
                                     </div>
-                                @endif
+                                @endif                      
+                            @endforeach
+                        @endif 
+                    </form>
+                                
                                 @if($annos_servicio == 0)
                                             <table>                   
                                                 <tr>
@@ -210,6 +214,9 @@
                                                     </div>
                                                     </td>
                                                 </tr>
+                                                <div class="frameContenedor" style="margin:5px;" align="right">                      
+                                                <a class='btn btn-secondary' href="{{ URL::route('ver_trabajador',$cedula) }}">Regresar</a> 
+                                                </div>
                                 @endif
                                 @if($annos_servicio==-1)
                                             <table>  
@@ -223,16 +230,14 @@
                                                         </div>
                                                         </td>
                                                     </tr>
+                                                    <div class="frameContenedor" style="margin:5px;" align="right">                      
+                                                    <a class='btn btn-secondary' href="{{ URL::route('ver_trabajador',$cedula) }}">Regresar</a> 
+                                                    </div>
                                 @endif
                                             </table>
-                                            <div class="frameContenedor" style="margin:5px;" align="right">                      
-                                            <a class='btn btn-secondary' href="{{ URL::route('ver_trabajador',$cedula) }}">Regresar</a> 
-                                            </div>
+                                            
                                        
-                                
-                            @endforeach
-                        @endif 
-                 </form>
+              
               
                  
          
