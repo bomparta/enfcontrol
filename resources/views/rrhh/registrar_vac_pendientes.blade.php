@@ -141,20 +141,15 @@
                                             </div>
                                         @enderror
                             </td>
-                        </tr>
-                            
-                        
-                        
+                        </tr>           
                             </table>
-                          
-                 
   
                         <div class="frameContenedor" style="margin:5px;" align="right">
                             <input class='btn btn-info' type="submit" value="Guardar" >
                             <a class='btn btn-secondary' href="{{ URL::route('ver_trabajador',$cedula) }}">Regresar</a> 
                         </div>
                         </form>
-                            @endforeach
+                        @endforeach
                     <hr>
                 <div class="table-responsive mt-3">
                     <table id="example1" class="table table-striped table-bordered" style="width:100%">                                
@@ -216,7 +211,7 @@
                 </table>   
                 @else
                 <table>    
-                @if($annos_servicio == 0)
+                    @if($annos_servicio == 0)
                 <tr>
                     <td  >
                     <div class="alert alert-danger" role="alert">
@@ -244,7 +239,8 @@
                     <a class='btn btn-secondary' href="{{ URL::route('ver_trabajador',$cedula) }}">Regresar</a> 
                     </div>
 
-                        @endif          
+                @endif    
+            @endif         
                 </div>
                  
          
