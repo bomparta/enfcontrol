@@ -157,6 +157,7 @@
                                                 @if($vacaciones->tipo_aprobacion_director==3)
                                                 <img src="{{url('img/icon/erase.ico')}}" style="max-width: 40px; max-height: 40px"  alt="Image">  Denegado
                                                 @endif
+                                                <br>
                                                 @if($vacaciones->tipo_aprobacion_presidencia==1)   
                                                 <img src="{{url('img/icon/check.png')}}" style="max-width: 40px; max-height: 40px"  alt="Image">  Aprobada
                                                  @endif

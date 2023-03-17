@@ -78,13 +78,13 @@
                                             @if($vacaciones_solicitudes->tipo_aprobacion_director==3)
                                             <img src="{{url('img/icon/erase.ico')}}" style="max-width: 40px; max-height: 40px"  alt="Image">  Denegado</td>
                                             @endif
-                                            @if($vacaciones->tipo_aprobacion_presidencia==1)   
+                                            @if($vacaciones_solicitudes->tipo_aprobacion_presidencia==1)   
                                                 <img src="{{url('img/icon/check.png')}}" style="max-width: 40px; max-height: 40px"  alt="Image">  Aprobada
                                                  @endif
-                                                @if($vacaciones->tipo_aprobacion_presidencia==2)
+                                                @if($vacaciones_solicitudes->tipo_aprobacion_presidencia==2)
                                                 <img src="{{url('img/icon/reloj.png')}}" style="max-width: 40px; max-height: 40px"  alt="Image">  Diferido
                                                 @endif
-                                                @if($vacaciones->tipo_aprobacion_presidencia==3)
+                                                @if($vacaciones_solicitudes->tipo_aprobacion_presidencia==3)
                                                 <img src="{{url('img/icon/erase.ico')}}" style="max-width: 40px; max-height: 40px"  alt="Image">  Denegado
                                                 @endif
                                         </div>   
