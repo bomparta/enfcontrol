@@ -38,7 +38,7 @@
       
                 <form id="formulario" name="formulario" method="POST" action="{{route('store_vac_pendientes')}}">    
                 @csrf
-                @if(isset($datos_funcionario) &&  $annos_servicio>=1)
+                @if(isset($datos_funcionario) )
                 @foreach($datos_funcionario as $key=>$funcionario)
              
                     <input type= "hidden" id="funcionario_id" name="funcionario_id" value="{{$funcionario->funcionario_id}}" class="form-control"  >    
@@ -96,6 +96,7 @@
                             </tbody>
                             
                             </table>
+                           @if ($annos_servicio>=1)
                             <p><p>
                             <table align="center" border="0" cellpadding="2" cellspacing="2" width="100%">
                             <tr>                            
