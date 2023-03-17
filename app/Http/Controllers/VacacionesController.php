@@ -628,6 +628,35 @@ class VacacionesController extends Controller
                 'usuario_presidencia' =>  Auth::user()->id, 
                 'observacion_presidencia' => $request->observaciones,
             ]);
+            if($request->tipo_aprobacion!=1){
+                $lapso_revertir=Vacaciones_disfrutadas::where('solicitud_vacaciones_id', $request->id_solicitud)->get();
+                  foreach( $lapso_revertir as  $lapso_revertir){
+                             $dias_pendientes=Vacaciones_pendientes::where('id', $lapso_revertir->lapso_disfrute)->first();
+                          if($dias_pendientes->dias_pendientes==$lapso_revertir->dias_disfrutados){
+                             $sumar_dias=0;
+                          }else{
+                              if(($lapso_revertir->dias_disfrutados<= $dias_pendientes->dias_adisfrutar) && $dias_pendientes->dias_pendientes >0 ){
+                                  $sumar_dias=$dias_pendientes->dias_adisfrutar - ($dias_pendientes->dias_pendientes + $lapso_revertir->dias_disfrutados) ;
+                              }else{ 
+                                  if(($lapso_revertir->dias_disfrutados <= $dias_pendientes->dias_adisfrutar) && $dias_pendientes->dias_pendientes == 0 ){
+                                      $sumar_dias= $lapso_revertir->dias_disfrutados;
+                                  }
+                              } 
+                          }         
+                                      Vacaciones_pendientes::where('id', $lapso_revertir->lapso_disfrute)
+                                          ->update([            
+                                          'status'=>  1 ,
+                                          'dias_pendientes' => $sumar_dias,            
+                                      ]);
+                                    
+                                      Vacaciones_disfrutadas::where('id', $lapso_revertir->id)
+                                      ->update([            
+                                          'status'=>  0                       
+                                      ]); 
+                              
+                       
+                  }
+            }
             
        return  redirect('rrhh/vacaciones/vacaciones_pend_aprobar_presidencia')->with('message', ' La solicitud  fue procesada con éxito!!.');
     }
