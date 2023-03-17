@@ -286,6 +286,13 @@ class VacacionesController extends Controller
         }
        
       //  dd($fecha_reintegro);
+      $request->validate([
+            
+        'funcionario_id' => ['required'],
+        'fechadisfrute' => ['required'],
+        'lapso_pendientes' => ['required'],
+      
+    ]);
         $vacaciones = new Solicitud_vacaciones();        
         $vacaciones->funcionario_id = $request->funcionario_id;
         $vacaciones->fecha_solicitud =  $date;
