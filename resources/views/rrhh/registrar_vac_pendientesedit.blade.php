@@ -2,24 +2,20 @@
 @section('styles')
 @endsection
 @section('content')
-    <div class="d-flex" id="wrapper">
-        @include('layouts.apprrhh')      
-        <div id="page-content-wrapper">
-            <div class="sidebar-heading text-center">
-                <h4 class="text-primary" >CONTROL DE EXPEDIENTES RRHH</h6>    
-                <h6 class="text-dark">Bienvenid@, {{Auth::user()->name}}</h6>
-            </div> 
-
-
-            <div class="container pb-4">
-                <div class="row align-items-stretch">
-
-                        <div class="col-12">
-
-                            <div class="card mb-4">
-                <div align="center" id="divTituloIndex2" class="text-primary">              
-                <b>REGISTRAR VACACIONES PENDIENTES DEL TRABAJADOR(A)</b>
-                </div>           
+<div class="d-flex" id="wrapper">
+@include('layouts.apprrhh')      
+<div id="page-content-wrapper">
+    <div class="sidebar-heading text-center">
+        <h4 class="text-primary" >CONTROL DE EXPEDIENTES RRHH</h6>    
+        <h6 class="text-dark">Bienvenid@, {{Auth::user()->name}}</h6>
+    </div> 
+    <div class="container pb-4">
+        <div class="row align-items-stretch">
+            <div class="col-12">
+                <div class="card mb-4">
+                    <div align="center" id="divTituloIndex2" class="text-primary">              
+                        <b>REGISTRAR VACACIONES PENDIENTES DEL TRABAJADOR(A)</b>
+                    </div>           
                     <table align="center" border="0" cellpadding="2" cellspacing="2" width="100%" >
                          <tr>
                             <td>
