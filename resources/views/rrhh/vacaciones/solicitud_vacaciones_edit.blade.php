@@ -220,7 +220,7 @@
                                                 </a>  
                                                 @else
                                                 @if($vacaciones->aprobado_presidencia=="" && $vacaciones->aprobado_director=="" )
-                                                    <b>Pendiente por Abrobación<b>  <img src="/img/icon/adv.jpg" class="icon-sm" alt="Listado">
+                                                    <b>Pendiente por Aprobación<b>  <img src="/img/icon/adv.jpg" class="icon-sm" alt="Listado">
                                                     @elseif($vacaciones->aprobado_presidencia=="" && $vacaciones->aprobado_director==1 && $vacaciones->tipo_aprobacion_director !=1 )
                                                     <b>Rechazada por la Dirección<b>  <img src="/img/icon/no.ico" class="icon-sm" alt="Listado">                                                                                           
                                                  @endif

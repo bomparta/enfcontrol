@@ -280,6 +280,7 @@ Route::get("/rrhh/vacaciones/registrar_solicitud/{cedula}","VacacionesController
 Route::post("/rrhh/vacaciones/registrar_solicitud", "VacacionesController@store_vacaciones")->name('store_vacaciones');
 Route::get("/rrhh/vacaciones/vacaciones_pendientes","VacacionesController@ver_pendientes")->name('vacaciones_pendientes');
 Route::get("/rrhh/vacaciones/vacaciones_disfrutadas","VacacionesController@ver_disfrutadas")->name('vacaciones_disfrutadas');
+Route::get('/rrhh/vacaciones/planilla_vacaciones/{id}', 'VacacionesController@planilla_vacaciones')->name('planilla');
 
 //niveles aprobacion jefe inmediato o coordinador//
 Route::get("/rrhh/vacaciones/vacaciones_pend_aprobar","VacacionesController@ver_pendientes_aprobar")->name('vacaciones_pendientes_aprobacion');

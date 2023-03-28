@@ -84,12 +84,14 @@
                             <th    align="center"   >   FECHA DE INGRESO ADMINISTRACIÓN PÚBLICA <span style="color:red;">*</span>&nbsp;   </th>
                                 <th   align="center"   >   FECHA DE INGRESO FENFMP <span style="color:red;">*</span>&nbsp;  </th>
                                 <th  align="center"   >   FECHA DE INGRESO VACACIONES <span style="color:red;">*</span>&nbsp;  </th>
+                                <th  align="center"   >   TIEMPO DE SERVICIO ADM. PÚB.  </th>
                             </tr>
                             
                             <tr  >
                             <td  align="center"   > <input type="date" id ="fecha_ingreso_adm" name="fecha_ingreso_adm" value="{{$funcionario->fecha_ingreso_adm}}" class="form-control"  required>   </td>
                             <td    >  <input type="date" id ="fecha_ingreso_fund" name="fecha_ingreso_fund" value="{{$funcionario->fecha_ingreso_fund}}"  class="form-control"  required>    </td>
                             <td   >   <input type="date" id ="fecha_ingreso_vac" name="fecha_ingreso_vac" value="{{$funcionario->fecha_ingreso_vac}}" class="form-control"  required>  </td>
+                            <td   align="center"  >{{$annos}} años {{$meses}} meses {{$dias}} días </td>
                             </tr>
 
                         

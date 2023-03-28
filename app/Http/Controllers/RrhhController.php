@@ -323,15 +323,13 @@ public function subirArchivo_rrhh(Request $request)
        ->where('usuario', '=',$id)
        ->where('nombre', 'foto')
        ->get();
-       if($funcionario->count()>0  and $foto->count()>0 ){
+     
         $view = \view('rrhh/funcionario/planillarrhh', compact('foto','edad','datos_funcionario','familiar','cursos','laboral','idiomas','cuentas','educacion'));
        
        $pdf = App::make('dompdf.wrapper');
        $pdf->loadHTML($view)->setPaper('legal');
-       return $pdf->download('planillarrhh'.'.pdf');
-     }else{
-        return redirect('rrhh/funcionario/datosedit')->with('advertencia', ' Debe completar al menos los datos personales, dirección de domicilio y el requisito de la foto tipo carnet para imprimir la PLANILLA DE ACTUALIZACION DE DATOS!!.');
-     }
+       return $pdf->download('planillarrhh'.'.pdf');     
+     
        
   
        
@@ -547,8 +545,17 @@ public function subirArchivo_rrhh(Request $request)
        ->JOIN('tipo_trabajador','tipo_trabajador.id','administracion_publica.id_tipo_funcionario')             
        ->where('administracion_publica.funcionario_id','=',$funcionario_id)
        ->orderBy('administracion_publica.fecha_ingreso','asc')->get();      
+       $annos=Administracion_publica::where('administracion_publica.funcionario_id','=',$funcionario_id)->sum('anno_servicios','meses_servicios','dias_servicios');  
+       $meses=Administracion_publica::where('administracion_publica.funcionario_id','=',$funcionario_id)->sum('meses_servicios');  
+       $dias=Administracion_publica::where('administracion_publica.funcionario_id','=',$funcionario_id)->sum('dias_servicios');  
+    
+      if($dias >30)$dias=$dias%30;$meses=$meses+1;
+      if($meses >=12)$meses=$meses%12;
+      if($meses>0)$annos=$annos+1;
+      //dd($annos,$meses,$dias);
+ 
        if($datos_funcionario->count()>0){      
-           return view('rrhh/registrar_adm_publica', compact('datos_funcionario','adm_pub','nacionalidades','tipo_trabajador','edad','cedula'));
+           return view('rrhh/registrar_adm_publica', compact('annos','meses','dias','datos_funcionario','adm_pub','nacionalidades','tipo_trabajador','edad','cedula'));
         }else {
             return redirect('rrhh/ver_trabajador') 
              ->with('advertencia', 'No hay resultados que mostrar.');             
@@ -877,9 +884,16 @@ public function subirArchivo_rrhh(Request $request)
        $vacaciones=  Vacaciones_pendientes::select('vacaciones.vacaciones_pendientes.*')      
       ->where('vacaciones.vacaciones_pendientes.funcionario_id','=',$funcionario_id)
       ->orderby('vacaciones.vacaciones_pendientes.lapso_disfrute','ASC')->get();        
+      $annos=Administracion_publica::where('administracion_publica.funcionario_id','=',$funcionario_id)->sum('anno_servicios','meses_servicios','dias_servicios');  
+      $meses=Administracion_publica::where('administracion_publica.funcionario_id','=',$funcionario_id)->sum('meses_servicios');  
+      $dias=Administracion_publica::where('administracion_publica.funcionario_id','=',$funcionario_id)->sum('dias_servicios');  
+   
+     if($dias >30)$dias=$dias%30;$meses=$meses+1;
+     if($meses >=12)$meses=$meses%12;
+     if($meses>0)$annos=$annos+1;
        if($datos_funcionario->count()>0){    
           
-           return view('rrhh/registrar_vac_pendientes', compact('datos_funcionario','annos_servicio','vacaciones','nacionalidades','tipo_trabajador','edad','cedula'));
+           return view('rrhh/registrar_vac_pendientes', compact('datos_funcionario','annos','meses','dias','annos_servicio','vacaciones','nacionalidades','tipo_trabajador','edad','cedula'));
         }else {
             return redirect('rrhh/ver_trabajador') 
              ->with('advertencia', 'No hay resultados que mostrar.');             

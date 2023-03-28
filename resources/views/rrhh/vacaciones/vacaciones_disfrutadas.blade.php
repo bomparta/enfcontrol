@@ -65,9 +65,7 @@
                                        <td>{{$disfrutadas->fecha_inicio}}</td>
                                        <td>{{$disfrutadas->fecha_reintegro}}</td>
                                         <td colspan="2">                                        
-                                               <a href src="#" style="max-width: 50px; max-height: 50px"  alt="Image"/><span class='btn-info badge'><font color='red'>Ver Solicitud {{$disfrutadas->solicitud_vacaciones_id}}</font></span> </a>
-                                           
-
+                                               <a href="{{route('planilla',$disfrutadas->Id_solicitud)}}" style="max-width: 50px; max-height: 50px"  alt="Image"/><span class='btn-info badge'><font color='red'>Ver Solicitud {{$disfrutadas->solicitud_vacaciones_id}}</font></span> </a>                                           
                                         </td>                                                                             
                                     </tr>                     
                         @endforeach

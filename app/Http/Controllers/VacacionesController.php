@@ -107,6 +107,8 @@ class VacacionesController extends Controller
         ->where('persona.numero_identificacion','=',$cedula)->get();
         $funcionario_id=null;
        // dd($funcionario);
+       
+
         foreach($funcionario as $funcionario){
             $funcionario_id=$funcionario->funcionario_id;
             $edad=Carbon::parse($funcionario->edad)->age;
@@ -118,6 +120,7 @@ class VacacionesController extends Controller
              
             }
         }
+     
       //  dd($fecha_ingreso_vac,  $annos_solicitud);
         $lapso= Vacaciones_pendientes::select('vacaciones.vacaciones_pendientes.*') ->where('vacaciones.vacaciones_pendientes.funcionario_id','=',$funcionario_id)
                                         ->where('vacaciones.vacaciones_pendientes.status','=',1)
@@ -695,6 +698,52 @@ class VacacionesController extends Controller
 
        return view('rrhh.vacaciones.aprobar_solicitud_presidencia',compact('cedula','solicitudes'));
     }    
+    public function planilla_vacaciones($id_solicitud_vacaciones)
+    {
+        $cedula=Auth::user()->cedula;
+        $datos_funcionario= Funcionario::select('funcionario.id as funcionario_id','tipo_trabajador.id as id_tipo_trabajador',
+        'funcionario.*','persona.*','funcionario.cargo as cargo','funcionario.id_oficina_administrativa'     ,
+        'estado_civil.descripcion as est_civil','entidad.descripcion as estado_nac',
+        'tipo_trabajador.descripcion as trabajador','ubic_administrativa.descripcion as administrativa',
+        'ent.descripcion as ent_domi','municipio.nombre as muni_domi','parroquia.nombre as parr_domi','funcionario.id_tipo_funcionario as tipo_trabajador') 
+        ->join ('persona', 'persona.id','=','funcionario.persona_id')    
+        ->join('estado_civil','estado_civil.id','=','persona.id_estado_civil')  
+        ->join('entidad','entidad.id','=','persona.estado_nac') 
+        ->join('tipo_trabajador','tipo_trabajador.id','funcionario.id_tipo_funcionario')      
+        ->join('ubic_administrativa','ubic_administrativa.id','funcionario.id_oficina_administrativa')          
+        ->join('entidad as ent','ent.id','=','funcionario.estado_domicilio') 
+        ->join('municipio','municipio.id','=','funcionario.municipio_domicilio')     
+        ->join('parroquia','parroquia.id','=','funcionario.parroquia_domicilio')             
+        ->where('persona.numero_identificacion','=',$cedula)->get();     
+        $foto = ImagenUpload::select('*')
+        ->where('usuario', '=',Auth::user()->id)
+        ->where('nombre', 'foto')
+        ->get();
+        $solicitud=Solicitud_vacaciones::select('vacaciones.solicitud_vacaciones.*','vacaciones.solicitud_vacaciones.id as Id_solicitud' )           
+   ->where('vacaciones.solicitud_vacaciones.revisado','=',1)
+   ->where('vacaciones.solicitud_vacaciones.aprobado_coordinador','=',1)
+   ->where('vacaciones.solicitud_vacaciones.aprobado_director','=',1)
+   ->where('vacaciones.solicitud_vacaciones.aprobado_presidencia','=',1)  
+   ->where('vacaciones.solicitud_vacaciones.tipo_aprobacion_presidencia','=',1)   
+   ->where('vacaciones.solicitud_vacaciones.tipo_aprobacion_director','=',1)         
+   ->where('vacaciones.solicitud_vacaciones.id','=',$id_solicitud_vacaciones)
+   ->first();  
+        $disfrutadas=Vacaciones_disfrutadas::select('vacaciones.solicitud_vacaciones.*','vacaciones.vacaciones_disfrutadas.*','vacaciones.solicitud_vacaciones.id as Id_solicitud','vacaciones.vacaciones_disfrutadas.id as Id_lapso', 'vacaciones.vacaciones_pendientes.*' )     
+            ->join ('vacaciones.solicitud_vacaciones', 'vacaciones.solicitud_vacaciones.id','=','vacaciones.vacaciones_disfrutadas.solicitud_vacaciones_id') 
+       ->join ('vacaciones.vacaciones_pendientes', 'vacaciones.vacaciones_pendientes.id', '=','vacaciones.vacaciones_disfrutadas.lapso_disfrute')        
+       ->where('vacaciones.solicitud_vacaciones.revisado','=',1)
+       ->where('vacaciones.solicitud_vacaciones.aprobado_coordinador','=',1)
+       ->where('vacaciones.solicitud_vacaciones.aprobado_director','=',1)
+       ->where('vacaciones.solicitud_vacaciones.aprobado_presidencia','=',1)  
+       ->where('vacaciones.solicitud_vacaciones.tipo_aprobacion_presidencia','=',1)   
+       ->where('vacaciones.solicitud_vacaciones.tipo_aprobacion_director','=',1)         
+       ->where('vacaciones.solicitud_vacaciones.id','=',$id_solicitud_vacaciones)
+       ->get();  
+       $view = \view('rrhh/vacaciones/planilla_vacaciones', compact('datos_funcionario','foto','disfrutadas','solicitud'));
+       $pdf = App::make('dompdf.wrapper');
+       $pdf->loadHTML($view)->setPaper('legal');
+       return $pdf->download('planilla_vac'.Auth::user()->cedula.'.pdf');
+    }
 }
    
 
