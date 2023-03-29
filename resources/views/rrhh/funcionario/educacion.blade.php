@@ -58,7 +58,7 @@
                         </table>
                         <table>
          <form id="formulario" name="formulario" method="post" action="{{route('registrareducacion')}}">           
-            @if(funcionario_id>0)    
+         @if(count($funcionario>0))
                     @if (count($educacion)==0)   
               
          <input id="id_funcionario" type="hidden" name="id_funcionario" value="{{$funcionario_id}}" >

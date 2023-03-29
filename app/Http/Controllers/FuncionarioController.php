@@ -483,7 +483,7 @@ class FuncionarioController extends Controller
             $funcionario_id=$funcionario->funcionario_id;
         }
         $educacion= Educacion_funcionarios::where('funcionario_id',$funcionario_id)->get();
-       return view('rrhh/funcionario/educacion',compact('educacion','funcionario_id'));
+       return view('rrhh/funcionario/educacion',compact('educacion','funcionario_id','$funcionario'));
     } 
     public function editeducacion()
     {
@@ -497,7 +497,7 @@ class FuncionarioController extends Controller
             $funcionario_id=$funcionario->funcionario_id;
         }
         $educacion= Educacion_funcionarios::where('funcionario_id',$funcionario_id)->get();
-       return view('rrhh/funcionario/educacion_edit',compact('educacion','funcionario_id'));
+       return view('rrhh/funcionario/educacion_edit',compact('educacion','funcionario_id','$funcionario'));
     }
     public function storeducacion(Request $request)
     {
@@ -709,7 +709,7 @@ class FuncionarioController extends Controller
             $funcionario_id=$funcionario->funcionario_id;
         }
         $idiomas=Idiomas::select('*')->where('idiomas.funcionario_id','=',$funcionario_id)->paginate(5);
-       return view('rrhh/funcionario/idiomas',compact('idiomas','funcionario_id'));
+       return view('rrhh/funcionario/idiomas',compact('idiomas','funcionario_id','$funcionario'));
     }
     public function storeidiomas(Request $request)
     {
