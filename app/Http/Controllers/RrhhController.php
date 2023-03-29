@@ -330,7 +330,7 @@ public function subirArchivo_rrhh(Request $request)
        $pdf->loadHTML($view)->setPaper('legal');
        return $pdf->download('planillarrhh'.'.pdf');     
      }else{
-        return  redirect()->back()->with('error', 'Debe completar los datos y requisitos!! .');
+        return  redirect()->back()->with('error', 'Debe completar los datos y requisitos, para generar la Planilla de Actualización de Datos!! .');
      }
        
   
