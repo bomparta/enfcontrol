@@ -1063,7 +1063,7 @@ public function destroyfamiliar($id)
        ->where('usuario', '=',$id)
        ->where('nombre', 'titulo')
        ->get();
-        if ($funcionario!=null){
+        if (count($funcionario)>0){
             return view('rrhh.funcionario.requisitos',compact('familiar','laboral','cursos','foto','cedula','partida','matrimonio','constancia','horario','curriculum','titulo'));
         }else{
             return    redirect()->back()->with('error', 'DEBE COMPLETAR LOS DATOS BÁSICOS, PARA PODER CARGAR SUS REQUISITOS.'); 
