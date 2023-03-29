@@ -57,7 +57,8 @@
                         </tr>
                         </table>
                         <table>
-         <form id="formulario" name="formulario" method="post" action="{{route('registrareducacion')}}">               
+         <form id="formulario" name="formulario" method="post" action="{{route('registrareducacion')}}">           
+            @if(funcionario_id>0)    
                     @if (count($educacion)==0)   
               
          <input id="id_funcionario" type="hidden" name="id_funcionario" value="{{$funcionario_id}}" >
@@ -207,7 +208,12 @@
                     <div class="frameContenedor" style="margin:5px;" align="right">
                         <input class='btn btn-info' type="submit" value="Guardar" >
                     </div>
-                    
+                    @else
+                    </table>
+                    <div class="frameContenedor" style="margin:5px;"align="center">
+                           <h2 aling="center"><b>DEBE COMPLETAR LOS DATOS BÁSICOS</b></h2>
+                        </div>
+                    @endif
                 </form>
 
             </div>

@@ -58,7 +58,7 @@
                        
                        <table>
                <form id="formulario" name="formulario" method="post" action="{{route('actualizaridiomas')}}">
-                
+            @if($funcionario_id>0)    
          @foreach($idiomas as $key=>$item)  
                 <input id="id_idioma" type="hidden" name="id_idioma" value="{{$item->id}}" >
                 @csrf
@@ -111,6 +111,12 @@
 
                     
                     @endforeach
+                    @else
+                    </table>
+                    <div class="frameContenedor" style="margin:5px;"align="center">
+                           <h2 aling="center"><b>DEBE COMPLETAR LOS DATOS BÁSICOS</b></h2>
+                        </div>
+                    @endif
                 </form>
                 </div>
     </div>
