@@ -101,7 +101,7 @@
                     <div class="frameContenedor" style="margin:5px;" align="right">
                         <input class='btn btn-info' type="submit" value="Registrar Idioma" >
                     </div>
-                    @endif
+                  
                 </form>
                     <hr>
                     <div class="table-responsive mt-3">
@@ -160,6 +160,12 @@
                                 </tr>
                             </tfoot>
                         </table>
+                        @else
+                        </table>
+                        <div class="frameContenedor" style="margin:5px;"align="center">
+                           <h2 aling="center"><b>DEBE COMPLETAR LOS DATOS BÁSICOS</b></h2>
+                        </div>
+                        @endif
                     </div>
             
 
