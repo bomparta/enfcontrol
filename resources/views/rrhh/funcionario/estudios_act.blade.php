@@ -89,16 +89,18 @@
                         </td>
                     </tr>   
                     @endforeach
-                    </table>
-                    @else
-                    <div class="frameContenedor" style="margin:5px;"align="center">
-                           <h2 aling="center"><b>DEBE COMPLETAR LOS DATOS BÁSICOS</b></h2>
-                        </div>
-                    @endif     
-                         
+                    </table> 
                     <div class="frameContenedor" style="margin:5px;" align="right">
                         <input class='btn btn-info' type="submit" value="Guardar" >
                     </div>
+                    @else
+                    </table> 
+                    <div class="frameContenedor" style="margin:5px;"align="center">
+                           <h2 aling="center"><b>DEBE COMPLETAR LOS DATOS BÁSICOS</b></h2>
+                        </div>
+                    @endif                  
+                   
+                    
                 </form>
                      </div>
                  </div>

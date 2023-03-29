@@ -58,6 +58,7 @@
                        
                        <table>
                <form id="formulario" name="formulario" method="post" action="{{route('actualizaridiomas')}}">
+                
          @foreach($idiomas as $key=>$item)  
                 <input id="id_idioma" type="hidden" name="id_idioma" value="{{$item->id}}" >
                 @csrf
