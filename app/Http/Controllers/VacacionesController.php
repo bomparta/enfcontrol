@@ -719,15 +719,23 @@ class VacacionesController extends Controller
         ->where('usuario', '=',Auth::user()->id)
         ->where('nombre', 'foto')
         ->get();
-        $solicitud=Solicitud_vacaciones::select('vacaciones.solicitud_vacaciones.*','vacaciones.solicitud_vacaciones.id as Id_solicitud' )           
-   ->where('vacaciones.solicitud_vacaciones.revisado','=',1)
-   ->where('vacaciones.solicitud_vacaciones.aprobado_coordinador','=',1)
-   ->where('vacaciones.solicitud_vacaciones.aprobado_director','=',1)
-   ->where('vacaciones.solicitud_vacaciones.aprobado_presidencia','=',1)  
-   ->where('vacaciones.solicitud_vacaciones.tipo_aprobacion_presidencia','=',1)   
-   ->where('vacaciones.solicitud_vacaciones.tipo_aprobacion_director','=',1)         
-   ->where('vacaciones.solicitud_vacaciones.id','=',$id_solicitud_vacaciones)
-   ->first();  
+        $solicitud=Solicitud_vacaciones::select('vacaciones.solicitud_vacaciones.*','vacaciones.solicitud_vacaciones.id as Id_solicitud' )          
+        ->where('vacaciones.solicitud_vacaciones.revisado','=',1)
+        ->where('vacaciones.solicitud_vacaciones.aprobado_coordinador','=',1)
+        ->where('vacaciones.solicitud_vacaciones.aprobado_director','=',1)
+        ->where('vacaciones.solicitud_vacaciones.aprobado_presidencia','=',1)  
+        ->where('vacaciones.solicitud_vacaciones.tipo_aprobacion_presidencia','=',1)   
+        ->where('vacaciones.solicitud_vacaciones.tipo_aprobacion_director','=',1)         
+        ->where('vacaciones.solicitud_vacaciones.id','=',$id_solicitud_vacaciones)
+        ->first();  
+        $aprobado_director= Solicitud_vacaciones::select('vacaciones.solicitud_vacaciones.*','users.*')
+        ->join('users','users.id','=','vacaciones.solicitud_vacaciones.usuario_director')  
+        ->where('vacaciones.solicitud_vacaciones.id','=',$id_solicitud_vacaciones)
+        ->first();       
+        $aprobado_presidencia= Solicitud_vacaciones::select('vacaciones.solicitud_vacaciones.*','users.*')
+        ->join('users','users.id','=','vacaciones.solicitud_vacaciones.usuario_presidencia')  
+        ->where('vacaciones.solicitud_vacaciones.id','=',$id_solicitud_vacaciones)
+        ->first(); 
         $disfrutadas=Vacaciones_disfrutadas::select('vacaciones.solicitud_vacaciones.*','vacaciones.vacaciones_disfrutadas.*','vacaciones.solicitud_vacaciones.id as Id_solicitud','vacaciones.vacaciones_disfrutadas.id as Id_lapso', 'vacaciones.vacaciones_pendientes.*' )     
             ->join ('vacaciones.solicitud_vacaciones', 'vacaciones.solicitud_vacaciones.id','=','vacaciones.vacaciones_disfrutadas.solicitud_vacaciones_id') 
        ->join ('vacaciones.vacaciones_pendientes', 'vacaciones.vacaciones_pendientes.id', '=','vacaciones.vacaciones_disfrutadas.lapso_disfrute')        
@@ -739,7 +747,7 @@ class VacacionesController extends Controller
        ->where('vacaciones.solicitud_vacaciones.tipo_aprobacion_director','=',1)         
        ->where('vacaciones.solicitud_vacaciones.id','=',$id_solicitud_vacaciones)
        ->get();  
-       $view = \view('rrhh/vacaciones/planilla_vacaciones', compact('datos_funcionario','foto','disfrutadas','solicitud'));
+       $view = \view('rrhh/vacaciones/planilla_vacaciones', compact('datos_funcionario','foto','disfrutadas','solicitud','aprobado_director','aprobado_presidencia'));
        $pdf = App::make('dompdf.wrapper');
        $pdf->loadHTML($view)->setPaper('legal');
        return $pdf->download('planilla_vac'.Auth::user()->cedula.'.pdf');

@@ -76,7 +76,7 @@
                 Desincorporación
                 </a>  
         @endif
-        @if(in_array( Auth::user()->id_usuariogrupo, array(10,11,12,13,14,6,4) ))<!--Funcionarios !-->
+        @if(in_array( Auth::user()->id_usuariogrupo, array(10,11,12,13,14,15,16,6,4) ))<!--Funcionarios !-->
         <div class="card-header text-secondary">FUNCIONARIOS</div>
         <div class="card-header text-primary" aling="center">Control de Expedientes</div>
         <a href="{{route('buscarfuncionario')}}" class="list-group-item list-group-item-action border-0">

@@ -68,12 +68,13 @@ body { margin-left: 0.1in; margin-right: 0.1in; margin-top: 0.1in; margin-bottom
 
 <tr class="tr_encabezado">
     <td class="td_encabezado" colspan="2">  <img src="{{public_path('/img/logo1.png')}}" style="width: 15mm; height: 15mm; margin: 0;" /> </td>
-    <td class="td_encabezado" colspan="9" style="font-size:150%;"><b>REPUBLICA BOLIVARIANA DE VENEZUELA <br>
-        FUNDACIÓN ESCUELA NACIONAL DE FISCALES DEL MINISTERIO PÚBLICO <br>
-        PLANILLA SOLICITUD DE VACACIONES 
-        
+      <td class="td_encabezado" colspan="9" style="font-size:150%;"><b>REPUBLICA BOLIVARIANA DE VENEZUELA <br>
+        FUNDACIÓN ESCUELA NACIONAL DE FISCALES DEL MINISTERIO PÚBLICO    
     </td>
     <td class="td_encabezado" colspan="2"> <img  src="{{public_path('/img/logo2.png')}}"   style="width: 15mm; height: 15mm; " /></td>
+</tr>
+<tr class="tr_encabezado">  
+    <td class="td_encabezado" colspan="13" style="font-size:150%;"> <b>PLANILLA SOLICITUD DE VACACIONES </b></td>        
 </tr>
 </table>
 <p>
@@ -135,11 +136,11 @@ body { margin-left: 0.1in; margin-right: 0.1in; margin-top: 0.1in; margin-bottom
         <th  colspan=3 align="center"   >   FECHA DE REINTEGRO    </th>        
 	</tr>
 	<tr>
-		<td  colspan=2 align="center"   >   {{$funcionario->trabajador}}   </td>
-		<td  colspan=3 align="center"   >   {{$solicitud->fecha_solicitud}}   </td>
-		<td  colspan=2 align="center"   >   {{$solicitud->dias_disfrute}}   </td>
-        <td  colspan=3 align="center"   >   {{$solicitud->fecha_inicio}}   </td>
-        <td  colspan=3 align="center"   >   {{$solicitud->fecha_reintegro}}   </td> 
+		<td  colspan=2    >   <div align="center">{{date('m',strtotime($funcionario->fecha_ingreso_vac))}}   </div></td>
+		<td  colspan=3    >   <div align="center"> {{date('d-m-Y',strtotime($solicitud->fecha_solicitud))}} </div>  </td>
+		<td  colspan=2    >   <div align="center"> {{$solicitud->dias_disfrute}}  </div> </td>
+        <td  colspan=3    >   <div align="center">{{date('d-m-Y',strtotime($solicitud->fecha_inicio))}}  </div> </td>
+        <td  colspan=3    >   <div align="center"> {{date('d-m-Y',strtotime($solicitud->fecha_reintegro))}}  </div> </td> 
 	</tr>
 </table>
 <p>
@@ -154,7 +155,7 @@ body { margin-left: 0.1in; margin-right: 0.1in; margin-top: 0.1in; margin-bottom
 	</tr>
 	@foreach($disfrutadas as $disfrutadas)
 	<tr align="center" >
-		<td  colspan=2  align="center"   >  {{$disfrutadas->fecha_solicitud}}   </td>
+		<td  colspan=2  align="center"   >  {{date('d-m-Y',strtotime($disfrutadas->fecha_solicitud))}}   </td>
 		<td  colspan=2  align="center"   >  {{$disfrutadas->lapso_disfrute}}   </td>
 		<td  colspan=2 align="center"   >    {{$disfrutadas->dias_disfrutados}}      </td>
 		<td  colspan=3 align="center"  >  {{$disfrutadas->dias_pendientes}}   </td>
@@ -176,9 +177,9 @@ body { margin-left: 0.1in; margin-right: 0.1in; margin-top: 0.1in; margin-bottom
 		
 	</tr>
 	<tr >
-		<td    colspan=4 height="22" align="center"   >   <br>    </td>
-        <td    colspan=4  align="center"   >   <br>    </td>
-        <td   colspan=5   align="center"   >   <br>    </td>
+		<td    colspan=4 height="44"    >   <div align="center">{{$aprobado_director->name}}<br>{{$aprobado_director->created_at}} </div>     </td>
+        <td    colspan=4    >  <div align="center">{{$aprobado_presidencia->name}}<br>{{$aprobado_director->updated_at}}  </div>     </td>
+        <td   colspan=5    >  <div align="center">{{ucfirst(strtolower($funcionario->nombre))}} {{ucfirst(strtolower($funcionario->apellido))}}  </div>    </td>
 		
 	</tr>
 	<tr >

@@ -32,7 +32,7 @@
                                 <a class="nav-link "  href="{{route('vacaciones_pendientes')}}">Lapsos Pendientes de Disfrute</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{route('vacaciones_pendientes')}}">Lapsos Disfrutados</a>
+                                    <a class="nav-link" href="{{route('vacaciones_disfrutadas')}}">Lapsos Disfrutados</a>
                                 </li>                                
                                 </ul>
                                      
