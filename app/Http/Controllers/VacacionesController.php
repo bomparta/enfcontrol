@@ -85,8 +85,11 @@ class VacacionesController extends Controller
      ->join ('persona', 'persona.id','=','funcionario.persona_id') 
      ->where('persona.numero_identificacion','=',$cedula_usuario)->get();     
 
-     
+     if(count($datos_funcionario)>0){
       return view('rrhh.vacaciones.solicitud_vacaciones_edit',compact('vacaciones_solicitudes','datos_funcionario'));
+    }else{
+        return    redirect()->back()->with('error', ' Debe completar los datos básicos, para registrar su Solicitud de Vacaciones.');
+      }
     }
     public function rrhh()
     {
