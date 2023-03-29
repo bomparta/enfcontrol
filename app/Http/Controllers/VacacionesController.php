@@ -144,7 +144,7 @@ class VacacionesController extends Controller
       // dd($fecha_ingreso_vac);
      
       //dd($lapso);
-      if(count($datos_funcionario>0)){
+      if(count($datos_funcionario)>0){
        return view('rrhh.vacaciones.registrar_solicitud',compact('cedula','annos_solicitud','nacionalidades','datos_funcionario','edad','tipo_trabajador','uni_adscripcion','lapso'));
       }else{
         return    redirect()->back()->with('error', ' Debe completar los datos básicos, para registrar su Solicitud de Vacaciones.');
