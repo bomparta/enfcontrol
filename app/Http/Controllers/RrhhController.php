@@ -323,7 +323,7 @@ public function subirArchivo_rrhh(Request $request)
        ->where('usuario', '=',$id)
        ->where('nombre', 'foto')
        ->get();
-     if(count($foto)>0 && count($funcionario)>0){
+     if(count($foto)>0 && count($datos_funcionario)>0){
         $view = \view('rrhh/funcionario/planillarrhh', compact('foto','edad','datos_funcionario','familiar','cursos','laboral','idiomas','cuentas','educacion'));
        
        $pdf = App::make('dompdf.wrapper');
