@@ -50,10 +50,10 @@
                             </td>
                         </tr>
                         </table>
-                       
+                        @if(isset($funcionario_id))     
                        <table>
                <form id="formulario" name="formulario" method="post" action="{{route('idiomasregistrar')}}">
-               @if(isset($funcionario_id))     
+              
                 <input id="id_funcionario" type="hidden" name="id_funcionario" onkeyup="mayusculas(this);" value="{{$funcionario_id}}" >
                 @csrf
                
