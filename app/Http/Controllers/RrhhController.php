@@ -546,11 +546,12 @@ public function subirArchivo_rrhh(Request $request)
        $adm_pub=Administracion_publica::Select('*','administracion_publica.id as adm_id','tipo_trabajador.descripcion as tipo_trabajador') 
        ->JOIN('tipo_trabajador','tipo_trabajador.id','administracion_publica.id_tipo_funcionario')             
        ->where('administracion_publica.funcionario_id','=',$funcionario_id)
-       ->orderBy('administracion_publica.fecha_ingreso','asc')->get();      
+       ->orderBy('administracion_publica.fecha_ingreso','asc')->get();    
+       $annos=$meses=$dias=0;  
        $annos=Administracion_publica::where('administracion_publica.funcionario_id','=',$funcionario_id)->sum('anno_servicios','meses_servicios','dias_servicios');  
        $meses=Administracion_publica::where('administracion_publica.funcionario_id','=',$funcionario_id)->sum('meses_servicios');  
        $dias=Administracion_publica::where('administracion_publica.funcionario_id','=',$funcionario_id)->sum('dias_servicios');  
-    
+       
       if($dias >30)$dias=$dias%30;$meses=$meses+1;
       if($meses >=12)$meses=$meses%12;
       if($meses>0)$annos=$annos+1;

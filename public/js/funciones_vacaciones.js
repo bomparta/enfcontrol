@@ -48,16 +48,16 @@ function sumar_dias(e,valor){
     }
  } 
  	
-function dias_disfrute_lapso(e,fecha_ingreso,tipo_trabajador){
+function dias_disfrute_lapso(e,fecha_ingreso,tipo_trabajador, annos_adm){
     //if ((event.keyCode === 165 || event.keyCode === 9)  && !event.shiftKey){
         
          var anno_ingreso=  new Date(fecha_ingreso.value).getFullYear() ; 
-      
+        var anno_servicio=annos_adm.value;
         var lapso_disfrute = parseInt(e.value) - parseInt(anno_ingreso);
        // alert(lapso_disfrute);
        if(tipo_trabajador!=3){
 
-       
+       if(anno_servicio<lapso_disfrute){
         if(lapso_disfrute<=5){          
          //   alert("tiene menos 5 años");  
             document.getElementById('dias_adisfrutar').value=30;      
@@ -70,6 +70,20 @@ function dias_disfrute_lapso(e,fecha_ingreso,tipo_trabajador){
            // alert("tiene mas de  11 años");
             document.getElementById('dias_adisfrutar').value=45; 
         }
+    }else{
+        if(anno_servicio<=5){          
+            //   alert("tiene menos 5 años");  
+               document.getElementById('dias_adisfrutar').value=30;      
+           }
+           if(anno_servicio>=6 && anno_servicio<=10){          
+              // alert("tiene entre 6 y 10 años");  
+               document.getElementById('dias_adisfrutar').value=40;       
+           }
+           if(anno_servicio>=11){
+              // alert("tiene mas de  11 años");
+               document.getElementById('dias_adisfrutar').value=45; 
+           }
+    }
     }else{
         document.getElementById('dias_adisfrutar').value=30; 
     }

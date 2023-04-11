@@ -86,7 +86,8 @@
                                     <td  align="center"   > {{$funcionario->fecha_ingreso_adm}}</td>
                                     <td    > {{$funcionario->fecha_ingreso_fund}}</td>
                                     <td   > {{$funcionario->fecha_ingreso_vac}} <input type="hidden" id="fecha_ingreso_vac" name="fecha_ingreso_vac" value="{{$funcionario->fecha_ingreso_vac}}"/></td>
-                                    <td   align="center"  >{{$annos}} años {{$meses}} meses {{$dias}} días <input type="hidden" id="annos_adm" name="annos_adm" value="{{$annos}}"/> </td>
+                                    <td   align="center"  >{{$annos}} años {{$meses}} meses {{$dias}} días 
+                                        <input type="hidden" id="annos_adm" name="annos_adm" value="{{$annos}}"/> </td>
                                     </tr>                        
                                     </tbody>                            
                                     </table>
@@ -99,7 +100,7 @@
                                                 <span data-tooltip="Permite sólo números" sdata-flow="top">&nbsp;Lapso de Disfrute </span>
                                                 <span style="color:red;">*</span>&nbsp;<br>
                                                 <input type= "text" id="lapso_disfrute"  name="lapso_disfrute" onkeypress="return isNumberKey(event);" 
-                                                onkeydown="return dias_disfrute_lapso(this,document.getElementById('fecha_ingreso_vac'),document.getElementById('tipo_trabajador'))"  
+                                                onkeydown="return dias_disfrute_lapso(this,document.getElementById('fecha_ingreso_vac'),document.getElementById('tipo_trabajador'),document.getElementById('annos_adm'))"  
                                                 value="" class="form-control"  required>                              
                                                 @error('lapso_disfrute')
                                                 <div class="invalid-feedback">
