@@ -51,7 +51,7 @@ function sumar_dias(e,valor){
 function dias_disfrute_lapso(e,fecha_ingreso,tipo_trabajador, annos_adm){
     //if ((event.keyCode === 165 || event.keyCode === 9)  && !event.shiftKey){
     var anno_ingreso=  new Date(fecha_ingreso.value).getFullYear() ; 
-    var anno_servicio=annos_adm.value;
+    var anno_servicio=parseInt(annos_adm.value);
     var lapso_disfrute = parseInt(e.value) - parseInt(anno_ingreso);
     // alert(lapso_disfrute);
      
