@@ -55,6 +55,7 @@ function dias_disfrute_lapso(e,fecha_ingreso,tipo_trabajador, annos_adm){
         var anno_servicio=annos_adm.value;
         var lapso_disfrute = parseInt(e.value) - parseInt(anno_ingreso);
        // alert(lapso_disfrute);
+     
        if(tipo_trabajador!=3){
 
        if(anno_servicio<lapso_disfrute){
