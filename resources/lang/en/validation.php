@@ -146,6 +146,9 @@ return [
     |
     */
 
-    'attributes' => [],
+    'attributes' => [
+        'per_contacto' => 'Persona Contacto',
+        'dir_contacto' => 'Otra dirección donde se pueda localizar',
+    ],
 
 ];

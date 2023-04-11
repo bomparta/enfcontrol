@@ -47,7 +47,7 @@
                                     <b>Suministre su <span style="color:gray; ">Dirección de Domicilio</span>, haga clic en "Guardar" para registrar su información <b>
                                     <hr>   
                                     @include('rrhh.funcionario.mensaje')  
-                                    
+
                                 </div>
                             </td>
                         </tr>
@@ -150,7 +150,7 @@
                             </tr>
                             <tr>
                             <td>
-                            <span data-tooltip="Seleccione un valor de la lista" sdata-flow="top">  &nbsp;Teléfono de Habitacion&nbsp;</span><span style="color:red;">*</span>&nbsp;<br> 
+                            <span data-tooltip="Seleccione un valor de la lista" sdata-flow="top">  &nbsp;Teléfono de Habitación&nbsp;</span><span style="color:red;">*</span>&nbsp;<br> 
                            <div class="input-group">                              
                                     <select id="codhab" name="codhab" style="width:70px;" required>
                                         @foreach ($cod_habs as $cod_habs) var_dump($cod_habs)
@@ -182,8 +182,8 @@
                             </tr>
                             <tr>
                             <td>
-                            <span data-tooltip="Permite sólo caracteres alfanuméricos" sdata-flow="top">&nbsp;Otra dirección donde se pueda localizar:  &nbsp;&nbsp;&nbsp;&nbsp;</span>
-                            <input type="text" class="form-control"  name="dir_contacto" id="dir_contacto" value="{{$item->direccion_contacto}}"  onkeyup="mayusculas(this);" maxlength="200"  />
+                            <span data-tooltip="Permite sólo caracteres alfanuméricos" sdata-flow="top">&nbsp;Otra dirección donde se pueda localizar:  &nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color:red;">*</span>&nbsp;<br>
+                            <input type="text" class="form-control"  name="dir_contacto" id="dir_contacto" value="{{$item->direccion_contacto}}"  onkeyup="mayusculas(this);" maxlength="200"  required/>
                             </td>
                             <td>
                             <span data-tooltip="Seleccione un valor de la lista" sdata-flow="top">  &nbsp;Teléfono Persona Contacto&nbsp;</span><span style="color:red;">*</span>&nbsp;<br>
@@ -198,8 +198,8 @@
                                 </div>
                             </td>
                             <td>
-                            <span data-tooltip="Permite sólo caracteres alfanuméricos" sdata-flow="top"> &nbsp;Persona Contacto:  &nbsp;&nbsp;&nbsp;&nbsp;</span>
-                            <input type="text" class="form-control"  name="per_contacto" id="per_contacto"  onkeyup="mayusculas(this);" value="{{$item->persona_contacto}}"  maxlength="200"  />
+                            <span data-tooltip="Permite sólo caracteres alfanuméricos" sdata-flow="top"> &nbsp;Persona Contacto:  &nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color:red;">*</span>&nbsp;<br>
+                            <input type="text" class="form-control"  name="per_contacto" id="per_contacto"  onkeyup="mayusculas(this);" value="{{$item->persona_contacto}}"  maxlength="200" required />
                             </td>
                         </tr>                            
                                                 
