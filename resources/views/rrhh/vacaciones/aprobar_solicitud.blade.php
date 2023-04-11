@@ -120,7 +120,7 @@
                         <td>
                                 &nbsp;Tipo de Aprobación&nbsp;<span style="color:red;">*</span>&nbsp;<br>
                                 <select id="tipo_aprobacion" name="tipo_aprobacion"  class="form-control" required >
-                                <option value="0">Seleccione...</option>
+                                <option value="">Seleccione...</option>
                                 <option value="1">Aprobado</option>
                                 <option value="2">Diferido</option>  
                                 <option value="3">Negado</option>
