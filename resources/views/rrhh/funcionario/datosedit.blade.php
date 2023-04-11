@@ -278,3 +278,8 @@
         </div> <!-- page-content-wrapper -->
     </div> <!-- wrapper -->
 @endsection
+@section('scripts')
+<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+<script src="{{url('js/funciones_generales.js')}}"></script>
+
+@endsection

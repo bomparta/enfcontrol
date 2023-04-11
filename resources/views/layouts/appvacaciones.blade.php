@@ -1,4 +1,4 @@
-
+@if(Auth::user())
 <aside class="bg-white" id="sidebar-wrapper-lg">
     <div class="list-group list-group-flush">
         <!-- Menu Administrador RRHH-->
@@ -163,6 +163,7 @@
                 Desincorporación
                 </a>  
         @endif
+    @endif
     @endif
         <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();

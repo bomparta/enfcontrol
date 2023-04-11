@@ -47,7 +47,7 @@
                                     <b>Suministre su <span style="color:gray; ">Dirección de Domicilio</span>, haga clic en "Guardar" para registrar su información <b>
                                     <hr>   
                                     @include('rrhh.funcionario.mensaje')  
-                           
+                                    
                                 </div>
                             </td>
                         </tr>

@@ -42,6 +42,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Collection;
 use Carbon\Carbon;
+
 class VacacionesController extends Controller
 {
     /**

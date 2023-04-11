@@ -178,6 +178,7 @@
                                                                     <input type="hidden" name="_method" value="delete">
                                                                     <button type="submit" class="btn btn-primary" data-tip="Detalle" title="Eliminar registro" data-toggle="tooltip" data-original-title="Eliminar"> 
                                                                     <img src="/img/icon/erase.ico" class="icon-sm" alt="Listado"></button>                                                                                                            
+                                                                </form>
                                                                 </td>                                                          
                                                             @else
                                                                 <td></td>

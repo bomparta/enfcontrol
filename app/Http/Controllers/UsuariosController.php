@@ -6,6 +6,7 @@ use App\UsuarioGrupo;
 use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\User;
 
+
 class UsuariosController extends Controller
 {
     /**
