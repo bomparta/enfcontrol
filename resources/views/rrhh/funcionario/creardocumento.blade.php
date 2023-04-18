@@ -33,6 +33,7 @@
                                                     @if($tipo_documento=='horario')HORARIO DE CLASES TRABAJADOR @endif
                                                     @if($tipo_documento=='curriculum')CURRICULUM VITAE ACTUALIZADO @endif
                                                     @if($tipo_documento=='titulo')ÚLTIMO TITULO ACADÉMICO REGISTRADO OBTENIDO  @endif
+                                                    @if($tipo_documento=='rif')COMPROBANTE DE REGISTRO ÚNICO DE INFORMACIÓN FISCAL (RIF) ACTUALIZADO  @endif
 
                     </b>
                 
