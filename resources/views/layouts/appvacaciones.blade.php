@@ -137,7 +137,7 @@
             </a>          
             <hr> 
         <div class="card-header text-primary" aling="center">Vacaciones</div>
-            <a href="#" class="list-group-item list-group-item-action border-0">
+            <a href="{{route('vac_colectivas_rrhh')}}" class="list-group-item list-group-item-action border-0">
                 <img src="/img/icons-lineal/check_list.png" class="icon-lg">
                 Vacaciones Colectivas
             </a>   

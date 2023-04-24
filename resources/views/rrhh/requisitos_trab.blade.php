@@ -103,6 +103,22 @@
                                     </tr>
                                     <tr>
                                     
+                                    <td  >COMPROBANTE DE REGISTRO ÚNICO DE INFORMACIÓN FISCAL (RIF) ACTUALIZADO</td>
+                                    <td>
+                                    @if(empty($rif[0]->ruta) )
+                                        <img src="{{url('img/imagen/rif.png')}}" style="max-width: 150px; max-height: 150px"  alt="Image"/><span class='btn-info badge'><font color='red'>Pendiente</font></span> 
+                                    @else
+                                    <img src="{{url('img/icon/check.png')}}" style="max-width: 250px; max-height: 150px"  alt="Image"> <a href= "{{ Storage::url( $rif[0]->ruta) }}" target="_new">
+                                                   Ver Documento<span class='btn-info badge'><font color=#F2F3F8>Cargado</font></span> 
+                                    @endif
+                                    </td>
+
+                              
+                                   
+                                        
+                                </tr>
+                                    <tr>
+                                    
                                     <td  >ÚLTIMO TITULO ACADÉMICO REGISTRADO OBTENIDO (BACHILLER, TECNICO, UNIVERSITARIO)</td>
                                     <td>
                                     @if(empty($titulo[0]->ruta) )

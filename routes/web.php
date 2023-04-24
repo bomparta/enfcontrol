@@ -151,7 +151,7 @@ Route::get("/rrhh/registrar_vac_pendientesedit/{id}/{cedula}", "RrhhController@v
 Route::post("/rrhh/registrar_vac_pendientes", "RrhhController@store_vac_pendientes")->name('store_vac_pendientes');
 Route::post("/rrhh/registrar_vac_pendientesedit", "RrhhController@update_vac_pendientes")->name('update_vac_pendientes');
 Route::delete('registrar_vac_pendientes/{id}', 'RrhhController@destroy_vac_pendientes')->name('borrar_vac_pendientes');
-
+Route::get("/rrhh/registrar_vac_colectivas", "RrhhController@vac_colectivas")->name('vac_colectivas_rrhh');
 
 Route::get("/rrhh/registrar_rrhh/{cedula}","RrhhController@create_mov")->name('registrar_mov_rrhh');
 Route::post("/rrhh/registrar_rrhh", "RrhhController@store_mov")->name('store_rrhh');

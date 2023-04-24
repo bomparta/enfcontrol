@@ -120,8 +120,12 @@ class RrhhController extends Controller
        ->where('usuario', '=',$id)
        ->where('nombre', 'titulo')
        ->get();
+       $rif = ImagenUpload::select('*')
+       ->where('usuario', '=',$id)
+       ->where('nombre', 'rif')
+       ->get();
 
-        return view('rrhh.requisitos_trab',compact('nombres','apellidos','cedula_usuario','nacionalidad','familiar','laboral','cursos','foto','cedula','partida','matrimonio','constancia','horario','curriculum','titulo'));
+        return view('rrhh.requisitos_trab',compact('nombres','apellidos','cedula_usuario','nacionalidad','familiar','rif','laboral','cursos','foto','cedula','partida','matrimonio','constancia','horario','curriculum','titulo'));
         
     }
     public function doc_familiar($id_familiar,$tipo_documento){
@@ -1042,6 +1046,12 @@ public function subirArchivo_rrhh(Request $request)
     
             return    redirect()->back()->with('message', ' El Lapso pendiente de vacaciones del Trabajador(a) fue eliminado con éxito!!.');
         }
-    
+        public function vac_colectivas(Request $request)
+        {       
+            $tipo_trabajador= Tipo_Trabajador::All();
+            $uni_adscripcion= Ubic_Administrativa::All();
+          return view('rrhh/registrar_vac_colectivas', compact('tipo_trabajador','uni_adscripcion'));
+          
+        }
 
 }
