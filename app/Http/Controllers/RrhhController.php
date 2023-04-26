@@ -1053,5 +1053,55 @@ public function subirArchivo_rrhh(Request $request)
           return view('rrhh/registrar_vac_colectivas', compact('tipo_trabajador','uni_adscripcion'));
           
         }
+        public function store_vac_colectivas(Request $request)
+        {
+           // dd($request);
+            $request->validate([
+                
+                'funcionario_id' => ['required'],    
+                'fecha_ingreso_vac' => ['required'], 
+                'tipo_trabajador' => ['required'],      
+                'lapso_disfrute'=>['required'],
+                'dias_adisfrutar'=>['required'],            
+                'dias_pendientes'=>['required'],       
+                
+            ]);
+            
+            $existe_lapso=Vacaciones_pendientes::where('lapso_disfrute','=',$request->lapso_disfrute)
+            ->where('funcionario_id',$request->funcionario_id)->get();  
+           // dd($existe_lapso);
+            if(count($existe_lapso)>0){
+                return    redirect()->back()->with('error', ' El Lapso de Disfrute del Trabajador(a) que desea cargar  se encuentra registrado!!.');     
+            }else{
+                $ingreso= date("Y-d-m",strtotime($request->fecha_ingreso_vac));
+                $actual=date("Y-d-m");
+                $anno_ingreso=date("Y",strtotime($request->fecha_ingreso_vac));
+                $mes_ingreso=date("m",strtotime($request->fecha_ingreso_vac));
+                $dia_ingreso=date("d",strtotime($request->fecha_ingreso_vac));
+                $anno_actual=date("Y");
+             // dd($ingreso,$actual);
+            
+              // dd($ingreso,$actual,$anno_ingreso,$request->lapso_disfrute);
+                if($request->lapso_disfrute <= $anno_ingreso ){
+                    return    redirect()->back()->with('error', 'El Lapso de Disfrute del Trabajador(a)  no puede ser registrado.Su fecha para el disfrute de vacaciones es apartir del día , mes y año de aniversario en la FENFMP.');
+                }else{            
+                    if( ($actual>=$ingreso && $actual<=$ingreso) || (($request->lapso_disfrute >= $anno_ingreso) && ($anno_ingreso <= $request->lapso_disfrute) && $request->lapso_disfrute<=$anno_actual) ){
+                    $pendientes = new Vacaciones_pendientes();        
+                    $pendientes->funcionario_id = $request->funcionario_id;
+                    $pendientes->lapso_disfrute = $request->lapso_disfrute;
+                    $pendientes->dias_adisfrutar = $request->dias_adisfrutar;          
+                    $pendientes->dias_pendientes = $request->dias_pendientes;    
+                    $pendientes->observaciones_rrhh = $request->observaciones;  
+                    $pendientes->registrado_por = Auth::user()->cedula; 
+                    $pendientes->save();
+                    return    redirect()->back()->with('message', 'El Lapso de Disfrute del Trabajador(a) fue agregado con éxito!!.');
+                    } else{
+                        return    redirect()->back()->with('error', 'El Lapso de Disfrute del Trabajador(a)  que desea registrar no corresponde al intervalo vigente de vacaciones. Su fecha para el disfrute de vacaciones es apartir del día , mes y año de aniversario');
+                    }
+                }
+            }
+            
+            
+        }
 
 }

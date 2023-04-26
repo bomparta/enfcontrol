@@ -57,7 +57,7 @@
                                             @endif
 
                                         </td>                                  
-                                        @if(in_array( Auth::user()->id_usuariogrupo, array(10,11,12,13) ))
+                                        @if(in_array( Auth::user()->id_usuariogrupo, array(9,10,11,12,13) ))
                                             @if( empty($foto[0]) ) 
                                             <td class="text-center">
                                             <a href= "{{route('creardocumento',$tipo_documento='foto')}}" class="btn btn-info" data-tip="Detalle" data-toggle="tooltip" data-original-title="Editar">

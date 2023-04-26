@@ -32,7 +32,7 @@
                         </tr>
                     </table>
       
-                <form id="formulario" name="formulario" method="POST" action="{{route('store_vac_pendientes')}}">    
+                <form id="formulario" name="formulario" method="POST" action="{{route('store_vac_colectivas')}}">    
                         @csrf
                       
                                   
