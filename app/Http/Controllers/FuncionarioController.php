@@ -1088,7 +1088,8 @@ public function destroyfamiliar($id)
     {
             //Recibimos el archivo y lo guardamos en la carpeta storage/app/public
            // $request->file('archivo')->store('public/foto_carnet');
-            //dd($request->all());
+          // dd($request->hasfile('archivo'));
+        //   dd($request->all());
 
             if($request->hasfile('archivo')):
                 $imagen         = $request->file('archivo');
@@ -1119,7 +1120,7 @@ public function destroyfamiliar($id)
                 return redirect('rrhh/funcionario/requisitos/')->with('message', 'Se adjunto el documento con exito!! .');
 
             endif;
-            return redirect('rrhh/funcionario/requisitos/')->with('error', 'No se adjunto el documento correctamente.');
+            return redirect('rrhh/funcionario/requisitos/')->with('error', 'No se adjunto el documento correctamente. Verificar el tamaño del Archivo no debe exceder a más de 1 Mb.');
          
     }
     
