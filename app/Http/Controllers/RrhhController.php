@@ -129,7 +129,7 @@ class RrhhController extends Controller
        ->where('nombre', 'carnet_mp')
        ->get();
 
-        return view('rrhh.requisitos_trab',compact('nombres','apellidos','cedula_usuario','nacionalidad','familiar','rif','carnet_mp','laboral','cursos','foto','cedula','partida','matrimonio','constancia','horario','curriculum','titulo'));
+        return view('rrhh.requisitos_trab',compact('nombres','apellidos','cedula_usuario','nacionalidad','familiar','rif','carnet','laboral','cursos','foto','cedula','partida','matrimonio','constancia','horario','curriculum','titulo'));
         
     }
     public function doc_familiar($id_familiar,$tipo_documento){
