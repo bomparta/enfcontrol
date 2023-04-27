@@ -117,6 +117,18 @@
                                    
                                         
                                 </tr>
+                                <tr>
+                                    
+                                <td  >CARNET DE TRABAJO DEL MINISTERIO PÚBLICO</td>
+                                    <td>
+                                    @if(empty($carnet[0]->ruta) )
+                                        <img src="{{url('img/imagen/foto_carnet_mp.png')}}" style="max-width: 150px; max-height: 150px"  alt="Image"/><span class='btn-info badge'><font color='red'>Pendiente</font></span> 
+                                    @else
+                                    <img src="{{url('img/icon/check.png')}}" style="max-width: 250px; max-height: 150px"  alt="Image"> <a href= "{{ Storage::url( $carnet[0]->ruta) }}" target="_new">
+                                                   Ver Documento<span class='btn-info badge'><font color=#F2F3F8>Cargado</font></span> 
+                                    @endif
+                                    </td>                                        
+                                </tr>
                                     <tr>
                                     
                                     <td  >ÚLTIMO TITULO ACADÉMICO REGISTRADO OBTENIDO (BACHILLER, TECNICO, UNIVERSITARIO)</td>
