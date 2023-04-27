@@ -180,7 +180,34 @@
                                         </td>
                                         @else
                                         <td class="text-center">
-                                            <a href= "{{route('creardocumento',$tipo_documento='titulo')}}" class="btn btn-success" data-tip="Detalle" data-toggle="tooltip" data-original-title="Editar">
+                                            <a href= "{{route('creardocumento',$tipo_documento='rif')}}" class="btn btn-success" data-tip="Detalle" data-toggle="tooltip" data-original-title="Editar">
+                                            <img src="/img/icon/modify.ico" class="icon-sm" alt="Listado">Editar
+                                            </a>
+                                            </td>
+                                        @endif
+                                 
+                                        
+                                </tr>
+                                <td  >CARNET DE TRABAJO DEL MINISTERIO PÚBLICO</td>
+                                    <td>
+                                    @if(empty($carnet[0]->ruta) )
+                                        <img src="{{url('img/imagen/foto_carnet_mp.png')}}" style="max-width: 150px; max-height: 150px"  alt="Image"/><span class='btn-info badge'><font color='red'>Pendiente</font></span> 
+                                    @else
+                                    <img src="{{url('img/icon/check.png')}}" style="max-width: 250px; max-height: 150px"  alt="Image"> <a href= "{{ Storage::url( $carnet[0]->ruta) }}" target="_new">
+                                                   Ver Documento<span class='btn-info badge'><font color=#F2F3F8>Cargado</font></span> 
+                                    @endif
+                                    </td>
+
+                              
+                                    @if(empty($carnet[0]->ruta) )
+                                        <td class="text-center">
+                                        <a href= "{{route('creardocumento',$tipo_documento='carnet_mp')}}" class="btn btn-info" data-tip="Detalle" data-toggle="tooltip" data-original-title="Editar">
+                                        <img src="/img/icon/modify.ico" class="icon-sm" alt="Listado">Cargar
+                                        </a>
+                                        </td>
+                                        @else
+                                        <td class="text-center">
+                                            <a href= "{{route('creardocumento',$tipo_documento='carnet_mp')}}" class="btn btn-success" data-tip="Detalle" data-toggle="tooltip" data-original-title="Editar">
                                             <img src="/img/icon/modify.ico" class="icon-sm" alt="Listado">Editar
                                             </a>
                                             </td>

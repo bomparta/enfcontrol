@@ -1067,8 +1067,12 @@ public function destroyfamiliar($id)
        ->where('usuario', '=',$id)
        ->where('nombre', 'rif')
        ->get();
+       $carnet = ImagenUpload::select('*')
+       ->where('usuario', '=',$id)
+       ->where('nombre', 'carnet_mp')
+       ->get();
         if ($funcionario->count()>0){
-            return view('rrhh.funcionario.requisitos',compact('familiar','laboral','cursos','foto','cedula','partida','matrimonio','rif','constancia','horario','curriculum','titulo'));
+            return view('rrhh.funcionario.requisitos',compact('familiar','laboral','cursos','foto','cedula','partida','matrimonio','rif','carnet','constancia','horario','curriculum','titulo'));
         }else{
             return    redirect()->back()->with('error', 'DEBE COMPLETAR LOS DATOS BÁSICOS, PARA PODER CARGAR SUS REQUISITOS.'); 
         }
@@ -1191,7 +1195,7 @@ public function destroyfamiliar($id)
                 return redirect('rrhh/funcionario/familiar/')->with('message', 'Se adjunto el documento con exito!! .');
 
             endif;
-            return redirect('rrhh/funcionario/familiar/')->with('error', 'No se adjunto el documento correctamente.');
+            return redirect('rrhh/funcionario/familiar/')->with('error', 'No se adjunto el documento correctamente. Verificar el tamaño del Archivo no debe exceder a más de 1 Mb.');
          
     }
     public function requisito_cursos(Request $request,$tipo_documento,$id_curso,$ir=null)
@@ -1246,7 +1250,7 @@ public function destroyfamiliar($id)
                 return redirect('rrhh/funcionario/cursos/')->with('message', 'Se adjunto el documento con exito!! .');
 
             endif;
-            return redirect('rrhh/funcionario/cursos/')->with('error', 'No se adjunto el documento correctamente.');
+            return redirect('rrhh/funcionario/cursos/')->with('error', 'No se adjunto el documento correctamente. Verificar el tamaño del Archivo no debe exceder a más de 1 Mb.');
          
     }
     public function requisito_laboral(Request $request,$tipo_documento,$id_laboral,$ir=null)
@@ -1301,7 +1305,7 @@ public function destroyfamiliar($id)
                 return redirect('rrhh/funcionario/experiencia/')->with('message', 'Se adjunto el documento con exito!! .');
 
             endif;
-            return redirect('rrhh/funcionario/experiencia/')->with('error', 'No se adjunto el documento correctamente.');
+            return redirect('rrhh/funcionario/experiencia/')->with('error', 'No se adjunto el documento correctamente. Verificar el tamaño del Archivo no debe exceder a más de 1 Mb.');
          
     }
 
