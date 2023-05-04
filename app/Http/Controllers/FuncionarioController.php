@@ -1102,11 +1102,12 @@ public function destroyfamiliar($id)
                 $imagen->move($ruta,$nombreimagen);  
                 
                 $id= Auth::user()->id;
+                dd($id);
                 $requisitos =  ImagenUpload::select('*')
                 ->where('usuario', '=',$id)
                 ->where('nombre', '=', $request->tipo_documento)
                 ->get();
-                dd($id,$requisitos);
+                dd($requisitos);
                 if($requisitos->count()==0 ){
                             
                     $datosimagen = new ImagenUpload();
