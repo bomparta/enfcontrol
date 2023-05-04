@@ -1093,7 +1093,7 @@ public function destroyfamiliar($id)
             //Recibimos el archivo y lo guardamos en la carpeta storage/app/public
            // $request->file('archivo')->store('public/foto_carnet');
           // dd($request->hasfile('archivo'));
-           dd($request->all());
+          // dd($request->all());
 
             if($request->hasfile('archivo')):
                 $imagen         = $request->file('archivo');
@@ -1106,6 +1106,7 @@ public function destroyfamiliar($id)
                 ->where('usuario', '=',$id)
                 ->where('nombre', '=', $request->tipo_documento)
                 ->get();
+                dd($id,$requisitos);
                 if($requisitos->count()==0 ){
                             
                     $datosimagen = new ImagenUpload();
