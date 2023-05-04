@@ -66,13 +66,21 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
-            'name' => $data['name'],188,
-            'cedula' => $data['cedula'],
-            'username' => $data['username'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
-            'id_usuariogrupo' => '11',
-        ]);
+       // dd($data);
+   
+   // dd($usuario_existe);
+   $usuario_existe= User::where('cedula',$data['cedula'])->get();
+   // dd($usuario_existe);
+     
+            return User::create([
+                'name' => $data['name'],188,
+                'cedula' => $data['cedula'],
+                'username' => $data['username'],
+                'email' => $data['email'],
+                'password' => Hash::make($data['password']),
+                'id_usuariogrupo' => '11',
+            ]);
+      
+      
     }
 }
