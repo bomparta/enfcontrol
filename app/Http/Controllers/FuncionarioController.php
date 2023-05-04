@@ -1093,21 +1093,21 @@ public function destroyfamiliar($id)
             //Recibimos el archivo y lo guardamos en la carpeta storage/app/public
            // $request->file('archivo')->store('public/foto_carnet');
           // dd($request->hasfile('archivo'));
-           dd($request->hasfile('archivo'),$request->all());
+          // dd($request->hasfile('archivo'),$request->all());
 
-            if($request->hasfile('archivo')):
+            if($request->hasfile('archivo')){
                 $imagen         = $request->file('archivo');
                 $nombreimagen   = $imagen.".".$imagen->guessExtension();
                 $ruta           = $request->file('archivo')->store('public/documentos_rrhh/'.$request->tipo_documento);
                 $imagen->move($ruta,$nombreimagen);  
                 
                 $id= Auth::user()->id;
-                dd($id);
+               // dd($id);
                 $requisitos =  ImagenUpload::select('*')
                 ->where('usuario', '=',$id)
                 ->where('nombre', '=', $request->tipo_documento)
                 ->get();
-                dd($requisitos);
+              //  dd($requisitos);
                 if($requisitos->count()==0 ){
                             
                     $datosimagen = new ImagenUpload();
@@ -1124,9 +1124,11 @@ public function destroyfamiliar($id)
                 }
                 
                 return redirect('rrhh/funcionario/requisitos/')->with('message', 'Se adjunto el documento con exito!! .');
-
-            endif;
-            return redirect('rrhh/funcionario/requisitos/')->with('error', 'No se adjunto el documento correctamente. Verificar el tamaño del Archivo no debe exceder a más de 1 Mb.');
+            }else{
+                return redirect('rrhh/funcionario/requisitos/')->with('error', 'No se adjunto el documento correctamente. Verificar el tamaño del Archivo no debe exceder a más de 1 Mb.');
+            }
+            
+            
          
     }
     
