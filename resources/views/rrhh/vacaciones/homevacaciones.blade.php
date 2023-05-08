@@ -58,6 +58,16 @@
                     </div>
                     
                   @endif  
+                  @if(in_array( Auth::user()->id_usuariogrupo, array(12,16,9)))
+                    <div class="card bg-light mb-6" style="max-width: 14rem;">
+                    
+                      <div class="card-body">
+                      <a href="{{route('vac_colectivas_rrhh')}}"> <h6 class="card-title">Vacaciones Colectivas</h6>
+                        <img src="{{url('/img/colectivas.png')}}" class="card-img-top">
+                      </a>
+                      </div>
+                    </div>                    
+                  @endif  
                   @endif  
                   </div>
                 </div>
