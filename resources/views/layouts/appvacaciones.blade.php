@@ -35,19 +35,19 @@
             <img src="/img/icons-lineal/check_list.png" class="icon-lg">
             Solicitud de Vacaciones
         </a> 
-        <div class="card-header text-primary" aling="center">Vacaciones</div>
-            <a href="{{route('vacaciones_pendientes_aprobacion')}}" class="list-group-item list-group-item-action border-0">
-            <img src="/img/icons-lineal/check_list.png" class="icon-lg">
-            Aprobación de Jefe(a) inmediato o Coordinador(a)
-            </a>   
-            <a href="{{route('vacaciones_pendientes_aprobacion_director')}}" class="list-group-item list-group-item-action border-0">
-            <img src="/img/icons-lineal/check_list.png" class="icon-lg">
-            Aprobación de Director(a)
-            </a>   
-            <a href="{{route('vacaciones_pendientes_aprobacion_presidencia')}}" class="list-group-item list-group-item-action border-0">
-            <img src="/img/icons-lineal/check_list.png" class="icon-lg">
-            Aprobación de Presidente(a)
-            </a>   
+       
+        <a href="{{route('vacaciones_pendientes_aprobacion')}}" class="list-group-item list-group-item-action border-0">
+        <img src="/img/icons-lineal/check_list.png" class="icon-lg">
+        Aprobación de Jefe(a) inmediato o Coordinador(a)
+        </a>   
+        <a href="{{route('vacaciones_pendientes_aprobacion_director')}}" class="list-group-item list-group-item-action border-0">
+        <img src="/img/icons-lineal/check_list.png" class="icon-lg">
+        Aprobación de Director(a)
+        </a>   
+        <a href="{{route('vacaciones_pendientes_aprobacion_presidencia')}}" class="list-group-item list-group-item-action border-0">
+        <img src="/img/icons-lineal/check_list.png" class="icon-lg">
+        Aprobación de Presidente(a)
+        </a>   
        <hr>      
         <div class="card-header text-secondary">RRHH</div>
         <div class="card-header text-primary" aling="center">Control de Expedientes</div>
@@ -133,7 +133,7 @@
             </a>       
             @endif
        
-        @if(in_array( Auth::user()->id_usuariogrupo, array(10,12,9 ))) <!--Personal rrhh !-->
+        @if(in_array( Auth::user()->id_usuariogrupo, array(10,12 ))) <!--Personal rrhh !-->
         <div class="card-header text-secondary">RRHH</div>
         <div class="card-header text-primary" aling="center">Control de Expedientes</div>
             <a href="{{route('ver_trabajador')}}" class="list-group-item list-group-item-action border-0">

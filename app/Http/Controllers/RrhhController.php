@@ -32,6 +32,7 @@ use App\RrhhMovimientos;
 use App\TipoMovimientosRRHH;
 use App\Administracion_publica;
 use App\Vacaciones_pendientes;
+use App\Vacaciones_colectivas;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -1054,58 +1055,100 @@ public function subirArchivo_rrhh(Request $request)
         {       
             $tipo_trabajador= Tipo_Trabajador::All();
             $uni_adscripcion= Ubic_Administrativa::All();
-          return view('rrhh/registrar_vac_colectivas', compact('tipo_trabajador','uni_adscripcion'));
+            $colectivas= Vacaciones_colectivas:: select ('vacaciones.vacaciones_colectivas.*', 
+             'tipo_trabajador.descripcion as trabajador','ubic_administrativa.descripcion as ubicacion')
+             ->JOIN('tipo_trabajador','tipo_trabajador.id','vacaciones.vacaciones_colectivas.id_tipo_funcionario')      
+             ->JOIN('ubic_administrativa','ubic_administrativa.id','vacaciones.vacaciones_colectivas.id_oficina_administrativa')           
+            ->get();
+          return view('rrhh/registrar_vac_colectivas', compact('tipo_trabajador','uni_adscripcion','colectivas'));
           
         }
         public function store_vac_colectivas(Request $request)
         {
            // dd($request);
             $request->validate([
+            
                 
-                'funcionario_id' => ['required'],    
-                'fecha_ingreso_vac' => ['required'], 
-                'tipo_trabajador' => ['required'],      
+                'id_oficina_administrativa' => ['required'],    
+                'id_tipo_trabajador' => ['required'], 
+            
                 'lapso_disfrute'=>['required'],
-                'dias_adisfrutar'=>['required'],            
-                'dias_pendientes'=>['required'],       
+                'dias_adescontar'=>['required'],            
+              
                 
             ]);
             
-            $existe_lapso=Vacaciones_pendientes::where('lapso_disfrute','=',$request->lapso_disfrute)
-            ->where('funcionario_id',$request->funcionario_id)->get();  
+            $existe_lapso=Vacaciones_colectivas::where('lapso_disfrute','=',$request->lapso_disfrute)->get();  
            // dd($existe_lapso);
             if(count($existe_lapso)>0){
-                return    redirect()->back()->with('error', ' El Lapso de Disfrute del Trabajador(a) que desea cargar  se encuentra registrado!!.');     
-            }else{
-                $ingreso= date("Y-d-m",strtotime($request->fecha_ingreso_vac));
-                $actual=date("Y-d-m");
-                $anno_ingreso=date("Y",strtotime($request->fecha_ingreso_vac));
-                $mes_ingreso=date("m",strtotime($request->fecha_ingreso_vac));
-                $dia_ingreso=date("d",strtotime($request->fecha_ingreso_vac));
-                $anno_actual=date("Y");
-             // dd($ingreso,$actual);
-            
-              // dd($ingreso,$actual,$anno_ingreso,$request->lapso_disfrute);
-                if($request->lapso_disfrute <= $anno_ingreso ){
-                    return    redirect()->back()->with('error', 'El Lapso de Disfrute del Trabajador(a)  no puede ser registrado.Su fecha para el disfrute de vacaciones es apartir del día , mes y año de aniversario en la FENFMP.');
+                return    redirect()->back()->with('error', ' El Lapso de Disfrute Colectivo que desea cargar  se encuentra registrado!!.');     
+            }else{               
+                $anno_actual=date("Y");       
+                if($request->lapso_disfrute > $anno_actual ){
+                    return    redirect()->back()->with('error', 'El Lapso de Disfrute Colectivo no puede ser registrado. Es mayor al año actual.');
                 }else{            
-                    if( ($actual>=$ingreso && $actual<=$ingreso) || (($request->lapso_disfrute >= $anno_ingreso) && ($anno_ingreso <= $request->lapso_disfrute) && $request->lapso_disfrute<=$anno_actual) ){
-                    $pendientes = new Vacaciones_pendientes();        
-                    $pendientes->funcionario_id = $request->funcionario_id;
-                    $pendientes->lapso_disfrute = $request->lapso_disfrute;
-                    $pendientes->dias_adisfrutar = $request->dias_adisfrutar;          
-                    $pendientes->dias_pendientes = $request->dias_pendientes;    
-                    $pendientes->observaciones_rrhh = $request->observaciones;  
-                    $pendientes->registrado_por = Auth::user()->cedula; 
-                    $pendientes->save();
-                    return    redirect()->back()->with('message', 'El Lapso de Disfrute del Trabajador(a) fue agregado con éxito!!.');
-                    } else{
-                        return    redirect()->back()->with('error', 'El Lapso de Disfrute del Trabajador(a)  que desea registrar no corresponde al intervalo vigente de vacaciones. Su fecha para el disfrute de vacaciones es apartir del día , mes y año de aniversario');
-                    }
+                    $colectivas = new Vacaciones_colectivas();        
+                    $colectivas->id_oficina_administrativa = $request->id_oficina_administrativa;
+                    $colectivas->lapso_disfrute = $request->lapso_disfrute;
+                    $colectivas->dias_adescontar = $request->dias_adescontar;          
+                    $colectivas->id_tipo_funcionario = $request->id_tipo_trabajador;    
+                    $colectivas->observaciones = $request->observaciones;  
+                    $colectivas->registrado_por = Auth::user()->cedula; 
+                    $colectivas->save();
+                    return    redirect()->back()->with('message', 'El Lapso de Disfrute Colectivo fue agregado con éxito!!.');                    
                 }
             }
             
             
+        }
+        public function vac_colectivas_rrhh_edit(Request $request,$id)
+        {       
+            $tipo_trabajador= Tipo_Trabajador::All();
+            $uni_adscripcion= Ubic_Administrativa::All();
+           $colectivas=  Vacaciones_colectivas::select('vacaciones.vacaciones_colectivas.*')            
+          ->where('vacaciones.vacaciones_colectivas.id','=',$id)
+          ->orderby('vacaciones.vacaciones_colectivas.lapso_disfrute','ASC')->get();  
+       
+              
+               return view('rrhh/registrar_vac_colectivasedit', compact('tipo_trabajador','uni_adscripcion','colectivas','id'));
+          
+        }
+        public function update_vac_colectivas(Request $request)
+        {
+           // dd($request);
+            $request->validate([
+                'id_oficina_administrativa' => ['required'],    
+                'id_tipo_trabajador' => ['required'],             
+                'lapso_disfrute'=>['required'],
+                'dias_adescontar'=>['required'],           
+                'id_colectivas'=>['required'],  
+            ]);
+            Vacaciones_colectivas::where('id','=',$request->id_colectivas)->update([     
+    
+                'id_tipo_funcionario'=> $request->id_tipo_trabajador,
+                'id_oficina_administrativa' => $request->id_oficina_administrativa,
+                'dias_adescontar' => $request->dias_adescontar,                      
+                'observaciones' => $request->observaciones,                 
+                'actualizado_por'=>Auth::user()->cedula,
+               
+            ]);   
+      
+               
+                return    redirect()->back()->with('message', ' El Lapso de Vacaciones Colectivas fue actualizado con éxito!!.');
+           
+        
+
+            
+            
+        } 
+        public function destroy_vac_colectivas($id)
+        {
+            //dd($id);
+            $pendientes = Vacaciones_colectivas::findOrFail($id);
+            
+            $pendientes->delete();
+    
+            return    redirect()->back()->with('message', ' El Lapso de vacaciones colectivas fue eliminado con éxito!!.');
         }
 
 }

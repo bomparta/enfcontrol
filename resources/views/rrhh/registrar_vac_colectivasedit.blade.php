@@ -22,7 +22,7 @@
                                 <div id="divSubTituloIndex2">
                                    
                                     <hr>
-                                    <b> Sumistrar los datos correspondientes a las <span style="color:gray; ">Vacaciones Colectivas del personal activo de la FENFMP </span>, haga clic en "Guardar" para registrar su información.
+                                    <b> Actualice los datos correspondientes al lapso de <span style="color:gray; ">Vacaciones Colectivas del personal activo de la FENFMP </span>, haga clic en "Actualizar" para registrar su información.
                                     <hr>   
                                     @include('rrhh.funcionario.mensaje')  
                            
@@ -32,18 +32,21 @@
                         </tr>
                     </table>
       
-                <form id="formulario" name="formulario" method="POST" action="{{route('store_vac_colectivas')}}">    
+                <form id="formulario" name="formulario" method="POST" action="{{route('update_vac_colectivas')}}">    
+                @if(isset($colectivas))      
+                @foreach($colectivas as $col)  
+                <input type= "hidden" id="id_colectivas" name="id_colectivas" value="{{$col->id}}" class="form-control"  >   
                         @csrf
-                      
-                                  
+       
                                     <table align="center" border="0" cellpadding="2" cellspacing="2" width="100%">
                                     <tr>
                                         <td>
                                         <span data-tooltip="Seleccione un valor de la lista" sdata-flow="top">  &nbsp;Unidad(es) de Adscripción&nbsp;</span><span style="color:red;">*</span>&nbsp;<br>
                                             <select id="id_oficina_administrativa" name="id_oficina_administrativa"class="form-control" required >
-                                            <option value="27"  >TODAS</option>
+                                          
                                                 @foreach ($uni_adscripcion as $uni_adscripcion)
-                                                    <option value="{{ $uni_adscripcion->id }}">
+                                                    <option value="{{ $uni_adscripcion->id }}" 
+                                                    @if($col->id_oficina_administrativa == $uni_adscripcion->id) selected @endif >
                                                     {{ $uni_adscripcion->descripcion }}</option>
                                                 @endforeach
                                             </select>
@@ -56,9 +59,10 @@
                                         <td>
                             <span data-tooltip="Seleccione un valor de la lista" sdata-flow="top">  &nbsp;Tipo de Trabajador&nbsp;</span><span style="color:red;">*</span>&nbsp;<br>
                                 <select id="id_tipo_trabajador" name="id_tipo_trabajador"  class="form-control" required >
-                                <option value="8" >TODOS</option>
+                              
                                     @foreach ($tipo_trabajador as $tipo_trabajador)
-                                    <option value="{{ $tipo_trabajador->id }}" >
+                                    <option value="{{ $tipo_trabajador->id }}"
+                                    @if($col->id_tipo_funcionario == $tipo_trabajador->id) selected @endif >
                                       {{ $tipo_trabajador->descripcion }} </option>
                                     @endforeach
                                 </select>
@@ -77,7 +81,7 @@
                                                 <span style="color:red;">*</span>&nbsp;<br>
                                                 <input type= "text" id="lapso_disfrute"  name="lapso_disfrute" onkeypress="return isNumberKey(event);" 
                                                 onkeydown="return dias_disfrute_lapso(this,document.getElementById('fecha_ingreso_vac'),document.getElementById('tipo_trabajador'),document.getElementById('annos_adm'))"  
-                                                value="" class="form-control"  required>                              
+                                                value="{{$col->lapso_disfrute}}" class="form-control"  required readonly>                              
                                                 @error('lapso_disfrute')
                                                 <div class="invalid-feedback">
                                                 <span style="color:red;"><strong>{{ $message }}</strong></span>
@@ -86,7 +90,7 @@
                                             </td>        
                                             <td>
                                                 <span data-tooltip="Permite sólo números"  sdata-flow="top">&nbsp;Días a Descontar </span><span style="color:red;">*</span>&nbsp;<br>
-                                                <input type= "text" id="dias_adescontar"  name="dias_adescontar"  value="" class="form-control"  required >                              
+                                                <input type= "text" id="dias_adescontar"  name="dias_adescontar"  value="{{$col->dias_adescontar}}" class="form-control"  required >                              
                                                 @error('dias_adescontar')
                                                 <div class="invalid-feedback">
                                                 <span style="color:red;"><strong>{{ $message }}</strong></span>
@@ -98,84 +102,25 @@
                                         <tr>
                                             <td>
                                                 <span data-tooltip="Permite sólo caracteres alfanuméricos" sdata-flow="top">&nbsp;Observaciones <br></span>
-                                                <input type= "text" id="observaciones" rows="2" name="observaciones" onkeyup="mayusculas(this);"  value="" class="form-control"  >                              
+                                                <input type= "text" id="observaciones" rows="2" name="observaciones" onkeyup="mayusculas(this);"  value="{{$col->observaciones}}" class="form-control"  >                              
                                                 @error('observaciones')
                                                 <div class="invalid-feedback">
                                                 <span style="color:red;"><strong>{{ $message }}</strong></span>
                                                 </div>
                                                 @enderror
                                             </td>
-                                        </tr>           
+                                        </tr>  
+                              
                                         </table>
+                                        @endforeach   
+                            @endif  
             
                                     <div class="frameContenedor" style="margin:5px;" align="right">
-                                        <input class='btn btn-info' type="submit" value="Guardar" >
-                                      
+                                        <input class='btn btn-info' type="submit" value="Actualizar" >
+                                        <a class='btn btn-secondary' href="{{ URL::route('vac_colectivas_rrhh') }}">Regresar</a> 
                                     </div>  
-                </form>  
-                                    <hr>
-                                    <div class="table-responsive mt-3">
-                                        <table id="example1" class="table table-striped table-bordered" style="width:100%">                                
-                                            <thead>
-                                                    <tr>
-                                                    <tr>
-                                                        <th>Lapso de Disfrute</th>
-                                                        <th>Dias Descontados</th>
-                                                        <th>Tipo Trabajador</th>
-                                                        <th>Unidades Admistrativas</th>
-                                                        @if(in_array( Auth::user()->id_usuariogrupo, array(9,12,10) ))
-                                                        <th >Opciones</th>
-                                                        @endif
-                                                </tr>
-                                            </thead>    
-                                            <tbody>   
-                                                @if(isset($colectivas))      
-                                                    @foreach($colectivas as $col)                           
-                                                        <tr>                                                                                 
-                                                            <td>{{$col->lapso_disfrute}}</td>
-                                                            <td>{{$col->dias_adescontar}} días</td>    
-                                                            <td>{{$col->trabajador}}</td>    
-                                                            <td>{{$col->ubicacion}}</td>                                                          
-                                                           
-                                                            @if(in_array( Auth::user()->id_usuariogrupo, array(9,12,10)  ))
-                                                                <td  >
-                                                                    <a href= "/rrhh/registrar_vac_colectivasedit/{{$col->id}}" class="btn btn-info" data-tip="Detalle" title="Actualizar Registro de Vacaciones colectivas" data-toggle="tooltip" data-original-title="Editar">
-                                                                    <img src="/img/icon/modify.ico" class="icon-sm" alt="Listado">
-                                                                    </a>
-                                                               
-                                                                <form method="POST" action="{{URL::route('borrar_vac_colectivas',$col->id)}}">
-                                                                 @csrf
-                                                                    <input type="hidden" name="_method" value="delete">
-                                                                    <button type="submit" class="btn btn-primary" data-tip="Detalle" title="Eliminar registro" data-toggle="tooltip" data-original-title="Eliminar"> 
-                                                                    <img src="/img/icon/erase.ico" class="icon-sm" alt="Listado"></button>                                                                                                            
-                                                                </form>
-                                                                </td>                                                          
-                                                            @else
-                                                                <td></td>
-                                                            @endif                                                           
-                                                        </tr>
-                                                    @endforeach
-                                                @endif 
-                                            </tbody>
-                                            <tfoot>
-                                                <tr>
-                                                <th>Lapso de Disfrute</th>
-                                                        <th>Dias Descontados</th>
-                                                        <th>Tipo Trabajador</th>
-                                                        <th>Unidades Admistrativas</th>
-                                                        @if(in_array( Auth::user()->id_usuariogrupo, array(9,12,10) ))
-                                                        <th >Opciones</th>
-                                                        @endif
-                                                </tr>
-                                            </tfoot>
-                                    </table>   
-                                    </div>
-                                              
-                            
-                      
-              
-              
-                 
+                </form>                                    
+                                    </div>                                             
          
             </div>
         

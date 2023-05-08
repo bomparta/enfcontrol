@@ -141,18 +141,24 @@ Route::get('/rrhh/searchredirect', function(){
 Route::get("/rrhh/ver_trabajador/{search}", "RrhhController@search");
 Route::get("/rrhh/datos_rrhh/{cedula}", "RrhhController@search_datos")->name('datos_rrhh');
 Route::get("/rrhh/movimientos/{cedula}", "RrhhController@movimientos")->name('mov_rrhh');
+
 Route::get("/rrhh/registrar_adm_publica_edit/{id}/{cedula}", "RrhhController@antecedentes_edit")->name('antecedentes_rrhh_edit');
 Route::get("/rrhh/registrar_adm_publica/{cedula}", "RrhhController@antecedentes")->name('antecedentes_rrhh');
 Route::post("/rrhh/registrar_adm_publica", "RrhhController@store_antecedentes")->name('store_antecedentes');
 Route::post("/rrhh/registrar_adm_publica_edit", "RrhhController@update_antecedentes")->name('update_antecedentes');
 Route::delete('registrar_adm_publica/{id}', 'RrhhController@destroy')->name('borrar_adm_pub');
+
 Route::get("/rrhh/registrar_vac_pendientes/{cedula}", "RrhhController@vac_pendientes_rrhh")->name('vac_pendientes_rrhh');
 Route::get("/rrhh/registrar_vac_pendientesedit/{id}/{cedula}", "RrhhController@vac_pendientes_rrhh_edit")->name('vac_pendientes_rrhh_edit');
 Route::post("/rrhh/registrar_vac_pendientes", "RrhhController@store_vac_pendientes")->name('store_vac_pendientes');
 Route::post("/rrhh/registrar_vac_pendientesedit", "RrhhController@update_vac_pendientes")->name('update_vac_pendientes');
 Route::delete('registrar_vac_pendientes/{id}', 'RrhhController@destroy_vac_pendientes')->name('borrar_vac_pendientes');
+
 Route::get("/rrhh/registrar_vac_colectivas", "RrhhController@vac_colectivas")->name('vac_colectivas_rrhh');
+Route::get("/rrhh/registrar_vac_colectivasedit/{id}", "RrhhController@vac_colectivas_rrhh_edit")->name('vac_colectivas_rrhh_edit');
 Route::post("/rrhh/registrar_vac_colectivas", "RrhhController@store_vac_colectivas")->name('store_vac_colectivas');
+Route::post("/rrhh/registrar_vac_colectivasedit", "RrhhController@update_vac_colectivas")->name('update_vac_colectivas');
+Route::delete('registrar_vac_colectivas/{id}', 'RrhhController@destroy_vac_colectivas')->name('borrar_vac_colectivas');
 
 Route::get("/rrhh/registrar_rrhh/{cedula}","RrhhController@create_mov")->name('registrar_mov_rrhh');
 Route::post("/rrhh/registrar_rrhh", "RrhhController@store_mov")->name('store_rrhh');

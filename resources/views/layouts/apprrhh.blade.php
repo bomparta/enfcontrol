@@ -39,6 +39,21 @@
                 <img src="/img/icons-lineal/check_list.png" class="icon-lg">
                 Solicitud de Vacaciones
             </a> 
+         
+                <a href="{{route('vacaciones_pendientes_aprobacion')}}" class="list-group-item list-group-item-action border-0">
+                <img src="/img/icons-lineal/check_list.png" class="icon-lg">
+                Aprobación de Vacaciones Jefe(a) inmediato o Coordinador(a)
+                </a> 
+              
+                <a href="{{route('vacaciones_pendientes_aprobacion_director')}}" class="list-group-item list-group-item-action border-0">
+                <img src="/img/icons-lineal/check_list.png" class="icon-lg">
+                Aprobación de Vacaciones Director(a)
+                </a> 
+              
+                <a href="{{route('vacaciones_pendientes_aprobacion_presidencia')}}" class="list-group-item list-group-item-action border-0">
+                <img src="/img/icons-lineal/check_list.png" class="icon-lg">
+                Aprobación de Vacaciones Presidente(a)
+                </a>         
             <hr>
             <div class="card-header text-secondary">RRHH</div>
             <div class="card-header text-primary" aling="center">Control de Expedientes</div>

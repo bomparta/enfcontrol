@@ -1099,7 +1099,11 @@ public function destroyfamiliar($id)
                 $imagen         = $request->file('archivo');
                 $nombreimagen   = $imagen.".".$imagen->guessExtension();
                 $ruta           = $request->file('archivo')->store('public/documentos_rrhh/'.$request->tipo_documento);
-                $imagen->move($ruta,$nombreimagen);  
+               // dd($ruta);
+                if(!$imagen->move($ruta,$nombreimagen)){
+                    return redirect('rrhh/funcionario/requisitos/')->with('error', 'Permiso denegado para guardar archivo!! .');
+                }
+                  
                 
                 $id= Auth::user()->id;
                // dd($id);
