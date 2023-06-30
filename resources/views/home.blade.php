@@ -150,14 +150,14 @@
                 </div>
             </div>
         </a>
-        <a style="color: black;" href="{{route('vacaciones')}}">
+     <!--<a style="color: black;" href="{{route('vacaciones')}}">
             <div class="card text-center">
                 <img src="{{url('/img/vacacion.png')}}" class="card-img-top">
                 <div class="card-body">
                     <h1 class="card-title">Vacaciones</h1>
                 </div>
             </div>
-        </a>
+        </a>-->
         @endif
         @if(in_array( Auth::user()->id_usuariogrupo, array(13) ))
         <a style="color: black;" href="{{route('menubienes')}}">
