@@ -101,8 +101,8 @@
                 
             
                     <div class="container-fluid">
-                        <strong>"El ente articulador del Ministerio Público en el Sistema de Justicia Venezolano, 
-                            <br>en materia de Función Fiscal que coadyuven en la resolución de problemas<br>en el Sistema de Justicia Penal venezolano."
+                        <strong>"La Escuela Nacional de Fiscales es una institución docente adscrita al Ministerio Público de la República Bolivariana de Venezuela,
+                            <br> que tiene como fin la formación y mejoramiento del material humano que actúa en representación de la fiscalía."
                         </strong>
                         <p>
                         <hr style=" height: 10px;border-radius: 5px; background-color: #c8c5c5;">
